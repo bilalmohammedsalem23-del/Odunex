@@ -1,222 +1,1625 @@
-
-// ==============================================
-// إعدادات Firebase - OdoNex Admin API
-// ==============================================
-
-// إعدادات Firebase (من مشروعك)
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "odunex-project.firebaseapp.com",
-    projectId: "odunex-project",
-    storageBucket: "odunex-project.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-// تهيئة Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
-
-// ==============================================
-// التحقق من تسجيل الدخول
-// ==============================================
-auth.onAuthStateChanged((user) => {
-    if (!user) {
-        window.location.href = 'login.html';
-    } else {
-        // تحميل بيانات المستخدم
-        document.getElementById('adminName').textContent = user.email || 'مدير النظام';
-        
-        // تحميل البيانات حسب القسم الحالي
-        const currentSection = sessionStorage.getItem('currentSection') || 'dashboard';
-        loadSectionData(currentSection);
-    }
-});
-
-// ==============================================
-// دوال حفظ واسترجاع البيانات
-// ==============================================
-
-// حفظ محتوى الصفحة
-window.savePageContent = async function(section, data) {
-    try {
-        document.getElementById('loadingBar').style.display = 'block';
-        
-        await db.collection('pages').doc(section).set({
-            content: data,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            updatedBy: auth.currentUser?.email || 'system'
-        }, { merge: true });
-        
-        showToast('success', 'تم حفظ التغييرات بنجاح');
-        return true;
-    } catch (error) {
-        showToast('error', 'حدث خطأ في حفظ البيانات');
-        console.error(error);
-        return false;
-    } finally {
-        document.getElementById('loadingBar').style.display = 'none';
-    }
-};
-
-// استرجاع محتوى الصفحة
-window.loadPageContent = async function(section) {
-    try {
-        const doc = await db.collection('pages').doc(section).get();
-        if (doc.exists) {
-            return doc.data().content;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdoNex | لوحة التحكم الشاملة</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
-        return null;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-};
 
-// ==============================================
-// تحميل بيانات القسم
-// ==============================================
-async function loadSectionData(section) {
-    if (section === 'dashboard') return;
-    
-    const data = await loadPageContent(section);
-    if (data) {
-        // تعبئة النماذج بالبيانات المحفوظة
-        fillFormWithData(section, data);
-    }
-}
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark: #3730a3;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f3f4f6;
+            --white: #ffffff;
+            --sidebar-width: 280px;
+        }
 
-// تعبئة النماذج بالبيانات
-function fillFormWithData(section, data) {
-    // هذا يعتمد على هيكل كل صفحة
-    console.log('Loading data for:', section, data);
-}
+        body {
+            background: #f0f2f5;
+            overflow-x: hidden;
+        }
 
-// ==============================================
-// إدارة الصور
-// ==============================================
-window.uploadImage = async function(file, path = 'general') {
-    try {
-        document.getElementById('loadingBar').style.display = 'block';
-        
-        const storageRef = storage.ref();
-        const imageRef = storageRef.child(`images/${path}/${file.name}`);
-        await imageRef.put(file);
-        
-        const url = await imageRef.getDownloadURL();
-        showToast('success', 'تم رفع الصورة بنجاح');
-        return url;
-    } catch (error) {
-        showToast('error', 'فشل رفع الصورة');
-        console.error(error);
-        return null;
-    } finally {
-        document.getElementById('loadingBar').style.display = 'none';
-    }
-};
+        /* ===== شريط التحميل ===== */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateX(-100%);
+            animation: loading 2s infinite;
+            z-index: 9999;
+            display: none;
+        }
 
-// ==============================================
-// إدارة الرسائل
-// ==============================================
-window.loadMessages = async function() {
-    try {
-        const snapshot = await db.collection('messages')
-            .orderBy('timestamp', 'desc')
-            .limit(50)
-            .get();
-        
-        return snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        }));
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-};
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
 
-// ==============================================
-// تحديث دالة showSection
-// ==============================================
-const originalShowSection = window.showSection;
-window.showSection = function(section) {
-    // حفظ القسم الحالي
-    sessionStorage.setItem('currentSection', section);
-    
-    // استدعاء الدالة الأصلية
-    if (originalShowSection) {
-        originalShowSection(section);
-    }
-    
-    // تحميل البيانات للقسم
-    setTimeout(() => {
-        loadSectionData(section);
-    }, 500);
-};
+        /* ===== القائمة العلوية ===== */
+        .top-navbar {
+            background: var(--white);
+            padding: 15px 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            margin-right: var(--sidebar-width);
+        }
 
-// ==============================================
-// تحديث دوال الحفظ
-// ==============================================
-window.savePage = async function() {
-    const section = sessionStorage.getItem('currentSection');
-    if (!section) return;
-    
-    // جمع البيانات من النموذج
-    const formData = collectFormData();
-    
-    const success = await savePageContent(section, formData);
-    if (success) {
-        // تحديث المعاينة إذا لزم الأمر
-    }
-};
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-window.saveSection = window.savePage;
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
 
-window.saveItem = async function() {
-    // حفظ عنصر فردي (للإضافات الجديدة)
-    const section = sessionStorage.getItem('currentSection');
-    const itemData = collectItemData();
-    
-    // إضافة إلى مصفوفة العناصر في Firestore
-    const doc = await db.collection('sections').doc(section).get();
-    const items = doc.exists ? doc.data().items || [] : [];
-    items.push(itemData);
-    
-    await db.collection('sections').doc(section).set({ items }, { merge: true });
-    showToast('success', 'تمت الإضافة بنجاح');
-    closeModal();
-};
+        .nav-left h2 {
+            font-size: 20px;
+            color: var(--dark);
+            font-weight: 600;
+        }
 
-// ==============================================
-// دوال المساعدة
-// ==============================================
-function collectFormData() {
-    // جمع بيانات النموذج - حسب احتياجك
-    const data = {};
-    
-    document.querySelectorAll('[data-field]').forEach(el => {
-        data[el.dataset.field] = el.value;
-    });
-    
-    return data;
-}
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-function collectItemData() {
-    // جمع بيانات عنصر من النافذة المنبثقة
-    const data = {};
-    
-    document.querySelectorAll('#modalContent [data-field]').forEach(el => {
-        data[el.dataset.field] = el.value;
-    });
-    
-    return data;
-}
+        .notification-badge {
+            position: relative;
+            cursor: pointer;
+        }
 
-// ==============================================
-// تصدير الدوال للاستخدام العام
-// ==============================================
-window.db = db;
-window.auth = auth;
-window.storage = storage;
+        .notification-badge i {
+            font-size: 22px;
+            color: var(--gray);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger);
+            color: white;
+            font-size: 11px;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .user-profile:hover {
+            background: var(--light);
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-info {
+            line-height: 1.4;
+        }
+
+        .user-info .name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .user-info .role {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* ===== القائمة الجانبية ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--white);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1001;
+        }
+
+        .sidebar-logo {
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .sidebar-logo img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-logo h3 {
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .sidebar-menu {
+            padding: 20px;
+            list-style: none;
+        }
+
+        .menu-category {
+            padding: 15px 0 5px;
+            color: var(--gray);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--gray);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .sidebar-menu li a i {
+            width: 20px;
+            font-size: 16px;
+        }
+
+        .sidebar-menu li a .badge {
+            position: static;
+            margin-right: auto;
+            font-size: 11px;
+            padding: 2px 8px;
+        }
+
+        /* ===== المحتوى الرئيسي ===== */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            padding: 90px 30px 30px;
+            min-height: 100vh;
+        }
+
+        /* ===== بطاقات الإحصائيات ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-info h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon i {
+            font-size: 28px;
+            color: var(--white);
+        }
+
+        /* ===== تبويبات الأقسام ===== */
+        .sections-tabs {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* ===== نماذج التعديل ===== */
+        .edit-form {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            border: 2px dashed var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-preview:hover::after {
+            content: 'تغيير الصورة';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* ===== قائمة العناصر ===== */
+        .items-list {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--light);
+            transition: background 0.3s;
+        }
+
+        .item-row:hover {
+            background: var(--light);
+        }
+
+        .item-row:last-child {
+            border-bottom: none;
+        }
+
+        .item-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .item-info p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .item-actions i {
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .item-actions i:hover {
+            color: var(--primary);
+        }
+
+        .item-actions i.fa-trash:hover {
+            color: var(--danger);
+        }
+
+        /* ===== أزرار الإجراءات ===== */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        /* ===== نافذة منبثقة ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .modal-header h3 {
+            font-size: 20px;
+            color: var(--dark);
+        }
+
+        .close-modal {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        /* ===== رسائل التنبيه ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 3000;
+        }
+
+        .toast.success {
+            border-right: 4px solid var(--secondary);
+        }
+
+        .toast.error {
+            border-right: 4px solid var(--danger);
+        }
+
+        .toast.warning {
+            border-right: 4px solid var(--warning);
+        }
+
+        .toast i {
+            font-size: 20px;
+        }
+
+        .toast.success i {
+            color: var(--secondary);
+        }
+
+        .toast.error i {
+            color: var(--danger);
+        }
+
+        .toast.warning i {
+            color: var(--warning);
+        }
+
+        /* ===== مؤشرات التحميل ===== */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading-shimmer 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes loading-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ===== علامات التبويب ===== */
+        .language-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .lang-tab {
+            padding: 8px 16px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== استجابة ===== */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                right: -100%;
+            }
+            
+            .sidebar.active {
+                right: 0;
+            }
+            
+            .top-navbar {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-right: 0;
+                padding: 90px 15px 30px;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-bar" id="loadingBar"></div>
+
+    <!-- القائمة العلوية -->
+    <div class="top-navbar">
+        <div class="nav-left">
+            <i class="fas fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+            <h2 id="pageTitle">لوحة التحكم الرئيسية</h2>
+        </div>
+        <div class="nav-right">
+            <div class="notification-badge" onclick="loadNotifications()">
+                <i class="fas fa-bell"></i>
+                <span class="badge" id="notificationCount">0</span>
+            </div>
+            <div class="user-profile" onclick="toggleUserMenu()">
+                <img src="../assets/images/odonex-logo.png.png" alt="User" id="userAvatar">
+                <div class="user-info">
+                    <div class="name" id="adminName">مدير النظام</div>
+                    <div class="role" id="adminRole">مشرف عام</div>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- القائمة الجانبية -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="../assets/images/odonex-logo.png.png" alt="OdoNex">
+            <h3>OdoNex</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-category">الرئيسية</li>
+            <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> لوحة التحكم</a></li>
+            
+            <li class="menu-category">الصفحات العربية</li>
+            <li><a href="#" onclick="showSection('ar-home')"><i class="fas fa-home"></i> الرئيسية (index.html)</a></li>
+            <li><a href="#" onclick="showSection('ar-features')"><i class="fas fa-star"></i> المميزات (features.html)</a></li>
+            <li><a href="#" onclick="showSection('ar-pricing')"><i class="fas fa-tag"></i> الأسعار (pricing.html)</a></li>
+            <li><a href="#" onclick="showSection('ar-gallery')"><i class="fas fa-images"></i> معرض الأعمال (gallery.html)</a></li>
+            <li><a href="#" onclick="showSection('ar-contact')"><i class="fas fa-envelope"></i> اتصل بنا (contact.html)</a></li>
+            
+            <li class="menu-category">الصفحات الإنجليزية</li>
+            <li><a href="#" onclick="showSection('en-home')"><i class="fas fa-home"></i> Home (index-en.html)</a></li>
+            <li><a href="#" onclick="showSection('en-features')"><i class="fas fa-star"></i> Features (features-en.html)</a></li>
+            <li><a href="#" onclick="showSection('en-pricing')"><i class="fas fa-tag"></i> Pricing (pricing-en.html)</a></li>
+            <li><a href="#" onclick="showSection('en-gallery')"><i class="fas fa-images"></i> Gallery (gallery-en.html)</a></li>
+            <li><a href="#" onclick="showSection('en-contact')"><i class="fas fa-envelope"></i> Contact (contact-en.html)</a></li>
+            
+            <li class="menu-category">إدارة المحتوى</li>
+            <li><a href="#" onclick="showSection('hero')"><i class="fas fa-star"></i> القسم الرئيسي (Hero)</a></li>
+            <li><a href="#" onclick="showSection('statistics')"><i class="fas fa-chart-bar"></i> الإحصائيات</a></li>
+            <li><a href="#" onclick="showSection('testimonials')"><i class="fas fa-comment"></i> آراء العملاء</a></li>
+            <li><a href="#" onclick="showSection('faq')"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+            <li><a href="#" onclick="showSection('footer')"><i class="fas fa-foot"></i> الفوتر</a></li>
+            
+            <li class="menu-category">إدارة</li>
+            <li><a href="#" onclick="showSection('messages')"><i class="fas fa-inbox"></i> الرسائل <span class="badge" id="messagesBadge">0</span></a></li>
+            <li><a href="#" onclick="showSection('users')"><i class="fas fa-users"></i> المستخدمين</a></li>
+            <li><a href="#" onclick="showSection('settings')"><i class="fas fa-cog"></i> الإعدادات</a></li>
+            
+            <li class="menu-category">أخرى</li>
+            <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+        </ul>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content" id="mainContent">
+        <!-- سيتم تحميل المحتوى هنا ديناميكياً -->
+    </div>
+
+    <!-- نافذة التعديل المنبثقة -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="editModal">
+            <div class="modal-header">
+                <h3 id="modalTitle">تعديل المحتوى</h3>
+                <i class="fas fa-times close-modal" onclick="closeModal()"></i>
+            </div>
+            <div id="modalContent">
+                <!-- محتوى النموذج سيتم تحميله ديناميكياً -->
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تأكيد الحذف -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3>تأكيد الحذف</h3>
+                <i class="fas fa-times close-modal" onclick="closeConfirmModal()"></i>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 20px;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: var(--warning); margin-bottom: 20px;"></i>
+                <p style="margin-bottom: 20px; font-size: 16px;">هل أنت متأكد من حذف هذا العنصر؟</p>
+                <div class="action-buttons" style="justify-content: center;">
+                    <button class="btn-danger" onclick="confirmDelete()">نعم، احذف</button>
+                    <button class="btn-secondary" onclick="closeConfirmModal()">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة اختيار الصورة -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>اختيار صورة</h3>
+                <i class="fas fa-times close-modal" onclick="closeImageModal()"></i>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>اختر صورة من جهازك</label>
+                    <input type="file" id="imageInput" accept="image/*" class="form-control" onchange="previewSelectedImage(event)">
+                </div>
+                <div class="image-preview" id="selectedImagePreview" style="width: 100%; height: 200px; margin: 20px 0;">
+                    <i class="fas fa-image" style="color: #ccc; font-size: 40px;"></i>
+                </div>
+                <button class="btn-primary" onclick="uploadSelectedImage()" style="width: 100%;">
+                    <i class="fas fa-upload"></i> رفع الصورة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- رسالة التنبيه -->
+    <div class="toast" id="toast">
+        <i class="fas" id="toastIcon"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Admin JavaScript -->
+    <script src="js/admin.js"></script>
+    
+    <script>
+        // ==============================================
+        // دوال التحكم في الواجهة
+        // ==============================================
+
+        // متغيرات عامة
+        let currentSection = 'dashboard';
+        let currentItemId = null;
+        let deleteCallback = null;
+
+        // تبديل القائمة الجانبية
+        window.toggleSidebar = function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        };
+
+        // إظهار القسم المحدد
+        window.showSection = function(section) {
+            currentSection = section;
+            document.getElementById('pageTitle').textContent = getSectionTitle(section);
+            
+            // تحديث الرابط النشط
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick')?.includes(section)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // إظهار شريط التحميل
+            showLoading();
+
+            // تحميل المحتوى حسب القسم
+            setTimeout(() => {
+                if (section === 'dashboard') {
+                    loadDashboard();
+                } else if (section.startsWith('ar-') || section.startsWith('en-')) {
+                    loadPageEditor(section);
+                } else {
+                    loadSectionEditor(section);
+                }
+                hideLoading();
+            }, 500);
+        };
+
+        // الحصول على عنوان القسم
+        function getSectionTitle(section) {
+            const titles = {
+                'dashboard': 'لوحة التحكم الرئيسية',
+                'ar-home': 'تعديل الصفحة الرئيسية - عربي',
+                'ar-features': 'تعديل صفحة المميزات - عربي',
+                'ar-pricing': 'تعديل صفحة الأسعار - عربي',
+                'ar-gallery': 'تعديل معرض الأعمال - عربي',
+                'ar-contact': 'تعديل صفحة اتصل بنا - عربي',
+                'en-home': 'Edit Home Page - English',
+                'en-features': 'Edit Features Page - English',
+                'en-pricing': 'Edit Pricing Page - English',
+                'en-gallery': 'Edit Gallery Page - English',
+                'en-contact': 'Edit Contact Page - English',
+                'hero': 'إدارة القسم الرئيسي',
+                'statistics': 'إدارة الإحصائيات',
+                'testimonials': 'إدارة آراء العملاء',
+                'faq': 'إدارة الأسئلة الشائعة',
+                'footer': 'إدارة الفوتر',
+                'messages': 'إدارة الرسائل',
+                'users': 'إدارة المستخدمين',
+                'settings': 'الإعدادات العامة'
+            };
+            return titles[section] || 'لوحة التحكم';
+        }
+
+        // تحميل لوحة التحكم الرئيسية
+        function loadDashboard() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="totalPages">0</h3>
+                            <p>إجمالي الصفحات</p>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-file"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="arabicPages">0</h3>
+                            <p>صفحات عربية</p>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="englishPages">0</h3>
+                            <p>صفحات إنجليزية</p>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h3 id="newMessages">0</h3>
+                            <p>رسائل جديدة</p>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sections-tabs">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" onclick="showTab('all-pages')">كل الصفحات</button>
+                        <button class="tab-btn" onclick="showTab('arabic')">العربية</button>
+                        <button class="tab-btn" onclick="showTab('english')">الإنجليزية</button>
+                    </div>
+                    
+                    <div class="tab-pane active" id="all-pages">
+                        <div class="items-list">
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>الصفحات العربية</h4>
+                                    <p>5 صفحات - index.html, features.html, pricing.html, gallery.html, contact.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('ar-home')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('index.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>الصفحات الإنجليزية</h4>
+                                    <p>5 صفحات - index-en.html, features-en.html, pricing-en.html, gallery-en.html, contact-en.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('en-home')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('index-en.html')"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="arabic">
+                        <div class="items-list">
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>الرئيسية</h4>
+                                    <p>index.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('ar-home')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('index.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>المميزات</h4>
+                                    <p>features.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('ar-features')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('features.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>الأسعار</h4>
+                                    <p>pricing.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('ar-pricing')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('pricing.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>معرض الأعمال</h4>
+                                    <p>gallery.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('ar-gallery')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('gallery.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>اتصل بنا</h4>
+                                    <p>contact.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('ar-contact')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('contact.html')"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="english">
+                        <div class="items-list">
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>Home</h4>
+                                    <p>index-en.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('en-home')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('index-en.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>Features</h4>
+                                    <p>features-en.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('en-features')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('features-en.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>Pricing</h4>
+                                    <p>pricing-en.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('en-pricing')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('pricing-en.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>Gallery</h4>
+                                    <p>gallery-en.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('en-gallery')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('gallery-en.html')"></i>
+                                </div>
+                            </div>
+                            <div class="item-row">
+                                <div class="item-info">
+                                    <h4>Contact</h4>
+                                    <p>contact-en.html</p>
+                                </div>
+                                <div class="item-actions">
+                                    <i class="fas fa-edit" onclick="showSection('en-contact')"></i>
+                                    <i class="fas fa-eye" onclick="previewPage('contact-en.html')"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // تحميل الإحصائيات من Firebase
+            loadDashboardStats();
+        }
+
+        // تحميل إحصائيات لوحة التحكم
+        async function loadDashboardStats() {
+            try {
+                const stats = await window.getDashboardStats?.() || {
+                    totalPages: 10,
+                    arabicPages: 5,
+                    englishPages: 5,
+                    newMessages: 0
+                };
+                
+                document.getElementById('totalPages').textContent = stats.totalPages;
+                document.getElementById('arabicPages').textContent = stats.arabicPages;
+                document.getElementById('englishPages').textContent = stats.englishPages;
+                document.getElementById('newMessages').textContent = stats.newMessages;
+                document.getElementById('messagesBadge').textContent = stats.newMessages;
+                document.getElementById('notificationCount').textContent = stats.newMessages;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // تحميل محرر الصفحة
+        function loadPageEditor(section) {
+            const content = document.getElementById('mainContent');
+            const isArabic = section.startsWith('ar-');
+            
+            content.innerHTML = `
+                <div class="language-tabs">
+                    <button class="lang-tab ${isArabic ? 'active' : ''}" onclick="switchLanguage('ar', '${section.replace('ar-', '').replace('en-', '')}')">العربية</button>
+                    <button class="lang-tab ${!isArabic ? 'active' : ''}" onclick="switchLanguage('en', '${section.replace('ar-', '').replace('en-', '')}')">English</button>
+                </div>
+                
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label>عنوان الصفحة</label>
+                        <input type="text" class="form-control" data-field="title" id="pageTitle" placeholder="عنوان الصفحة">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>وصف الصفحة</label>
+                        <textarea class="form-control" data-field="description" id="pageDescription" rows="3" placeholder="وصف الصفحة"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>الكلمات المفتاحية (SEO)</label>
+                        <input type="text" class="form-control" data-field="keywords" id="pageKeywords" placeholder="كلمة1, كلمة2, كلمة3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>محتوى الصفحة</label>
+                        <textarea class="form-control ckeditor" id="pageContent" rows="10"></textarea>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="savePageContent('${section}')">
+                            <i class="fas fa-save"></i> حفظ التغييرات
+                        </button>
+                        <button class="btn-secondary" onclick="previewPage('${section.replace('ar-', '').replace('en-', '') + (isArabic ? '.html' : '-en.html')}')">
+                            <i class="fas fa-eye"></i> معاينة
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // تفعيل CKEditor
+            CKEDITOR.replace('pageContent');
+            
+            // تحميل البيانات المحفوظة
+            loadSavedPageData(section);
+        }
+
+        // تحميل البيانات المحفوظة للصفحة
+        async function loadSavedPageData(section) {
+            try {
+                const data = await window.loadPageContent?.(section);
+                if (data) {
+                    document.getElementById('pageTitle').value = data.title || '';
+                    document.getElementById('pageDescription').value = data.description || '';
+                    document.getElementById('pageKeywords').value = data.keywords || '';
+                    CKEDITOR.instances.pageContent.setData(data.content || '');
+                }
+            } catch (error) {
+                console.error('Error loading page data:', error);
+            }
+        }
+
+        // تحميل محرر القسم
+        function loadSectionEditor(section) {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-form">
+                    <div class="items-list" id="sectionItems">
+                        <!-- سيتم تحميل العناصر هنا -->
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>جاري التحميل...</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-secondary" onclick="openAddItemModal('${section}')">
+                        <i class="fas fa-plus"></i> إضافة عنصر جديد
+                    </button>
+                    
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <button class="btn-primary" onclick="saveSectionContent('${section}')">
+                            <i class="fas fa-save"></i> حفظ التغييرات
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // تحميل عناصر القسم
+            loadSectionItems(section);
+        }
+
+        // تحميل عناصر القسم
+        async function loadSectionItems(section) {
+            try {
+                const items = await window.loadSectionItems?.(section) || [];
+                const itemsList = document.getElementById('sectionItems');
+                
+                if (items.length === 0) {
+                    itemsList.innerHTML = `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>لا توجد عناصر</h4>
+                                <p>اضغط على "إضافة عنصر جديد" للبدء</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                itemsList.innerHTML = items.map((item, index) => `
+                    <div class="item-row" data-id="${item.id || index}">
+                        <div class="item-info">
+                            <h4>${item.title || 'بدون عنوان'}</h4>
+                            <p>${item.description || ''}</p>
+                        </div>
+                        <div class="item-actions">
+                            <i class="fas fa-edit" onclick="openEditItemModal('${section}', ${JSON.stringify(item).replace(/"/g, '&quot;')})"></i>
+                            <i class="fas fa-trash" onclick="deleteItem('${section}', '${item.id || index}')"></i>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading section items:', error);
+            }
+        }
+
+        // حفظ محتوى الصفحة
+        window.savePageContent = async function(section) {
+            showLoading();
+            
+            const data = {
+                title: document.getElementById('pageTitle')?.value || '',
+                description: document.getElementById('pageDescription')?.value || '',
+                keywords: document.getElementById('pageKeywords')?.value || '',
+                content: CKEDITOR.instances.pageContent?.getData() || ''
+            };
+
+            try {
+                const success = await window.savePageData?.(section, data);
+                if (success) {
+                    showToast('success', 'تم حفظ الصفحة بنجاح');
+                } else {
+                    showToast('error', 'فشل حفظ الصفحة');
+                }
+            } catch (error) {
+                showToast('error', 'حدث خطأ في حفظ البيانات');
+                console.error(error);
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // حفظ محتوى القسم
+        window.saveSectionContent = async function(section) {
+            showLoading();
+            
+            try {
+                const items = [];
+                document.querySelectorAll('#sectionItems .item-row').forEach(row => {
+                    const id = row.dataset.id;
+                    const title = row.querySelector('.item-info h4')?.textContent || '';
+                    const description = row.querySelector('.item-info p')?.textContent || '';
+                    items.push({ id, title, description });
+                });
+
+                const success = await window.saveSectionData?.(section, items);
+                if (success) {
+                    showToast('success', 'تم حفظ القسم بنجاح');
+                } else {
+                    showToast('error', 'فشل حفظ القسم');
+                }
+            } catch (error) {
+                showToast('error', 'حدث خطأ في حفظ البيانات');
+                console.error(error);
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // فتح نافذة إضافة عنصر
+        window.openAddItemModal = function(section) {
+            currentSection = section;
+            document.getElementById('modalTitle').textContent = 'إضافة عنصر جديد';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>العنوان</label>
+                    <input type="text" class="form-control" id="itemTitle" data-field="title">
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea class="form-control" id="itemDescription" data-field="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>الصورة</label>
+                    <div class="image-preview" onclick="openImageModal()">
+                        <i class="fas fa-image" style="color: #ccc; font-size: 30px;"></i>
+                    </div>
+                    <input type="hidden" id="itemImage" data-field="image">
+                </div>
+                <button class="btn-primary" onclick="saveNewItem()" style="width: 100%;">
+                    <i class="fas fa-save"></i> حفظ
+                </button>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        // فتح نافذة تعديل عنصر
+        window.openEditItemModal = function(section, item) {
+            if (typeof item === 'string') {
+                item = JSON.parse(item);
+            }
+            
+            currentSection = section;
+            currentItemId = item.id;
+            
+            document.getElementById('modalTitle').textContent = 'تعديل العنصر';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>العنوان</label>
+                    <input type="text" class="form-control" id="itemTitle" data-field="title" value="${item.title || ''}">
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea class="form-control" id="itemDescription" data-field="description" rows="3">${item.description || ''}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>الصورة</label>
+                    <div class="image-preview" onclick="openImageModal()">
+                        ${item.image ? `<img src="${item.image}" alt="Preview">` : '<i class="fas fa-image" style="color: #ccc; font-size: 30px;"></i>'}
+                    </div>
+                    <input type="hidden" id="itemImage" data-field="image" value="${item.image || ''}">
+                </div>
+                <button class="btn-primary" onclick="updateItem()" style="width: 100%;">
+                    <i class="fas fa-save"></i> تحديث
+                </button>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        // حفظ عنصر جديد
+        window.saveNewItem = function() {
+            const title = document.getElementById('itemTitle')?.value;
+            const description = document.getElementById('itemDescription')?.value;
+            const image = document.getElementById('itemImage')?.value;
+            
+            if (!title) {
+                showToast('warning', 'الرجاء إدخال العنوان');
+                return;
+            }
+
+            // إضافة العنصر للقائمة
+            const itemsList = document.getElementById('sectionItems');
+            const newItem = `
+                <div class="item-row">
+                    <div class="item-info">
+                        <h4>${title}</h4>
+                        <p>${description || ''}</p>
+                    </div>
+                    <div class="item-actions">
+                        <i class="fas fa-edit" onclick="openEditItemModal('${currentSection}', {title: '${title}', description: '${description}', image: '${image}'})"></i>
+                        <i class="fas fa-trash" onclick="deleteItem('${currentSection}', 'new')"></i>
+                    </div>
+                </div>
+            `;
+
+            if (itemsList.children.length === 1 && itemsList.children[0].querySelector('.item-info h4')?.textContent === 'لا توجد عناصر') {
+                itemsList.innerHTML = newItem;
+            } else {
+                itemsList.insertAdjacentHTML('beforeend', newItem);
+            }
+
+            closeModal();
+            showToast('success', 'تمت الإضافة بنجاح');
+        };
+
+        // تحديث عنصر
+        window.updateItem = function() {
+            const title = document.getElementById('itemTitle')?.value;
+            const description = document.getElementById('itemDescription')?.value;
+            const image = document.getElementById('itemImage')?.value;
+            
+            if (!title) {
+                showToast('warning', 'الرجاء إدخال العنوان');
+                return;
+            }
+
+            // تحديث العنصر في القائمة
+            const itemRow = document.querySelector(`#sectionItems .item-row[data-id="${currentItemId}"]`);
+            if (itemRow) {
+                itemRow.querySelector('.item-info h4').textContent = title;
+                itemRow.querySelector('.item-info p').textContent = description || '';
+            }
+
+            closeModal();
+            showToast('success', 'تم التحديث بنجاح');
+        };
+
+        // حذف عنصر
+        window.deleteItem = function(section, itemId) {
+            currentSection = section;
+            currentItemId = itemId;
+            document.getElementById('confirmModal').style.display = 'flex';
+        };
+
+        // تأكيد الحذف
+        window.confirmDelete = function() {
+            const itemRow = document.querySelector(`#sectionItems .item-row[data-id="${currentItemId}"]`);
+            if (itemRow) {
+                itemRow.remove();
+            }
+
+            // إذا كانت القائمة فاضية
+            const itemsList = document.getElementById('sectionItems');
+            if (itemsList.children.length === 0) {
+                itemsList.innerHTML = `
+                    <div class="item-row">
+                        <div class="item-info">
+                            <h4>لا توجد عناصر</h4>
+                            <p>اضغط على "إضافة عنصر جديد" للبدء</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            closeConfirmModal();
+            showToast('success', 'تم الحذف بنجاح');
+        };
+
+        // فتح نافذة الصور
+        window.openImageModal = function() {
+            document.getElementById('imageModal').style.display = 'flex';
+        };
+
+        // معاينة الصورة المختارة
+        window.previewSelectedImage = function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('selectedImagePreview').innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: contain;">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        // رفع الصورة المختارة
+        window.uploadSelectedImage = async function() {
+            const fileInput = document.getElementById('imageInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showToast('warning', 'الرجاء اختيار صورة أولاً');
+                return;
+            }
+
+            showLoading();
+            
+            try {
+                const url = await window.uploadImage?.(file, currentSection);
+                if (url) {
+                    document.getElementById('itemImage').value = url;
+                    document.querySelector('#modalContent .image-preview').innerHTML = `<img src="${url}" alt="Preview">`;
+                    closeImageModal();
+                    showToast('success', 'تم رفع الصورة بنجاح');
+                }
+            } catch (error) {
+                showToast('error', 'فشل رفع الصورة');
+                console.error(error);
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // إغلاق النوافذ المنبثقة
+        window.closeModal = function() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        };
+
+        window.closeConfirmModal = function() {
+            document.getElementById('confirmModal').style.display = 'none';
+        };
+
+        window.closeImageModal = function() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.getElementById('imageInput').value = '';
+            document.getElementById('selectedImagePreview').innerHTML = '<i class="fas fa-image" style="color: #ccc; font-size: 40px;"></i>';
+        };
+
+        // تبديل اللغة
+        window.switchLanguage = function(lang, page) {
+            const section = lang === 'ar' ? `ar-${page}` : `en-${page}`;
+            showSection(section);
+        };
+
+        // معاينة الصفحة
+        window.previewPage = function(pageName) {
+            window.open(`../${pageName}`, '_blank');
+        };
+
+        // إظهار التبويب
+        window.showTab = function(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        };
+
+        // إظهار شريط التحميل
+        function showLoading() {
+            document.getElementById('loadingBar').style.display = 'block';
+        }
+
+        // إخفاء شريط التحميل
+        function hideLoading() {
+            setTimeout(() => {
+                document.getElementById('loadingBar').style.display = 'none';
+            }, 500);
+        }
+
+        // إظهار رسالة تنبيه
+        window.showToast = function(type, message) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            
+            toast.className = `toast ${type}`;
+            icon.className = `fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle'}`;
+            document.getElementById('toastMessage').textContent = message;
+            
+            toast.style.display = 'flex';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        };
+
+        // تبديل قائمة المستخدم
+        window.toggleUserMenu = function() {
+            // يمكن إضافة قائمة منسدلة هنا
+        };
+
+        // تحميل الإشعارات
+        window.loadNotifications = function() {
+            showSection('messages');
+        };
+
+        // تسجيل الخروج
+        window.logout = function() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                window.logoutUser?.();
+            }
+        };
+
+        // التهيئة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // إغلاق النوافذ عند الضغط خارجها
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal-overlay')) {
+                    closeModal();
+                    closeConfirmModal();
+                    closeImageModal();
+                }
+            };
+        });
+    </script>
+</body>
+</html>
