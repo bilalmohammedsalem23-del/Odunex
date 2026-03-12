@@ -354,7 +354,13 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* تم حذف hero-logo بالكامل */
+        .hero-logo {
+            width: 308px;  /* تمت الزيادة بنسبة 10% من 280px */
+            height: auto;
+            margin: 0 auto 15px;
+            filter: drop-shadow(0 10px 15px rgba(122,90,248,0.15));
+            animation: gentleBounce 4s ease-in-out infinite;
+        }
 
         h1 {
             font-size: 44px;
@@ -790,6 +796,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
+            .hero-logo {
+                width: 264px;  /* تمت الزيادة بنسبة 10% من 240px */
+            }
+            
             h1 {
                 font-size: 40px;
             }
@@ -814,6 +824,10 @@
 
             .hero {
                 padding: 60px 0 30px;
+            }
+
+            .hero-logo {
+                width: 220px;  /* تمت الزيادة بنسبة 10% من 200px */
             }
 
             h1 {
@@ -905,6 +919,10 @@
                 font-size: 28px;
             }
 
+            .hero-logo {
+                width: 176px;  /* تمت الزيادة بنسبة 10% من 160px */
+            }
+
             .testimonials-title,
             .faq-title {
                 font-size: 28px;
@@ -994,7 +1012,7 @@
        <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <!-- تم حذف صورة الشعار من هنا -->
+        <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="hero-logo">
         <h1>
             <span class="brand-gradient">Odunex</span> <span class="black-text">| حلول ERP الموحدة</span>
         </h1>
