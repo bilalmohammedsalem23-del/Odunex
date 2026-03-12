@@ -16,7 +16,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     
     <style>
-        /* نفس التنسيقات السابقة */
         * {
             margin: 0;
             padding: 0;
@@ -382,17 +381,19 @@
 
     <script>
         // ==============================================
-        // إعدادات Firebase
+        // إعدادات Firebase الصحيحة (من مشروعك)
         // ==============================================
         const firebaseConfig = {
-            apiKey: "AIzaSyCbaHb-x48AUNFwifNqcqjmSujcXpmZ0",
+            apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
             authDomain: "odunex-project.firebaseapp.com",
             projectId: "odunex-project",
             storageBucket: "odunex-project.firebasestorage.app",
-            messagingSenderId: "20180968682",
-            appId: "1:20180968682:web:76574c7befec70c24df6e3",
+            messagingSenderId: "20189086682",
+            appId: "1:20189086682:web:76574c7befec70c24df6e3",
             measurementId: "G-RREEW2EY4K"
         };
+
+        console.log('Firebase Config:', firebaseConfig);
 
         // تهيئة Firebase
         try {
@@ -400,7 +401,8 @@
             console.log('✅ Firebase initialized successfully');
         } catch (error) {
             console.error('❌ Firebase initialization error:', error);
-            showError('حدث خطأ في الاتصال بقاعدة البيانات');
+            document.getElementById('errorText').textContent = 'خطأ في تهيئة قاعدة البيانات';
+            document.getElementById('errorMessage').style.display = 'flex';
         }
         
         const auth = firebase.auth();
@@ -458,27 +460,32 @@
                 
                 // رسائل خطأ مخصصة
                 let errorMessage = '';
-                switch (error.code) {
-                    case 'auth/user-not-found':
-                        errorMessage = 'لا يوجد مستخدم بهذا البريد الإلكتروني';
-                        break;
-                    case 'auth/wrong-password':
-                        errorMessage = 'كلمة المرور غير صحيحة';
-                        break;
-                    case 'auth/invalid-email':
-                        errorMessage = 'البريد الإلكتروني غير صالح';
-                        break;
-                    case 'auth/user-disabled':
-                        errorMessage = 'تم تعطيل هذا الحساب';
-                        break;
-                    case 'auth/too-many-requests':
-                        errorMessage = 'تم حظر الحساب مؤقتاً. الرجاء المحاولة لاحقاً';
-                        break;
-                    case 'auth/network-request-failed':
-                        errorMessage = 'خطأ في الاتصال بالإنترنت';
-                        break;
-                    default:
-                        errorMessage = 'حدث خطأ في تسجيل الدخول: ' + error.message;
+                
+                if (error.message.includes('API key')) {
+                    errorMessage = 'خطأ في مفتاح API';
+                } else {
+                    switch (error.code) {
+                        case 'auth/user-not-found':
+                            errorMessage = 'لا يوجد مستخدم بهذا البريد الإلكتروني';
+                            break;
+                        case 'auth/wrong-password':
+                            errorMessage = 'كلمة المرور غير صحيحة';
+                            break;
+                        case 'auth/invalid-email':
+                            errorMessage = 'البريد الإلكتروني غير صالح';
+                            break;
+                        case 'auth/user-disabled':
+                            errorMessage = 'تم تعطيل هذا الحساب';
+                            break;
+                        case 'auth/too-many-requests':
+                            errorMessage = 'تم حظر الحساب مؤقتاً';
+                            break;
+                        case 'auth/network-request-failed':
+                            errorMessage = 'خطأ في الاتصال بالإنترنت';
+                            break;
+                        default:
+                            errorMessage = 'حدث خطأ في تسجيل الدخول';
+                    }
                 }
                 
                 errorText.textContent = errorMessage;
