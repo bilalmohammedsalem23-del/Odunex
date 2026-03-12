@@ -19,5 +19,8 @@ jobs:
       - name: Install Firebase
         run: npm install -g firebase-tools
 
+      - name: Preview Deploy
+        run: firebase hosting:channel:deploy preview --expires 7d --token ${{ secrets.FIREBASE_TOKEN }}
+
       - name: Deploy
         run: firebase deploy --only hosting --project odunex-project --token ${{ secrets.FIREBASE_TOKEN }}
