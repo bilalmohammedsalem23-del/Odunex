@@ -48,10 +48,11 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 450px;
-            padding: 50px 40px;
+            max-width: 360px;
+            padding: 30px 25px;
             position: relative;
             overflow: hidden;
+            transform: scale(0.8);
         }
 
         .login-container::before {
@@ -60,50 +61,52 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .logo {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .logo img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 15px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+            width: 70px;
+            height: 70px;
+            margin-bottom: 8px;
+            border-radius: 14px;
+            box-shadow: 0 6px 15px rgba(79, 70, 229, 0.15);
+            object-fit: contain;
         }
 
         .logo h2 {
             color: var(--primary);
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .logo p {
             color: var(--gray);
-            font-size: 14px;
+            font-size: 11px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: 600;
             color: var(--dark);
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .form-group label i {
             color: var(--primary);
-            margin-left: 5px;
+            margin-left: 4px;
+            font-size: 11px;
         }
 
         .input-group {
@@ -112,20 +115,20 @@
 
         .input-group i {
             position: absolute;
-            right: 15px;
+            right: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
-            font-size: 16px;
+            font-size: 13px;
             transition: color 0.3s;
         }
 
         .form-control {
             width: 100%;
-            padding: 14px 45px 14px 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 15px;
+            padding: 10px 35px 10px 12px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 13px;
             transition: all 0.3s;
             background: var(--white);
         }
@@ -133,7 +136,7 @@
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
         .form-control:focus + i {
@@ -142,12 +145,12 @@
 
         .password-toggle {
             position: absolute;
-            left: 15px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
             cursor: pointer;
-            font-size: 16px;
+            font-size: 13px;
             transition: color 0.3s;
             z-index: 10;
         }
@@ -161,41 +164,35 @@
             background: var(--primary);
             color: var(--white);
             border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
+            gap: 8px;
+            margin-top: 8px;
         }
 
         .btn-login:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn-login:active {
-            transform: translateY(0);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
         }
 
         .btn-login i {
-            font-size: 18px;
-            transition: transform 0.3s;
+            font-size: 15px;
         }
 
         .btn-login:hover i {
-            transform: translateX(5px);
+            transform: translateX(4px);
         }
 
         .btn-login:disabled {
-            opacity: 0.7;
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
@@ -203,19 +200,19 @@
         .error-message {
             background: #fee2e2;
             color: var(--danger);
-            padding: 12px 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-right: 4px solid var(--danger);
+            gap: 8px;
+            border-right: 3px solid var(--danger);
             display: none;
         }
 
         .error-message i {
-            font-size: 18px;
+            font-size: 15px;
         }
 
         .loading-bar {
@@ -223,7 +220,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
@@ -238,17 +235,18 @@
 
         .toast {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 25px;
+            left: 25px;
             background: var(--white);
-            padding: 15px 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             display: none;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             z-index: 10000;
             animation: slideUp 0.3s ease;
+            font-size: 12px;
         }
 
         @keyframes slideUp {
@@ -263,15 +261,15 @@
         }
 
         .toast.success {
-            border-right: 4px solid var(--secondary);
+            border-right: 3px solid var(--secondary);
         }
 
         .toast.error {
-            border-right: 4px solid var(--danger);
+            border-right: 3px solid var(--danger);
         }
 
         .toast i {
-            font-size: 20px;
+            font-size: 17px;
         }
 
         .toast.success i {
@@ -283,16 +281,17 @@
         }
 
         .footer-links {
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: center;
             color: var(--gray);
-            font-size: 13px;
+            font-size: 11px;
         }
 
         .footer-links a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
+            font-size: 11px;
         }
 
         .footer-links a:hover {
@@ -301,16 +300,8 @@
 
         @media (max-width: 480px) {
             .login-container {
-                padding: 40px 20px;
-            }
-
-            .logo img {
-                width: 80px;
-                height: 80px;
-            }
-
-            .logo h2 {
-                font-size: 24px;
+                transform: scale(0.75);
+                padding: 25px 20px;
             }
         }
     </style>
@@ -338,7 +329,7 @@
                 </label>
                 <div class="input-group">
                     <input type="email" id="email" class="form-control" 
-                           placeholder="admin@odonex.com" 
+                           placeholder=" " 
                            required
                            autocomplete="email">
                     <i class="fas fa-envelope"></i>
@@ -352,7 +343,7 @@
                 </label>
                 <div class="input-group">
                     <input type="password" id="password" class="form-control" 
-                           placeholder="********" 
+                           placeholder=" " 
                            required
                            autocomplete="current-password">
                     <i class="fas fa-lock"></i>
@@ -368,7 +359,7 @@
 
         <div class="footer-links">
             <p>جميع الحقوق محفوظة &copy; 2026 OdoNex</p>
-            <p style="margin-top: 5px;">
+            <p style="margin-top: 3px;">
                 <a href="../index.html">العودة للموقع</a>
             </p>
         </div>
