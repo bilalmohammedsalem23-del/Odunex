@@ -45,14 +45,13 @@
 
         .login-container {
             background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
             width: 100%;
-            max-width: 360px;
-            padding: 30px 25px;
+            max-width: 480px;
+            padding: 45px 40px;
             position: relative;
             overflow: hidden;
-            transform: scale(0.8);
         }
 
         .login-container::before {
@@ -61,52 +60,52 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 5px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
         .logo {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .logo img {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 8px;
-            border-radius: 14px;
-            box-shadow: 0 6px 15px rgba(79, 70, 229, 0.15);
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
             object-fit: contain;
         }
 
         .logo h2 {
             color: var(--primary);
-            font-size: 20px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
         }
 
         .logo p {
             color: var(--gray);
-            font-size: 11px;
+            font-size: 14px;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
             color: var(--dark);
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .form-group label i {
             color: var(--primary);
-            margin-left: 4px;
-            font-size: 11px;
+            margin-left: 5px;
+            font-size: 14px;
         }
 
         .input-group {
@@ -115,20 +114,20 @@
 
         .input-group i {
             position: absolute;
-            right: 12px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
-            font-size: 13px;
+            font-size: 16px;
             transition: color 0.3s;
         }
 
         .form-control {
             width: 100%;
-            padding: 10px 35px 10px 12px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 13px;
+            padding: 14px 45px 14px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
             transition: all 0.3s;
             background: var(--white);
         }
@@ -136,7 +135,7 @@
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
 
         .form-control:focus + i {
@@ -145,12 +144,12 @@
 
         .password-toggle {
             position: absolute;
-            left: 12px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
             cursor: pointer;
-            font-size: 13px;
+            font-size: 16px;
             transition: color 0.3s;
             z-index: 10;
         }
@@ -164,31 +163,31 @@
             background: var(--primary);
             color: var(--white);
             border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .btn-login:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
         }
 
         .btn-login i {
-            font-size: 15px;
+            font-size: 18px;
         }
 
         .btn-login:hover i {
-            transform: translateX(4px);
+            transform: translateX(5px);
         }
 
         .btn-login:disabled {
@@ -200,19 +199,19 @@
         .error-message {
             background: #fee2e2;
             color: var(--danger);
-            padding: 10px 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-size: 12px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            border-right: 3px solid var(--danger);
+            gap: 10px;
+            border-right: 4px solid var(--danger);
             display: none;
         }
 
         .error-message i {
-            font-size: 15px;
+            font-size: 18px;
         }
 
         .loading-bar {
@@ -220,7 +219,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
@@ -235,18 +234,18 @@
 
         .toast {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            bottom: 30px;
+            left: 30px;
             background: var(--white);
-            padding: 12px 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             display: none;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             z-index: 10000;
             animation: slideUp 0.3s ease;
-            font-size: 12px;
+            font-size: 14px;
         }
 
         @keyframes slideUp {
@@ -261,15 +260,15 @@
         }
 
         .toast.success {
-            border-right: 3px solid var(--secondary);
+            border-right: 4px solid var(--secondary);
         }
 
         .toast.error {
-            border-right: 3px solid var(--danger);
+            border-right: 4px solid var(--danger);
         }
 
         .toast i {
-            font-size: 17px;
+            font-size: 20px;
         }
 
         .toast.success i {
@@ -281,17 +280,16 @@
         }
 
         .footer-links {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
             color: var(--gray);
-            font-size: 11px;
+            font-size: 13px;
         }
 
         .footer-links a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            font-size: 11px;
         }
 
         .footer-links a:hover {
@@ -300,8 +298,16 @@
 
         @media (max-width: 480px) {
             .login-container {
-                transform: scale(0.75);
-                padding: 25px 20px;
+                padding: 35px 25px;
+            }
+            
+            .logo img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .logo h2 {
+                font-size: 24px;
             }
         }
     </style>
@@ -318,7 +324,7 @@
 
         <div class="error-message" id="errorMessage">
             <i class="fas fa-exclamation-circle"></i>
-            <span id="errorText">خطأ في البريد الإلكتروني أو كلمة المرور</span>
+            <span id="errorText"></span>
         </div>
 
         <form onsubmit="event.preventDefault(); login()">
@@ -359,7 +365,7 @@
 
         <div class="footer-links">
             <p>جميع الحقوق محفوظة &copy; 2026 OdoNex</p>
-            <p style="margin-top: 3px;">
+            <p style="margin-top: 5px;">
                 <a href="../index.html">العودة للموقع</a>
             </p>
         </div>
@@ -406,21 +412,28 @@
             const loginBtn = document.getElementById('loginBtn');
             const loadingBar = document.getElementById('loadingBar');
             const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
 
+            // التحقق من المدخلات
             if (!email || !password) {
-                showError('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
+                errorText.textContent = 'الرجاء إدخال البريد الإلكتروني وكلمة المرور';
+                errorDiv.style.display = 'flex';
                 return;
             }
 
+            // إظهار التحميل
             loadingBar.style.display = 'block';
             loginBtn.disabled = true;
             errorDiv.style.display = 'none';
 
             try {
-                const result = await auth.signInWithEmailAndPassword(email, password);
+                // محاولة تسجيل الدخول
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 
+                // نجاح تسجيل الدخول
                 showToast('success', 'تم تسجيل الدخول بنجاح');
                 
+                // التوجيه للوحة التحكم بعد 1.5 ثانية
                 setTimeout(() => {
                     window.location.href = 'index.html';
                 }, 1500);
@@ -428,36 +441,41 @@
             } catch (error) {
                 console.error('Login error:', error);
                 
+                // رسائل خطأ مخصصة
+                let errorMessage = '';
                 switch (error.code) {
                     case 'auth/user-not-found':
+                        errorMessage = 'لا يوجد مستخدم بهذا البريد الإلكتروني';
+                        break;
                     case 'auth/wrong-password':
+                        errorMessage = 'كلمة المرور غير صحيحة';
+                        break;
                     case 'auth/invalid-email':
-                        showError('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+                        errorMessage = 'البريد الإلكتروني غير صالح';
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = 'تم تعطيل هذا الحساب';
                         break;
                     case 'auth/too-many-requests':
-                        showError('تم حظر الحساب مؤقتاً. الرجاء المحاولة لاحقاً');
+                        errorMessage = 'تم حظر الحساب مؤقتاً. الرجاء المحاولة لاحقاً';
                         break;
                     default:
-                        showError('حدث خطأ في تسجيل الدخول');
+                        errorMessage = 'حدث خطأ في تسجيل الدخول';
                 }
+                
+                errorText.textContent = errorMessage;
+                errorDiv.style.display = 'flex';
+                
+                // إخفاء الخطأ بعد 5 ثواني
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                }, 5000);
+                
             } finally {
+                // إخفاء التحميل
                 loadingBar.style.display = 'none';
                 loginBtn.disabled = false;
             }
-        }
-
-        // ==============================================
-        // إظهار رسالة خطأ
-        // ==============================================
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
-            errorText.textContent = message;
-            errorDiv.style.display = 'flex';
-            
-            setTimeout(() => {
-                errorDiv.style.display = 'none';
-            }, 5000);
         }
 
         // ==============================================
