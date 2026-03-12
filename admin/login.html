@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     
     <style>
+        /* نفس التنسيقات السابقة */
         * {
             margin: 0;
             padding: 0;
@@ -339,8 +340,7 @@
                 <div class="input-group">
                     <input type="email" id="email" class="form-control" 
                            placeholder=" " 
-                           required
-                           autocomplete="off">
+                           required>
                     <i class="fas fa-envelope"></i>
                 </div>
             </div>
@@ -355,9 +355,7 @@
                            id="password" 
                            class="form-control" 
                            placeholder=" " 
-                           required
-                           autocomplete="off"
-                           onfocus="this.type='password'">
+                           required>
                     <i class="fas fa-lock"></i>
                     <i class="fas fa-eye password-toggle" id="togglePassword" onclick="togglePasswordVisibility()"></i>
                 </div>
@@ -397,7 +395,14 @@
         };
 
         // تهيئة Firebase
-        firebase.initializeApp(firebaseConfig);
+        try {
+            firebase.initializeApp(firebaseConfig);
+            console.log('✅ Firebase initialized successfully');
+        } catch (error) {
+            console.error('❌ Firebase initialization error:', error);
+            showError('حدث خطأ في الاتصال بقاعدة البيانات');
+        }
+        
         const auth = firebase.auth();
 
         // ==============================================
@@ -405,6 +410,7 @@
         // ==============================================
         auth.onAuthStateChanged((user) => {
             if (user) {
+                console.log('✅ User already logged in:', user.email);
                 window.location.href = 'index.html';
             }
         });
@@ -427,6 +433,8 @@
                 return;
             }
 
+            console.log('Attempting login with email:', email);
+
             // إظهار التحميل
             loadingBar.style.display = 'block';
             loginBtn.disabled = true;
@@ -435,6 +443,7 @@
             try {
                 // محاولة تسجيل الدخول
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                console.log('✅ Login successful:', userCredential.user.email);
                 
                 // نجاح تسجيل الدخول
                 showToast('success', 'تم تسجيل الدخول بنجاح');
@@ -445,7 +454,7 @@
                 }, 1500);
 
             } catch (error) {
-                console.error('Login error:', error);
+                console.error('❌ Login error:', error.code, error.message);
                 
                 // رسائل خطأ مخصصة
                 let errorMessage = '';
@@ -465,8 +474,11 @@
                     case 'auth/too-many-requests':
                         errorMessage = 'تم حظر الحساب مؤقتاً. الرجاء المحاولة لاحقاً';
                         break;
+                    case 'auth/network-request-failed':
+                        errorMessage = 'خطأ في الاتصال بالإنترنت';
+                        break;
                     default:
-                        errorMessage = 'حدث خطأ في تسجيل الدخول';
+                        errorMessage = 'حدث خطأ في تسجيل الدخول: ' + error.message;
                 }
                 
                 errorText.textContent = errorMessage;
@@ -503,6 +515,20 @@
         }
 
         // ==============================================
+        // إظهار رسالة خطأ
+        // ==============================================
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.style.display = 'flex';
+            
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // ==============================================
         // إظهار رسالة تنبيه
         // ==============================================
         function showToast(type, message) {
@@ -520,21 +546,6 @@
                 toast.style.display = 'none';
             }, 3000);
         }
-
-        // التأكد من أن حقل كلمة المرور يعمل بشكل صحيح
-        document.addEventListener('DOMContentLoaded', function() {
-            const passwordInput = document.getElementById('password');
-            
-            // التأكد من أن الحقل قابل للكتابة
-            passwordInput.addEventListener('click', function() {
-                this.focus();
-            });
-            
-            // منع أي سلوك غريب
-            passwordInput.addEventListener('keydown', function(e) {
-                e.stopPropagation();
-            });
-        });
     </script>
 </body>
 </html>
