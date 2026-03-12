@@ -1,0 +1,27 @@
+# admin/.htaccess
+
+# منع الوصول المباشر للمجلد
+Options -Indexes
+
+# حماية المجلد بكلمة مرور إضافية (اختياري)
+AuthType Basic
+AuthName "Admin Area"
+AuthUserFile /path/to/.htpasswd
+Require valid-user
+
+# منع الوصول لجميع الملفات ما عدا login.html و dashboard.html
+<FilesMatch "\.(html|php)$">
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+</FilesMatch>
+
+<Files "login.html">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "dashboard.html">
+    Order Allow,Deny
+    Allow from all
+</Files>

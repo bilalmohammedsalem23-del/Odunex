@@ -1,0 +1,1262 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Odunex | الأسعار</title>
+    <!-- Google Fonts - Cairo Bold -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --primary-purple: #7A5AF8;
+            --primary-blue: #2BB0ED;
+            --accent-blue: #4A7BFF;
+            --dark-text: #333333;
+            --body-text: #444444;
+            --secondary-text: #6B6B6B;
+            --light-text: #8A8A8A;
+            --section-bg: #F8F9FB;
+            --bg-white: #FFFFFF;
+            --border-color: #E6E8EC;
+            --icon-color: #666666;
+            --footer-bg: #F8F9FB;
+            --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            --popular-gradient: linear-gradient(135deg, rgba(122,90,248,0.05), rgba(43,176,237,0.05));
+            
+            /* Dark mode colors */
+            --dark-bg: #0a0a1a;
+            --dark-card: #14142b;
+            --dark-border: #2a2a4a;
+            --dark-text-primary: #e0e0ff;
+            --dark-text-secondary: #c0c0e0;
+            --dark-text-muted: #a0a0c0;
+            --dark-card-bg: #1a1a35;
+            --dark-header-bg: #14142b;
+            --dark-glow: rgba(122, 90, 248, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding-top: 80px;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== Dark Mode Styles ===== */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
+        }
+
+        /* Header in dark mode */
+        body.dark-mode header {
+            background: var(--dark-header-bg);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .nav-logo-text {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .nav-menu a {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .nav-menu a:hover,
+        body.dark-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .lang-container,
+        body.dark-mode .dark-mode-container {
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .lang-text,
+        body.dark-mode .dark-mode-toggle {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .globe-icon {
+            filter: invert(0.8);
+        }
+
+        /* Pricing cards in dark mode */
+        body.dark-mode .pricing-card {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .pricing-card.popular {
+            background-image: linear-gradient(var(--dark-card-bg), var(--dark-card-bg)), 
+                              var(--main-gradient);
+        }
+
+        body.dark-mode .card-title,
+        body.dark-mode .price-yearly {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .features-list li {
+            color: var(--dark-text-secondary) !important;
+            border-bottom-color: var(--dark-border);
+        }
+
+        body.dark-mode .features-list li i {
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .price-box {
+            border-bottom-color: var(--dark-border);
+        }
+
+        /* Payment methods in dark mode */
+        body.dark-mode .payment-section {
+            background-color: var(--dark-card-bg);
+        }
+
+        body.dark-mode .payment-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .payment-card h3 {
+            color: var(--dark-text-primary);
+        }
+
+        /* Footer in dark mode */
+        body.dark-mode footer {
+            background: var(--dark-card-bg);
+            border-top: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .footer-brand-name {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .footer-tagline,
+        body.dark-mode .footer-copyright {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .page-header p {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ===== Header ===== */
+        header {
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            overflow-x: auto;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6B6B6B;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        /* Zoom and glow effect on menu links */
+        .nav-menu a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
+        }
+
+        .nav-menu a.active {
+            transform: scale(1.05);
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        }
+
+        .lang-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background-size: contain;
+            transition: filter 0.3s ease;
+        }
+
+        .dark-mode-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        }
+
+        .dark-mode-toggle {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #555;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== Page Header ===== */
+        .page-header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== Pricing Section ===== */
+        .pricing-section {
+            margin: 20px 0 40px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        .pricing-card {
+            background: var(--bg-white);
+            border-radius: 28px;
+            padding: 35px 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px rgba(122,90,248,0.12);
+        }
+
+        /* Most Popular Card - Middle */
+        .pricing-card.popular {
+            border: double 2px transparent;
+            background-image: linear-gradient(var(--bg-white), var(--bg-white)), 
+                              var(--main-gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(122,90,248,0.15);
+            z-index: 2;
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--main-gradient);
+            color: white;
+            padding: 8px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(122,90,248,0.3);
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .price-box {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+
+        .price-monthly {
+            font-size: 42px;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .price-monthly small {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--light-text);
+            -webkit-text-fill-color: var(--light-text);
+        }
+
+        .price-yearly {
+            font-size: 18px;
+            color: var(--secondary-text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            font-size: 16px;
+            color: var(--secondary-text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li i {
+            color: var(--primary-purple);
+            font-size: 18px;
+            width: 22px;
+        }
+
+        /* ===== Compare Buttons ===== */
+        .btn-compare-filled {
+            width: 100%;
+            padding: 14px;
+            background: var(--main-gradient);
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(122,90,248,0.2);
+        }
+
+        .btn-compare-filled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(122,90,248,0.3);
+        }
+
+        .btn-compare-filled i {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .btn-compare-filled:hover i {
+            transform: translateX(-5px); /* عكس الاتجاه للعربية */
+        }
+
+        .btn-compare-outline {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            color: var(--primary-purple);
+            background-image: var(--main-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-compare-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            padding: 2px;
+            background: var(--main-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .btn-compare-outline i {
+            font-size: 16px;
+            transition: transform 0.3s;
+            background: var(--main-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-compare-outline:hover {
+            background: var(--main-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.2);
+            color: white;
+            background-clip: unset;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: white;
+        }
+
+        .btn-compare-outline:hover i {
+            background: white;
+            background-clip: unset;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: white;
+            transform: translateX(-5px); /* عكس الاتجاه للعربية */
+        }
+
+        .btn-compare-outline:hover::before {
+            opacity: 0;
+        }
+
+        /* ===== Payment Methods Section ===== */
+        .payment-section {
+            padding: 40px 0 60px;
+            text-align: center;
+        }
+
+        .payment-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .payment-title span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        .payment-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 20px 20px 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(122,90,248,0.15);
+            border-color: var(--primary-purple);
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--main-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .payment-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .qr-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .qr-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover .qr-img {
+            transform: scale(1.05);
+        }
+
+        .payment-title-container {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .payment-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin: 0;
+        }
+
+        /* ===== Modal for Payment Method ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            left: 0; /* تعديل للعربية */
+            right: auto;
+            font-size: 32px;
+            cursor: pointer;
+            color: white;
+            transition: color 0.3s ease;
+            z-index: 2001;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-purple);
+        }
+
+        .modal-img-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: var(--bg-white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin: 20px 0 10px;
+        }
+
+        .modal p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        body.dark-mode .modal-img-container {
+            background: var(--dark-card-bg);
+        }
+
+        /* ===== Footer Section ===== */
+        footer {
+            background-color: var(--footer-bg);
+            width: 100%;
+            padding: 35px 0 25px;
+            text-align: center;
+            margin-top: auto;
+            transition: all 0.3s ease;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-text {
+            text-align: center;
+        }
+
+        .footer-brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text);
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        .footer-tagline {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--secondary-text);
+            margin-top: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--light-text);
+            margin-top: 12px;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 992px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-right, .nav-left {
+                width: auto;
+            }
+
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .page-header {
+                padding: 50px 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .page-header p {
+                font-size: 18px;
+            }
+
+            .pricing-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .pricing-card {
+                width: 100%;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .payment-title {
+                font-size: 30px;
+            }
+
+            .footer-brand-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-brand-text {
+                text-align: center;
+            }
+
+            .close-modal {
+                top: -50px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 60px 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+            
+            .card-title {
+                font-size: 24px;
+            }
+            
+            .price-monthly {
+                font-size: 36px;
+            }
+            
+            .features-list li {
+                font-size: 15px;
+            }
+
+            .payment-title {
+                font-size: 28px;
+            }
+
+            .payment-card {
+                padding: 15px 15px 25px;
+            }
+
+            .payment-card h3 {
+                font-size: 14px;
+            }
+
+            .footer-brand-name {
+                font-size: 22px;
+            }
+
+            .footer-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .footer-copyright {
+                font-size: 12px;
+            }
+
+            .modal h3 {
+                font-size: 20px;
+            }
+
+            .modal p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-right">
+                <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
+                <span class="nav-logo-text">Odunex</span>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index.html">الرئيسية</a>
+                <a href="features.html">المميزات</a>
+                <a href="pricing.html" class="active">الأسعار</a>
+                <a href="gallery.html">معرض الأعمال</a>
+                <a href="contact.html">اتصل بنا</a>
+            </div>
+
+            <div class="nav-left">
+                <div class="lang-container" onclick="switchLanguage()">
+                    <span class="lang-text">EN</span>
+                    <div class="globe-icon"></div>
+                </div>
+                <div class="dark-mode-container" onclick="toggleDarkMode()">
+                    <span class="dark-mode-toggle">☾</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1><span>خطط</span> الأسعار</h1>
+                <p>اختر الخطة المناسبة لحجم أعمالك</p>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <div class="container">
+                <div class="pricing-grid">
+                    <!-- Starter -->
+                    <div class="pricing-card">
+                        <h2 class="card-title">مبتدئ</h2>
+                        <div class="price-box">
+                            <div class="price-monthly">$10 <small>/شهرياً</small></div>
+                            <div class="price-yearly">$200 سنوياً</div>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> ميزات رقمية أساسية</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات البريد</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات التركيز</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات العمل الأساسية</li>
+                        </ul>
+                        <button class="btn-compare-outline">
+                            <span>قارن</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Professional (Most Popular) -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">الأكثر شعبية</div>
+                        <h2 class="card-title">احترافي</h2>
+                        <div class="price-box">
+                            <div class="price-monthly">$79 <small>/شهرياً</small></div>
+                            <div class="price-yearly">$250 سنوياً</div>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> ميزات رقمية أساسية</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات البريد</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات التركيز</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات العمل الأساسية</li>
+                        </ul>
+                        <button class="btn-compare-filled">
+                            <span>قارن</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Enterprise -->
+                    <div class="pricing-card">
+                        <h2 class="card-title">مؤسسي</h2>
+                        <div class="price-box">
+                            <div class="price-monthly">$100 <small>/شهرياً</small></div>
+                            <div class="price-yearly">$360 سنوياً</div>
+                        </div>
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> ميزات رقمية أساسية</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات البريد</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات التركيز</li>
+                            <li><i class="fas fa-check-circle"></i> ميزات العمل الأساسية</li>
+                        </ul>
+                        <button class="btn-compare-outline">
+                            <span>قارن</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods Section -->
+        <section class="payment-section">
+            <div class="container">
+                <h2 class="payment-title"><span>طرق</span> الدفع</h2>
+                
+                <div class="payment-grid">
+                    <!-- Q Card -->
+                    <div class="payment-card" onclick="openPaymentModal('qcard')">
+                        <div class="qr-container">
+                            <img src="assets/images/Q card.gif" alt="كي كارد" class="qr-img">
+                        </div>
+                        <div class="payment-title-container">
+                            <h3>كي كارد</h3>
+                        </div>
+                    </div>
+
+                    <!-- Zain Cash -->
+                    <div class="payment-card" onclick="openPaymentModal('zain')">
+                        <div class="qr-container">
+                            <img src="assets/images/Zain.gif" alt="زين كاش" class="qr-img">
+                        </div>
+                        <div class="payment-title-container">
+                            <h3>زين كاش</h3>
+                        </div>
+                    </div>
+
+                    <!-- Fib -->
+                    <div class="payment-card" onclick="openPaymentModal('fib')">
+                        <div class="qr-container">
+                            <img src="assets/images/FIB.gif" alt="FIb" class="qr-img">
+                        </div>
+                        <div class="payment-title-container">
+                            <h3>FIb</h3>
+                        </div>
+                    </div>
+
+                    <!-- Al-Taif Islamic Bank -->
+                    <div class="payment-card" onclick="openPaymentModal('altaeef')">
+                        <div class="qr-container">
+                            <img src="assets/images/al taeef.gif" alt="مصرف الطيف الاسلامي" class="qr-img">
+                        </div>
+                        <div class="payment-title-container">
+                            <h3>مصرف الطيف الاسلامي</h3>
+                        </div>
+                    </div>
+
+                    <!-- Fast Pay -->
+                    <div class="payment-card" onclick="openPaymentModal('fastpay')">
+                        <div class="qr-container">
+                            <img src="assets/images/Fast pay.gif" alt="فاست بي" class="qr-img">
+                        </div>
+                        <div class="payment-title-container">
+                            <h3>فاست بي</h3>
+                        </div>
+                    </div>
+
+                    <!-- Asia Pay -->
+                    <div class="payment-card" onclick="openPaymentModal('asia')">
+                        <div class="qr-container">
+                            <img src="assets/images/Asia.gif" alt="اسيا حوالة" class="qr-img">
+                        </div>
+                        <div class="payment-title-container">
+                            <h3>اسيا حوالة</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Payment Method -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal">
+            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+            <div class="modal-img-container" id="modalImageContainer">
+                <img src="" alt="طريقة الدفع" class="modal-img" id="modalImage">
+            </div>
+            <h3 id="modalTitle">طريقة الدفع</h3>
+            <p id="modalDescription">امسح رمز QR للدفع</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand-row">
+                <div class="footer-brand-text">
+                    <div class="footer-brand-name">Odunex</div>
+                    <div class="footer-tagline">حلول ERP الموحدة</div>
+                </div>
+                <div class="footer-logo">
+                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2026 جميع الحقوق محفوظة لشركة Odunex | حلول ERP الموحدة
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Dark/Light Mode Preservation System =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedMode = localStorage.getItem('darkMode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+            
+            updateActiveLink();
+        });
+
+        function toggleDarkMode() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (isDarkMode) {
+                localStorage.setItem('darkMode', 'enabled');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+        }
+
+        function updateActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function switchLanguage() {
+            window.location.href = 'pricing-en.html';
+        }
+
+        function openPaymentModal(method) {
+            const modal = document.getElementById('paymentModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            switch(method) {
+                case 'qcard':
+                    modalImage.src = 'assets/images/Q card.gif';
+                    modalTitle.textContent = 'كي كارد';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق كي كارد';
+                    break;
+                case 'zain':
+                    modalImage.src = 'assets/images/Zain.gif';
+                    modalTitle.textContent = 'زين كاش';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق زين كاش';
+                    break;
+                case 'fib':
+                    modalImage.src = 'assets/images/FIB.gif';
+                    modalTitle.textContent = 'FIb';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق FIb';
+                    break;
+                case 'altaeef':
+                    modalImage.src = 'assets/images/al taeef.gif';
+                    modalTitle.textContent = 'مصرف الطيف الاسلامي';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق مصرف الطيف';
+                    break;
+                case 'fastpay':
+                    modalImage.src = 'assets/images/Fast pay.gif';
+                    modalTitle.textContent = 'فاست بي';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق فاست بي';
+                    break;
+                case 'asia':
+                    modalImage.src = 'assets/images/Asia.gif';
+                    modalTitle.textContent = 'اسيا حوالة';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق اسيا حوالة';
+                    break;
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

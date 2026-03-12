@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdoNex | تعديل الإحصائيات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/admin-style.css">
+    <style>
+        .stats-editor {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card-editor {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #eef2f6;
+        }
+        
+        .stat-icon-preview {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .stat-icon-preview svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+        }
+        
+        .icon-selector {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .icon-option {
+            width: 50px;
+            height: 50px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .icon-option:hover,
+        .icon-option.selected {
+            background: var(--main-gradient);
+            color: white;
+        }
+        
+        .stats-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- ... محتوى sidebar ... -->
+    </div>
+    
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>تعديل الإحصائيات</h1>
+                <p><a href="index.html" style="color: var(--primary-purple);">← العودة لإدارة الصفحة الرئيسية</a></p>
+            </div>
+        </div>
+        
+        <div class="stats-editor">
+            <h2 style="margin-bottom: 25px;">تعديل الأرقام والتسميات</h2>
+            
+            <!-- الإحصائية 1 -->
+            <div class="stat-card-editor">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الرقم</label>
+                        <input type="text" id="stat1Value" value="1500">
+                    </div>
+                    <div class="form-group">
+                        <label>التسمية</label>
+                        <input type="text" id="stat1Label" value="عميل نشط">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>اختر الأيقونة</label>
+                    <div class="icon-selector">
+                        <div class="icon-option selected" onclick="selectIcon(this, 'stat1')">👥</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat1')">📊</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat1')">📈</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat1')">🏢</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat1')">🌍</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat1')">⭐</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الإحصائية 2 -->
+            <div class="stat-card-editor">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الرقم</label>
+                        <input type="text" id="stat2Value" value="320">
+                    </div>
+                    <div class="form-group">
+                        <label>التسمية</label>
+                        <input type="text" id="stat2Label" value="مشروع منجز">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>اختر الأيقونة</label>
+                    <div class="icon-selector">
+                        <div class="icon-option selected" onclick="selectIcon(this, 'stat2')">📁</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat2')">📊</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat2')">📈</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat2')">🏆</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat2')">✅</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat2')">⚙️</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الإحصائية 3 -->
+            <div class="stat-card-editor">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الرقم</label>
+                        <input type="text" id="stat3Value" value="15">
+                    </div>
+                    <div class="form-group">
+                        <label>التسمية</label>
+                        <input type="text" id="stat3Label" value="دولة حول العالم">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>اختر الأيقونة</label>
+                    <div class="icon-selector">
+                        <div class="icon-option selected" onclick="selectIcon(this, 'stat3')">🌍</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat3')">🌎</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat3')">🌏</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat3')">🗺️</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat3')">✈️</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat3')">📍</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الإحصائية 4 -->
+            <div class="stat-card-editor">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الرقم</label>
+                        <input type="text" id="stat4Value" value="99%">
+                    </div>
+                    <div class="form-group">
+                        <label>التسمية</label>
+                        <input type="text" id="stat4Label" value="رضا العملاء">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>اختر الأيقونة</label>
+                    <div class="icon-selector">
+                        <div class="icon-option selected" onclick="selectIcon(this, 'stat4')">⭐</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat4')">❤️</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat4')">👍</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat4')">🎯</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat4')">🏆</div>
+                        <div class="icon-option" onclick="selectIcon(this, 'stat4')">✅</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-save" onclick="saveStats()">💾 حفظ الإحصائيات</button>
+        </div>
+        
+        <!-- معاينة -->
+        <div class="stats-editor">
+            <h3 style="margin-bottom: 20px;">معاينة الإحصائيات</h3>
+            <div class="stats-preview-grid" id="statsPreview">
+                <div>
+                    <div class="stat-icon-preview" id="stat1Icon">👥</div>
+                    <div class="stat-number" style="font-size: 44px; background: linear-gradient(135deg, #7A5AF8, #2BB0ED); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="stat1Number">1500</div>
+                    <div class="stat-label" id="stat1LabelPreview">عميل نشط</div>
+                </div>
+                <div>
+                    <div class="stat-icon-preview" id="stat2Icon">📁</div>
+                    <div class="stat-number" style="font-size: 44px; background: linear-gradient(135deg, #7A5AF8, #2BB0ED); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="stat2Number">320</div>
+                    <div class="stat-label" id="stat2LabelPreview">مشروع منجز</div>
+                </div>
+                <div>
+                    <div class="stat-icon-preview" id="stat3Icon">🌍</div>
+                    <div class="stat-number" style="font-size: 44px; background: linear-gradient(135deg, #7A5AF8, #2BB0ED); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="stat3Number">15</div>
+                    <div class="stat-label" id="stat3LabelPreview">دولة حول العالم</div>
+                </div>
+                <div>
+                    <div class="stat-icon-preview" id="stat4Icon">⭐</div>
+                    <div class="stat-number" style="font-size: 44px; background: linear-gradient(135deg, #7A5AF8, #2BB0ED); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="stat4Number">99%</div>
+                    <div class="stat-label" id="stat4LabelPreview">رضا العملاء</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // تحديث المعاينة المباشرة
+        document.getElementById('stat1Value').addEventListener('input', function() {
+            document.getElementById('stat1Number').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat1Label').addEventListener('input', function() {
+            document.getElementById('stat1LabelPreview').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat2Value').addEventListener('input', function() {
+            document.getElementById('stat2Number').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat2Label').addEventListener('input', function() {
+            document.getElementById('stat2LabelPreview').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat3Value').addEventListener('input', function() {
+            document.getElementById('stat3Number').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat3Label').addEventListener('input', function() {
+            document.getElementById('stat3LabelPreview').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat4Value').addEventListener('input', function() {
+            document.getElementById('stat4Number').innerHTML = this.value;
+        });
+        
+        document.getElementById('stat4Label').addEventListener('input', function() {
+            document.getElementById('stat4LabelPreview').innerHTML = this.value;
+        });
+        
+        function selectIcon(element, statId) {
+            // إزالة التحديد من جميع الأيقونات في نفس المجموعة
+            const parent = element.parentNode;
+            parent.querySelectorAll('.icon-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            // تحديث أيقونة المعاينة
+            document.getElementById(statId + 'Icon').innerHTML = element.innerHTML;
+        }
+        
+        function saveStats() {
+            const statsData = {
+                stat1: {
+                    value: document.getElementById('stat1Value').value,
+                    label: document.getElementById('stat1Label').value,
+                    icon: document.getElementById('stat1Icon').innerHTML
+                },
+                stat2: {
+                    value: document.getElementById('stat2Value').value,
+                    label: document.getElementById('stat2Label').value,
+                    icon: document.getElementById('stat2Icon').innerHTML
+                },
+                stat3: {
+                    value: document.getElementById('stat3Value').value,
+                    label: document.getElementById('stat3Label').value,
+                    icon: document.getElementById('stat3Icon').innerHTML
+                },
+                stat4: {
+                    value: document.getElementById('stat4Value').value,
+                    label: document.getElementById('stat4Label').value,
+                    icon: document.getElementById('stat4Icon').innerHTML
+                }
+            };
+            
+            localStorage.setItem('statsData', JSON.stringify(statsData));
+            alert('تم حفظ الإحصائيات بنجاح!');
+        }
+        
+        // تحميل البيانات المحفوظة
+        window.addEventListener('load', function() {
+            const savedData = localStorage.getItem('statsData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('stat1Value').value = data.stat1.value;
+                document.getElementById('stat1Label').value = data.stat1.label;
+                document.getElementById('stat2Value').value = data.stat2.value;
+                document.getElementById('stat2Label').value = data.stat2.label;
+                document.getElementById('stat3Value').value = data.stat3.value;
+                document.getElementById('stat3Label').value = data.stat3.label;
+                document.getElementById('stat4Value').value = data.stat4.value;
+                document.getElementById('stat4Label').value = data.stat4.label;
+                
+                document.getElementById('stat1Number').innerHTML = data.stat1.value;
+                document.getElementById('stat2Number').innerHTML = data.stat2.value;
+                document.getElementById('stat3Number').innerHTML = data.stat3.value;
+                document.getElementById('stat4Number').innerHTML = data.stat4.value;
+                
+                document.getElementById('stat1LabelPreview').innerHTML = data.stat1.label;
+                document.getElementById('stat2LabelPreview').innerHTML = data.stat2.label;
+                document.getElementById('stat3LabelPreview').innerHTML = data.stat3.label;
+                document.getElementById('stat4LabelPreview').innerHTML = data.stat4.label;
+                
+                document.getElementById('stat1Icon').innerHTML = data.stat1.icon || '👥';
+                document.getElementById('stat2Icon').innerHTML = data.stat2.icon || '📁';
+                document.getElementById('stat3Icon').innerHTML = data.stat3.icon || '🌍';
+                document.getElementById('stat4Icon').innerHTML = data.stat4.icon || '⭐';
+            }
+        });
+    </script>
+</body>
+</html>

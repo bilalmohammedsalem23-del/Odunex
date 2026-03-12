@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | OdoNex</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* الخلفية المتحركة */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .background span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: animate 20s linear infinite;
+            bottom: -150px;
+        }
+
+        .background span:nth-child(1) {
+            left: 25%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+        }
+
+        .background span:nth-child(2) {
+            left: 10%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .background span:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .background span:nth-child(4) {
+            left: 40%;
+            width: 45px;
+            height: 45px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .background span:nth-child(5) {
+            left: 65%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 0s;
+        }
+
+        .background span:nth-child(6) {
+            left: 75%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 3s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 350px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* الشعار */
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-wrapper img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 8px 15px rgba(102, 126, 234, 0.3));
+        }
+
+        .logo-wrapper h1 {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3px;
+        }
+
+        .logo-wrapper p {
+            color: #666;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* حقول الإدخال */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .input-wrapper {
+            position: relative;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 16px;
+            transition: color 0.3s;
+            pointer-events: none; /* مهم: الأيقونة لا تمنع النقر */
+        }
+
+        .input-wrapper:focus-within i {
+            color: #667eea;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 45px 14px 15px;
+            border: none;
+            background: transparent;
+            font-size: 15px;
+            color: #1f2937;
+            outline: none;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* زر إظهار/إخفاء كلمة المرور */
+        .toggle-password {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+            z-index: 10;
+            background: transparent;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .toggle-password:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* خيارات إضافية */
+        .options-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .remember-me span {
+            font-size: 13px;
+            color: #4b5563;
+        }
+
+        .forgot-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .forgot-link:hover {
+            color: #764ba2;
+        }
+
+        /* زر تسجيل الدخول */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 15px -5px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-login:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -5px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* رسالة الخطأ */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .alert i {
+            font-size: 16px;
+        }
+
+        /* معلومات إضافية */
+        .info-text {
+            text-align: center;
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .info-text p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* أيقونة العودة */
+        .back-link {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            z-index: 2;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                max-width: 300px;
+            }
+            
+            .login-card {
+                padding: 25px 20px;
+            }
+            
+            .logo-wrapper img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- رابط العودة -->
+    <a href="../index.html" class="back-link">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <!-- الخلفية المتحركة -->
+    <div class="background">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <!-- الشعار -->
+            <div class="logo-wrapper">
+                <img src="../assets/images/odonex-logo.png.png" alt="OdoNex Logo">
+                <h1>OdoNex</h1>
+                <p>لوحة التحكم الإدارية</p>
+            </div>
+
+            <!-- رسالة الخطأ -->
+            <div id="errorAlert" class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorMessage"></span>
+            </div>
+
+            <!-- نموذج تسجيل الدخول -->
+            <form id="loginForm">
+                <!-- اسم المستخدم -->
+                <div class="form-group">
+                    <label>اسم المستخدم</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="أدخل اسم المستخدم">
+                    </div>
+                </div>
+
+                <!-- كلمة المرور -->
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="أدخل كلمة المرور">
+                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <!-- خيارات -->
+                <div class="options-row">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>تذكرني</span>
+                    </label>
+                    <span class="forgot-link" id="forgotLink">نسيت كلمة المرور؟</span>
+                </div>
+
+                <!-- زر الدخول -->
+                <button type="button" class="btn-login" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>تسجيل الدخول</span>
+                </button>
+            </form>
+
+            <div class="info-text">
+                <p>هذه الصفحة مخصصة للمشرفين فقط</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // الحل النهائي لمشكلة حقل كلمة المرور والـ Refresh
+        (function() {
+            'use strict';
+            
+            // الحصول على العناصر
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const togglePassword = document.getElementById('togglePassword');
+            const loginBtn = document.getElementById('loginBtn');
+            const errorAlert = document.getElementById('errorAlert');
+            const errorMessage = document.getElementById('errorMessage');
+            const forgotLink = document.getElementById('forgotLink');
+            const rememberMe = document.getElementById('rememberMe');
+            
+            // تفريغ الحقول نهائياً
+            usernameInput.value = '';
+            passwordInput.value = '';
+            
+            // منع المتصفح من تعبئة الحقول تلقائياً
+            usernameInput.setAttribute('autocomplete', 'off');
+            passwordInput.setAttribute('autocomplete', 'off');
+            
+            // إظهار/إخفاء كلمة المرور
+            togglePassword.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    togglePassword.classList.remove('fa-eye');
+                    togglePassword.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    togglePassword.classList.remove('fa-eye-slash');
+                    togglePassword.classList.add('fa-eye');
+                }
+                
+                // إعادة التركيز لحقل كلمة المرور
+                passwordInput.focus();
+                return false;
+            });
+            
+            // دالة إظهار الخطأ
+            function showError(text) {
+                errorMessage.textContent = text;
+                errorAlert.style.display = 'flex';
+                
+                setTimeout(() => {
+                    errorAlert.style.display = 'none';
+                }, 3000);
+            }
+            
+            // دالة تسجيل الدخول
+            function doLogin() {
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+                
+                // التحقق من الحقول
+                if (!username) {
+                    showError('الرجاء إدخال اسم المستخدم');
+                    usernameInput.focus();
+                    return false;
+                }
+                
+                if (!password) {
+                    showError('الرجاء إدخال كلمة المرور');
+                    passwordInput.focus();
+                    return false;
+                }
+                
+                // تعطيل الزر
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارِ التحقق...';
+                
+                // التحقق من البيانات
+                setTimeout(() => {
+                    if (username === 'admin' && password === 'OdoNex2026') {
+                        
+                        // حفظ الجلسة
+                        if (rememberMe.checked) {
+                            localStorage.setItem('adminLoggedIn', 'true');
+                        } else {
+                            sessionStorage.setItem('adminLoggedIn', 'true');
+                        }
+                        
+                        // تغيير نص الزر
+                        loginBtn.innerHTML = '<i class="fas fa-check"></i> تم بنجاح';
+                        
+                        // تحويل بعد نصف ثانية
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 500);
+                        
+                    } else {
+                        // فشل الدخول
+                        showError('اسم المستخدم أو كلمة المرور غير صحيحة');
+                        
+                        // إعادة الزر لحالته
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> تسجيل الدخول';
+                        
+                        // تفريغ كلمة المرور فقط
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    }
+                }, 800);
+                
+                return false;
+            }
+            
+            // ربط زر الدخول
+            loginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                doLogin();
+                return false;
+            });
+            
+            // ربط الضغط على Enter
+            usernameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    passwordInput.focus();
+                }
+            });
+            
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doLogin();
+                }
+            });
+            
+            // منع المتصفح من إرسال النموذج
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            });
+            
+            // نسيت كلمة المرور
+            forgotLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showError('للحصول على المساعدة، يرجى التواصل مع مدير النظام');
+            });
+            
+            // التحقق من الجلسة
+            if (localStorage.getItem('adminLoggedIn') === 'true' || 
+                sessionStorage.getItem('adminLoggedIn') === 'true') {
+                window.location.href = 'index.html';
+            }
+            
+            console.log('✅ الصفحة جاهزة - جميع الحقول تعمل');
+        })();
+    </script>
+</body>
+</html>

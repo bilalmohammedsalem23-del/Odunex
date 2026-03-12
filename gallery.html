@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Odunex | معرض الأعمال</title>
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* ===== الإعدادات العامة ===== */
+        :root {
+            --primary-purple: #7B2CBF;
+            --primary-blue: #00B4D8;
+            --dark-gray: #2D3436;
+            --medium-gray: #636E72;
+            --light-purple-bg: rgba(123, 44, 191, 0.1);
+            --card-bg: #FFFFFF;
+            --body-bg: #F8F9FA;
+            --main-gradient: linear-gradient(135deg, #00B4D8, #7B2CBF);
+            --icon-gradient: linear-gradient(135deg, #7B2CBF, #00B4D8);
+            --tag-gradient: linear-gradient(135deg, #7B2CBF, #00B4D8);
+            
+            /* Dark mode colors */
+            --dark-bg: #0a0a1a;
+            --dark-card: #14142b;
+            --dark-border: #2a2a4a;
+            --dark-text-primary: #e0e0ff;
+            --dark-text-secondary: #c0c0e0;
+            --dark-text-muted: #a0a0c0;
+            --dark-card-bg: #1a1a35;
+            --dark-header-bg: #14142b;
+            --dark-glow: rgba(123, 44, 191, 0.3);
+        }
+
+        body {
+            background: var(--body-bg);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding-top: 80px;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== Dark Mode Styles ===== */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
+        }
+
+        /* Header in dark mode */
+        body.dark-mode header {
+            background: var(--dark-header-bg);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .nav-logo-text {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .nav-menu a {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .nav-menu a:hover,
+        body.dark-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .lang-container,
+        body.dark-mode .dark-mode-container {
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .lang-text,
+        body.dark-mode .dark-mode-toggle {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .globe-icon {
+            filter: invert(0.8);
+        }
+
+        /* Gallery cards in dark mode */
+        body.dark-mode .gallery-card {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .card-title {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .card-description {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .icon-box {
+            background: var(--icon-gradient);
+            box-shadow: 0 5px 15px var(--dark-glow);
+        }
+
+        body.dark-mode .tag {
+            background: var(--tag-gradient);
+            color: white;
+            box-shadow: 0 3px 8px var(--dark-glow);
+        }
+
+        /* Footer in dark mode */
+        body.dark-mode footer {
+            background: var(--dark-card-bg);
+            border-top: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .footer-brand-name {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .footer-tagline,
+        body.dark-mode .footer-copyright {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        /* Section header in dark mode */
+        body.dark-mode .section-header p {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ===== Header ===== */
+        header {
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            overflow-x: auto;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--medium-gray);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        /* Zoom and glow effect on menu links */
+        .nav-menu a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(123, 44, 191, 0.5);
+        }
+
+        .nav-menu a.active {
+            transform: scale(1.05);
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(123, 44, 191, 0.3);
+        }
+
+        .lang-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--medium-gray);
+            transition: color 0.3s ease;
+        }
+
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23636E72" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background-size: contain;
+            transition: filter 0.3s ease;
+        }
+
+        .dark-mode-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(123, 44, 191, 0.3);
+        }
+
+        .dark-mode-toggle {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--medium-gray);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== قسم العنوان الرئيسي ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0 20px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            transition: color 0.3s ease;
+        }
+
+        .section-header h2 .gradient-text {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== شبكة البطاقات ===== */
+        .gallery-section {
+            padding: 20px 0 60px;
+            flex: 1;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* ===== البطاقة الواحدة ===== */
+        .gallery-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-purple);
+            box-shadow: 0 20px 40px rgba(123, 44, 191, 0.15);
+        }
+
+        /* حاوية الأيقونة - بتدرج لوني */
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: var(--icon-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.2);
+        }
+
+        .icon-box i {
+            font-size: 24px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        /* التأثير الاندماجي للأيقونة - تكبير مع توهج */
+        .gallery-card:hover .icon-box {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(123, 44, 191, 0.6);
+        }
+
+        /* عنوان المشروع */
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        /* وصف المشروع */
+        .card-description {
+            font-size: 13px;
+            color: var(--medium-gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-weight: 400;
+            flex: 1;
+            transition: color 0.3s ease;
+        }
+
+        /* حاوية العلامات */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        /* العلامة الواحدة - بتدرج لوني */
+        .tag {
+            background: var(--tag-gradient);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 3px 8px rgba(123, 44, 191, 0.2);
+            white-space: nowrap;
+        }
+
+        /* التأثير الاندماجي للزر - رفع مع تكبير خفيف */
+        .gallery-card:hover .tag {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
+        }
+
+        /* للشاشات المتوسطة */
+        @media (max-width: 1100px) {
+            .gallery-card {
+                padding: 20px 15px;
+            }
+            
+            .card-title {
+                font-size: 17px;
+            }
+            
+            .card-description {
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+        }
+
+        /* للشاشات الصغيرة */
+        @media (max-width: 900px) {
+            .tag {
+                font-size: 10px;
+                padding: 3px 6px;
+            }
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background-color: var(--card-bg);
+            width: 100%;
+            padding: 35px 0 25px;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-text {
+            text-align: center;
+        }
+
+        .footer-brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        .footer-tagline {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--medium-gray);
+            margin-top: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--medium-gray);
+            margin-top: 12px;
+            opacity: 0.8;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .section-header h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-right, .nav-left {
+                width: auto;
+            }
+
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .section-header {
+                padding: 50px 0 20px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .section-header p {
+                font-size: 16px;
+                padding: 0 15px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-brand-text {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-header {
+                padding: 60px 0 20px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .card-title {
+                font-size: 16px;
+            }
+
+            .card-description {
+                font-size: 12px;
+            }
+
+            .tag {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .footer-brand-name {
+                font-size: 22px;
+            }
+
+            .footer-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .footer-copyright {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-right">
+                <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
+                <span class="nav-logo-text">Odunex</span>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index.html">الرئيسية</a>
+                <a href="features.html">المميزات</a>
+                <a href="pricing.html">الأسعار</a>
+                <a href="gallery.html" class="active">معرض الأعمال</a>
+                <a href="contact.html">اتصل بنا</a>
+            </div>
+
+            <div class="nav-left">
+                <div class="lang-container" onclick="switchLanguage()">
+                    <span class="lang-text">EN</span>
+                    <div class="globe-icon"></div>
+                </div>
+                <div class="dark-mode-container" onclick="toggleDarkMode()">
+                    <span class="dark-mode-toggle">☾</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Section Header -->
+        <div class="section-header">
+            <div class="container">
+                <h2>معرض <span class="gradient-text">أعمالنا</span></h2>
+                <p>مشاريع حقيقية نفذناها لعملائنا في مختلف القطاعات</p>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-grid">
+                    <!-- 1. نظام إدارة المطاعم -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="card-title">نظام إدارة المطاعم</h3>
+                        <p class="card-description">نظام متكامل لإدارة الطلبات والمخزون والفواتير لسلسلة مطاعم تضم 15 فرعاً.</p>
+                        <div class="tags-container">
+                            <span class="tag">نقاط البيع</span>
+                            <span class="tag">المخزون</span>
+                            <span class="tag">التقارير</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. نظام محاسبة المصانع -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="card-title">نظام محاسبة المصانع</h3>
+                        <p class="card-description">حل ERP شامل لمصنع ملابس يشمل تتبع الإنتاج والتكاليف والموارد البشرية.</p>
+                        <div class="tags-container">
+                            <span class="tag">الإنتاج</span>
+                            <span class="tag">التكاليف</span>
+                            <span class="tag">موارد بشرية</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. نظام العيادات الطبية -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <h3 class="card-title">نظام العيادات الطبية</h3>
+                        <p class="card-description">منصة لإدارة المواعيد والملفات الطبية والفواتير لمجموعة عيادات متخصصة.</p>
+                        <div class="tags-container">
+                            <span class="tag">المواعيد</span>
+                            <span class="tag">ملفات طبية</span>
+                            <span class="tag">الفوترة</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. نظام إدارة المدارس -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="card-title">نظام إدارة المدارس</h3>
+                        <p class="card-description">نظام شامل لإدارة شؤون الطلاب والرسوم الدراسية والتقارير المالية.</p>
+                        <div class="tags-container">
+                            <span class="tag">شؤون طلاب</span>
+                            <span class="tag">الرسوم</span>
+                            <span class="tag">التقارير</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. نظام الشركات العقارية -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="card-title">نظام الشركات العقارية</h3>
+                        <p class="card-description">حل متكامل لإدارة العقارات والعقود والإيجارات والصيانة والتحصيل.</p>
+                        <div class="tags-container">
+                            <span class="tag">العقارات</span>
+                            <span class="tag">العقود</span>
+                            <span class="tag">التحصيل</span>
+                        </div>
+                    </div>
+
+                    <!-- 6. نظام التجارة الإلكترونية -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="card-title">نظام التجارة الإلكترونية</h3>
+                        <p class="card-description">ربط المتجر الإلكتروني بالنظام المحاسبي لتتبع المبيعات والمخزون آلياً.</p>
+                        <div class="tags-container">
+                            <span class="tag">المتجر</span>
+                            <span class="tag">المبيعات</span>
+                            <span class="tag">المخزون</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand-row">
+                <div class="footer-brand-text">
+                    <div class="footer-brand-name">Odunex</div>
+                    <div class="footer-tagline">حلول ERP الموحدة</div>
+                </div>
+                <div class="footer-logo">
+                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2026 جميع الحقوق محفوظة لشركة Odunex | حلول ERP الموحدة
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Dark/Light Mode Preservation System =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve saved mode
+            const savedMode = localStorage.getItem('darkMode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+            
+            // Update active link
+            updateActiveLink();
+        });
+
+        // Toggle dark mode function
+        function toggleDarkMode() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (isDarkMode) {
+                localStorage.setItem('darkMode', 'enabled');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+        }
+
+        // Update active link function
+        function updateActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Language switch function
+        function switchLanguage() {
+            let currentPage = window.location.pathname.split('/').pop() || 'gallery.html';
+            
+            const pageMap = {
+                'index.html': 'index-en.html',
+                'features.html': 'features-en.html',
+                'pricing.html': 'pricing-en.html',
+                'gallery.html': 'gallery-en.html',
+                'contact.html': 'contact-en.html'
+            };
+            
+            window.location.href = pageMap[currentPage] || 'index-en.html';
+        }
+    </script>
+</body>
+</html>

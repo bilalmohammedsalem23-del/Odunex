@@ -1,0 +1,6 @@
+
+# robots.txt - منع فهرسة مجلد admin
+User-agent: *
+Disallow: /admin/
+Disallow: /admin/login.html
+Disallow: /admin/dashboard.html

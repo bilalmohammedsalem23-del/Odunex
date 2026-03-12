@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdoNex | تعديل القسم الرئيسي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/admin-style.css">
+    <style>
+        .edit-container {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eef2f6;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-purple);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(122,90,248,0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .live-preview {
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .preview-logo {
+            width: 200px;
+            height: auto;
+            margin: 0 auto 20px;
+        }
+        
+        .preview-title {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .preview-subheadline {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 15px;
+        }
+        
+        .btn-save {
+            background: var(--main-gradient);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.3);
+        }
+        
+        .image-upload {
+            border: 2px dashed var(--primary-purple);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            background: rgba(122,90,248,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- ... محتوى sidebar ... -->
+    </div>
+    
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>تعديل القسم الرئيسي (Hero)</h1>
+                <p><a href="index.html" style="color: var(--primary-purple);">← العودة لإدارة الصفحة الرئيسية</a></p>
+            </div>
+        </div>
+        
+        <div class="edit-container">
+            <h2 style="margin-bottom: 25px;">محتوى القسم</h2>
+            
+            <form id="heroForm">
+                <!-- الشعار -->
+                <div class="form-group">
+                    <label>الشعار الرئيسي</label>
+                    <div class="image-upload" onclick="document.getElementById('logoFile').click()">
+                        <img src="../../../assets/images/odonex-logo.png.png" alt="Current Logo" style="height: 60px; margin-bottom: 10px;">
+                        <p>اضغط لتغيير الشعار</p>
+                        <input type="file" id="logoFile" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <!-- العنوان الرئيسي -->
+                <div class="form-group">
+                    <label>العنوان الرئيسي</label>
+                    <input type="text" id="heroTitle" value="OdoNex | حلول ERP الموحدة">
+                </div>
+                
+                <!-- العنوان الفرعي -->
+                <div class="form-group">
+                    <label>العنوان الفرعي</label>
+                    <input type="text" id="heroSubheadline" value="تكامل. أمان. توسع.">
+                </div>
+                
+                <!-- الوصف -->
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="heroDescription" rows="3">نظام محاسبي متكامل يجمع جميع عمليات أعمالك في منصة واحدة سهلة وآمنة وقابلة للتوسع.</textarea>
+                </div>
+                
+                <!-- الأزرار -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>نص الزر الأساسي</label>
+                        <input type="text" id="btnPrimary" value="ابدأ تجربتك المجانية">
+                    </div>
+                    <div class="form-group">
+                        <label>نص الزر الثانوي</label>
+                        <input type="text" id="btnSecondary" value="اطلب عرضاً توضيحياً">
+                    </div>
+                </div>
+                
+                <!-- خيارات إضافية -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>سرعة حركة الشعار (ثانية)</label>
+                        <input type="number" id="bounceSpeed" value="4" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>حجم الشعار (px)</label>
+                        <input type="number" id="logoSize" value="280">
+                    </div>
+                </div>
+                
+                <button type="button" class="btn-save" onclick="saveHero()">💾 حفظ التغييرات</button>
+            </form>
+            
+            <!-- معاينة حية -->
+            <div class="live-preview">
+                <h3 style="margin-bottom: 20px;">معاينة حية</h3>
+                <img src="../../../assets/images/odonex-logo.png.png" alt="Logo" class="preview-logo" id="previewLogo">
+                <div class="preview-title" id="previewTitle">OdoNex | حلول ERP الموحدة</div>
+                <div class="preview-subheadline" id="previewSubheadline">تكامل. أمان. توسع.</div>
+                <p style="color: #8A8A8A; max-width: 700px; margin: 15px auto;" id="previewDescription">
+                    نظام محاسبي متكامل يجمع جميع عمليات أعمالك في منصة واحدة سهلة وآمنة وقابلة للتوسع.
+                </p>
+                <div style="display: flex; gap: 16px; justify-content: center; margin-top: 20px;">
+                    <button style="background: linear-gradient(135deg, #7A5AF8, #2BB0ED); color: white; border: none; padding: 12px 28px; border-radius: 8px; font-weight: 600;" id="previewBtnPrimary">ابدأ تجربتك المجانية</button>
+                    <button style="background: transparent; border: 2px solid #7A5AF8; color: #7A5AF8; padding: 12px 28px; border-radius: 8px; font-weight: 600;" id="previewBtnSecondary">اطلب عرضاً توضيحياً</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // تحديث المعاينة المباشرة
+        document.getElementById('heroTitle').addEventListener('input', function() {
+            document.getElementById('previewTitle').innerHTML = this.value;
+        });
+        
+        document.getElementById('heroSubheadline').addEventListener('input', function() {
+            document.getElementById('previewSubheadline').innerHTML = this.value;
+        });
+        
+        document.getElementById('heroDescription').addEventListener('input', function() {
+            document.getElementById('previewDescription').innerHTML = this.value;
+        });
+        
+        document.getElementById('btnPrimary').addEventListener('input', function() {
+            document.getElementById('previewBtnPrimary').innerHTML = this.value;
+        });
+        
+        document.getElementById('btnSecondary').addEventListener('input', function() {
+            document.getElementById('previewBtnSecondary').innerHTML = this.value;
+        });
+        
+        function saveHero() {
+            // هنا يمكن حفظ البيانات في localStorage أو إرسالها للسيرفر
+            const heroData = {
+                title: document.getElementById('heroTitle').value,
+                subheadline: document.getElementById('heroSubheadline').value,
+                description: document.getElementById('heroDescription').value,
+                btnPrimary: document.getElementById('btnPrimary').value,
+                btnSecondary: document.getElementById('btnSecondary').value,
+                bounceSpeed: document.getElementById('bounceSpeed').value,
+                logoSize: document.getElementById('logoSize').value
+            };
+            
+            localStorage.setItem('heroData', JSON.stringify(heroData));
+            alert('تم حفظ التغييرات بنجاح!');
+        }
+        
+        // تحميل البيانات المحفوظة (إن وجدت)
+        window.addEventListener('load', function() {
+            const savedData = localStorage.getItem('heroData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('heroTitle').value = data.title;
+                document.getElementById('heroSubheadline').value = data.subheadline;
+                document.getElementById('heroDescription').value = data.description;
+                document.getElementById('btnPrimary').value = data.btnPrimary;
+                document.getElementById('btnSecondary').value = data.btnSecondary;
+                document.getElementById('bounceSpeed').value = data.bounceSpeed;
+                document.getElementById('logoSize').value = data.logoSize;
+                
+                // تحديث المعاينة
+                document.getElementById('previewTitle').innerHTML = data.title;
+                document.getElementById('previewSubheadline').innerHTML = data.subheadline;
+                document.getElementById('previewDescription').innerHTML = data.description;
+                document.getElementById('previewBtnPrimary').innerHTML = data.btnPrimary;
+                document.getElementById('previewBtnSecondary').innerHTML = data.btnSecondary;
+            }
+        });
+    </script>
+</body>
+</html>
