@@ -32,17 +32,18 @@
         }
 
         :root {
-            --primary: #4f46e5;
-            --primary-light: #818cf8;
-            --primary-dark: #3730a3;
-            --secondary: #10b981;
+            --primary: #7A5AF8;
+            --primary-light: #9B7FF9;
+            --primary-dark: #5A3AC8;
+            --secondary: #2BB0ED;
+            --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
             --dark: #1f2937;
             --gray: #6b7280;
             --light: #f3f4f6;
             --white: #ffffff;
-            --sidebar-width: 280px;
+            --sidebar-width: 300px;
         }
 
         body {
@@ -222,11 +223,12 @@
             border-radius: 10px;
             transition: all 0.3s;
             margin-bottom: 5px;
+            cursor: pointer;
         }
 
         .sidebar-menu li a:hover,
         .sidebar-menu li a.active {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
         }
 
@@ -287,7 +289,7 @@
         .stat-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -299,62 +301,51 @@
             color: var(--white);
         }
 
-        /* ===== تبويبات الأقسام ===== */
-        .sections-tabs {
+        /* ===== أقسام التعديل ===== */
+        .edit-section {
             background: var(--white);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px;
             margin-bottom: 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        .tabs-header {
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .language-tabs {
             display: flex;
             gap: 10px;
-            border-bottom: 2px solid var(--light);
-            padding-bottom: 15px;
             margin-bottom: 20px;
-            overflow-x: auto;
         }
 
-        .tab-btn {
-            padding: 10px 20px;
+        .lang-tab {
+            padding: 8px 20px;
+            border: 2px solid var(--primary);
             background: transparent;
-            border: none;
+            color: var(--primary);
             border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--gray);
             cursor: pointer;
+            font-weight: 600;
             transition: all 0.3s;
-            white-space: nowrap;
         }
 
-        .tab-btn:hover {
-            background: var(--light);
-            color: var(--dark);
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
+        .lang-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
         }
 
         /* ===== نماذج التعديل ===== */
-        .edit-form {
-            background: var(--light);
-            border-radius: 12px;
-            padding: 25px;
-        }
-
         .form-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -387,7 +378,7 @@
         .form-control:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(122, 90, 248, 0.1);
         }
 
         textarea.form-control {
@@ -396,8 +387,8 @@
         }
 
         .image-preview {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             border-radius: 10px;
             border: 2px dashed var(--gray);
             display: flex;
@@ -407,6 +398,7 @@
             overflow: hidden;
             position: relative;
             cursor: pointer;
+            background: var(--light);
         }
 
         .image-preview img {
@@ -436,6 +428,7 @@
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 20px;
+            border: 1px solid var(--light);
         }
 
         .item-row {
@@ -447,12 +440,12 @@
             transition: background 0.3s;
         }
 
-        .item-row:hover {
-            background: var(--light);
-        }
-
         .item-row:last-child {
             border-bottom: none;
+        }
+
+        .item-row:hover {
+            background: var(--light);
         }
 
         .item-info h4 {
@@ -469,7 +462,7 @@
 
         .item-actions {
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         .item-actions i {
@@ -496,7 +489,7 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
             border: none;
             padding: 12px 30px;
@@ -511,8 +504,8 @@
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122, 90, 248, 0.3);
         }
 
         .btn-primary:disabled {
@@ -536,8 +529,9 @@
         }
 
         .btn-secondary:hover {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: var(--white);
+            border-color: transparent;
         }
 
         .btn-danger {
@@ -621,7 +615,7 @@
         }
 
         .toast.success {
-            border-right: 4px solid var(--secondary);
+            border-right: 4px solid var(--success);
         }
 
         .toast.error {
@@ -637,7 +631,7 @@
         }
 
         .toast.success i {
-            color: var(--secondary);
+            color: var(--success);
         }
 
         .toast.error i {
@@ -646,42 +640,6 @@
 
         .toast.warning i {
             color: var(--warning);
-        }
-
-        /* ===== مؤشرات التحميل ===== */
-        .skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading-shimmer 1.5s infinite;
-            border-radius: 4px;
-        }
-
-        @keyframes loading-shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* ===== علامات التبويب ===== */
-        .language-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .lang-tab {
-            padding: 8px 16px;
-            border: 2px solid var(--primary);
-            background: transparent;
-            color: var(--primary);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .lang-tab.active {
-            background: var(--primary);
-            color: white;
         }
 
         /* ===== استجابة ===== */
@@ -768,54 +726,53 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-category">الرئيسية</li>
-            <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> لوحة التحكم</a></li>
+            <li><a class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> لوحة التحكم</a></li>
             
             <li class="menu-category">الصفحات العربية</li>
-            <li><a href="#" onclick="showSection('ar-home')"><i class="fas fa-home"></i> الرئيسية (index.html)</a></li>
-            <li><a href="#" onclick="showSection('ar-features')"><i class="fas fa-star"></i> المميزات (features.html)</a></li>
-            <li><a href="#" onclick="showSection('ar-pricing')"><i class="fas fa-tag"></i> الأسعار (pricing.html)</a></li>
-            <li><a href="#" onclick="showSection('ar-gallery')"><i class="fas fa-images"></i> معرض الأعمال (gallery.html)</a></li>
-            <li><a href="#" onclick="showSection('ar-contact')"><i class="fas fa-envelope"></i> اتصل بنا (contact.html)</a></li>
+            <li><a onclick="showSection('ar-home')"><i class="fas fa-home"></i> الرئيسية (index.html)</a></li>
+            <li><a onclick="showSection('ar-features')"><i class="fas fa-star"></i> المميزات (features.html)</a></li>
+            <li><a onclick="showSection('ar-pricing')"><i class="fas fa-tag"></i> الأسعار (pricing.html)</a></li>
+            <li><a onclick="showSection('ar-gallery')"><i class="fas fa-images"></i> معرض الأعمال (gallery.html)</a></li>
+            <li><a onclick="showSection('ar-contact')"><i class="fas fa-envelope"></i> اتصل بنا (contact.html)</a></li>
             
             <li class="menu-category">الصفحات الإنجليزية</li>
-            <li><a href="#" onclick="showSection('en-home')"><i class="fas fa-home"></i> Home (index-en.html)</a></li>
-            <li><a href="#" onclick="showSection('en-features')"><i class="fas fa-star"></i> Features (features-en.html)</a></li>
-            <li><a href="#" onclick="showSection('en-pricing')"><i class="fas fa-tag"></i> Pricing (pricing-en.html)</a></li>
-            <li><a href="#" onclick="showSection('en-gallery')"><i class="fas fa-images"></i> Gallery (gallery-en.html)</a></li>
-            <li><a href="#" onclick="showSection('en-contact')"><i class="fas fa-envelope"></i> Contact (contact-en.html)</a></li>
+            <li><a onclick="showSection('en-home')"><i class="fas fa-home"></i> Home (index-en.html)</a></li>
+            <li><a onclick="showSection('en-features')"><i class="fas fa-star"></i> Features (features-en.html)</a></li>
+            <li><a onclick="showSection('en-pricing')"><i class="fas fa-tag"></i> Pricing (pricing-en.html)</a></li>
+            <li><a onclick="showSection('en-gallery')"><i class="fas fa-images"></i> Gallery (gallery-en.html)</a></li>
+            <li><a onclick="showSection('en-contact')"><i class="fas fa-envelope"></i> Contact (contact-en.html)</a></li>
             
-            <li class="menu-category">إدارة المحتوى</li>
-            <li><a href="#" onclick="showSection('hero')"><i class="fas fa-star"></i> القسم الرئيسي (Hero)</a></li>
-            <li><a href="#" onclick="showSection('statistics')"><i class="fas fa-chart-bar"></i> الإحصائيات</a></li>
-            <li><a href="#" onclick="showSection('testimonials')"><i class="fas fa-comment"></i> آراء العملاء</a></li>
-            <li><a href="#" onclick="showSection('faq')"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
-            <li><a href="#" onclick="showSection('footer')"><i class="fas fa-foot"></i> الفوتر</a></li>
+            <li class="menu-category">إدارة المحتوى العام</li>
+            <li><a onclick="showSection('statistics')"><i class="fas fa-chart-bar"></i> الإحصائيات</a></li>
+            <li><a onclick="showSection('testimonials')"><i class="fas fa-comment"></i> آراء العملاء</a></li>
+            <li><a onclick="showSection('faq')"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+            
+            <li class="menu-category">إدارة الصفحات الخاصة</li>
+            <li><a onclick="showSection('pricing-plans')"><i class="fas fa-credit-card"></i> خطط الأسعار</a></li>
+            <li><a onclick="showSection('gallery-items')"><i class="fas fa-images"></i> عناصر المعرض</a></li>
+            <li><a onclick="showSection('payment-methods')"><i class="fas fa-money-bill"></i> طرق الدفع</a></li>
+            <li><a onclick="showSection('contact-info')"><i class="fas fa-address-book"></i> معلومات الاتصال</a></li>
             
             <li class="menu-category">إدارة</li>
-            <li><a href="#" onclick="showSection('messages')"><i class="fas fa-inbox"></i> الرسائل <span class="badge" id="messagesBadge">0</span></a></li>
-            <li><a href="#" onclick="showSection('users')"><i class="fas fa-users"></i> المستخدمين</a></li>
-            <li><a href="#" onclick="showSection('settings')"><i class="fas fa-cog"></i> الإعدادات</a></li>
+            <li><a onclick="showSection('messages')"><i class="fas fa-inbox"></i> الرسائل <span class="badge" id="messagesBadge">0</span></a></li>
+            <li><a onclick="showSection('settings')"><i class="fas fa-cog"></i> الإعدادات</a></li>
             
             <li class="menu-category">أخرى</li>
-            <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+            <li><a onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
         </ul>
     </div>
 
     <!-- المحتوى الرئيسي -->
-    <div class="main-content" id="mainContent">
-        <!-- سيتم تحميل المحتوى هنا ديناميكياً -->
-    </div>
+    <div class="main-content" id="mainContent"></div>
 
     <!-- نافذة التعديل المنبثقة -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal" id="editModal">
             <div class="modal-header">
-                <h3 id="modalTitle">تعديل المحتوى</h3>
+                <h3 id="modalTitle">تعديل العنصر</h3>
                 <i class="fas fa-times close-modal" onclick="closeModal()"></i>
             </div>
-            <div id="modalContent">
-                <!-- محتوى النموذج سيتم تحميله ديناميكياً -->
-            </div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
@@ -865,78 +822,61 @@
         <span id="toastMessage"></span>
     </div>
 
-    <!-- Admin JavaScript -->
-    <script src="js/admin.js"></script>
-    
     <script>
         // ==============================================
-        // استخدام الكائنات من admin.js
+        // إعدادات Firebase
         // ==============================================
-        const db = window.db;
-        const auth = window.auth;
-        const storage = window.storage;
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
+            authDomain: "odunex-project.firebaseapp.com",
+            projectId: "odunex-project",
+            storageBucket: "odunex-project.firebasestorage.app",
+            messagingSenderId: "20189086682",
+            appId: "1:20189086682:web:76574c7befec70c24df6e3"
+        };
+
+        // تهيئة Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        const storage = firebase.storage();
 
         // ==============================================
-        // متغيرات عامة للتحكم في التحميل
+        // التحقق من تسجيل الدخول
         // ==============================================
-        let currentSection = 'dashboard';
-        let currentItemId = null;
-        let deleteCallback = null;
-        let isAuthenticated = false;
-        let contentLoaded = false;
-        let authProcessed = false;
+        let authChecked = false;
 
-        // ==============================================
-        // التحقق من تسجيل الدخول - مرة واحدة فقط
-        // ==============================================
         auth.onAuthStateChanged((user) => {
-            // منع التكرار
-            if (authProcessed) return;
+            if (authChecked) return;
+            authChecked = true;
             
             if (!user) {
-                authProcessed = true;
-                window.location.replace('login.html');
-                return;
-            }
-            
-            // مستخدم مسجل دخوله
-            authProcessed = true;
-            isAuthenticated = true;
-            
-            console.log('✅ User logged in:', user.email);
-            
-            // تحميل بيانات المستخدم
-            const adminNameElement = document.getElementById('adminName');
-            if (adminNameElement) {
-                adminNameElement.textContent = user.email || 'مدير النظام';
-            }
-            
-            // تحميل المحتوى مرة واحدة فقط
-            if (!contentLoaded) {
-                contentLoaded = true;
-                setTimeout(() => {
-                    loadDashboard();
-                    loadDashboardStats();
-                    loadUnreadMessagesCount();
-                }, 100);
+                window.location.href = 'login.html';
+            } else {
+                document.getElementById('adminName').textContent = user.email || 'مدير النظام';
+                loadDashboard();
+                loadUnreadMessagesCount();
             }
         });
 
         // ==============================================
+        // المتغيرات العامة
+        // ==============================================
+        let currentSection = 'dashboard';
+        let currentItemId = null;
+        let deleteCallback = null;
+
+        // ==============================================
         // دوال التحكم في الواجهة
         // ==============================================
-
-        // تبديل القائمة الجانبية
-        window.toggleSidebar = function() {
+        function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
-        };
+        }
 
-        // إظهار القسم المحدد
-        window.showSection = function(section) {
+        function showSection(section) {
             currentSection = section;
             document.getElementById('pageTitle').textContent = getSectionTitle(section);
             
-            // تحديث الرابط النشط
             document.querySelectorAll('.sidebar-menu a').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('onclick')?.includes(section)) {
@@ -944,23 +884,14 @@
                 }
             });
 
-            // إظهار شريط التحميل
             showLoading();
-
-            // تحميل المحتوى حسب القسم
+            
             setTimeout(() => {
-                if (section === 'dashboard') {
-                    loadDashboard();
-                } else if (section.startsWith('ar-') || section.startsWith('en-')) {
-                    loadPageEditor(section);
-                } else {
-                    loadSectionEditor(section);
-                }
+                loadSectionContent(section);
                 hideLoading();
-            }, 500);
-        };
+            }, 300);
+        }
 
-        // الحصول على عنوان القسم
         function getSectionTitle(section) {
             const titles = {
                 'dashboard': 'لوحة التحكم الرئيسية',
@@ -974,19 +905,61 @@
                 'en-pricing': 'Edit Pricing Page - English',
                 'en-gallery': 'Edit Gallery Page - English',
                 'en-contact': 'Edit Contact Page - English',
-                'hero': 'إدارة القسم الرئيسي',
                 'statistics': 'إدارة الإحصائيات',
                 'testimonials': 'إدارة آراء العملاء',
                 'faq': 'إدارة الأسئلة الشائعة',
-                'footer': 'إدارة الفوتر',
-                'messages': 'إدارة الرسائل',
-                'users': 'إدارة المستخدمين',
+                'pricing-plans': 'إدارة خطط الأسعار',
+                'gallery-items': 'إدارة عناصر المعرض',
+                'payment-methods': 'إدارة طرق الدفع',
+                'contact-info': 'إدارة معلومات الاتصال',
+                'messages': 'الرسائل الواردة',
                 'settings': 'الإعدادات العامة'
             };
             return titles[section] || 'لوحة التحكم';
         }
 
-        // تحميل لوحة التحكم الرئيسية
+        function loadSectionContent(section) {
+            switch(section) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'statistics':
+                    loadStatisticsEditor();
+                    break;
+                case 'testimonials':
+                    loadTestimonialsEditor();
+                    break;
+                case 'faq':
+                    loadFaqEditor();
+                    break;
+                case 'pricing-plans':
+                    loadPricingPlansEditor();
+                    break;
+                case 'gallery-items':
+                    loadGalleryItemsEditor();
+                    break;
+                case 'payment-methods':
+                    loadPaymentMethodsEditor();
+                    break;
+                case 'contact-info':
+                    loadContactInfoEditor();
+                    break;
+                case 'messages':
+                    loadMessages();
+                    break;
+                case 'settings':
+                    loadSettings();
+                    break;
+                default:
+                    if (section.startsWith('ar-') || section.startsWith('en-')) {
+                        loadPageEditor(section);
+                    }
+            }
+        }
+
+        // ==============================================
+        // لوحة التحكم الرئيسية
+        // ==============================================
         function loadDashboard() {
             const content = document.getElementById('mainContent');
             
@@ -1003,680 +976,1999 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-info">
-                            <h3 id="arabicPages">0</h3>
-                            <p>صفحات عربية</p>
+                            <h3 id="totalTestimonials">0</h3>
+                            <p>آراء العملاء</p>
                         </div>
                         <div class="stat-icon">
-                            <i class="fas fa-globe"></i>
+                            <i class="fas fa-comment"></i>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-info">
-                            <h3 id="englishPages">0</h3>
-                            <p>صفحات إنجليزية</p>
+                            <h3 id="totalFaq">0</h3>
+                            <p>أسئلة شائعة</p>
                         </div>
                         <div class="stat-icon">
-                            <i class="fas fa-language"></i>
+                            <i class="fas fa-question-circle"></i>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-info">
-                            <h3 id="newMessages">0</h3>
-                            <p>رسائل جديدة</p>
+                            <h3 id="totalGallery">0</h3>
+                            <p>مشاريع في المعرض</p>
                         </div>
                         <div class="stat-icon">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-images"></i>
                         </div>
                     </div>
                 </div>
 
-                <div class="sections-tabs">
-                    <div class="tabs-header">
-                        <button class="tab-btn active" onclick="showTab('all-pages')">كل الصفحات</button>
-                        <button class="tab-btn" onclick="showTab('arabic')">العربية</button>
-                        <button class="tab-btn" onclick="showTab('english')">الإنجليزية</button>
-                    </div>
-                    
-                    <div class="tab-pane active" id="all-pages">
-                        <div class="items-list">
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>الصفحات العربية</h4>
-                                    <p>5 صفحات - index.html, features.html, pricing.html, gallery.html, contact.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('ar-home')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('index.html')"></i>
-                                </div>
+                <div class="edit-section">
+                    <h3 class="section-title">إحصائيات سريعة</h3>
+                    <div class="items-list">
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>الصفحات العربية</h4>
+                                <p>5 صفحات - الرئيسية، المميزات، الأسعار، المعرض، اتصل بنا</p>
                             </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>الصفحات الإنجليزية</h4>
-                                    <p>5 صفحات - index-en.html, features-en.html, pricing-en.html, gallery-en.html, contact-en.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('en-home')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('index-en.html')"></i>
-                                </div>
+                            <div class="item-actions">
+                                <i class="fas fa-edit" onclick="showSection('ar-home')"></i>
+                            </div>
+                        </div>
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>الصفحات الإنجليزية</h4>
+                                <p>5 pages - Home, Features, Pricing, Gallery, Contact</p>
+                            </div>
+                            <div class="item-actions">
+                                <i class="fas fa-edit" onclick="showSection('en-home')"></i>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="tab-pane" id="arabic">
-                        <div class="items-list">
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>الرئيسية</h4>
-                                    <p>index.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('ar-home')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('index.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>المميزات</h4>
-                                    <p>features.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('ar-features')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('features.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>الأسعار</h4>
-                                    <p>pricing.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('ar-pricing')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('pricing.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>معرض الأعمال</h4>
-                                    <p>gallery.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('ar-gallery')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('gallery.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>اتصل بنا</h4>
-                                    <p>contact.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('ar-contact')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('contact.html')"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tab-pane" id="english">
-                        <div class="items-list">
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>Home</h4>
-                                    <p>index-en.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('en-home')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('index-en.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>Features</h4>
-                                    <p>features-en.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('en-features')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('features-en.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>Pricing</h4>
-                                    <p>pricing-en.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('en-pricing')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('pricing-en.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>Gallery</h4>
-                                    <p>gallery-en.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('en-gallery')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('gallery-en.html')"></i>
-                                </div>
-                            </div>
-                            <div class="item-row">
-                                <div class="item-info">
-                                    <h4>Contact</h4>
-                                    <p>contact-en.html</p>
-                                </div>
-                                <div class="item-actions">
-                                    <i class="fas fa-edit" onclick="showSection('en-contact')"></i>
-                                    <i class="fas fa-eye" onclick="previewPage('contact-en.html')"></i>
-                                </div>
+                </div>
+
+                <div class="edit-section">
+                    <h3 class="section-title">آخر النشاطات</h3>
+                    <div class="items-list" id="recentActivity">
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>جاري تحميل النشاطات...</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             `;
 
-            // تحميل الإحصائيات من Firebase
             loadDashboardStats();
+            loadRecentActivity();
         }
 
-        // تحميل إحصائيات لوحة التحكم
         async function loadDashboardStats() {
             try {
-                const stats = await window.getDashboardStats?.() || {
-                    totalPages: 10,
-                    arabicPages: 5,
-                    englishPages: 5,
-                    newMessages: 0
-                };
-                
-                document.getElementById('totalPages').textContent = stats.totalPages;
-                document.getElementById('arabicPages').textContent = stats.arabicPages;
-                document.getElementById('englishPages').textContent = stats.englishPages;
-                document.getElementById('newMessages').textContent = stats.newMessages;
-                document.getElementById('messagesBadge').textContent = stats.newMessages;
-                document.getElementById('notificationCount').textContent = stats.newMessages;
+                const [pages, testimonials, faq, gallery] = await Promise.all([
+                    db.collection('pages').get(),
+                    db.collection('testimonials').get(),
+                    db.collection('faq').get(),
+                    db.collection('gallery').get()
+                ]);
+
+                document.getElementById('totalPages').textContent = pages.size || 10;
+                document.getElementById('totalTestimonials').textContent = testimonials.size || 6;
+                document.getElementById('totalFaq').textContent = faq.size || 7;
+                document.getElementById('totalGallery').textContent = gallery.size || 6;
             } catch (error) {
                 console.error('Error loading stats:', error);
             }
         }
 
-        // تحميل عدد الرسائل غير المقروءة
-        async function loadUnreadMessagesCount() {
+        async function loadRecentActivity() {
             try {
-                // سيتم تنفيذها من admin.js
+                const activity = document.getElementById('recentActivity');
+                activity.innerHTML = `
+                    <div class="item-row">
+                        <div class="item-info">
+                            <h4>آخر تحديث للنظام</h4>
+                            <p>${new Date().toLocaleString('ar-SA')}</p>
+                        </div>
+                    </div>
+                `;
             } catch (error) {
-                console.error('Error loading unread messages:', error);
+                console.error('Error loading activity:', error);
             }
         }
 
-        // تحميل محرر الصفحة
+        // ==============================================
+        // محرر الصفحات
+        // ==============================================
         function loadPageEditor(section) {
             const content = document.getElementById('mainContent');
             const isArabic = section.startsWith('ar-');
             
             content.innerHTML = `
-                <div class="language-tabs">
-                    <button class="lang-tab ${isArabic ? 'active' : ''}" onclick="switchLanguage('ar', '${section.replace('ar-', '').replace('en-', '')}')">العربية</button>
-                    <button class="lang-tab ${!isArabic ? 'active' : ''}" onclick="switchLanguage('en', '${section.replace('ar-', '').replace('en-', '')}')">English</button>
-                </div>
-                
-                <div class="edit-form">
-                    <div class="form-group">
-                        <label>عنوان الصفحة</label>
-                        <input type="text" class="form-control" data-field="title" id="pageTitle" placeholder="عنوان الصفحة">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>وصف الصفحة</label>
-                        <textarea class="form-control" data-field="description" id="pageDescription" rows="3" placeholder="وصف الصفحة"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>الكلمات المفتاحية (SEO)</label>
-                        <input type="text" class="form-control" data-field="keywords" id="pageKeywords" placeholder="كلمة1, كلمة2, كلمة3">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>محتوى الصفحة</label>
-                        <textarea class="form-control ckeditor" id="pageContent" rows="10"></textarea>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn-primary" onclick="savePageContent('${section}')">
-                            <i class="fas fa-save"></i> حفظ التغييرات
+                <div class="edit-section">
+                    <h3 class="section-title">
+                        ${isArabic ? 'محتوى الصفحة' : 'Page Content'}
+                        <button class="btn-secondary" onclick="previewPage('${section}')">
+                            <i class="fas fa-eye"></i> ${isArabic ? 'معاينة' : 'Preview'}
                         </button>
-                        <button class="btn-secondary" onclick="previewPage('${section.replace('ar-', '').replace('en-', '') + (isArabic ? '.html' : '-en.html')}')">
-                            <i class="fas fa-eye"></i> معاينة
-                        </button>
-                    </div>
+                    </h3>
+                    
+                    <div id="pageEditor"></div>
                 </div>
             `;
 
-            // تفعيل CKEditor
-            CKEDITOR.replace('pageContent');
-            
-            // تحميل البيانات المحفوظة
-            loadSavedPageData(section);
+            loadPageData(section);
         }
 
-        // تحميل البيانات المحفوظة للصفحة
-        async function loadSavedPageData(section) {
+        async function loadPageData(section) {
             try {
-                const data = await window.loadPageContent?.(section);
-                if (data) {
-                    document.getElementById('pageTitle').value = data.title || '';
-                    document.getElementById('pageDescription').value = data.description || '';
-                    document.getElementById('pageKeywords').value = data.keywords || '';
-                    CKEDITOR.instances.pageContent.setData(data.content || '');
+                const doc = await db.collection('pages').doc(section).get();
+                const data = doc.exists ? doc.data() : {};
+                
+                const editor = document.getElementById('pageEditor');
+                const isArabic = section.startsWith('ar-');
+                
+                if (section.includes('home')) {
+                    editor.innerHTML = generateHomePageForm(section, data, isArabic);
+                } else if (section.includes('features')) {
+                    editor.innerHTML = generateFeaturesPageForm(section, data, isArabic);
+                } else if (section.includes('pricing')) {
+                    editor.innerHTML = generatePricingPageForm(section, data, isArabic);
+                } else if (section.includes('gallery')) {
+                    editor.innerHTML = generateGalleryPageForm(section, data, isArabic);
+                } else if (section.includes('contact')) {
+                    editor.innerHTML = generateContactPageForm(section, data, isArabic);
                 }
             } catch (error) {
                 console.error('Error loading page data:', error);
             }
         }
 
-        // تحميل محرر القسم
-        function loadSectionEditor(section) {
+        function generateHomePageForm(section, data, isArabic) {
+            return `
+                <div class="form-group">
+                    <label>${isArabic ? 'العنوان الرئيسي' : 'Main Title'}</label>
+                    <input type="text" class="form-control" id="mainTitle" value="${data.mainTitle || 'Odunex | حلول ERP الموحدة'}" placeholder="${isArabic ? 'أدخل العنوان الرئيسي' : 'Enter main title'}">
+                </div>
+                
+                <div class="form-group">
+                    <label>${isArabic ? 'العنوان الفرعي' : 'Subtitle'}</label>
+                    <input type="text" class="form-control" id="subtitle" value="${data.subtitle || (isArabic ? 'تكامل. أمان. توسع.' : 'Integration. Security. Scalability.')}">
+                </div>
+                
+                <div class="form-group">
+                    <label>${isArabic ? 'الوصف' : 'Description'}</label>
+                    <textarea class="form-control" id="description" rows="3">${data.description || (isArabic ? 'نظام محاسبي متكامل يجمع جميع عمليات أعمالك في منصة واحدة سهلة وآمنة وقابلة للتوسع.' : 'A comprehensive accounting system that brings all your business operations into one easy, secure, and scalable platform.')}</textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${isArabic ? 'نص زر التجربة' : 'Free Trial Button Text'}</label>
+                        <input type="text" class="form-control" id="trialBtnText" value="${data.trialBtnText || (isArabic ? 'ابدأ تجربتك المجانية' : 'Start Free Trial')}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>${isArabic ? 'نص زر العرض' : 'Demo Button Text'}</label>
+                        <input type="text" class="form-control" id="demoBtnText" value="${data.demoBtnText || (isArabic ? 'اطلب عرضاً توضيحياً' : 'Request a Demo')}">
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePage('${section}')">
+                        <i class="fas fa-save"></i> ${isArabic ? 'حفظ التغييرات' : 'Save Changes'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function generateFeaturesPageForm(section, data, isArabic) {
+            return `
+                <div class="form-group">
+                    <label>${isArabic ? 'عنوان الصفحة' : 'Page Title'}</label>
+                    <input type="text" class="form-control" id="pageTitle" value="${data.pageTitle || (isArabic ? 'المميزات' : 'Features')}">
+                </div>
+                
+                <div class="form-group">
+                    <label>${isArabic ? 'الوصف' : 'Description'}</label>
+                    <textarea class="form-control" id="description" rows="2">${data.description || (isArabic ? 'كل ما تحتاجه لإدارة أعمالك بكفاءة وأمان في مكان واحد' : 'Everything you need to manage your business efficiently and securely in one place')}</textarea>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePage('${section}')">
+                        <i class="fas fa-save"></i> ${isArabic ? 'حفظ التغييرات' : 'Save Changes'}
+                    </button>
+                    <button class="btn-secondary" onclick="showSection('${section.replace('-home', '-features')}')">
+                        <i class="fas fa-list"></i> ${isArabic ? 'إدارة المميزات' : 'Manage Features'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function generatePricingPageForm(section, data, isArabic) {
+            return `
+                <div class="form-group">
+                    <label>${isArabic ? 'عنوان الصفحة' : 'Page Title'}</label>
+                    <input type="text" class="form-control" id="pageTitle" value="${data.pageTitle || (isArabic ? 'خطط الأسعار' : 'Pricing Plans')}">
+                </div>
+                
+                <div class="form-group">
+                    <label>${isArabic ? 'الوصف' : 'Description'}</label>
+                    <textarea class="form-control" id="description" rows="2">${data.description || (isArabic ? 'اختر الخطة المناسبة لحجم أعمالك' : 'Choose the right plan for your business size')}</textarea>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePage('${section}')">
+                        <i class="fas fa-save"></i> ${isArabic ? 'حفظ التغييرات' : 'Save Changes'}
+                    </button>
+                    <button class="btn-secondary" onclick="showSection('pricing-plans')">
+                        <i class="fas fa-credit-card"></i> ${isArabic ? 'إدارة خطط الأسعار' : 'Manage Pricing Plans'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function generateGalleryPageForm(section, data, isArabic) {
+            return `
+                <div class="form-group">
+                    <label>${isArabic ? 'عنوان الصفحة' : 'Page Title'}</label>
+                    <input type="text" class="form-control" id="pageTitle" value="${data.pageTitle || (isArabic ? 'معرض أعمالنا' : 'Our Portfolio')}">
+                </div>
+                
+                <div class="form-group">
+                    <label>${isArabic ? 'الوصف' : 'Description'}</label>
+                    <textarea class="form-control" id="description" rows="2">${data.description || (isArabic ? 'مشاريع حقيقية نفذناها لعملائنا في مختلف القطاعات' : 'Real projects we delivered for our clients across various sectors')}</textarea>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePage('${section}')">
+                        <i class="fas fa-save"></i> ${isArabic ? 'حفظ التغييرات' : 'Save Changes'}
+                    </button>
+                    <button class="btn-secondary" onclick="showSection('gallery-items')">
+                        <i class="fas fa-images"></i> ${isArabic ? 'إدارة عناصر المعرض' : 'Manage Gallery Items'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function generateContactPageForm(section, data, isArabic) {
+            return `
+                <div class="form-group">
+                    <label>${isArabic ? 'عنوان الصفحة' : 'Page Title'}</label>
+                    <input type="text" class="form-control" id="pageTitle" value="${data.pageTitle || (isArabic ? 'تواصل معنا' : 'Contact Us')}">
+                </div>
+                
+                <div class="form-group">
+                    <label>${isArabic ? 'الوصف' : 'Description'}</label>
+                    <textarea class="form-control" id="description" rows="2">${data.description || (isArabic ? 'نحن هنا للإجابة على استفساراتك ومساعدتك في أي وقت' : "We're here to answer your questions and help you anytime")}</textarea>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePage('${section}')">
+                        <i class="fas fa-save"></i> ${isArabic ? 'حفظ التغييرات' : 'Save Changes'}
+                    </button>
+                    <button class="btn-secondary" onclick="showSection('contact-info')">
+                        <i class="fas fa-address-book"></i> ${isArabic ? 'إدارة معلومات الاتصال' : 'Manage Contact Info'}
+                    </button>
+                </div>
+            `;
+        }
+
+        window.savePage = async function(section) {
+            showLoading();
+            
+            const data = {
+                mainTitle: document.getElementById('mainTitle')?.value || '',
+                subtitle: document.getElementById('subtitle')?.value || '',
+                description: document.getElementById('description')?.value || '',
+                trialBtnText: document.getElementById('trialBtnText')?.value || '',
+                demoBtnText: document.getElementById('demoBtnText')?.value || '',
+                pageTitle: document.getElementById('pageTitle')?.value || '',
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                await db.collection('pages').doc(section).set(data, { merge: true });
+                showToast('success', 'تم الحفظ بنجاح');
+            } catch (error) {
+                console.error('Error saving page:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر الإحصائيات
+        // ==============================================
+        function loadStatisticsEditor() {
             const content = document.getElementById('mainContent');
             
             content.innerHTML = `
-                <div class="edit-form">
-                    <div class="items-list" id="sectionItems">
-                        <!-- سيتم تحميل العناصر هنا -->
-                        <div class="item-row">
-                            <div class="item-info">
-                                <h4>جاري التحميل...</h4>
-                            </div>
-                        </div>
-                    </div>
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة الإحصائيات</h3>
                     
-                    <button class="btn-secondary" onclick="openAddItemModal('${section}')">
-                        <i class="fas fa-plus"></i> إضافة عنصر جديد
-                    </button>
-                    
-                    <div class="action-buttons" style="margin-top: 20px;">
-                        <button class="btn-primary" onclick="saveSectionContent('${section}')">
-                            <i class="fas fa-save"></i> حفظ التغييرات
-                        </button>
-                    </div>
+                    <div id="statsEditor"></div>
                 </div>
             `;
 
-            // تحميل عناصر القسم
-            loadSectionItems(section);
+            loadStatsData();
         }
 
-        // تحميل عناصر القسم
-        async function loadSectionItems(section) {
+        async function loadStatsData() {
             try {
-                const items = await window.loadSectionItems?.(section) || [];
-                const itemsList = document.getElementById('sectionItems');
+                const doc = await db.collection('site-data').doc('statistics').get();
+                const data = doc.exists ? doc.data() : {
+                    activeClients: 1500,
+                    projectsCompleted: 320,
+                    countries: 15,
+                    satisfaction: 99
+                };
                 
-                if (items.length === 0) {
-                    itemsList.innerHTML = `
+                const editor = document.getElementById('statsEditor');
+                
+                editor.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>عدد العملاء النشطين</label>
+                            <input type="number" class="form-control" id="activeClients" value="${data.activeClients}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>عدد المشاريع المنجزة</label>
+                            <input type="number" class="form-control" id="projectsCompleted" value="${data.projectsCompleted}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>عدد الدول</label>
+                            <input type="number" class="form-control" id="countries" value="${data.countries}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>نسبة رضا العملاء (%)</label>
+                            <input type="number" class="form-control" id="satisfaction" value="${data.satisfaction}" min="0" max="100">
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="saveStatistics()">
+                            <i class="fas fa-save"></i> حفظ الإحصائيات
+                        </button>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        window.saveStatistics = async function() {
+            showLoading();
+            
+            const data = {
+                activeClients: parseInt(document.getElementById('activeClients')?.value) || 1500,
+                projectsCompleted: parseInt(document.getElementById('projectsCompleted')?.value) || 320,
+                countries: parseInt(document.getElementById('countries')?.value) || 15,
+                satisfaction: parseInt(document.getElementById('satisfaction')?.value) || 99,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                await db.collection('site-data').doc('statistics').set(data);
+                showToast('success', 'تم حفظ الإحصائيات');
+            } catch (error) {
+                console.error('Error saving statistics:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر آراء العملاء
+        // ==============================================
+        function loadTestimonialsEditor() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة آراء العملاء</h3>
+                    
+                    <div class="items-list" id="testimonialsList"></div>
+                    
+                    <button class="btn-secondary" onclick="openAddTestimonialModal()">
+                        <i class="fas fa-plus"></i> إضافة رأي جديد
+                    </button>
+                </div>
+            `;
+
+            loadTestimonials();
+        }
+
+        async function loadTestimonials() {
+            try {
+                const snapshot = await db.collection('testimonials').orderBy('order', 'asc').get();
+                const testimonials = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                const list = document.getElementById('testimonialsList');
+                
+                if (testimonials.length === 0) {
+                    list.innerHTML = `
                         <div class="item-row">
                             <div class="item-info">
-                                <h4>لا توجد عناصر</h4>
-                                <p>اضغط على "إضافة عنصر جديد" للبدء</p>
+                                <h4>لا توجد آراء</h4>
+                                <p>أضف رأي جديد للبدء</p>
                             </div>
                         </div>
                     `;
                     return;
                 }
 
-                itemsList.innerHTML = items.map((item, index) => `
-                    <div class="item-row" data-id="${item.id || index}">
+                list.innerHTML = testimonials.map((item, index) => `
+                    <div class="item-row" data-id="${item.id}">
                         <div class="item-info">
-                            <h4>${item.title || 'بدون عنوان'}</h4>
-                            <p>${item.description || ''}</p>
+                            <h4>${item.name || 'بدون اسم'}</h4>
+                            <p>${item.role || ''} - ${item.text?.substring(0, 50)}...</p>
                         </div>
                         <div class="item-actions">
-                            <i class="fas fa-edit" onclick="openEditItemModal('${section}', ${JSON.stringify(item).replace(/"/g, '&quot;')})"></i>
-                            <i class="fas fa-trash" onclick="deleteItem('${section}', '${item.id || index}')"></i>
+                            <i class="fas fa-star" style="color: ${item.rating >= 5 ? '#F5B301' : '#D1D5DB'}"></i>
+                            <i class="fas fa-edit" onclick="openEditTestimonialModal('${item.id}')"></i>
+                            <i class="fas fa-trash" onclick="deleteTestimonial('${item.id}')"></i>
                         </div>
                     </div>
                 `).join('');
             } catch (error) {
-                console.error('Error loading section items:', error);
+                console.error('Error loading testimonials:', error);
             }
         }
 
-        // حفظ محتوى الصفحة
-        window.savePageContent = async function(section) {
+        window.openAddTestimonialModal = function() {
+            document.getElementById('modalTitle').textContent = 'إضافة رأي جديد';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>الاسم</label>
+                    <input type="text" class="form-control" id="testimonialName" placeholder="اسم العميل">
+                </div>
+                <div class="form-group">
+                    <label>المنصب / الشركة</label>
+                    <input type="text" class="form-control" id="testimonialRole" placeholder="مثال: مدير عام - شركة النخبة">
+                </div>
+                <div class="form-group">
+                    <label>نص الرأي</label>
+                    <textarea class="form-control" id="testimonialText" rows="4" placeholder="اكتب رأي العميل هنا"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>عدد النجوم (1-5)</label>
+                    <input type="number" class="form-control" id="testimonialRating" min="1" max="5" value="5">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="saveTestimonial()">حفظ</button>
+                </div>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        window.openEditTestimonialModal = async function(id) {
+            try {
+                const doc = await db.collection('testimonials').doc(id).get();
+                const data = doc.data();
+                
+                document.getElementById('modalTitle').textContent = 'تعديل الرأي';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="form-group">
+                        <label>الاسم</label>
+                        <input type="text" class="form-control" id="testimonialName" value="${data.name || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>المنصب / الشركة</label>
+                        <input type="text" class="form-control" id="testimonialRole" value="${data.role || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>نص الرأي</label>
+                        <textarea class="form-control" id="testimonialText" rows="4">${data.text || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>عدد النجوم (1-5)</label>
+                        <input type="number" class="form-control" id="testimonialRating" min="1" max="5" value="${data.rating || 5}">
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="updateTestimonial('${id}')">تحديث</button>
+                    </div>
+                `;
+                document.getElementById('modalOverlay').style.display = 'flex';
+            } catch (error) {
+                console.error('Error loading testimonial:', error);
+                showToast('error', 'فشل تحميل البيانات');
+            }
+        };
+
+        window.saveTestimonial = async function() {
+            const name = document.getElementById('testimonialName')?.value;
+            const role = document.getElementById('testimonialRole')?.value;
+            const text = document.getElementById('testimonialText')?.value;
+            const rating = parseInt(document.getElementById('testimonialRating')?.value) || 5;
+            
+            if (!name || !text) {
+                showToast('warning', 'الرجاء إدخال الاسم والنص');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const snapshot = await db.collection('testimonials').get();
+                const order = snapshot.size;
+                
+                await db.collection('testimonials').add({
+                    name,
+                    role,
+                    text,
+                    rating,
+                    order,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تمت الإضافة بنجاح');
+                closeModal();
+                loadTestimonials();
+            } catch (error) {
+                console.error('Error saving testimonial:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.updateTestimonial = async function(id) {
+            const name = document.getElementById('testimonialName')?.value;
+            const role = document.getElementById('testimonialRole')?.value;
+            const text = document.getElementById('testimonialText')?.value;
+            const rating = parseInt(document.getElementById('testimonialRating')?.value) || 5;
+            
+            if (!name || !text) {
+                showToast('warning', 'الرجاء إدخال الاسم والنص');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                await db.collection('testimonials').doc(id).update({
+                    name,
+                    role,
+                    text,
+                    rating,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تم التحديث بنجاح');
+                closeModal();
+                loadTestimonials();
+            } catch (error) {
+                console.error('Error updating testimonial:', error);
+                showToast('error', 'فشل التحديث');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.deleteTestimonial = async function(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا الرأي؟')) return;
+            
+            showLoading();
+            
+            try {
+                await db.collection('testimonials').doc(id).delete();
+                showToast('success', 'تم الحذف بنجاح');
+                loadTestimonials();
+            } catch (error) {
+                console.error('Error deleting testimonial:', error);
+                showToast('error', 'فشل الحذف');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر الأسئلة الشائعة
+        // ==============================================
+        function loadFaqEditor() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة الأسئلة الشائعة</h3>
+                    
+                    <div class="items-list" id="faqList"></div>
+                    
+                    <button class="btn-secondary" onclick="openAddFaqModal()">
+                        <i class="fas fa-plus"></i> إضافة سؤال جديد
+                    </button>
+                </div>
+            `;
+
+            loadFaq();
+        }
+
+        async function loadFaq() {
+            try {
+                const snapshot = await db.collection('faq').orderBy('order', 'asc').get();
+                const faq = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                const list = document.getElementById('faqList');
+                
+                if (faq.length === 0) {
+                    list.innerHTML = `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>لا توجد أسئلة</h4>
+                                <p>أضف سؤال جديد للبدء</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = faq.map((item, index) => `
+                    <div class="item-row" data-id="${item.id}">
+                        <div class="item-info">
+                            <h4>${item.question || 'بدون سؤال'}</h4>
+                            <p>${item.answer?.substring(0, 50)}...</p>
+                        </div>
+                        <div class="item-actions">
+                            <i class="fas fa-edit" onclick="openEditFaqModal('${item.id}')"></i>
+                            <i class="fas fa-trash" onclick="deleteFaq('${item.id}')"></i>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading faq:', error);
+            }
+        }
+
+        window.openAddFaqModal = function() {
+            document.getElementById('modalTitle').textContent = 'إضافة سؤال جديد';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>السؤال (عربي)</label>
+                    <input type="text" class="form-control" id="faqQuestionAr" placeholder="السؤال بالعربية">
+                </div>
+                <div class="form-group">
+                    <label>الإجابة (عربي)</label>
+                    <textarea class="form-control" id="faqAnswerAr" rows="3" placeholder="الإجابة بالعربية"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Question (English)</label>
+                    <input type="text" class="form-control" id="faqQuestionEn" placeholder="Question in English">
+                </div>
+                <div class="form-group">
+                    <label>Answer (English)</label>
+                    <textarea class="form-control" id="faqAnswerEn" rows="3" placeholder="Answer in English"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="saveFaq()">حفظ</button>
+                </div>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        window.openEditFaqModal = async function(id) {
+            try {
+                const doc = await db.collection('faq').doc(id).get();
+                const data = doc.data();
+                
+                document.getElementById('modalTitle').textContent = 'تعديل السؤال';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="form-group">
+                        <label>السؤال (عربي)</label>
+                        <input type="text" class="form-control" id="faqQuestionAr" value="${data.questionAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>الإجابة (عربي)</label>
+                        <textarea class="form-control" id="faqAnswerAr" rows="3">${data.answerAr || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Question (English)</label>
+                        <input type="text" class="form-control" id="faqQuestionEn" value="${data.questionEn || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Answer (English)</label>
+                        <textarea class="form-control" id="faqAnswerEn" rows="3">${data.answerEn || ''}</textarea>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="updateFaq('${id}')">تحديث</button>
+                    </div>
+                `;
+                document.getElementById('modalOverlay').style.display = 'flex';
+            } catch (error) {
+                console.error('Error loading faq:', error);
+                showToast('error', 'فشل تحميل البيانات');
+            }
+        };
+
+        window.saveFaq = async function() {
+            const questionAr = document.getElementById('faqQuestionAr')?.value;
+            const answerAr = document.getElementById('faqAnswerAr')?.value;
+            const questionEn = document.getElementById('faqQuestionEn')?.value;
+            const answerEn = document.getElementById('faqAnswerEn')?.value;
+            
+            if (!questionAr || !answerAr) {
+                showToast('warning', 'الرجاء إدخال السؤال والإجابة بالعربية');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const snapshot = await db.collection('faq').get();
+                const order = snapshot.size;
+                
+                await db.collection('faq').add({
+                    questionAr,
+                    answerAr,
+                    questionEn,
+                    answerEn,
+                    order,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تمت الإضافة بنجاح');
+                closeModal();
+                loadFaq();
+            } catch (error) {
+                console.error('Error saving faq:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.updateFaq = async function(id) {
+            const questionAr = document.getElementById('faqQuestionAr')?.value;
+            const answerAr = document.getElementById('faqAnswerAr')?.value;
+            const questionEn = document.getElementById('faqQuestionEn')?.value;
+            const answerEn = document.getElementById('faqAnswerEn')?.value;
+            
+            if (!questionAr || !answerAr) {
+                showToast('warning', 'الرجاء إدخال السؤال والإجابة بالعربية');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                await db.collection('faq').doc(id).update({
+                    questionAr,
+                    answerAr,
+                    questionEn,
+                    answerEn,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تم التحديث بنجاح');
+                closeModal();
+                loadFaq();
+            } catch (error) {
+                console.error('Error updating faq:', error);
+                showToast('error', 'فشل التحديث');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.deleteFaq = async function(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا السؤال؟')) return;
+            
+            showLoading();
+            
+            try {
+                await db.collection('faq').doc(id).delete();
+                showToast('success', 'تم الحذف بنجاح');
+                loadFaq();
+            } catch (error) {
+                console.error('Error deleting faq:', error);
+                showToast('error', 'فشل الحذف');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر خطط الأسعار
+        // ==============================================
+        function loadPricingPlansEditor() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة خطط الأسعار</h3>
+                    
+                    <div class="items-list" id="pricingList"></div>
+                    
+                    <button class="btn-secondary" onclick="openAddPricingModal()">
+                        <i class="fas fa-plus"></i> إضافة خطة جديدة
+                    </button>
+                </div>
+            `;
+
+            loadPricingPlans();
+        }
+
+        async function loadPricingPlans() {
+            try {
+                const snapshot = await db.collection('pricing').orderBy('order', 'asc').get();
+                const plans = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                const list = document.getElementById('pricingList');
+                
+                if (plans.length === 0) {
+                    list.innerHTML = `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>لا توجد خطط</h4>
+                                <p>أضف خطة جديدة للبدء</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = plans.map(plan => `
+                    <div class="item-row" data-id="${plan.id}">
+                        <div class="item-info">
+                            <h4>${plan.nameAr || 'بدون اسم'} ${plan.isPopular ? '<span style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 2px 8px; border-radius: 20px; font-size: 10px;">الأكثر شعبية</span>' : ''}</h4>
+                            <p>${plan.priceMonthlyAr || ''} / شهرياً</p>
+                        </div>
+                        <div class="item-actions">
+                            <i class="fas fa-edit" onclick="openEditPricingModal('${plan.id}')"></i>
+                            <i class="fas fa-trash" onclick="deletePricingPlan('${plan.id}')"></i>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading pricing plans:', error);
+            }
+        }
+
+        window.openAddPricingModal = function() {
+            document.getElementById('modalTitle').textContent = 'إضافة خطة جديدة';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>اسم الخطة (عربي)</label>
+                    <input type="text" class="form-control" id="planNameAr" placeholder="مثال: مبتدئ">
+                </div>
+                <div class="form-group">
+                    <label>اسم الخطة (English)</label>
+                    <input type="text" class="form-control" id="planNameEn" placeholder="Example: Starter">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>السعر الشهري ($)</label>
+                        <input type="number" class="form-control" id="priceMonthly" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label>السعر السنوي ($)</label>
+                        <input type="number" class="form-control" id="priceYearly" value="200">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>المميزات (كل ميزة في سطر جديد)</label>
+                    <textarea class="form-control" id="featuresAr" rows="4" placeholder="ميزة 1&#10;ميزة 2&#10;ميزة 3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Features (one per line)</label>
+                    <textarea class="form-control" id="featuresEn" rows="4" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="isPopular"> خطة الأكثر شعبية
+                    </label>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePricingPlan()">حفظ</button>
+                </div>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        window.openEditPricingModal = async function(id) {
+            try {
+                const doc = await db.collection('pricing').doc(id).get();
+                const data = doc.data();
+                
+                document.getElementById('modalTitle').textContent = 'تعديل الخطة';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="form-group">
+                        <label>اسم الخطة (عربي)</label>
+                        <input type="text" class="form-control" id="planNameAr" value="${data.nameAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>اسم الخطة (English)</label>
+                        <input type="text" class="form-control" id="planNameEn" value="${data.nameEn || ''}">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>السعر الشهري ($)</label>
+                            <input type="number" class="form-control" id="priceMonthly" value="${data.priceMonthly || 10}">
+                        </div>
+                        <div class="form-group">
+                            <label>السعر السنوي ($)</label>
+                            <input type="number" class="form-control" id="priceYearly" value="${data.priceYearly || 200}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>المميزات (كل ميزة في سطر جديد)</label>
+                        <textarea class="form-control" id="featuresAr" rows="4">${data.featuresAr || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Features (one per line)</label>
+                        <textarea class="form-control" id="featuresEn" rows="4">${data.featuresEn || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="isPopular" ${data.isPopular ? 'checked' : ''}> خطة الأكثر شعبية
+                        </label>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="updatePricingPlan('${id}')">تحديث</button>
+                    </div>
+                `;
+                document.getElementById('modalOverlay').style.display = 'flex';
+            } catch (error) {
+                console.error('Error loading pricing plan:', error);
+                showToast('error', 'فشل تحميل البيانات');
+            }
+        };
+
+        window.savePricingPlan = async function() {
+            const nameAr = document.getElementById('planNameAr')?.value;
+            const nameEn = document.getElementById('planNameEn')?.value;
+            const priceMonthly = parseFloat(document.getElementById('priceMonthly')?.value) || 10;
+            const priceYearly = parseFloat(document.getElementById('priceYearly')?.value) || 200;
+            const featuresAr = document.getElementById('featuresAr')?.value;
+            const featuresEn = document.getElementById('featuresEn')?.value;
+            const isPopular = document.getElementById('isPopular')?.checked || false;
+            
+            if (!nameAr || !nameEn) {
+                showToast('warning', 'الرجاء إدخال اسم الخطة');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const snapshot = await db.collection('pricing').get();
+                const order = snapshot.size;
+                
+                await db.collection('pricing').add({
+                    nameAr,
+                    nameEn,
+                    priceMonthly,
+                    priceYearly,
+                    featuresAr: featuresAr?.split('\n').filter(f => f.trim()) || [],
+                    featuresEn: featuresEn?.split('\n').filter(f => f.trim()) || [],
+                    isPopular,
+                    order,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تمت الإضافة بنجاح');
+                closeModal();
+                loadPricingPlans();
+            } catch (error) {
+                console.error('Error saving pricing plan:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.updatePricingPlan = async function(id) {
+            const nameAr = document.getElementById('planNameAr')?.value;
+            const nameEn = document.getElementById('planNameEn')?.value;
+            const priceMonthly = parseFloat(document.getElementById('priceMonthly')?.value) || 10;
+            const priceYearly = parseFloat(document.getElementById('priceYearly')?.value) || 200;
+            const featuresAr = document.getElementById('featuresAr')?.value;
+            const featuresEn = document.getElementById('featuresEn')?.value;
+            const isPopular = document.getElementById('isPopular')?.checked || false;
+            
+            if (!nameAr || !nameEn) {
+                showToast('warning', 'الرجاء إدخال اسم الخطة');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                await db.collection('pricing').doc(id).update({
+                    nameAr,
+                    nameEn,
+                    priceMonthly,
+                    priceYearly,
+                    featuresAr: featuresAr?.split('\n').filter(f => f.trim()) || [],
+                    featuresEn: featuresEn?.split('\n').filter(f => f.trim()) || [],
+                    isPopular,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تم التحديث بنجاح');
+                closeModal();
+                loadPricingPlans();
+            } catch (error) {
+                console.error('Error updating pricing plan:', error);
+                showToast('error', 'فشل التحديث');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.deletePricingPlan = async function(id) {
+            if (!confirm('هل أنت متأكد من حذف هذه الخطة؟')) return;
+            
+            showLoading();
+            
+            try {
+                await db.collection('pricing').doc(id).delete();
+                showToast('success', 'تم الحذف بنجاح');
+                loadPricingPlans();
+            } catch (error) {
+                console.error('Error deleting pricing plan:', error);
+                showToast('error', 'فشل الحذف');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر عناصر المعرض
+        // ==============================================
+        function loadGalleryItemsEditor() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة عناصر المعرض</h3>
+                    
+                    <div class="items-list" id="galleryList"></div>
+                    
+                    <button class="btn-secondary" onclick="openAddGalleryModal()">
+                        <i class="fas fa-plus"></i> إضافة مشروع جديد
+                    </button>
+                </div>
+            `;
+
+            loadGalleryItems();
+        }
+
+        async function loadGalleryItems() {
+            try {
+                const snapshot = await db.collection('gallery').orderBy('order', 'asc').get();
+                const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                const list = document.getElementById('galleryList');
+                
+                if (items.length === 0) {
+                    list.innerHTML = `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>لا توجد مشاريع</h4>
+                                <p>أضف مشروع جديد للبدء</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = items.map(item => `
+                    <div class="item-row" data-id="${item.id}">
+                        <div class="item-info">
+                            <h4>${item.titleAr || 'بدون عنوان'}</h4>
+                            <p>${item.categoryAr || ''}</p>
+                        </div>
+                        <div class="item-actions">
+                            <i class="fas fa-edit" onclick="openEditGalleryModal('${item.id}')"></i>
+                            <i class="fas fa-trash" onclick="deleteGalleryItem('${item.id}')"></i>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading gallery items:', error);
+            }
+        }
+
+        window.openAddGalleryModal = function() {
+            document.getElementById('modalTitle').textContent = 'إضافة مشروع جديد';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>عنوان المشروع (عربي)</label>
+                    <input type="text" class="form-control" id="galleryTitleAr" placeholder="عنوان المشروع">
+                </div>
+                <div class="form-group">
+                    <label>Project Title (English)</label>
+                    <input type="text" class="form-control" id="galleryTitleEn" placeholder="Project title">
+                </div>
+                <div class="form-group">
+                    <label>التصنيف (عربي)</label>
+                    <input type="text" class="form-control" id="galleryCategoryAr" placeholder="مثال: تجارة، خدمات">
+                </div>
+                <div class="form-group">
+                    <label>Category (English)</label>
+                    <input type="text" class="form-control" id="galleryCategoryEn" placeholder="Example: Trading, Services">
+                </div>
+                <div class="form-group">
+                    <label>الوصف (عربي)</label>
+                    <textarea class="form-control" id="galleryDescAr" rows="3" placeholder="وصف المشروع"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Description (English)</label>
+                    <textarea class="form-control" id="galleryDescEn" rows="3" placeholder="Project description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>العلامات (مفصولة بفواصل)</label>
+                    <input type="text" class="form-control" id="galleryTagsAr" placeholder="نقاط البيع, المخزون, التقارير">
+                </div>
+                <div class="form-group">
+                    <label>Tags (comma separated)</label>
+                    <input type="text" class="form-control" id="galleryTagsEn" placeholder="POS, Inventory, Reports">
+                </div>
+                <div class="form-group">
+                    <label>الأيقونة</label>
+                    <select class="form-control" id="galleryIcon">
+                        <option value="fa-utensils">مطاعم</option>
+                        <option value="fa-industry">مصانع</option>
+                        <option value="fa-hospital">عيادات</option>
+                        <option value="fa-graduation-cap">مدارس</option>
+                        <option value="fa-building">عقارات</option>
+                        <option value="fa-shopping-cart">تجارة إلكترونية</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="saveGalleryItem()">حفظ</button>
+                </div>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        window.openEditGalleryModal = async function(id) {
+            try {
+                const doc = await db.collection('gallery').doc(id).get();
+                const data = doc.data();
+                
+                document.getElementById('modalTitle').textContent = 'تعديل المشروع';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="form-group">
+                        <label>عنوان المشروع (عربي)</label>
+                        <input type="text" class="form-control" id="galleryTitleAr" value="${data.titleAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Title (English)</label>
+                        <input type="text" class="form-control" id="galleryTitleEn" value="${data.titleEn || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>التصنيف (عربي)</label>
+                        <input type="text" class="form-control" id="galleryCategoryAr" value="${data.categoryAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Category (English)</label>
+                        <input type="text" class="form-control" id="galleryCategoryEn" value="${data.categoryEn || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف (عربي)</label>
+                        <textarea class="form-control" id="galleryDescAr" rows="3">${data.descriptionAr || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Description (English)</label>
+                        <textarea class="form-control" id="galleryDescEn" rows="3">${data.descriptionEn || ''}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>العلامات (مفصولة بفواصل)</label>
+                        <input type="text" class="form-control" id="galleryTagsAr" value="${data.tagsAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Tags (comma separated)</label>
+                        <input type="text" class="form-control" id="galleryTagsEn" value="${data.tagsEn || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>الأيقونة</label>
+                        <select class="form-control" id="galleryIcon">
+                            <option value="fa-utensils" ${data.icon === 'fa-utensils' ? 'selected' : ''}>مطاعم</option>
+                            <option value="fa-industry" ${data.icon === 'fa-industry' ? 'selected' : ''}>مصانع</option>
+                            <option value="fa-hospital" ${data.icon === 'fa-hospital' ? 'selected' : ''}>عيادات</option>
+                            <option value="fa-graduation-cap" ${data.icon === 'fa-graduation-cap' ? 'selected' : ''}>مدارس</option>
+                            <option value="fa-building" ${data.icon === 'fa-building' ? 'selected' : ''}>عقارات</option>
+                            <option value="fa-shopping-cart" ${data.icon === 'fa-shopping-cart' ? 'selected' : ''}>تجارة إلكترونية</option>
+                        </select>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="updateGalleryItem('${id}')">تحديث</button>
+                    </div>
+                `;
+                document.getElementById('modalOverlay').style.display = 'flex';
+            } catch (error) {
+                console.error('Error loading gallery item:', error);
+                showToast('error', 'فشل تحميل البيانات');
+            }
+        };
+
+        window.saveGalleryItem = async function() {
+            const titleAr = document.getElementById('galleryTitleAr')?.value;
+            const titleEn = document.getElementById('galleryTitleEn')?.value;
+            const categoryAr = document.getElementById('galleryCategoryAr')?.value;
+            const categoryEn = document.getElementById('galleryCategoryEn')?.value;
+            const descriptionAr = document.getElementById('galleryDescAr')?.value;
+            const descriptionEn = document.getElementById('galleryDescEn')?.value;
+            const tagsAr = document.getElementById('galleryTagsAr')?.value;
+            const tagsEn = document.getElementById('galleryTagsEn')?.value;
+            const icon = document.getElementById('galleryIcon')?.value;
+            
+            if (!titleAr || !titleEn) {
+                showToast('warning', 'الرجاء إدخال عنوان المشروع');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const snapshot = await db.collection('gallery').get();
+                const order = snapshot.size;
+                
+                await db.collection('gallery').add({
+                    titleAr,
+                    titleEn,
+                    categoryAr,
+                    categoryEn,
+                    descriptionAr,
+                    descriptionEn,
+                    tagsAr: tagsAr?.split(',').map(t => t.trim()) || [],
+                    tagsEn: tagsEn?.split(',').map(t => t.trim()) || [],
+                    icon,
+                    order,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تمت الإضافة بنجاح');
+                closeModal();
+                loadGalleryItems();
+            } catch (error) {
+                console.error('Error saving gallery item:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.updateGalleryItem = async function(id) {
+            const titleAr = document.getElementById('galleryTitleAr')?.value;
+            const titleEn = document.getElementById('galleryTitleEn')?.value;
+            const categoryAr = document.getElementById('galleryCategoryAr')?.value;
+            const categoryEn = document.getElementById('galleryCategoryEn')?.value;
+            const descriptionAr = document.getElementById('galleryDescAr')?.value;
+            const descriptionEn = document.getElementById('galleryDescEn')?.value;
+            const tagsAr = document.getElementById('galleryTagsAr')?.value;
+            const tagsEn = document.getElementById('galleryTagsEn')?.value;
+            const icon = document.getElementById('galleryIcon')?.value;
+            
+            if (!titleAr || !titleEn) {
+                showToast('warning', 'الرجاء إدخال عنوان المشروع');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                await db.collection('gallery').doc(id).update({
+                    titleAr,
+                    titleEn,
+                    categoryAr,
+                    categoryEn,
+                    descriptionAr,
+                    descriptionEn,
+                    tagsAr: tagsAr?.split(',').map(t => t.trim()) || [],
+                    tagsEn: tagsEn?.split(',').map(t => t.trim()) || [],
+                    icon,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تم التحديث بنجاح');
+                closeModal();
+                loadGalleryItems();
+            } catch (error) {
+                console.error('Error updating gallery item:', error);
+                showToast('error', 'فشل التحديث');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.deleteGalleryItem = async function(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا المشروع؟')) return;
+            
+            showLoading();
+            
+            try {
+                await db.collection('gallery').doc(id).delete();
+                showToast('success', 'تم الحذف بنجاح');
+                loadGalleryItems();
+            } catch (error) {
+                console.error('Error deleting gallery item:', error);
+                showToast('error', 'فشل الحذف');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر طرق الدفع
+        // ==============================================
+        function loadPaymentMethodsEditor() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة طرق الدفع</h3>
+                    
+                    <div class="items-list" id="paymentList"></div>
+                    
+                    <button class="btn-secondary" onclick="openAddPaymentModal()">
+                        <i class="fas fa-plus"></i> إضافة طريقة دفع جديدة
+                    </button>
+                </div>
+            `;
+
+            loadPaymentMethods();
+        }
+
+        async function loadPaymentMethods() {
+            try {
+                const snapshot = await db.collection('payment-methods').orderBy('name', 'asc').get();
+                const methods = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                const list = document.getElementById('paymentList');
+                
+                if (methods.length === 0) {
+                    list.innerHTML = `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>لا توجد طرق دفع</h4>
+                                <p>أضف طريقة دفع جديدة للبدء</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = methods.map(method => `
+                    <div class="item-row" data-id="${method.id}">
+                        <div class="item-info">
+                            <h4>${method.name}</h4>
+                            <p>${method.description || ''}</p>
+                        </div>
+                        <div class="item-actions">
+                            <i class="fas fa-edit" onclick="openEditPaymentModal('${method.id}')"></i>
+                            <i class="fas fa-trash" onclick="deletePaymentMethod('${method.id}')"></i>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading payment methods:', error);
+            }
+        }
+
+        window.openAddPaymentModal = function() {
+            document.getElementById('modalTitle').textContent = 'إضافة طريقة دفع جديدة';
+            document.getElementById('modalContent').innerHTML = `
+                <div class="form-group">
+                    <label>الاسم</label>
+                    <input type="text" class="form-control" id="paymentName" placeholder="مثال: كي كارد">
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <input type="text" class="form-control" id="paymentDescription" placeholder="وصف طريقة الدفع">
+                </div>
+                <div class="form-group">
+                    <label>رابط الصورة</label>
+                    <input type="text" class="form-control" id="paymentImage" placeholder="assets/images/Q card.gif">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="savePaymentMethod()">حفظ</button>
+                </div>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+
+        window.openEditPaymentModal = async function(id) {
+            try {
+                const doc = await db.collection('payment-methods').doc(id).get();
+                const data = doc.data();
+                
+                document.getElementById('modalTitle').textContent = 'تعديل طريقة الدفع';
+                document.getElementById('modalContent').innerHTML = `
+                    <div class="form-group">
+                        <label>الاسم</label>
+                        <input type="text" class="form-control" id="paymentName" value="${data.name || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف</label>
+                        <input type="text" class="form-control" id="paymentDescription" value="${data.description || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط الصورة</label>
+                        <input type="text" class="form-control" id="paymentImage" value="${data.image || ''}">
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="updatePaymentMethod('${id}')">تحديث</button>
+                    </div>
+                `;
+                document.getElementById('modalOverlay').style.display = 'flex';
+            } catch (error) {
+                console.error('Error loading payment method:', error);
+                showToast('error', 'فشل تحميل البيانات');
+            }
+        };
+
+        window.savePaymentMethod = async function() {
+            const name = document.getElementById('paymentName')?.value;
+            const description = document.getElementById('paymentDescription')?.value;
+            const image = document.getElementById('paymentImage')?.value;
+            
+            if (!name) {
+                showToast('warning', 'الرجاء إدخال الاسم');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                await db.collection('payment-methods').add({
+                    name,
+                    description,
+                    image,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تمت الإضافة بنجاح');
+                closeModal();
+                loadPaymentMethods();
+            } catch (error) {
+                console.error('Error saving payment method:', error);
+                showToast('error', 'فشل الحفظ');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.updatePaymentMethod = async function(id) {
+            const name = document.getElementById('paymentName')?.value;
+            const description = document.getElementById('paymentDescription')?.value;
+            const image = document.getElementById('paymentImage')?.value;
+            
+            if (!name) {
+                showToast('warning', 'الرجاء إدخال الاسم');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                await db.collection('payment-methods').doc(id).update({
+                    name,
+                    description,
+                    image,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                showToast('success', 'تم التحديث بنجاح');
+                closeModal();
+                loadPaymentMethods();
+            } catch (error) {
+                console.error('Error updating payment method:', error);
+                showToast('error', 'فشل التحديث');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        window.deletePaymentMethod = async function(id) {
+            if (!confirm('هل أنت متأكد من حذف طريقة الدفع هذه؟')) return;
+            
+            showLoading();
+            
+            try {
+                await db.collection('payment-methods').doc(id).delete();
+                showToast('success', 'تم الحذف بنجاح');
+                loadPaymentMethods();
+            } catch (error) {
+                console.error('Error deleting payment method:', error);
+                showToast('error', 'فشل الحذف');
+            } finally {
+                hideLoading();
+            }
+        };
+
+        // ==============================================
+        // محرر معلومات الاتصال
+        // ==============================================
+        function loadContactInfoEditor() {
+            const content = document.getElementById('mainContent');
+            
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">إدارة معلومات الاتصال</h3>
+                    
+                    <div id="contactInfoEditor"></div>
+                </div>
+            `;
+
+            loadContactInfo();
+        }
+
+        async function loadContactInfo() {
+            try {
+                const doc = await db.collection('site-data').doc('contact').get();
+                const data = doc.exists ? doc.data() : {
+                    addressAr: 'أربيل، القرية الإيطالية الثانية 215',
+                    addressEn: 'Erbil, Italian Village 2, No. 215',
+                    phone: '+9647883002797',
+                    email: 'info@odunex.com',
+                    website: 'https://odunex.com',
+                    workingHoursAr: 'ساعات العمل: ٩ص - ٦م',
+                    workingHoursEn: 'Working Hours: 9am - 6pm'
+                };
+                
+                const editor = document.getElementById('contactInfoEditor');
+                
+                editor.innerHTML = `
+                    <div class="form-group">
+                        <label>العنوان (عربي)</label>
+                        <input type="text" class="form-control" id="addressAr" value="${data.addressAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Address (English)</label>
+                        <input type="text" class="form-control" id="addressEn" value="${data.addressEn || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="text" class="form-control" id="phone" value="${data.phone || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="email" value="${data.email || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>الموقع الإلكتروني</label>
+                        <input type="text" class="form-control" id="website" value="${data.website || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>ساعات العمل (عربي)</label>
+                        <input type="text" class="form-control" id="workingHoursAr" value="${data.workingHoursAr || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Working Hours (English)</label>
+                        <input type="text" class="form-control" id="workingHoursEn" value="${data.workingHoursEn || ''}">
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="saveContactInfo()">
+                            <i class="fas fa-save"></i> حفظ معلومات الاتصال
+                        </button>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading contact info:', error);
+            }
+        }
+
+        window.saveContactInfo = async function() {
             showLoading();
             
             const data = {
-                title: document.getElementById('pageTitle')?.value || '',
-                description: document.getElementById('pageDescription')?.value || '',
-                keywords: document.getElementById('pageKeywords')?.value || '',
-                content: CKEDITOR.instances.pageContent?.getData() || ''
+                addressAr: document.getElementById('addressAr')?.value || '',
+                addressEn: document.getElementById('addressEn')?.value || '',
+                phone: document.getElementById('phone')?.value || '',
+                email: document.getElementById('email')?.value || '',
+                website: document.getElementById('website')?.value || '',
+                workingHoursAr: document.getElementById('workingHoursAr')?.value || '',
+                workingHoursEn: document.getElementById('workingHoursEn')?.value || '',
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 
             try {
-                const success = await window.savePageData?.(section, data);
-                if (success) {
-                    showToast('success', 'تم حفظ الصفحة بنجاح');
-                } else {
-                    showToast('error', 'فشل حفظ الصفحة');
-                }
+                await db.collection('site-data').doc('contact').set(data, { merge: true });
+                showToast('success', 'تم حفظ معلومات الاتصال');
             } catch (error) {
-                showToast('error', 'حدث خطأ في حفظ البيانات');
-                console.error(error);
+                console.error('Error saving contact info:', error);
+                showToast('error', 'فشل الحفظ');
             } finally {
                 hideLoading();
             }
         };
 
-        // حفظ محتوى القسم
-        window.saveSectionContent = async function(section) {
-            showLoading();
+        // ==============================================
+        // الرسائل
+        // ==============================================
+        function loadMessages() {
+            const content = document.getElementById('mainContent');
             
+            content.innerHTML = `
+                <div class="edit-section">
+                    <h3 class="section-title">الرسائل الواردة</h3>
+                    
+                    <div class="items-list" id="messagesList"></div>
+                </div>
+            `;
+
+            fetchMessages();
+        }
+
+        async function fetchMessages() {
             try {
-                const items = [];
-                document.querySelectorAll('#sectionItems .item-row').forEach(row => {
-                    const id = row.dataset.id;
-                    const title = row.querySelector('.item-info h4')?.textContent || '';
-                    const description = row.querySelector('.item-info p')?.textContent || '';
-                    items.push({ id, title, description });
-                });
-
-                const success = await window.saveSectionData?.(section, items);
-                if (success) {
-                    showToast('success', 'تم حفظ القسم بنجاح');
-                } else {
-                    showToast('error', 'فشل حفظ القسم');
-                }
-            } catch (error) {
-                showToast('error', 'حدث خطأ في حفظ البيانات');
-                console.error(error);
-            } finally {
-                hideLoading();
-            }
-        };
-
-        // فتح نافذة إضافة عنصر
-        window.openAddItemModal = function(section) {
-            currentSection = section;
-            document.getElementById('modalTitle').textContent = 'إضافة عنصر جديد';
-            document.getElementById('modalContent').innerHTML = `
-                <div class="form-group">
-                    <label>العنوان</label>
-                    <input type="text" class="form-control" id="itemTitle" data-field="title">
-                </div>
-                <div class="form-group">
-                    <label>الوصف</label>
-                    <textarea class="form-control" id="itemDescription" data-field="description" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>الصورة</label>
-                    <div class="image-preview" onclick="openImageModal()">
-                        <i class="fas fa-image" style="color: #ccc; font-size: 30px;"></i>
-                    </div>
-                    <input type="hidden" id="itemImage" data-field="image">
-                </div>
-                <button class="btn-primary" onclick="saveNewItem()" style="width: 100%;">
-                    <i class="fas fa-save"></i> حفظ
-                </button>
-            `;
-            document.getElementById('modalOverlay').style.display = 'flex';
-        };
-
-        // فتح نافذة تعديل عنصر
-        window.openEditItemModal = function(section, item) {
-            if (typeof item === 'string') {
-                item = JSON.parse(item);
-            }
+                const snapshot = await db.collection('messages').orderBy('timestamp', 'desc').limit(50).get();
+                const messages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                
+                const list = document.getElementById('messagesList');
+                
+                if (messages.length === 0) {
+                    list.innerHTML = `
+                        <div class="item-row">
+                            <div class="item-info">
+                                <h4>لا توجد رسائل</h4>
+                                <p>س// ==============================================
+// الرسائل (تابع)
+// ==============================================
+function loadMessages() {
+    const content = document.getElementById('mainContent');
+    
+    content.innerHTML = `
+        <div class="edit-section">
+            <h3 class="section-title">الرسائل الواردة</h3>
             
-            currentSection = section;
-            currentItemId = item.id;
-            
-            document.getElementById('modalTitle').textContent = 'تعديل العنصر';
-            document.getElementById('modalContent').innerHTML = `
-                <div class="form-group">
-                    <label>العنوان</label>
-                    <input type="text" class="form-control" id="itemTitle" data-field="title" value="${item.title || ''}">
-                </div>
-                <div class="form-group">
-                    <label>الوصف</label>
-                    <textarea class="form-control" id="itemDescription" data-field="description" rows="3">${item.description || ''}</textarea>
-                </div>
-                <div class="form-group">
-                    <label>الصورة</label>
-                    <div class="image-preview" onclick="openImageModal()">
-                        ${item.image ? `<img src="${item.image}" alt="Preview">` : '<i class="fas fa-image" style="color: #ccc; font-size: 30px;"></i>'}
-                    </div>
-                    <input type="hidden" id="itemImage" data-field="image" value="${item.image || ''}">
-                </div>
-                <button class="btn-primary" onclick="updateItem()" style="width: 100%;">
-                    <i class="fas fa-save"></i> تحديث
-                </button>
-            `;
-            document.getElementById('modalOverlay').style.display = 'flex';
-        };
+            <div class="items-list" id="messagesList"></div>
+        </div>
+    `;
 
-        // حفظ عنصر جديد
-        window.saveNewItem = function() {
-            const title = document.getElementById('itemTitle')?.value;
-            const description = document.getElementById('itemDescription')?.value;
-            const image = document.getElementById('itemImage')?.value;
-            
-            if (!title) {
-                showToast('warning', 'الرجاء إدخال العنوان');
-                return;
-            }
+    fetchMessages();
+}
 
-            // إضافة العنصر للقائمة
-            const itemsList = document.getElementById('sectionItems');
-            const newItem = `
+async function fetchMessages() {
+    try {
+        const snapshot = await db.collection('messages').orderBy('timestamp', 'desc').limit(50).get();
+        const messages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        const list = document.getElementById('messagesList');
+        
+        if (messages.length === 0) {
+            list.innerHTML = `
                 <div class="item-row">
                     <div class="item-info">
-                        <h4>${title}</h4>
-                        <p>${description || ''}</p>
-                    </div>
-                    <div class="item-actions">
-                        <i class="fas fa-edit" onclick="openEditItemModal('${currentSection}', {title: '${title}', description: '${description}', image: '${image}'})"></i>
-                        <i class="fas fa-trash" onclick="deleteItem('${currentSection}', 'new')"></i>
+                        <h4>لا توجد رسائل</h4>
+                        <p>سيظهر هنا الرسائل المرسلة من نموذج الاتصال</p>
                     </div>
                 </div>
             `;
+            return;
+        }
 
-            if (itemsList.children.length === 1 && itemsList.children[0].querySelector('.item-info h4')?.textContent === 'لا توجد عناصر') {
-                itemsList.innerHTML = newItem;
-            } else {
-                itemsList.insertAdjacentHTML('beforeend', newItem);
-            }
+        list.innerHTML = messages.map(msg => `
+            <div class="item-row" data-id="${msg.id}" style="background: ${msg.read ? 'transparent' : '#fff3e0'}">
+                <div class="item-info">
+                    <h4>${msg.name || 'بدون اسم'} - ${msg.email || ''}</h4>
+                    <p><strong>الموضوع:</strong> ${msg.subject || ''}</p>
+                    <p>${msg.message?.substring(0, 100)}...</p>
+                    <p style="font-size: 11px; color: #999;">${msg.timestamp?.toDate().toLocaleString('ar-SA') || ''}</p>
+                </div>
+                <div class="item-actions">
+                    <i class="fas fa-eye" onclick="viewMessage('${msg.id}')" title="عرض"></i>
+                    <i class="fas fa-trash" onclick="deleteMessage('${msg.id}')" title="حذف"></i>
+                </div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading messages:', error);
+    }
+}
 
-            closeModal();
-            showToast('success', 'تمت الإضافة بنجاح');
-        };
+window.viewMessage = async function(id) {
+    try {
+        const doc = await db.collection('messages').doc(id).get();
+        const msg = doc.data();
+        
+        // تحديث حالة القراءة
+        await db.collection('messages').doc(id).update({ read: true });
+        
+        document.getElementById('modalTitle').textContent = 'عرض الرسالة';
+        document.getElementById('modalContent').innerHTML = `
+            <div style="padding: 10px;">
+                <p><strong>الاسم:</strong> ${msg.name || ''}</p>
+                <p><strong>البريد الإلكتروني:</strong> ${msg.email || ''}</p>
+                <p><strong>الموضوع:</strong> ${msg.subject || ''}</p>
+                <p><strong>الرسالة:</strong></p>
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    ${msg.message || ''}
+                </div>
+                <p style="margin-top: 15px; font-size: 12px; color: #999;">
+                    ${msg.timestamp?.toDate().toLocaleString('ar-SA') || ''}
+                </p>
+            </div>
+            <div class="action-buttons" style="margin-top: 20px;">
+                <button class="btn-secondary" onclick="closeModal()">إغلاق</button>
+            </div>
+        `;
+        document.getElementById('modalOverlay').style.display = 'flex';
+        
+        // إعادة تحميل الرسائل لتحديث حالة القراءة
+        fetchMessages();
+        loadUnreadMessagesCount();
+    } catch (error) {
+        console.error('Error viewing message:', error);
+        showToast('error', 'فشل تحميل الرسالة');
+    }
+};
 
-        // تحديث عنصر
-        window.updateItem = function() {
-            const title = document.getElementById('itemTitle')?.value;
-            const description = document.getElementById('itemDescription')?.value;
-            const image = document.getElementById('itemImage')?.value;
+window.deleteMessage = async function(id) {
+    if (!confirm('هل أنت متأكد من حذف هذه الرسالة؟')) return;
+    
+    showLoading();
+    
+    try {
+        await db.collection('messages').doc(id).delete();
+        showToast('success', 'تم الحذف بنجاح');
+        fetchMessages();
+        loadUnreadMessagesCount();
+    } catch (error) {
+        console.error('Error deleting message:', error);
+        showToast('error', 'فشل الحذف');
+    } finally {
+        hideLoading();
+    }
+};
+
+async function loadUnreadMessagesCount() {
+    try {
+        const snapshot = await db.collection('messages').where('read', '==', false).get();
+        const count = snapshot.size;
+        document.getElementById('messagesBadge').textContent = count;
+        document.getElementById('notificationCount').textContent = count;
+    } catch (error) {
+        console.error('Error loading unread count:', error);
+    }
+}
+
+// ==============================================
+// الإعدادات العامة
+// ==============================================
+function loadSettings() {
+    const content = document.getElementById('mainContent');
+    
+    content.innerHTML = `
+        <div class="edit-section">
+            <h3 class="section-title">الإعدادات العامة</h3>
             
-            if (!title) {
-                showToast('warning', 'الرجاء إدخال العنوان');
-                return;
-            }
-
-            // تحديث العنصر في القائمة
-            const itemRow = document.querySelector(`#sectionItems .item-row[data-id="${currentItemId}"]`);
-            if (itemRow) {
-                itemRow.querySelector('.item-info h4').textContent = title;
-                itemRow.querySelector('.item-info p').textContent = description || '';
-            }
-
-            closeModal();
-            showToast('success', 'تم التحديث بنجاح');
-        };
-
-        // حذف عنصر
-        window.deleteItem = function(section, itemId) {
-            currentSection = section;
-            currentItemId = itemId;
-            document.getElementById('confirmModal').style.display = 'flex';
-        };
-
-        // تأكيد الحذف
-        window.confirmDelete = function() {
-            const itemRow = document.querySelector(`#sectionItems .item-row[data-id="${currentItemId}"]`);
-            if (itemRow) {
-                itemRow.remove();
-            }
-
-            // إذا كانت القائمة فاضية
-            const itemsList = document.getElementById('sectionItems');
-            if (itemsList.children.length === 0) {
-                itemsList.innerHTML = `
-                    <div class="item-row">
-                        <div class="item-info">
-                            <h4>لا توجد عناصر</h4>
-                            <p>اضغط على "إضافة عنصر جديد" للبدء</p>
-                        </div>
+            <div class="form-group">
+                <label>اسم الموقع</label>
+                <input type="text" class="form-control" id="siteName" value="Odunex">
+            </div>
+            
+            <div class="form-group">
+                <label>الوصف المختصر</label>
+                <input type="text" class="form-control" id="siteTagline" value="حلول ERP الموحدة | Unified ERP Solutions">
+            </div>
+            
+            <div class="form-group">
+                <label>رابط الشعار</label>
+                <input type="text" class="form-control" id="logoUrl" value="assets/images/odonex-logo.png.png">
+            </div>
+            
+            <div class="form-group">
+                <label>ألوان الموقع</label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>اللون الأساسي</label>
+                        <input type="color" class="form-control" id="primaryColor" value="#7A5AF8">
                     </div>
-                `;
-            }
-
-            closeConfirmModal();
-            showToast('success', 'تم الحذف بنجاح');
-        };
-
-        // فتح نافذة الصور
-        window.openImageModal = function() {
-            document.getElementById('imageModal').style.display = 'flex';
-        };
-
-        // معاينة الصورة المختارة
-        window.previewSelectedImage = function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('selectedImagePreview').innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: contain;">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        };
-
-        // رفع الصورة المختارة
-        window.uploadSelectedImage = async function() {
-            const fileInput = document.getElementById('imageInput');
-            const file = fileInput.files[0];
+                    <div class="form-group">
+                        <label>اللون الثانوي</label>
+                        <input type="color" class="form-control" id="secondaryColor" value="#2BB0ED">
+                    </div>
+                </div>
+            </div>
             
-            if (!file) {
-                showToast('warning', 'الرجاء اختيار صورة أولاً');
-                return;
-            }
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="saveSettings()">
+                    <i class="fas fa-save"></i> حفظ الإعدادات
+                </button>
+            </div>
+        </div>
+    `;
+}
 
-            showLoading();
-            
-            try {
-                const url = await window.uploadImage?.(file, currentSection);
-                if (url) {
-                    document.getElementById('itemImage').value = url;
-                    document.querySelector('#modalContent .image-preview').innerHTML = `<img src="${url}" alt="Preview">`;
-                    closeImageModal();
-                    showToast('success', 'تم رفع الصورة بنجاح');
-                }
-            } catch (error) {
-                showToast('error', 'فشل رفع الصورة');
-                console.error(error);
-            } finally {
-                hideLoading();
-            }
+window.saveSettings = async function() {
+    showLoading();
+    
+    const data = {
+        siteName: document.getElementById('siteName')?.value || 'Odunex',
+        siteTagline: document.getElementById('siteTagline')?.value || '',
+        logoUrl: document.getElementById('logoUrl')?.value || '',
+        primaryColor: document.getElementById('primaryColor')?.value || '#7A5AF8',
+        secondaryColor: document.getElementById('secondaryColor')?.value || '#2BB0ED',
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+        await db.collection('site-data').doc('settings').set(data, { merge: true });
+        showToast('success', 'تم حفظ الإعدادات');
+    } catch (error) {
+        console.error('Error saving settings:', error);
+        showToast('error', 'فشل الحفظ');
+    } finally {
+        hideLoading();
+    }
+};
+
+// ==============================================
+// معاينة الصفحة
+// ==============================================
+window.previewPage = function(section) {
+    const pageMap = {
+        'ar-home': 'index.html',
+        'ar-features': 'features.html',
+        'ar-pricing': 'pricing.html',
+        'ar-gallery': 'gallery.html',
+        'ar-contact': 'contact.html',
+        'en-home': 'index-en.html',
+        'en-features': 'features-en.html',
+        'en-pricing': 'pricing-en.html',
+        'en-gallery': 'gallery-en.html',
+        'en-contact': 'contact-en.html'
+    };
+    
+    const page = pageMap[section];
+    if (page) {
+        window.open(`../${page}`, '_blank');
+    }
+};
+
+// ==============================================
+// رفع الصور
+// ==============================================
+window.openImageModal = function() {
+    document.getElementById('imageModal').style.display = 'flex';
+};
+
+window.previewSelectedImage = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('selectedImagePreview').innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: contain;">`;
         };
+        reader.readAsDataURL(file);
+    }
+};
 
-        // إغلاق النوافذ المنبثقة
-        window.closeModal = function() {
-            document.getElementById('modalOverlay').style.display = 'none';
-        };
+window.uploadSelectedImage = async function() {
+    const fileInput = document.getElementById('imageInput');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        showToast('warning', 'الرجاء اختيار صورة أولاً');
+        return;
+    }
 
-        window.closeConfirmModal = function() {
-            document.getElementById('confirmModal').style.display = 'none';
-        };
-
-        window.closeImageModal = function() {
-            document.getElementById('imageModal').style.display = 'none';
-            document.getElementById('imageInput').value = '';
-            document.getElementById('selectedImagePreview').innerHTML = '<i class="fas fa-image" style="color: #ccc; font-size: 40px;"></i>';
-        };
-
-        // تبديل اللغة
-        window.switchLanguage = function(lang, page) {
-            const section = lang === 'ar' ? `ar-${page}` : `en-${page}`;
-            showSection(section);
-        };
-
-        // معاينة الصفحة
-        window.previewPage = function(pageName) {
-            window.open(`../${pageName}`, '_blank');
-        };
-
-        // إظهار التبويب
-        window.showTab = function(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-            
-            event.currentTarget.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        };
-
-        // إظهار شريط التحميل
-        function showLoading() {
-            document.getElementById('loadingBar').style.display = 'block';
-        }
-
-        // إخفاء شريط التحميل
-        function hideLoading() {
-            setTimeout(() => {
-                document.getElementById('loadingBar').style.display = 'none';
-            }, 500);
-        }
-
-        // إظهار رسالة تنبيه
-        window.showToast = function(type, message) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            
-            toast.className = `toast ${type}`;
-            icon.className = `fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle'}`;
-            document.getElementById('toastMessage').textContent = message;
-            
-            toast.style.display = 'flex';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        };
-
-        // تبديل قائمة المستخدم
-        window.toggleUserMenu = function() {
-            // يمكن إضافة قائمة منسدلة هنا
-        };
-
-        // تحميل الإشعارات
-        window.loadNotifications = function() {
-            showSection('messages');
-        };
-
-        // تسجيل الخروج
-        window.logout = function() {
-            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
-                window.logoutUser?.();
-            }
-        };
-
-        // التهيئة عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // إغلاق النوافذ عند الضغط خارجها
-            window.onclick = function(event) {
-                if (event.target.classList.contains('modal-overlay')) {
-                    closeModal();
-                    closeConfirmModal();
-                    closeImageModal();
-                }
-            };
+    showLoading();
+    
+    try {
+        const fileName = `${Date.now()}_${file.name}`;
+        const storageRef = storage.ref();
+        const imageRef = storageRef.child(`uploads/${fileName}`);
+        
+        await imageRef.put(file);
+        const url = await imageRef.getDownloadURL();
+        
+        // نسخ الرابط إلى الحافظة
+        navigator.clipboard.writeText(url).then(() => {
+            showToast('success', 'تم رفع الصورة ونسخ الرابط');
         });
-    </script>
+        
+        closeImageModal();
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        showToast('error', 'فشل رفع الصورة');
+    } finally {
+        hideLoading();
+    }
+};
+
+// ==============================================
+// دوال مساعدة للنوافذ المنبثقة
+// ==============================================
+function closeModal() {
+    document.getElementById('modalOverlay').style.display = 'none';
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function closeImageModal() {
+    document.getElementById('imageModal').style.display = 'none';
+    document.getElementById('imageInput').value = '';
+    document.getElementById('selectedImagePreview').innerHTML = '<i class="fas fa-image" style="color: #ccc; font-size: 40px;"></i>';
+}
+
+window.confirmDelete = function() {
+    if (deleteCallback) {
+        deleteCallback();
+        deleteCallback = null;
+    }
+    closeConfirmModal();
+};
+
+// ==============================================
+// دوال التحكم في الواجهة
+// ==============================================
+function toggleUserMenu() {
+    // يمكن إضافة قائمة منسدلة هنا
+}
+
+function loadNotifications() {
+    showSection('messages');
+}
+
+function logout() {
+    if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+        auth.signOut().then(() => {
+            window.location.href = 'login.html';
+        });
+    }
+}
+
+// ==============================================
+// إظهار وإخفاء التحميل
+// ==============================================
+function showLoading() {
+    document.getElementById('loadingBar').style.display = 'block';
+}
+
+function hideLoading() {
+    setTimeout(() => {
+        document.getElementById('loadingBar').style.display = 'none';
+    }, 300);
+}
+
+// ==============================================
+// إظهار رسائل التنبيه
+// ==============================================
+function showToast(type, message) {
+    const toast = document.getElementById('toast');
+    const icon = document.getElementById('toastIcon');
+    
+    toast.className = `toast ${type}`;
+    icon.className = `fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle'}`;
+    document.getElementById('toastMessage').textContent = message;
+    
+    toast.style.display = 'flex';
+    
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 3000);
+}
+
+// ==============================================
+// التهيئة عند تحميل الصفحة
+// ==============================================
+document.addEventListener('DOMContentLoaded', function() {
+    // إغلاق النوافذ عند الضغط خارجها
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            closeModal();
+            closeConfirmModal();
+            closeImageModal();
+        }
+    };
+    
+    // تحميل عدد الرسائل غير المقروءة
+    loadUnreadMessagesCount();
+});
+</script>
 </body>
 </html>
