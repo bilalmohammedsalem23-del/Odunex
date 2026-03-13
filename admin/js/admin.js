@@ -2,14 +2,13 @@
 // إعدادات Firebase - OdoNex Admin API
 // ==============================================
 
-// إعدادات Firebase (من مشروع odunex-project)
 const firebaseConfig = {
-    apiKey: "AIzaSyCbaHb-x48AUNFwifNqcqjmSujcXpmZ0",
+    apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
     authDomain: "odunex-project.firebaseapp.com",
     projectId: "odunex-project",
     storageBucket: "odunex-project.firebasestorage.app",
-    messagingSenderId: "20180968682",
-    appId: "1:20180968682:web:76574c7befec70c24df6e3",
+    messagingSenderId: "20189086682",
+    appId: "1:20189086682:web:76574c7befec70c24df6e3",
     measurementId: "G-RREEW2EY4K"
 };
 
@@ -20,16 +19,12 @@ const auth = firebase.auth();
 const storage = firebase.storage();
 
 // ==============================================
-// التحقق من تسجيل الدخول
+// التحقق من تسجيل الدخول - بدون إعادة توجيه
 // ==============================================
 auth.onAuthStateChanged((user) => {
-    if (!user) {
-        window.location.href = 'login.html';
-    } else {
-        const adminNameElement = document.getElementById('adminName');
-        if (adminNameElement) {
-            adminNameElement.textContent = user.email || 'مدير النظام';
-        }
+    const adminNameElement = document.getElementById('adminName');
+    if (adminNameElement) {
+        adminNameElement.textContent = user?.email || 'مدير النظام';
     }
 });
 
