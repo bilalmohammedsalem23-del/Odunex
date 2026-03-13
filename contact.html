@@ -1101,31 +1101,5 @@
             document.getElementById('contactForm').reset();
         }
     </script>
-    <!-- ============================================== -->
-<!-- تحويل لصفحة الصيانة -->
-<!-- ============================================== -->
-<script>
-    // كلمة السر للدخول
-    const bypassCode = 'odunex2026';
-    
-    // التحقق من صلاحية المشرف
-    const bypassMaintenance = localStorage.getItem('odunex_bypass') === 'true';
-    const urlBypass = new URLSearchParams(window.location.search).get('bypass') === bypassCode;
-    
-    if (urlBypass) {
-        localStorage.setItem('odunex_bypass', 'true');
-        // إزالة الباراميتر من الرابط
-        const url = new URL(window.location);
-        url.searchParams.delete('bypass');
-        window.history.replaceState({}, '', url);
-    }
-    
-    if (!bypassMaintenance && !urlBypass) {
-        window.location.href = 'maintenance.html';
-    }
-</script>
-<!-- ============================================== -->
-<!-- نهاية التحويل -->
-<!-- ============================================== -->
 </body>
 </html>
