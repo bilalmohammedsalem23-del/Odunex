@@ -5,25 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | Unified ERP Solutions</title>
     
-    <!-- Redirect to unified domain version -->
+    <!-- Redirect to unified domain (supports www and non-www) -->
     <script>
         (function() {
-            // Unify domain (remove www if present)
-            if (window.location.hostname === 'www.odunex-project.web.app') {
-                window.location.hostname = 'odunex-project.web.app';
+            // List of allowed domains (primary domain without www)
+            const primaryDomain = 'odunex.com';
+            const currentHost = window.location.hostname;
+            const currentProtocol = window.location.protocol;
+            const currentPath = window.location.pathname + window.location.search + window.location.hash;
+            
+            // If user visits www.odunex.com or any other subdomain, redirect to odunex.com
+            if (currentHost.endsWith('odunex.com') && currentHost !== primaryDomain) {
+                window.location.href = 'https://' + primaryDomain + currentPath;
+                return;
             }
-            // Ensure HTTPS
-            if (window.location.protocol !== 'https:') {
-                window.location.protocol = 'https:';
+            
+            // If still on old domain (firebase), redirect to new domain
+            if (currentHost.includes('web.app') || currentHost.includes('firebaseapp.com')) {
+                window.location.href = 'https://' + primaryDomain + currentPath;
+                return;
+            }
+            
+            // Ensure HTTPS (except for local development)
+            if (currentProtocol !== 'https:' && !currentHost.includes('localhost') && !currentHost.includes('127.0.0.1')) {
+                window.location.href = 'https://' + currentHost + currentPath;
             }
         })();
     </script>
     
-    <!-- Favicon - Website icon in browser tab -->
+    <!-- Favicon - Optimized for all sizes -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/odonex-logo.png.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/odonex-logo.png.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/odonex-logo.png.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/odonex-logo.png.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/odonex-logo.png.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/odonex-logo.png.png">
     <link rel="shortcut icon" href="assets/images/odonex-logo.png.png">
     <link rel="apple-touch-icon" href="assets/images/odonex-logo.png.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/odonex-logo.png.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/odonex-logo.png.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/odonex-logo.png.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/odonex-logo.png.png">
     
     <!-- Google Fonts - Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,7 +53,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* Same styles as your original file */
         * {
             margin: 0;
             padding: 0;
@@ -373,12 +394,16 @@
         }
 
         @keyframes gentleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            0%, 100% { 
+                transform: translateY(0); 
+            }
+            50% { 
+                transform: translateY(-10px); /* Increased bounce from 5px to 10px */
+            }
         }
 
         .hero-logo {
-            width: 280px;
+            width: 294px; /* Increased by 5% from 280px */
             height: auto;
             margin: 0 auto 15px;
             filter: drop-shadow(0 10px 15px rgba(122,90,248,0.15));
@@ -819,7 +844,7 @@
             }
             
             .hero-logo {
-                width: 240px;
+                width: 252px; /* 5% increase from 240px */
             }
             
             h1 {
@@ -849,7 +874,7 @@
             }
 
             .hero-logo {
-                width: 200px;
+                width: 210px; /* 5% increase from 200px */
             }
 
             h1 {
@@ -938,7 +963,7 @@
             }
 
             .hero-logo {
-                width: 160px;
+                width: 168px; /* 5% increase from 160px */
             }
 
             .testimonials-title,
