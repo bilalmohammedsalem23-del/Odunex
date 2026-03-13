@@ -1095,24 +1095,5 @@
             document.getElementById('contactForm').reset();
         }
     </script>
-  <!-- ============================================== -->
-<!-- Redirect to English Maintenance Page -->
-<!-- ============================================== -->
-<script>
-    // Check admin permissions
-    const bypassMaintenance = localStorage.getItem('adminBypass') === 'true';
-    const urlBypass = new URLSearchParams(window.location.search).get('bypass') === 'admin123';
-    
-    if (urlBypass) {
-        localStorage.setItem('adminBypass', 'true');
-    }
-    
-    if (!bypassMaintenance && !urlBypass) {
-        window.location.href = 'maintenance-en.html';
-    }
-</script>
-<!-- ============================================== -->
-<!-- End Redirect -->
-<!-- ============================================== -->
 </body>
 </html>
