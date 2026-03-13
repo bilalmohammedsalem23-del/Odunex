@@ -1095,5 +1095,24 @@
             document.getElementById('contactForm').reset();
         }
     </script>
+    <!-- ============================================== -->
+<!-- تحويل لصفحة الصيانة العربية -->
+<!-- ============================================== -->
+<script>
+    // التحقق من صلاحية المشرف
+    const bypassMaintenance = localStorage.getItem('adminBypass') === 'true';
+    const urlBypass = new URLSearchParams(window.location.search).get('bypass') === 'admin123';
+    
+    if (urlBypass) {
+        localStorage.setItem('adminBypass', 'true');
+    }
+    
+    if (!bypassMaintenance && !urlBypass) {
+        window.location.href = 'maintenance.html';
+    }
+</script>
+<!-- ============================================== -->
+<!-- نهاية التحويل -->
+<!-- ============================================== -->
 </body>
 </html>
