@@ -77,6 +77,9 @@
             --footer-bg: #F8F9FB;
             --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
             
+            /* WhatsApp color */
+            --whatsapp-green: #25D366;
+            
             /* Dark mode colors */
             --dark-bg: #0a0a1a;
             --dark-card: #14142b;
@@ -153,6 +156,15 @@
         body.dark-mode .btn-secondary {
             color: var(--primary-purple);
             border-color: var(--primary-purple);
+        }
+        
+        body.dark-mode .btn-whatsapp {
+            background: var(--whatsapp-green);
+            color: white;
+        }
+        
+        body.dark-mode .btn-whatsapp:hover {
+            background: #20B859;
         }
 
         /* Statistics section in dark mode */
@@ -492,6 +504,36 @@
             transform: scale(1.05) translateY(-2px);
             background: rgba(122,90,248,0.05);
             box-shadow: 0 10px 20px rgba(122,90,248,0.2);
+        }
+
+        /* زر الواتساب الجديد */
+        .btn-whatsapp {
+            background: var(--whatsapp-green);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            min-width: 180px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20B859;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp i {
+            font-size: 18px;
         }
 
         /* ===== Statistics Section ===== */
@@ -895,7 +937,7 @@
                 gap: 12px;
             }
 
-            .btn-primary, .btn-secondary {
+            .btn-primary, .btn-secondary, .btn-whatsapp {
                 width: 100%;
                 max-width: 280px;
             }
@@ -1072,7 +1114,12 @@
                 </p>
                 <div class="cta-buttons">
                     <button class="btn-primary">ابدأ تجربتك المجانية</button>
-                    <button class="btn-secondary">اطلب عرضاً توضيحياً</button>
+                    <a href="https://wa.me/9647883002797?text=أرغب%20في%20استشارة%20بخصوص%20نظام%20Odunex" 
+                       class="btn-whatsapp" 
+                       target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        اطلب استشارة الآن
+                    </a>
                 </div>
             </div>
         </section>
