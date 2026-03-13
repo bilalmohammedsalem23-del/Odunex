@@ -1095,11 +1095,11 @@
             document.getElementById('contactForm').reset();
         }
     </script>
-    <!-- ============================================== -->
-<!-- تحويل لصفحة الصيانة العربية -->
+  <!-- ============================================== -->
+<!-- Redirect to English Maintenance Page -->
 <!-- ============================================== -->
 <script>
-    // التحقق من صلاحية المشرف
+    // Check admin permissions
     const bypassMaintenance = localStorage.getItem('adminBypass') === 'true';
     const urlBypass = new URLSearchParams(window.location.search).get('bypass') === 'admin123';
     
@@ -1108,11 +1108,11 @@
     }
     
     if (!bypassMaintenance && !urlBypass) {
-        window.location.href = 'maintenance.html';
+        window.location.href = 'maintenance-en.html';
     }
 </script>
 <!-- ============================================== -->
-<!-- نهاية التحويل -->
+<!-- End Redirect -->
 <!-- ============================================== -->
 </body>
 </html>
