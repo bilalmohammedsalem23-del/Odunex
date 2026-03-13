@@ -2198,5 +2198,43 @@ function showTrialMessage(message, type) {
 <!-- تحويل لصفحة الصيانة -->
 <!-- ============================================== -->
 <script>
+    <!-- ============================================== -->
+<!-- تحويل لصفحة الصيانة - نسخة مستقرة -->
+<!-- ============================================== -->
+<script>
+    // كلمة السر للدخول (غير قابلة للتخمين)
+    const bypassCode = 'odunex2026';
+    
+    // دالة آمنة للتحقق
+    (function() {
+        // التحقق من وجود صلاحية مسبقة
+        const hasAccess = localStorage.getItem('odunex_access') === 'true';
+        
+        // التحقق من وجود كود المرور في الرابط
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasBypass = urlParams.get('bypass') === bypassCode;
+        
+        // إذا كان الرابط يحتوي على كود المرور
+        if (hasBypass) {
+            // حفظ الصلاحية
+            localStorage.setItem('odunex_access', 'true');
+            
+            // إزالة كود المرور من الرابط (بدون إعادة تحميل)
+            const newUrl = window.location.pathname + window.location.hash;
+            window.history.replaceState({}, document.title, newUrl);
+            
+            // لا يوجد تحويل - نبقى في الصفحة
+            return;
+        }
+        
+        // إذا لم يكن لديه صلاحية، حول لصفحة الصيانة
+        if (!hasAccess) {
+            window.location.replace('maintenance.html');
+        }
+    })();
+</script>
+<!-- ============================================== -->
+<!-- نهاية التحويل -->
+<!-- ============================================== -->
 </body>
 </html>
