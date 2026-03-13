@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (الإصدار القديم المتوافق) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -865,48 +865,28 @@
         <span id="toastMessage"></span>
     </div>
 
-    <!-- Admin JavaScript -->
+    <!-- Admin JavaScript (ملف منفصل) -->
     <script src="js/admin.js"></script>
     
     <script>
         // ==============================================
-        // إعدادات Firebase
+        // استخدام الكائنات من admin.js
         // ==============================================
-        const firebaseConfig = {
-            apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
-            authDomain: "odunex-project.firebaseapp.com",
-            projectId: "odunex-project",
-            storageBucket: "odunex-project.firebasestorage.app",
-            messagingSenderId: "20189086682",
-            appId: "1:20189086682:web:76574c7befec70c24df6e3",
-            measurementId: "G-RREEW2EY4K"
-        };
-
-        // تهيئة Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-        const storage = firebase.storage();
+        const db = window.db;
+        const auth = window.auth;
+        const storage = window.storage;
 
         // ==============================================
-        // متغيرات عامة
+        // التحقق من تسجيل الدخول (مرة واحدة فقط)
         // ==============================================
-        let currentSection = 'dashboard';
-        let currentItemId = null;
-        let deleteCallback = null;
-        let authInitialized = false;
+        let authChecked = false;
 
-        // ==============================================
-        // التحقق من تسجيل الدخول (مع منع التكرار)
-        // ==============================================
         auth.onAuthStateChanged((user) => {
-            // منع التكرار
-            if (authInitialized) return;
-            authInitialized = true;
+            if (authChecked) return;
+            authChecked = true;
             
             if (!user) {
-                console.log('No user, redirecting to login...');
-                window.location.replace('login.html');
+                window.location.href = 'login.html';
             } else {
                 console.log('✅ User logged in:', user.email);
                 
@@ -917,9 +897,7 @@
                 }
                 
                 // تحميل لوحة التحكم
-                setTimeout(() => {
-                    loadDashboard();
-                }, 100);
+                loadDashboard();
                 
                 // تحميل الإحصائيات
                 loadDashboardStats();
@@ -930,42 +908,77 @@
         });
 
         // ==============================================
-        // إظهار شريط التحميل
+        // متغيرات عامة
         // ==============================================
-        function showLoading() {
-            document.getElementById('loadingBar').style.display = 'block';
-        }
+        let currentSection = 'dashboard';
+        let currentItemId = null;
+        let deleteCallback = null;
 
         // ==============================================
-        // إخفاء شريط التحميل
+        // دوال التحكم في الواجهة
         // ==============================================
-        function hideLoading() {
-            setTimeout(() => {
-                document.getElementById('loadingBar').style.display = 'none';
-            }, 500);
-        }
 
-        // ==============================================
-        // إظهار رسالة تنبيه
-        // ==============================================
-        window.showToast = function(type, message) {
-            const toast = document.getElementById('toast');
-            const icon = document.getElementById('toastIcon');
-            
-            toast.className = `toast ${type}`;
-            icon.className = `fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle'}`;
-            document.getElementById('toastMessage').textContent = message;
-            
-            toast.style.display = 'flex';
-            
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
+        // تبديل القائمة الجانبية
+        window.toggleSidebar = function() {
+            document.getElementById('sidebar').classList.toggle('active');
         };
 
-        // ==============================================
+        // إظهار القسم المحدد
+        window.showSection = function(section) {
+            currentSection = section;
+            document.getElementById('pageTitle').textContent = getSectionTitle(section);
+            
+            // تحديث الرابط النشط
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick')?.includes(section)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // إظهار شريط التحميل
+            showLoading();
+
+            // تحميل المحتوى حسب القسم
+            setTimeout(() => {
+                if (section === 'dashboard') {
+                    loadDashboard();
+                } else if (section.startsWith('ar-') || section.startsWith('en-')) {
+                    loadPageEditor(section);
+                } else {
+                    loadSectionEditor(section);
+                }
+                hideLoading();
+            }, 500);
+        };
+
+        // الحصول على عنوان القسم
+        function getSectionTitle(section) {
+            const titles = {
+                'dashboard': 'لوحة التحكم الرئيسية',
+                'ar-home': 'تعديل الصفحة الرئيسية - عربي',
+                'ar-features': 'تعديل صفحة المميزات - عربي',
+                'ar-pricing': 'تعديل صفحة الأسعار - عربي',
+                'ar-gallery': 'تعديل معرض الأعمال - عربي',
+                'ar-contact': 'تعديل صفحة اتصل بنا - عربي',
+                'en-home': 'Edit Home Page - English',
+                'en-features': 'Edit Features Page - English',
+                'en-pricing': 'Edit Pricing Page - English',
+                'en-gallery': 'Edit Gallery Page - English',
+                'en-contact': 'Edit Contact Page - English',
+                'hero': 'إدارة القسم الرئيسي',
+                'statistics': 'إدارة الإحصائيات',
+                'testimonials': 'إدارة آراء العملاء',
+                'faq': 'إدارة الأسئلة الشائعة',
+                'footer': 'إدارة الفوتر',
+                'messages': 'إدارة الرسائل',
+                'users': 'إدارة المستخدمين',
+                'settings': 'الإعدادات العامة'
+            };
+            return titles[section] || 'لوحة التحكم';
+        }
+
         // تحميل لوحة التحكم الرئيسية
-        // ==============================================
         function loadDashboard() {
             const content = document.getElementById('mainContent');
             
@@ -1157,9 +1170,7 @@
             loadDashboardStats();
         }
 
-        // ==============================================
         // تحميل إحصائيات لوحة التحكم
-        // ==============================================
         async function loadDashboardStats() {
             try {
                 const stats = await window.getDashboardStats?.() || {
@@ -1180,79 +1191,16 @@
             }
         }
 
-        // ==============================================
         // تحميل عدد الرسائل غير المقروءة
-        // ==============================================
         async function loadUnreadMessagesCount() {
             try {
-                // هذه الدالة موجودة في admin.js
+                // سيتم تنفيذها من admin.js
             } catch (error) {
                 console.error('Error loading unread messages:', error);
             }
         }
 
-        // ==============================================
-        // إظهار القسم المحدد
-        // ==============================================
-        window.showSection = function(section) {
-            currentSection = section;
-            document.getElementById('pageTitle').textContent = getSectionTitle(section);
-            
-            // تحديث الرابط النشط
-            document.querySelectorAll('.sidebar-menu a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('onclick')?.includes(section)) {
-                    link.classList.add('active');
-                }
-            });
-
-            // إظهار شريط التحميل
-            showLoading();
-
-            // تحميل المحتوى حسب القسم
-            setTimeout(() => {
-                if (section === 'dashboard') {
-                    loadDashboard();
-                } else if (section.startsWith('ar-') || section.startsWith('en-')) {
-                    loadPageEditor(section);
-                } else {
-                    loadSectionEditor(section);
-                }
-                hideLoading();
-            }, 500);
-        };
-
-        // ==============================================
-        // الحصول على عنوان القسم
-        // ==============================================
-        function getSectionTitle(section) {
-            const titles = {
-                'dashboard': 'لوحة التحكم الرئيسية',
-                'ar-home': 'تعديل الصفحة الرئيسية - عربي',
-                'ar-features': 'تعديل صفحة المميزات - عربي',
-                'ar-pricing': 'تعديل صفحة الأسعار - عربي',
-                'ar-gallery': 'تعديل معرض الأعمال - عربي',
-                'ar-contact': 'تعديل صفحة اتصل بنا - عربي',
-                'en-home': 'Edit Home Page - English',
-                'en-features': 'Edit Features Page - English',
-                'en-pricing': 'Edit Pricing Page - English',
-                'en-gallery': 'Edit Gallery Page - English',
-                'en-contact': 'Edit Contact Page - English',
-                'hero': 'إدارة القسم الرئيسي',
-                'statistics': 'إدارة الإحصائيات',
-                'testimonials': 'إدارة آراء العملاء',
-                'faq': 'إدارة الأسئلة الشائعة',
-                'footer': 'إدارة الفوتر',
-                'messages': 'إدارة الرسائل',
-                'users': 'إدارة المستخدمين',
-                'settings': 'الإعدادات العامة'
-            };
-            return titles[section] || 'لوحة التحكم';
-        }
-
-        // ==============================================
         // تحميل محرر الصفحة
-        // ==============================================
         function loadPageEditor(section) {
             const content = document.getElementById('mainContent');
             const isArabic = section.startsWith('ar-');
@@ -1302,9 +1250,7 @@
             loadSavedPageData(section);
         }
 
-        // ==============================================
         // تحميل البيانات المحفوظة للصفحة
-        // ==============================================
         async function loadSavedPageData(section) {
             try {
                 const data = await window.loadPageContent?.(section);
@@ -1319,9 +1265,7 @@
             }
         }
 
-        // ==============================================
         // تحميل محرر القسم
-        // ==============================================
         function loadSectionEditor(section) {
             const content = document.getElementById('mainContent');
             
@@ -1352,9 +1296,7 @@
             loadSectionItems(section);
         }
 
-        // ==============================================
         // تحميل عناصر القسم
-        // ==============================================
         async function loadSectionItems(section) {
             try {
                 const items = await window.loadSectionItems?.(section) || [];
@@ -1389,9 +1331,7 @@
             }
         }
 
-        // ==============================================
         // حفظ محتوى الصفحة
-        // ==============================================
         window.savePageContent = async function(section) {
             showLoading();
             
@@ -1417,9 +1357,7 @@
             }
         };
 
-        // ==============================================
         // حفظ محتوى القسم
-        // ==============================================
         window.saveSectionContent = async function(section) {
             showLoading();
             
@@ -1446,9 +1384,7 @@
             }
         };
 
-        // ==============================================
         // فتح نافذة إضافة عنصر
-        // ==============================================
         window.openAddItemModal = function(section) {
             currentSection = section;
             document.getElementById('modalTitle').textContent = 'إضافة عنصر جديد';
@@ -1475,9 +1411,7 @@
             document.getElementById('modalOverlay').style.display = 'flex';
         };
 
-        // ==============================================
         // فتح نافذة تعديل عنصر
-        // ==============================================
         window.openEditItemModal = function(section, item) {
             if (typeof item === 'string') {
                 item = JSON.parse(item);
@@ -1510,9 +1444,7 @@
             document.getElementById('modalOverlay').style.display = 'flex';
         };
 
-        // ==============================================
         // حفظ عنصر جديد
-        // ==============================================
         window.saveNewItem = function() {
             const title = document.getElementById('itemTitle')?.value;
             const description = document.getElementById('itemDescription')?.value;
@@ -1548,9 +1480,7 @@
             showToast('success', 'تمت الإضافة بنجاح');
         };
 
-        // ==============================================
         // تحديث عنصر
-        // ==============================================
         window.updateItem = function() {
             const title = document.getElementById('itemTitle')?.value;
             const description = document.getElementById('itemDescription')?.value;
@@ -1572,18 +1502,14 @@
             showToast('success', 'تم التحديث بنجاح');
         };
 
-        // ==============================================
         // حذف عنصر
-        // ==============================================
         window.deleteItem = function(section, itemId) {
             currentSection = section;
             currentItemId = itemId;
             document.getElementById('confirmModal').style.display = 'flex';
         };
 
-        // ==============================================
         // تأكيد الحذف
-        // ==============================================
         window.confirmDelete = function() {
             const itemRow = document.querySelector(`#sectionItems .item-row[data-id="${currentItemId}"]`);
             if (itemRow) {
@@ -1607,16 +1533,12 @@
             showToast('success', 'تم الحذف بنجاح');
         };
 
-        // ==============================================
         // فتح نافذة الصور
-        // ==============================================
         window.openImageModal = function() {
             document.getElementById('imageModal').style.display = 'flex';
         };
 
-        // ==============================================
         // معاينة الصورة المختارة
-        // ==============================================
         window.previewSelectedImage = function(event) {
             const file = event.target.files[0];
             if (file) {
@@ -1628,9 +1550,7 @@
             }
         };
 
-        // ==============================================
         // رفع الصورة المختارة
-        // ==============================================
         window.uploadSelectedImage = async function() {
             const fileInput = document.getElementById('imageInput');
             const file = fileInput.files[0];
@@ -1658,9 +1578,7 @@
             }
         };
 
-        // ==============================================
         // إغلاق النوافذ المنبثقة
-        // ==============================================
         window.closeModal = function() {
             document.getElementById('modalOverlay').style.display = 'none';
         };
@@ -1675,24 +1593,18 @@
             document.getElementById('selectedImagePreview').innerHTML = '<i class="fas fa-image" style="color: #ccc; font-size: 40px;"></i>';
         };
 
-        // ==============================================
         // تبديل اللغة
-        // ==============================================
         window.switchLanguage = function(lang, page) {
             const section = lang === 'ar' ? `ar-${page}` : `en-${page}`;
             showSection(section);
         };
 
-        // ==============================================
         // معاينة الصفحة
-        // ==============================================
         window.previewPage = function(pageName) {
             window.open(`../${pageName}`, '_blank');
         };
 
-        // ==============================================
         // إظهار التبويب
-        // ==============================================
         window.showTab = function(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
@@ -1701,32 +1613,52 @@
             document.getElementById(tabId).classList.add('active');
         };
 
-        // ==============================================
+        // إظهار شريط التحميل
+        function showLoading() {
+            document.getElementById('loadingBar').style.display = 'block';
+        }
+
+        // إخفاء شريط التحميل
+        function hideLoading() {
+            setTimeout(() => {
+                document.getElementById('loadingBar').style.display = 'none';
+            }, 500);
+        }
+
+        // إظهار رسالة تنبيه
+        window.showToast = function(type, message) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            
+            toast.className = `toast ${type}`;
+            icon.className = `fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-exclamation-circle'}`;
+            document.getElementById('toastMessage').textContent = message;
+            
+            toast.style.display = 'flex';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        };
+
         // تبديل قائمة المستخدم
-        // ==============================================
         window.toggleUserMenu = function() {
             // يمكن إضافة قائمة منسدلة هنا
         };
 
-        // ==============================================
         // تحميل الإشعارات
-        // ==============================================
         window.loadNotifications = function() {
             showSection('messages');
         };
 
-        // ==============================================
         // تسجيل الخروج
-        // ==============================================
         window.logout = function() {
             if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
                 window.logoutUser?.();
             }
         };
 
-        // ==============================================
         // التهيئة عند تحميل الصفحة
-        // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
             // إغلاق النوافذ عند الضغط خارجها
             window.onclick = function(event) {
