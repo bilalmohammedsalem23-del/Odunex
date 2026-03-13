@@ -19,14 +19,11 @@ const auth = firebase.auth();
 const storage = firebase.storage();
 
 // ==============================================
-// التحقق من تسجيل الدخول - بدون إعادة توجيه
+// تصدير الكائنات للاستخدام العام
 // ==============================================
-auth.onAuthStateChanged((user) => {
-    const adminNameElement = document.getElementById('adminName');
-    if (adminNameElement) {
-        adminNameElement.textContent = user?.email || 'مدير النظام';
-    }
-});
+window.db = db;
+window.auth = auth;
+window.storage = storage;
 
 // ==============================================
 // دوال حفظ واسترجاع البيانات
@@ -80,28 +77,6 @@ window.loadSectionItems = async function(section) {
     }
 };
 
-// ==============================================
-// إدارة الصور
-// ==============================================
-
-window.uploadImage = async function(file, folder = 'general') {
-    try {
-        const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
-        const storageRef = storage.ref();
-        const imageRef = storageRef.child(`images/${folder}/${fileName}`);
-        await imageRef.put(file);
-        const url = await imageRef.getDownloadURL();
-        return url;
-    } catch (error) {
-        console.error('Error uploading image:', error);
-        return null;
-    }
-};
-
-// ==============================================
-// إدارة الإحصائيات
-// ==============================================
-
 window.getDashboardStats = async function() {
     try {
         const [pagesSnapshot, messagesSnapshot] = await Promise.all([
@@ -130,9 +105,19 @@ window.getDashboardStats = async function() {
     }
 };
 
-// ==============================================
-// تسجيل الخروج
-// ==============================================
+window.uploadImage = async function(file, folder = 'general') {
+    try {
+        const fileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+        const storageRef = storage.ref();
+        const imageRef = storageRef.child(`images/${folder}/${fileName}`);
+        await imageRef.put(file);
+        const url = await imageRef.getDownloadURL();
+        return url;
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        return null;
+    }
+};
 
 window.logoutUser = async function() {
     try {
@@ -142,10 +127,3 @@ window.logoutUser = async function() {
         console.error('Error logging out:', error);
     }
 };
-
-// ==============================================
-// تصدير الدوال للاستخدام العام
-// ==============================================
-window.db = db;
-window.auth = auth;
-window.storage = storage;
