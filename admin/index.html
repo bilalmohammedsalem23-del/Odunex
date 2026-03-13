@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Firebase SDK (الإصدار القديم المتوافق) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -865,7 +865,7 @@
         <span id="toastMessage"></span>
     </div>
 
-    <!-- Admin JavaScript (ملف منفصل) -->
+    <!-- Admin JavaScript -->
     <script src="js/admin.js"></script>
     
     <script>
@@ -877,42 +877,50 @@
         const storage = window.storage;
 
         // ==============================================
-        // التحقق من تسجيل الدخول (مرة واحدة فقط)
-        // ==============================================
-        let authChecked = false;
-
-        auth.onAuthStateChanged((user) => {
-            if (authChecked) return;
-            authChecked = true;
-            
-            if (!user) {
-                window.location.href = 'login.html';
-            } else {
-                console.log('✅ User logged in:', user.email);
-                
-                // تحميل بيانات المستخدم
-                const adminNameElement = document.getElementById('adminName');
-                if (adminNameElement) {
-                    adminNameElement.textContent = user.email || 'مدير النظام';
-                }
-                
-                // تحميل لوحة التحكم
-                loadDashboard();
-                
-                // تحميل الإحصائيات
-                loadDashboardStats();
-                
-                // تحميل عدد الرسائل غير المقروءة
-                loadUnreadMessagesCount();
-            }
-        });
-
-        // ==============================================
-        // متغيرات عامة
+        // متغيرات عامة للتحكم في التحميل
         // ==============================================
         let currentSection = 'dashboard';
         let currentItemId = null;
         let deleteCallback = null;
+        let isAuthenticated = false;
+        let contentLoaded = false;
+        let authProcessed = false;
+
+        // ==============================================
+        // التحقق من تسجيل الدخول - مرة واحدة فقط
+        // ==============================================
+        auth.onAuthStateChanged((user) => {
+            // منع التكرار
+            if (authProcessed) return;
+            
+            if (!user) {
+                authProcessed = true;
+                window.location.replace('login.html');
+                return;
+            }
+            
+            // مستخدم مسجل دخوله
+            authProcessed = true;
+            isAuthenticated = true;
+            
+            console.log('✅ User logged in:', user.email);
+            
+            // تحميل بيانات المستخدم
+            const adminNameElement = document.getElementById('adminName');
+            if (adminNameElement) {
+                adminNameElement.textContent = user.email || 'مدير النظام';
+            }
+            
+            // تحميل المحتوى مرة واحدة فقط
+            if (!contentLoaded) {
+                contentLoaded = true;
+                setTimeout(() => {
+                    loadDashboard();
+                    loadDashboardStats();
+                    loadUnreadMessagesCount();
+                }, 100);
+            }
+        });
 
         // ==============================================
         // دوال التحكم في الواجهة
