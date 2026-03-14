@@ -2175,7 +2175,6 @@ function formatPhoneNumber(phone) {
 }
 
 // ==============================================
-// ==============================================
 // إرسال طلب النسخة التجريبية
 // ==============================================
 async function submitTrialRequest() {
@@ -2206,7 +2205,7 @@ async function submitTrialRequest() {
     
     // التحقق من صحة رقم الهاتف
     if (!validatePhoneNumber(phone)) {
-        showTrialMessage('الرجاء إدخال رقم هاتف صحيح', 'warning');
+        showTrialMessage('الرجاء إدخال رقم هاتف عراقي صحيح (مثال: 07701234567 أو 9647701234567)', 'warning');
         return;
     }
     
@@ -2223,8 +2222,8 @@ async function submitTrialRequest() {
         const docRef = await db.collection('trial_requests').add({
             fullName: fullName,
             email: email,
-            phone: formattedPhone,
-            phoneRaw: phone,
+            phone: formattedPhone, // الرقم الموحد
+            phoneRaw: phone, // الرقم الأصلي للرجوع
             companyName: companyName,
             companyField: companyField,
             selectedSystem: selectedSystem,
@@ -2236,34 +2235,6 @@ async function submitTrialRequest() {
         });
         
         console.log('تم حفظ الطلب بنجاح:', docRef.id);
-        
-        // إرسال إشعار لـ Pipedream
-        try {
-            const webhookResponse = await fetch('https://eoiferm3j9nh6vp.m.pipedream.net', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    fullName: fullName,
-                    email: email,
-                    phone: formattedPhone,
-                    companyName: companyName,
-                    companyField: companyField,
-                    selectedSystem: selectedSystem,
-                    requestId: docRef.id,
-                    timestamp: new Date().toISOString()
-                })
-            });
-            
-            if (webhookResponse.ok) {
-                console.log('تم إرسال الإشعار بنجاح');
-            } else {
-                console.log('فشل إرسال الإشعار');
-            }
-        } catch (webhookError) {
-            console.log('خطأ في الإشعار:', webhookError);
-        }
         
         // إظهار رسالة النجاح
         document.getElementById('trialLoading').style.display = 'none';
@@ -2283,6 +2254,29 @@ async function submitTrialRequest() {
         
         showTrialMessage('حدث خطأ في إرسال الطلب. الرجاء المحاولة مرة أخرى', 'error');
     }
+}
+
+// ==============================================
+// التحقق من صحة البريد الإلكتروني
+// ==============================================
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// ==============================================
+// إظهار رسالة في النافذة
+// ==============================================
+function showTrialMessage(message, type) {
+    const msgDiv = document.getElementById('trialMessage');
+    msgDiv.textContent = message;
+    msgDiv.className = 'trial-message ' + type;
+    msgDiv.style.display = 'block';
+    
+    // إخفاء الرسالة بعد 5 ثواني
+    setTimeout(() => {
+        msgDiv.style.display = 'none';
+    }, 5000);
 }
 </script>
 </body>
