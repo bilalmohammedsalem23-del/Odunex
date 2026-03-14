@@ -23,40 +23,41 @@ button:hover { background:#5a4bd1; }
     <div id="requestsList">Loading...</div>
 </div>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<!-- Firebase SDK v9+ -->
+<script type="module">
+  // Import Firebase modules
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+  import { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-<script>
-  // Firebase config
+  // Firebase configuration
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
+    authDomain: "odunex-project.firebaseapp.com",
+    projectId: "odunex-project",
+    storageBucket: "odunex-project.firebasestorage.app",
+    messagingSenderId: "20189086682",
+    appId: "1:20189086682:web:76574c7befec70c24df6e3",
+    measurementId: "G-RREEW2EY4K"
   };
 
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  const list = document.getElementById("requestsList");
 
   // تحميل الطلبات
   async function loadRequests() {
-    const list = document.getElementById("requestsList");
     list.innerHTML = "Loading...";
-
     try {
-      const snapshot = await db.collection("trial_requests")
-        .orderBy("createdAt", "desc")
-        .get();
-
+      const q = query(collection(db, "trial_requests"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
       list.innerHTML = "";
 
-      snapshot.forEach(doc => {
-        const r = doc.data();
+      snapshot.forEach(docSnap => {
+        const r = docSnap.data();
         list.innerHTML += `
           <div class="request-card">
             <div class="request-title">${r.fullName}</div>
@@ -65,7 +66,7 @@ button:hover { background:#5a4bd1; }
             <p><b>Phone:</b> ${r.phone}</p>
             <p><b>System:</b> ${r.selectedSystem}</p>
             <p><b>Status:</b> ${r.adminApproved ? "Approved" : "Pending"}</p>
-            <button onclick="approve('${doc.id}')">Approve</button>
+            <button onclick="approve('${docSnap.id}')">Approve</button>
           </div>
         `;
       });
@@ -76,10 +77,11 @@ button:hover { background:#5a4bd1; }
     }
   }
 
-  // تحديث الحالة
+  // الموافقة على الطلب
   async function approve(id) {
     try {
-      await db.collection("trial_requests").doc(id).update({ adminApproved: true });
+      const docRef = doc(db, "trial_requests", id);
+      await updateDoc(docRef, { adminApproved: true });
       loadRequests();
     } catch(error) {
       alert("Error approving request: " + error);
@@ -87,7 +89,11 @@ button:hover { background:#5a4bd1; }
     }
   }
 
+  // اجعل approve متاحة عالمياً
+  window.approve = approve;
+
   window.onload = loadRequests;
+
 </script>
 
 </body>
