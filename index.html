@@ -2175,50 +2175,51 @@ function formatPhoneNumber(phone) {
 }
 
 // ==============================================
+// ==============================================
 // إرسال طلب النسخة التجريبية
 // ==============================================
 async function submitTrialRequest() {
-    // Check system selection
+    // التحقق من اختيار النظام
     if (!selectedSystem) {
-        showTrialMessage('Please select the required system (ERPNext or Odoo)', 'warning');
+        showTrialMessage('الرجاء اختيار النظام المطلوب (ERPNext أو Odoo)', 'warning');
         return;
     }
     
-    // Get form data
+    // جمع البيانات
     const fullName = document.getElementById('fullName').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const companyName = document.getElementById('companyName').value.trim();
     const companyField = document.getElementById('companyField').value;
     
-    // Validate fields
+    // التحقق من الحقول
     if (!fullName || !email || !phone || !companyName || !companyField) {
-        showTrialMessage('Please fill in all required fields', 'warning');
+        showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning');
         return;
     }
     
-    // Validate email
+    // التحقق من صحة البريد الإلكتروني
     if (!isValidEmail(email)) {
-        showTrialMessage('Please enter a valid email address', 'warning');
+        showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
         return;
     }
     
-    // Validate phone number
+    // التحقق من صحة رقم الهاتف
     if (!validatePhoneNumber(phone)) {
-        showTrialMessage('Please enter a valid phone number', 'warning');
+        showTrialMessage('الرجاء إدخال رقم هاتف صحيح', 'warning');
         return;
     }
     
-    // Format phone number
+    // تنسيق رقم الهاتف
     const formattedPhone = formatPhoneNumber(phone);
     
-    // Show loading
+    // إظهار التحميل
     document.getElementById('submitBtn').style.display = 'none';
     document.getElementById('trialLoading').style.display = 'block';
     document.getElementById('trialMessage').style.display = 'none';
     
     try {
-        // Save request to Firestore
+        // حفظ الطلب في Firestore
         const docRef = await db.collection('trial_requests').add({
             fullName: fullName,
             email: email,
@@ -2234,9 +2235,9 @@ async function submitTrialRequest() {
             read: false
         });
         
-        console.log('Request saved successfully:', docRef.id);
+        console.log('تم حفظ الطلب بنجاح:', docRef.id);
         
-        // Send notification to Pipedream
+        // إرسال إشعار لـ Pipedream
         try {
             const webhookResponse = await fetch('https://eoiferm3j9nh6vp.m.pipedream.net', {
                 method: 'POST',
@@ -2256,103 +2257,13 @@ async function submitTrialRequest() {
             });
             
             if (webhookResponse.ok) {
-                console.log('Notification sent successfully');
+                console.log('تم إرسال الإشعار بنجاح');
             } else {
-                console.log('Failed to send notification');
+                console.log('فشل إرسال الإشعار');
             }
         } catch (webhookError) {
-            console.log('Notification error:', webhookError);
+            console.log('خطأ في الإشعار:', webhookError);
         }
-        
-        // Show success message
-        document.getElementById('trialLoading').style.display = 'none';
-        showTrialMessage('✅ Your request has been sent successfully! We will review it and reply within 24 hours', 'success');
-        
-        // Reset form and close modal after 4 seconds
-        setTimeout(() => {
-            closeTrialModal();
-            document.getElementById('submitBtn').style.display = 'flex';
-        }, 4000);
-        
-    } catch (error) {
-        console.error('Error saving request:', error);
-        
-        document.getElementById('trialLoading').style.display = 'none';
-        document.getElementById('submitBtn').style.display = 'flex';
-        
-        showTrialMessage('An error occurred while sending your request. Please try again', 'error');
-    }
-}
-✅ باختصار شديد:
-الخطوة	العملية
-1	افتح ملف index.html
-2	ابحث عن function submitTrialRequest()
-3	احذف كل شيء من { إلى }
-4	الصق الكود الجديد مكانه
-5	كرر نفس الشيء لملف index-en.html
-هل تريد مني توضيح أي جزء؟ 👇
-
-كيف اعرف بداية ونهاية الدالة
-✅ كيف تعرف بداية ونهاية الدالة
-الدالة تبدأ بـ:
-javascript
-async function submitTrialRequest() {
-الدالة تنتهي بـ:
-javascript
-}
-✅ شكل الدالة كاملة في ملفك:
-في ملفك الحالي، ابحث عن هذا الجزء بالكامل:
-
-javascript
-// ==============================================
-// إرسال طلب النسخة التجريبية
-// ==============================================
-async function submitTrialRequest() {
-    // التحقق من اختيار النظام
-    if (!selectedSystem) {
-        showTrialMessage('الرجاء اختيار النظام المطلوب (ERPNext أو Odoo)', 'warning');
-        return;
-    }
-    
-    // جمع البيانات
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const companyName = document.getElementById('companyName').value.trim();
-    const companyField = document.getElementById('companyField').value;
-    
-    // التحقق من الحقول
-    if (!fullName || !email || !companyName || !companyField) {
-        showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning');
-        return;
-    }
-    
-    // التحقق من صحة البريد الإلكتروني
-    if (!isValidEmail(email)) {
-        showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
-        return;
-    }
-    
-    // إظهار التحميل
-    document.getElementById('submitBtn').style.display = 'none';
-    document.getElementById('trialLoading').style.display = 'block';
-    document.getElementById('trialMessage').style.display = 'none';
-    
-    try {
-        // حفظ الطلب في Firestore
-        const docRef = await db.collection('trial_requests').add({
-            fullName: fullName,
-            email: email,
-            companyName: companyName,
-            companyField: companyField,
-            selectedSystem: selectedSystem,
-            status: 'pending', // pending, approved, rejected
-            adminApproved: false,
-            trialLink: '',
-            createdAt: new Date().toISOString(),
-            read: false
-        });
-        
-        console.log('تم حفظ الطلب بنجاح:', docRef.id);
         
         // إظهار رسالة النجاح
         document.getElementById('trialLoading').style.display = 'none';
@@ -2372,46 +2283,6 @@ async function submitTrialRequest() {
         
         showTrialMessage('حدث خطأ في إرسال الطلب. الرجاء المحاولة مرة أخرى', 'error');
     }
-}
-✅ ما ستفعله:
-حدد من السطر الذي يبدأ بـ async function submitTrialRequest() {
-
-حدد حتى آخر } قبل السطر الذي يليه مباشرة
-
-احذف هذا الجزء بالكامل
-
-الصق الكود الجديد مكانه
-
-✅ للتبسيط: ابحث عن هذا النص في ملفك
-ابحث عن:
-
-text
-async function submitTrialRequest
-ثم احذف كل شيء من هذا السطر حتى آخر قوس } قبل السطر التالي.
-
-
-
-// ==============================================
-// التحقق من صحة البريد الإلكتروني
-// ==============================================
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// ==============================================
-// إظهار رسالة في النافذة
-// ==============================================
-function showTrialMessage(message, type) {
-    const msgDiv = document.getElementById('trialMessage');
-    msgDiv.textContent = message;
-    msgDiv.className = 'trial-message ' + type;
-    msgDiv.style.display = 'block';
-    
-    // إخفاء الرسالة بعد 5 ثواني
-    setTimeout(() => {
-        msgDiv.style.display = 'none';
-    }, 5000);
 }
 </script>
 </body>
