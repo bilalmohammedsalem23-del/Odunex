@@ -127,3 +127,68 @@ window.logoutUser = async function() {
         console.error('Error logging out:', error);
     }
 };
+// ==============================================
+// إدارة طلبات التجربة المجانية
+// ==============================================
+
+window.getTrialRequests = async function() {
+    try {
+
+        const snapshot = await db.collection('trial_requests')
+        .orderBy('createdAt', 'desc')
+        .get();
+
+        const requests = [];
+
+        snapshot.forEach(doc => {
+            requests.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+
+        return requests;
+
+    } catch (error) {
+        console.error('Error loading trial requests:', error);
+        return [];
+    }
+};
+
+
+
+window.approveTrialRequest = async function(id) {
+    try {
+
+        await db.collection('trial_requests').doc(id).update({
+            adminApproved: true,
+            approvedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            approvedBy: auth.currentUser?.email || 'admin'
+        });
+
+        return true;
+
+    } catch (error) {
+        console.error('Error approving request:', error);
+        return false;
+    }
+};
+
+
+
+window.rejectTrialRequest = async function(id) {
+    try {
+
+        await db.collection('trial_requests').doc(id).update({
+            adminApproved: false,
+            rejectedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            rejectedBy: auth.currentUser?.email || 'admin'
+        });
+
+        return true;
+
+    } catch (error) {
+        console.error('Error rejecting request:', error);
+        return false;
+    }
+};
