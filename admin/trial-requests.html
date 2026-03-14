@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Trial Requests - Odunex Admin</title>
+
+<link rel="stylesheet" href="assets/css/admin-style.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+<script src="js/admin.js"></script>
+
+<style>
+
+.requests-container{
+max-width:1100px;
+margin:auto;
+padding:40px;
+}
+
+.request-card{
+
+background:white;
+border-radius:10px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+.request-title{
+font-size:18px;
+font-weight:bold;
+}
+
+.request-actions button{
+
+margin-right:10px;
+padding:8px 14px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+
+}
+
+.approve{
+background:#28a745;
+color:white;
+}
+
+.reject{
+background:#dc3545;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="requests-container">
+
+<h2>Trial Requests</h2>
+
+<div id="requestsList"></div>
+
+</div>
+
+
+<script>
+
+async function loadRequests(){
+
+const list=document.getElementById("requestsList")
+
+list.innerHTML="Loading..."
+
+const requests=await window.getTrialRequests()
+
+list.innerHTML=""
+
+requests.forEach(r=>{
+
+list.innerHTML+=`
+
+<div class="request-card">
+
+<div class="request-title">${r.fullName}</div>
+
+<p><b>Company:</b> ${r.companyName}</p>
+
+<p><b>Email:</b> ${r.email}</p>
+
+<p><b>Phone:</b> ${r.phone}</p>
+
+<p><b>System:</b> ${r.selectedSystem}</p>
+
+<p><b>Status:</b> ${r.adminApproved ? "Approved" : "Pending"}</p>
+
+<div class="request-actions">
+
+<button class="approve" onclick="approve('${r.id}')">Approve</button>
+
+<button class="reject" onclick="reject('${r.id}')">Reject</button>
+
+</div>
+
+</div>
+
+`
+
+})
+
+}
+
+
+
+async function approve(id){
+
+await window.approveTrialRequest(id)
+
+loadRequests()
+
+}
+
+
+
+async function reject(id){
+
+await window.rejectTrialRequest(id)
+
+loadRequests()
+
+}
+
+
+
+loadRequests()
+
+</script>
+
+</body>
+</html>
