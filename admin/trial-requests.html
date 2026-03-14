@@ -1,146 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trial Requests - Odunex Admin</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f4f4f4; margin:0; padding:0; }
+.container { max-width:900px; margin:50px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+h2 { text-align:center; color:#2d2f6e; }
+#requestsList { margin-top:20px; }
+.request-card { background:#f9f9f9; padding:15px; margin-bottom:15px; border-radius:6px; border-left:5px solid #6c5ce7; }
+.request-card .request-title { font-weight:bold; font-size:18px; margin-bottom:5px; }
+.request-card p { margin:5px 0; }
+button { padding:8px 12px; background:#6c5ce7; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+button:hover { background:#5a4bd1; }
+</style>
+</head>
+<body>
 
-<link rel="stylesheet" href="assets/css/admin-style.css">
+<div class="container">
+    <h2>Trial Requests</h2>
+    <div id="requestsList">Loading...</div>
+</div>
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
-<script src="js/admin.js"></script>
-
-<style>
-
-.requests-container{
-max-width:1100px;
-margin:auto;
-padding:40px;
-}
-
-.request-card{
-
-background:white;
-border-radius:10px;
-padding:20px;
-margin-bottom:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-
-}
-
-.request-title{
-font-size:18px;
-font-weight:bold;
-}
-
-.request-actions button{
-
-margin-right:10px;
-padding:8px 14px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-
-}
-
-.approve{
-background:#28a745;
-color:white;
-}
-
-.reject{
-background:#dc3545;
-color:white;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="requests-container">
-
-<h2>Trial Requests</h2>
-
-<div id="requestsList"></div>
-
-</div>
-
-
 <script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
 
-async function loadRequests(){
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-const list=document.getElementById("requestsList")
+  // تحميل الطلبات
+  async function loadRequests() {
+    const list = document.getElementById("requestsList");
+    list.innerHTML = "Loading...";
 
-list.innerHTML="Loading..."
+    try {
+      const snapshot = await db.collection("trial_requests")
+        .orderBy("createdAt", "desc")
+        .get();
 
-const requests=await window.getTrialRequests()
+      list.innerHTML = "";
 
-list.innerHTML=""
+      snapshot.forEach(doc => {
+        const r = doc.data();
+        list.innerHTML += `
+          <div class="request-card">
+            <div class="request-title">${r.fullName}</div>
+            <p><b>Company:</b> ${r.companyName}</p>
+            <p><b>Email:</b> ${r.email}</p>
+            <p><b>Phone:</b> ${r.phone}</p>
+            <p><b>System:</b> ${r.selectedSystem}</p>
+            <p><b>Status:</b> ${r.adminApproved ? "Approved" : "Pending"}</p>
+            <button onclick="approve('${doc.id}')">Approve</button>
+          </div>
+        `;
+      });
 
-requests.forEach(r=>{
+    } catch(error) {
+      list.innerHTML = "Error loading requests";
+      console.error(error);
+    }
+  }
 
-list.innerHTML+=`
+  // تحديث الحالة
+  async function approve(id) {
+    try {
+      await db.collection("trial_requests").doc(id).update({ adminApproved: true });
+      loadRequests();
+    } catch(error) {
+      alert("Error approving request: " + error);
+      console.error(error);
+    }
+  }
 
-<div class="request-card">
-
-<div class="request-title">${r.fullName}</div>
-
-<p><b>Company:</b> ${r.companyName}</p>
-
-<p><b>Email:</b> ${r.email}</p>
-
-<p><b>Phone:</b> ${r.phone}</p>
-
-<p><b>System:</b> ${r.selectedSystem}</p>
-
-<p><b>Status:</b> ${r.adminApproved ? "Approved" : "Pending"}</p>
-
-<div class="request-actions">
-
-<button class="approve" onclick="approve('${r.id}')">Approve</button>
-
-<button class="reject" onclick="reject('${r.id}')">Reject</button>
-
-</div>
-
-</div>
-
-`
-
-})
-
-}
-
-
-
-async function approve(id){
-
-await window.approveTrialRequest(id)
-
-loadRequests()
-
-}
-
-
-
-async function reject(id){
-
-await window.rejectTrialRequest(id)
-
-loadRequests()
-
-}
-
-
-
-loadRequests()
-
+  window.onload = loadRequests;
 </script>
 
 </body>
