@@ -529,7 +529,7 @@
             box-shadow: 0 10px 20px rgba(122,90,248,0.2);
         }
 
-        /* زر الواتساب الجديد */
+        /* زر الواتساب الجديد (تم تغيير الرقم) */
         .btn-whatsapp {
             background: var(--whatsapp-green);
             color: white;
@@ -1137,7 +1137,7 @@
                 </p>
                 <div class="cta-buttons">
                     <button class="btn-primary">ابدأ تجربتك المجانية</button>
-                    <a href="https://wa.me/9647883002797?text=أرغب%20في%20استشارة%20بخصوص%20نظام%20Odunex" 
+                    <a href="https://wa.me/9647506841035?text=أرغب%20في%20استشارة%20بخصوص%20نظام%20Odunex" 
                        class="btn-whatsapp" 
                        target="_blank">
                         <i class="fab fa-whatsapp"></i>
@@ -1430,7 +1430,7 @@
     </footer>
 
     <!-- ============================================== -->
-    <!-- نافذة طلب النسخة التجريبية - ERPNext & Odoo -->
+    <!-- نافذة طلب النسخة التجريبية (بدون اختيار نظام) -->
     <!-- ============================================== -->
     <style>
         /* تنسيقات نافذة طلب التجربة */
@@ -1518,83 +1518,7 @@
             font-size: 16px;
         }
 
-        .system-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .system-card {
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .system-card:hover {
-            border-color: var(--primary-purple);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(122,90,248,0.15);
-        }
-
-        .system-card.selected {
-            border-color: var(--primary-purple);
-            background: linear-gradient(135deg, rgba(122,90,248,0.05), rgba(43,176,237,0.05));
-        }
-
-        .system-card.selected::before {
-            content: '✓';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 30px;
-            height: 30px;
-            background: var(--main-gradient);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 5px 10px rgba(122,90,248,0.3);
-        }
-
-        .system-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 15px;
-            background: linear-gradient(135deg, rgba(122,90,248,0.1), rgba(43,176,237,0.1));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: var(--primary-purple);
-            transition: all 0.3s;
-        }
-
-        .system-card:hover .system-icon,
-        .system-card.selected .system-icon {
-            background: var(--main-gradient);
-            color: white;
-        }
-
-        .system-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--dark-text);
-        }
-
-        .system-card p {
-            font-size: 13px;
-            color: var(--light-text);
-        }
+        /* تم إزالة system-selector بالكامل */
 
         .trial-form {
             margin-top: 20px;
@@ -1757,22 +1681,6 @@
             color: var(--dark-text-secondary);
         }
 
-        body.dark-mode .system-card {
-            border-color: var(--dark-border);
-        }
-
-        body.dark-mode .system-card h3 {
-            color: var(--dark-text-primary);
-        }
-
-        body.dark-mode .system-card p {
-            color: var(--dark-text-secondary);
-        }
-
-        body.dark-mode .system-card.selected {
-            background: var(--dark-card);
-        }
-
         body.dark-mode .trial-form .form-group label {
             color: var(--dark-text-primary);
         }
@@ -1803,24 +1711,6 @@
                 font-size: 28px;
             }
             
-            .system-selector {
-                gap: 10px;
-            }
-            
-            .system-card {
-                padding: 15px 10px;
-            }
-            
-            .system-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 30px;
-            }
-            
-            .system-card h3 {
-                font-size: 18px;
-            }
-            
             .trial-form .form-row {
                 grid-template-columns: 1fr;
                 gap: 10px;
@@ -1828,34 +1718,17 @@
         }
     </style>
 
-    <!-- النافذة المنبثقة -->
+    <!-- النافذة المنبثقة (بدون اختيار النظام) -->
     <div class="trial-modal-overlay" id="trialModal">
         <div class="trial-modal">
             <div class="trial-close" onclick="closeTrialModal()">&times;</div>
             
             <div class="trial-header">
                 <h2><span>ابدأ</span> تجربتك المجانية</h2>
-                <p>اختر النظام المناسب لعملك وجربه مجاناً لمدة 14 يوماً</p>
+                <p>نحن نقدم حلول ERP متكاملة لعملك</p>
             </div>
             
-            <!-- اختيار النظام -->
-            <div class="system-selector">
-                <div class="system-card" id="erpnextCard" onclick="selectSystem('erpnext')">
-                    <div class="system-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>ERPNext</h3>
-                    <p>نظام ERP مفتوح المصدر</p>
-                </div>
-                
-                <div class="system-card" id="odooCard" onclick="selectSystem('odoo')">
-                    <div class="system-icon">
-                        <i class="fas fa-cubes"></i>
-                    </div>
-                    <h3>Odoo</h3>
-                    <p>نظام ERP متكامل</p>
-                </div>
-            </div>
+            <!-- تم إزالة system-selector بالكامل -->
             
             <!-- نموذج التسجيل -->
             <div class="trial-form">
@@ -1949,7 +1822,7 @@
         // ==============================================
         // المتغيرات العامة
         // ==============================================
-        let selectedSystem = null;
+        // تم إزالة selectedSystem
 
         // ==============================================
         // فتح وإغلاق النافذة
@@ -1970,29 +1843,13 @@
             document.getElementById('companyName').value = '';
             document.getElementById('companyField').value = '';
             
-            // إزالة التحديد من بطاقات النظام
-            document.getElementById('erpnextCard').classList.remove('selected');
-            document.getElementById('odooCard').classList.remove('selected');
-            selectedSystem = null;
+            // تم إزالة إزالة التحديد من بطاقات النظام
             
             // إخفاء الرسائل
             document.getElementById('trialMessage').style.display = 'none';
         }
 
-        // ==============================================
-        // اختيار النظام
-        // ==============================================
-        function selectSystem(system) {
-            selectedSystem = system;
-            
-            if (system === 'erpnext') {
-                document.getElementById('erpnextCard').classList.add('selected');
-                document.getElementById('odooCard').classList.remove('selected');
-            } else {
-                document.getElementById('odooCard').classList.add('selected');
-                document.getElementById('erpnextCard').classList.remove('selected');
-            }
-        }
+        // تم إزالة دالة selectSystem
 
         // ==============================================
         // ربط زر التجربة بالنافذة
@@ -2064,145 +1921,105 @@
             return cleanPhone;
         }
 
+     // ==============================================
+// إرسال طلب النسخة التجريبية - إيميلين في مصفوفة
+// ==============================================
+async function submitTrialRequest() {
+    // جمع البيانات
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const companyName = document.getElementById('companyName').value.trim();
+    const companyField = document.getElementById('companyField').value;
+    
+    // التحقق من الحقول
+    if (!fullName || !email || !phone || !companyName || !companyField) {
+        showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning');
+        return;
+    }
+    
+    // التحقق من صحة البريد الإلكتروني
+    if (!isValidEmail(email)) {
+        showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
+        return;
+    }
+    
+    // التحقق من صحة رقم الهاتف
+    if (!validatePhoneNumber(phone)) {
+        showTrialMessage('الرجاء إدخال رقم هاتف عراقي صحيح (مثال: 07701234567 أو 9647701234567)', 'warning');
+        return;
+    }
+    
+    // تنسيق رقم الهاتف
+    const formattedPhone = formatPhoneNumber(phone);
+    
+    // إظهار التحميل
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('trialLoading').style.display = 'block';
+    document.getElementById('trialMessage').style.display = 'none';
+    
+    try {
+        // حفظ الطلب في Firestore
+        const docRef = await db.collection('trial_requests').add({
+            fullName: fullName,
+            email: email,
+            phone: formattedPhone,
+            phoneRaw: phone,
+            companyName: companyName,
+            companyField: companyField,
+            status: 'pending',
+            adminApproved: false,
+            trialLink: '',
+            createdAt: new Date().toISOString(),
+            read: false
+        });
+        
+        console.log('✅ تم حفظ الطلب بنجاح:', docRef.id);
+        
         // ==============================================
-        // إرسال طلب النسخة التجريبية مع إشعار إيميل
+        // إرسال إيميل واحد لمستلمين متعددين (info + support)
         // ==============================================
-        async function submitTrialRequest() {
-            // التحقق من اختيار النظام
-            if (!selectedSystem) {
-                showTrialMessage('الرجاء اختيار النظام المطلوب (ERPNext أو Odoo)', 'warning');
-                return;
-            }
+        try {
+            // تهيئة EmailJS
+            emailjs.init('jO00szsaAuuC7Gsly');
             
-            // جمع البيانات
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const companyName = document.getElementById('companyName').value.trim();
-            const companyField = document.getElementById('companyField').value;
+            // إرسال الإيميل إلى الإيميلين معاً (مصفوفة)
+            await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
+                to_email: ['info@odunex.com', 'support@odunex.com'], // ✅ مصفوفة إيميلات
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                companyName: companyName,
+                companyField: companyField,
+                requestId: docRef.id,
+                firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
+            });
             
-            // التحقق من الحقول
-            if (!fullName || !email || !phone || !companyName || !companyField) {
-                showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning');
-                return;
-            }
+            console.log('✅ تم إرسال الإيميل إلى info@odunex.com و support@odunex.com');
             
-            // التحقق من صحة البريد الإلكتروني
-            if (!isValidEmail(email)) {
-                showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
-                return;
-            }
-            
-            // التحقق من صحة رقم الهاتف
-            if (!validatePhoneNumber(phone)) {
-                showTrialMessage('الرجاء إدخال رقم هاتف عراقي صحيح (مثال: 07701234567 أو 9647701234567)', 'warning');
-                return;
-            }
-            
-            // تنسيق رقم الهاتف
-            const formattedPhone = formatPhoneNumber(phone);
-            
-            // إظهار التحميل
-            document.getElementById('submitBtn').style.display = 'none';
-            document.getElementById('trialLoading').style.display = 'block';
-            document.getElementById('trialMessage').style.display = 'none';
-            
-            try {
-                // حفظ الطلب في Firestore
-                const docRef = await db.collection('trial_requests').add({
-                    fullName: fullName,
-                    email: email,
-                    phone: formattedPhone,
-                    phoneRaw: phone,
-                    companyName: companyName,
-                    companyField: companyField,
-                    selectedSystem: selectedSystem,
-                    status: 'pending',
-                    adminApproved: false,
-                    trialLink: '',
-                    createdAt: new Date().toISOString(),
-                    read: false
-                });
-                
-                console.log('✅ تم حفظ الطلب بنجاح:', docRef.id);
-                
-                // ==============================================
-                // إرسال إشعار واتساب عبر Pipedream
-                // ==============================================
-                try {
-                    const webhookResponse = await fetch('https://eoiferm3j9nh6vp.m.pipedream.net', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            fullName: fullName,
-                            email: email,
-                            phone: formattedPhone,
-                            companyName: companyName,
-                            companyField: companyField,
-                            selectedSystem: selectedSystem,
-                            requestId: docRef.id,
-                            timestamp: new Date().toISOString()
-                        })
-                    });
-                    
-                    if (webhookResponse.ok) {
-                        console.log('✅ تم إرسال إشعار واتساب بنجاح');
-                    } else {
-                        console.log('❌ فشل إرسال إشعار واتساب');
-                    }
-                } catch (webhookError) {
-                    console.log('⚠️ خطأ في إرسال الإشعار:', webhookError);
-                }
-                
-                // ==============================================
-                // إرسال إيميل تلقائي عبر EmailJS
-                // ==============================================
-                try {
-                    // تهيئة EmailJS
-                    emailjs.init('jO00szsaAuuC7Gsly');
-                    
-                    // تحديد اسم النظام
-                    const systemName = selectedSystem === 'erpnext' ? 'ERPNext' : 'Odoo';
-                    
-                    // إرسال الإيميل
-                    await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
-                        to_email: 'info@odunex.com',
-                        fullName: fullName,
-                        email: email,
-                        phone: phone,
-                        companyName: companyName,
-                        companyField: companyField,
-                        selectedSystem: systemName,
-                        requestId: docRef.id,
-                        firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
-                    });
-                    
-                    console.log('✅ تم إرسال الإيميل التلقائي إلى info@odunex.com');
-                } catch (emailError) {
-                    console.log('⚠️ فشل إرسال الإيميل:', emailError);
-                }
-                
-                // إظهار رسالة النجاح
-                document.getElementById('trialLoading').style.display = 'none';
-                showTrialMessage('✅ تم إرسال طلبك بنجاح! سنقوم بمراجعته والرد عليك خلال 24 ساعة', 'success');
-                
-                // إعادة تعيين النموذج بعد 3 ثواني وإغلاق النافذة
-                setTimeout(() => {
-                    closeTrialModal();
-                    document.getElementById('submitBtn').style.display = 'flex';
-                }, 4000);
-                
-            } catch (error) {
-                console.error('❌ خطأ في حفظ الطلب:', error);
-                
-                document.getElementById('trialLoading').style.display = 'none';
-                document.getElementById('submitBtn').style.display = 'flex';
-                
-                showTrialMessage('حدث خطأ في إرسال الطلب. الرجاء المحاولة مرة أخرى', 'error');
-            }
+        } catch (emailError) {
+            console.log('⚠️ فشل إرسال الإيميل:', emailError);
         }
+        
+        // إظهار رسالة النجاح
+        document.getElementById('trialLoading').style.display = 'none';
+        showTrialMessage('✅ تم إرسال طلبك بنجاح! سنقوم بمراجعته والرد عليك خلال 24 ساعة', 'success');
+        
+        // إعادة تعيين النموذج بعد 3 ثواني وإغلاق النافذة
+        setTimeout(() => {
+            closeTrialModal();
+            document.getElementById('submitBtn').style.display = 'flex';
+        }, 4000);
+        
+    } catch (error) {
+        console.error('❌ خطأ في حفظ الطلب:', error);
+        
+        document.getElementById('trialLoading').style.display = 'none';
+        document.getElementById('submitBtn').style.display = 'flex';
+        
+        showTrialMessage('حدث خطأ في إرسال الطلب. الرجاء المحاولة مرة أخرى', 'error');
+    }
+}
 
         // ==============================================
         // التحقق من صحة البريد الإلكتروني
