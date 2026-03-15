@@ -1921,125 +1921,105 @@
             return cleanPhone;
         }
 
+     // ==============================================
+// إرسال طلب النسخة التجريبية - إيميلين في مصفوفة
+// ==============================================
+async function submitTrialRequest() {
+    // جمع البيانات
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const companyName = document.getElementById('companyName').value.trim();
+    const companyField = document.getElementById('companyField').value;
+    
+    // التحقق من الحقول
+    if (!fullName || !email || !phone || !companyName || !companyField) {
+        showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning');
+        return;
+    }
+    
+    // التحقق من صحة البريد الإلكتروني
+    if (!isValidEmail(email)) {
+        showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
+        return;
+    }
+    
+    // التحقق من صحة رقم الهاتف
+    if (!validatePhoneNumber(phone)) {
+        showTrialMessage('الرجاء إدخال رقم هاتف عراقي صحيح (مثال: 07701234567 أو 9647701234567)', 'warning');
+        return;
+    }
+    
+    // تنسيق رقم الهاتف
+    const formattedPhone = formatPhoneNumber(phone);
+    
+    // إظهار التحميل
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('trialLoading').style.display = 'block';
+    document.getElementById('trialMessage').style.display = 'none';
+    
+    try {
+        // حفظ الطلب في Firestore
+        const docRef = await db.collection('trial_requests').add({
+            fullName: fullName,
+            email: email,
+            phone: formattedPhone,
+            phoneRaw: phone,
+            companyName: companyName,
+            companyField: companyField,
+            status: 'pending',
+            adminApproved: false,
+            trialLink: '',
+            createdAt: new Date().toISOString(),
+            read: false
+        });
+        
+        console.log('✅ تم حفظ الطلب بنجاح:', docRef.id);
+        
         // ==============================================
-        // إرسال طلب النسخة التجريبية (بدون واتساب)
+        // إرسال إيميل واحد لمستلمين متعددين (info + support)
         // ==============================================
-        async function submitTrialRequest() {
-            // تم إزالة التحقق من اختيار النظام
+        try {
+            // تهيئة EmailJS
+            emailjs.init('jO00szsaAuuC7Gsly');
             
-            // جمع البيانات
-            const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const companyName = document.getElementById('companyName').value.trim();
-            const companyField = document.getElementById('companyField').value;
+            // إرسال الإيميل إلى الإيميلين معاً (مصفوفة)
+            await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
+                to_email: ['info@odunex.com', 'support@odunex.com'], // ✅ مصفوفة إيميلات
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                companyName: companyName,
+                companyField: companyField,
+                requestId: docRef.id,
+                firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
+            });
             
-            // التحقق من الحقول
-            if (!fullName || !email || !phone || !companyName || !companyField) {
-                showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning');
-                return;
-            }
+            console.log('✅ تم إرسال الإيميل إلى info@odunex.com و support@odunex.com');
             
-            // التحقق من صحة البريد الإلكتروني (مهم)
-            if (!isValidEmail(email)) {
-                showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
-                return;
-            }
-            
-            // التحقق من صحة رقم الهاتف
-            if (!validatePhoneNumber(phone)) {
-                showTrialMessage('الرجاء إدخال رقم هاتف عراقي صحيح (مثال: 07701234567 أو 9647701234567)', 'warning');
-                return;
-            }
-            
-            // تنسيق رقم الهاتف
-            const formattedPhone = formatPhoneNumber(phone);
-            
-            // إظهار التحميل
-            document.getElementById('submitBtn').style.display = 'none';
-            document.getElementById('trialLoading').style.display = 'block';
-            document.getElementById('trialMessage').style.display = 'none';
-            
-            try {
-                // حفظ الطلب في Firestore (بدون selectedSystem)
-                const docRef = await db.collection('trial_requests').add({
-                    fullName: fullName,
-                    email: email,
-                    phone: formattedPhone,
-                    phoneRaw: phone,
-                    companyName: companyName,
-                    companyField: companyField,
-                    status: 'pending',
-                    adminApproved: false,
-                    trialLink: '',
-                    createdAt: new Date().toISOString(),
-                    read: false
-                });
-                
-                console.log('✅ تم حفظ الطلب بنجاح:', docRef.id);
-                
-                // ==============================================
-                // تم إزالة إرسال إشعار واتساب عبر Pipedream
-                // ==============================================
-                
-                // ==============================================
-                // إرسال إيميل تلقائي عبر EmailJS إلى info@odunex.com
-                // ==============================================
-                try {
-                    // تهيئة EmailJS
-                    emailjs.init('jO00szsaAuuC7Gsly');
-                    
-                    // إرسال الإيميل الأول (info@odunex.com)
-                    await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
-                        to_email: 'info@odunex.com',
-                        fullName: fullName,
-                        email: email,
-                        phone: phone,
-                        companyName: companyName,
-                        companyField: companyField,
-                        requestId: docRef.id,
-                        firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
-                    });
-                    
-                    console.log('✅ تم إرسال الإيميل التلقائي إلى info@odunex.com');
-                    
-                    // إرسال الإيميل الثاني (support@odunex.com)
-                    await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
-                        to_email: 'support@odunex.com',
-                        fullName: fullName,
-                        email: email,
-                        phone: phone,
-                        companyName: companyName,
-                        companyField: companyField,
-                        requestId: docRef.id,
-                        firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
-                    });
-                    
-                    console.log('✅ تم إرسال الإيميل التلقائي إلى support@odunex.com');
-                    
-                } catch (emailError) {
-                    console.log('⚠️ فشل إرسال الإيميل:', emailError);
-                }
-                
-                // إظهار رسالة النجاح
-                document.getElementById('trialLoading').style.display = 'none';
-                showTrialMessage('✅ تم إرسال طلبك بنجاح! سنقوم بمراجعته والرد عليك خلال 24 ساعة', 'success');
-                
-                // إعادة تعيين النموذج بعد 3 ثواني وإغلاق النافذة
-                setTimeout(() => {
-                    closeTrialModal();
-                    document.getElementById('submitBtn').style.display = 'flex';
-                }, 4000);
-                
-            } catch (error) {
-                console.error('❌ خطأ في حفظ الطلب:', error);
-                
-                document.getElementById('trialLoading').style.display = 'none';
-                document.getElementById('submitBtn').style.display = 'flex';
-                
-                showTrialMessage('حدث خطأ في إرسال الطلب. الرجاء المحاولة مرة أخرى', 'error');
-            }
+        } catch (emailError) {
+            console.log('⚠️ فشل إرسال الإيميل:', emailError);
         }
+        
+        // إظهار رسالة النجاح
+        document.getElementById('trialLoading').style.display = 'none';
+        showTrialMessage('✅ تم إرسال طلبك بنجاح! سنقوم بمراجعته والرد عليك خلال 24 ساعة', 'success');
+        
+        // إعادة تعيين النموذج بعد 3 ثواني وإغلاق النافذة
+        setTimeout(() => {
+            closeTrialModal();
+            document.getElementById('submitBtn').style.display = 'flex';
+        }, 4000);
+        
+    } catch (error) {
+        console.error('❌ خطأ في حفظ الطلب:', error);
+        
+        document.getElementById('trialLoading').style.display = 'none';
+        document.getElementById('submitBtn').style.display = 'flex';
+        
+        showTrialMessage('حدث خطأ في إرسال الطلب. الرجاء المحاولة مرة أخرى', 'error');
+    }
+}
 
         // ==============================================
         // التحقق من صحة البريد الإلكتروني
