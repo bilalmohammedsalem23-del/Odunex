@@ -23,6 +23,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google reCAPTCHA - الحماية من البوتات -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
@@ -801,6 +805,20 @@
             to { transform: rotate(360deg); }
         }
 
+        /* ===== reCAPTCHA Responsive ===== */
+        .g-recaptcha {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        @media (max-width: 480px) {
+            .g-recaptcha {
+                transform: scale(0.85);
+                transform-origin: center;
+            }
+        }
+
         /* ===== Responsive Design ===== */
         @media (max-width: 992px) {
             .contact-grid {
@@ -1017,6 +1035,12 @@
                                 <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
                             </div>
                             
+                            <!-- حقل Honeypot - للبوتات فقط (مخفي عن البشر) -->
+                            <input type="text" id="website" name="website" style="display:none" autocomplete="off">
+                            
+                            <!-- Google reCAPTCHA - حماية متقدمة -->
+                            <div class="g-recaptcha" data-sitekey="6LfHpIssAAAAAI5yxIHZqJMD4zA-yNI9KOgpeUQo"></div>
+                            
                             <button type="submit" class="btn-submit" id="submitBtn">
                                 <span>إرسال الرسالة</span>
                                 <i class="fas fa-paper-plane"></i>
@@ -1117,6 +1141,51 @@
         })();
 
         // ==============================================
+        // دوال الحماية والتنظيف
+        // ==============================================
+        
+        // تنظيف المدخلات من أكواد HTML الضارة
+        function sanitize(text) {
+            return text.replace(/[<>]/g, "");
+        }
+        
+        // التحقق من الإيميل ومنع الإيميلات المؤقتة
+        function validateEmail(email) {
+            // التحقق من صيغة الإيميل
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!pattern.test(email)) return false;
+            
+            // قائمة الإيميلات المؤقتة والمشبوهة
+            const blockedDomains = [
+                "mailinator.com", "tempmail.com", "10minutemail.com",
+                "yopmail.com", "guerrillamail.com", "throwawaymail.com",
+                "fakeemail.com", "trashmail.com", "maildrop.cc",
+                "temp-mail.org", "tempinbox.com", "mailnesia.com"
+            ];
+            
+            const domain = email.split("@")[1].toLowerCase();
+            if (blockedDomains.includes(domain)) return false;
+            
+            return true;
+        }
+        
+        // كشف رسائل السبام
+        function isSpam(text) {
+            const spamWords = [
+                "crypto", "bitcoin", "casino", "loan", "porn", "sex",
+                "viagra", "xxx", "nude", "gambling", "賭場", "카지노"
+            ];
+            
+            text = text.toLowerCase();
+            for (let word of spamWords) {
+                if (text.includes(word)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ==============================================
         // نظام الحفاظ على الوضع الليلي/النهاري
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1140,28 +1209,57 @@
         });
 
         // ==============================================
-        // إعداد نموذج الاتصال مع EmailJS
+        // إعداد نموذج الاتصال مع جميع وسائل الحماية
         // ==============================================
         function setupContactForm() {
             const form = document.getElementById('contactForm');
             
-            form.addEventListener('submit', function(event) {
+            form.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 
-                // جمع البيانات من النموذج
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const subject = document.getElementById('subject').value.trim();
-                const message = document.getElementById('message').value.trim();
+                // تنظيف المدخلات من أكواد HTML
+                const name = sanitize(document.getElementById('name').value.trim());
+                const email = sanitize(document.getElementById('email').value.trim());
+                const subject = sanitize(document.getElementById('subject').value.trim());
+                const message = sanitize(document.getElementById('message').value.trim());
                 
-                // التحقق من المدخلات
+                // التحقق من حقل Honeypot (إذا كان مملوء فهذا بوت)
+                const honeypot = document.getElementById('website').value;
+                if (honeypot !== "") {
+                    console.log("تم حظر بوت (Honeypot)");
+                    return; // يوقف الإرسال بصمت
+                }
+                
+                // التحقق من الحقول المطلوبة
                 if (!name || !email || !subject || !message) {
                     showAlert('الرجاء ملء جميع الحقول المطلوبة', 'warning');
                     return;
                 }
                 
-                if (!isValidEmail(email)) {
-                    showAlert('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
+                // التحقق من صحة الإيميل ومنع الإيميلات المؤقتة
+                if (!validateEmail(email)) {
+                    showAlert('البريد الإلكتروني غير صالح أو غير مسموح به', 'warning');
+                    return;
+                }
+                
+                // التحقق من وجود كلمات سبام
+                if (isSpam(name + subject + message)) {
+                    showAlert('تم اكتشاف رسالة غير مرغوب فيها', 'error');
+                    return;
+                }
+                
+                // التحقق من reCAPTCHA
+                const recaptchaResponse = grecaptcha.getResponse();
+                if (recaptchaResponse.length === 0) {
+                    showAlert('الرجاء التحقق أنك لست روبوت', 'warning');
+                    return;
+                }
+                
+                // التحقق من الوقت بين الإرسالات (30 ثانية)
+                const lastSend = localStorage.getItem('lastSend');
+                const now = Date.now();
+                if (lastSend && now - lastSend < 30000) { // 30 ثانية
+                    showAlert('يمكنك إرسال رسالة واحدة كل 30 ثانية فقط', 'warning');
                     return;
                 }
                 
@@ -1171,44 +1269,48 @@
                 submitBtn.innerHTML = '<span>جاري الإرسال</span> <span class="loading-spinner"></span>';
                 submitBtn.disabled = true;
                 
-                // إرسال الإيميل عبر EmailJS - مع بياناتك الصحيحة
-                emailjs.send(
-                    'service_u22biwc',      // Service ID الخاص بك
-                    'template_jj5k7r9',     // Template ID الخاص بك
-                    {
-                        to_email: 'Info@odunex.com',
-                        to_name: 'فريق Odunex',
-                        from_name: name,
-                        from_email: email,
-                        subject: subject,
-                        message: message,
-                        reply_to: email
-                    }
-                ).then(
-                    function(response) {
-                        console.log('✅ تم الإرسال بنجاح', response);
-                        
-                        // إظهار رسالة نجاح
-                        showAlert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً', 'success');
-                        
-                        // إعادة تعيين النموذج
-                        form.reset();
-                        
-                        // إعادة زر الإرسال لحالته الطبيعية
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    },
-                    function(error) {
-                        console.log('❌ فشل الإرسال', error);
-                        
-                        // إظهار رسالة خطأ
-                        showAlert('عذراً، حدث خطأ في الإرسال. الرجاء المحاولة مرة أخرى', 'error');
-                        
-                        // إعادة زر الإرسال لحالته الطبيعية
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                );
+                try {
+                    // إرسال الإيميل عبر EmailJS
+                    await emailjs.send(
+                        'service_u22biwc',      // Service ID الخاص بك
+                        'template_jj5k7r9',     // Template ID الخاص بك
+                        {
+                            to_email: 'Info@odunex.com',
+                            to_name: 'فريق Odunex',
+                            from_name: name,
+                            from_email: email,
+                            subject: subject,
+                            message: message,
+                            reply_to: email
+                        }
+                    );
+                    
+                    // حفظ وقت الإرسال
+                    localStorage.setItem('lastSend', now);
+                    
+                    // إظهار رسالة نجاح
+                    showAlert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً', 'success');
+                    
+                    // إعادة تعيين النموذج
+                    form.reset();
+                    
+                    // إعادة تعيين reCAPTCHA
+                    grecaptcha.reset();
+                    
+                    // إعادة زر الإرسال لحالته الطبيعية
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                } catch (error) {
+                    console.error('❌ فشل الإرسال:', error);
+                    
+                    // إظهار رسالة خطأ
+                    showAlert('عذراً، حدث خطأ في الإرسال. الرجاء المحاولة مرة أخرى', 'error');
+                    
+                    // إعادة زر الإرسال لحالته الطبيعية
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
             });
         }
 
@@ -1238,14 +1340,6 @@
             setTimeout(() => {
                 alertDiv.style.display = 'none';
             }, 5000);
-        }
-
-        // ==============================================
-        // دالة التحقق من البريد الإلكتروني
-        // ==============================================
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
         }
 
         // ==============================================
