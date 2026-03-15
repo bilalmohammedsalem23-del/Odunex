@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | اتصل بنا</title>
     
-    <!-- أيقونة المتصفح (Favicon) - تم التغيير -->
+    <!-- أيقونة المتصفح (Favicon) -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- EmailJS SDK - إضافة مكتبة EmailJS -->
+    <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <script src="/maintenance-config.js"></script>
@@ -48,7 +48,6 @@
     </script>
     
     <style>
-        /* نفس الـ Styles الموجودة عندك - بدون تغيير */
         * {
             margin: 0;
             padding: 0;
@@ -101,13 +100,12 @@
             flex-direction: column;
         }
 
-        /* ===== Dark Mode Styles - شامل بالكامل ===== */
+        /* ===== Dark Mode Styles ===== */
         body.dark-mode {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
         }
 
-        /* الشريط الرئيسي (الهيدر) في الوضع الليلي */
         body.dark-mode header {
             background: var(--dark-header-bg);
             border-bottom: 1px solid var(--dark-border);
@@ -140,7 +138,6 @@
             filter: invert(0.8);
         }
 
-        /* البطاقات في الوضع الليلي */
         body.dark-mode .contact-form,
         body.dark-mode .info-card,
         body.dark-mode .social-card {
@@ -149,7 +146,6 @@
             box-shadow: 0 10px 30px var(--dark-card-glow);
         }
 
-        /* نصوص العناوين */
         body.dark-mode .contact-form h2,
         body.dark-mode .info-card h3,
         body.dark-mode .social-card h3,
@@ -157,7 +153,6 @@
             color: var(--dark-text-primary) !important;
         }
 
-        /* نصوص المحتوى */
         body.dark-mode .info-item span,
         body.dark-mode .info-item a,
         body.dark-mode .footer-tagline,
@@ -166,7 +161,6 @@
             color: var(--dark-text-secondary) !important;
         }
 
-        /* حقول الإدخال */
         body.dark-mode .form-group input,
         body.dark-mode .form-group textarea {
             background: var(--dark-input-bg);
@@ -183,7 +177,6 @@
             color: var(--dark-text-secondary);
         }
 
-        /* أيقونات التواصل الاجتماعي */
         body.dark-mode .social-icon-large {
             background: var(--dark-input-bg);
             color: var(--dark-text-secondary);
@@ -194,7 +187,6 @@
             color: white;
         }
 
-        /* أيقونات البطاقات */
         body.dark-mode .card-icon-large {
             box-shadow: 0 5px 15px var(--dark-glow);
         }
@@ -207,7 +199,6 @@
             color: var(--primary-purple);
         }
 
-        /* الفوتر */
         body.dark-mode footer {
             background: var(--dark-card-bg);
             border-top: 1px solid var(--dark-border);
@@ -289,7 +280,6 @@
             color: var(--primary-purple);
         }
 
-        /* تأثير التكبير والتوهج على روابط القائمة */
         .nav-menu a:hover {
             transform: scale(1.1);
             text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
@@ -1067,7 +1057,7 @@
                             <div class="info-content">
                                 <div class="info-item">
                                     <i class="fas fa-phone"></i>
-                                    <a href="tel:+9647506841035">+9647506841035</a>  <!-- رقم جديد -->
+                                    <a href="tel:+9647506841035">+9647506841035</a>
                                 </div>
                                 <div class="info-item">
                                     <i class="fas fa-envelope"></i>
@@ -1119,11 +1109,11 @@
 
     <script>
         // ==============================================
-        // تهيئة EmailJS - استخدم بياناتك الحقيقية هنا
+        // تهيئة EmailJS - مع بياناتك الحقيقية
         // ==============================================
         (function() {
-            // ضع الـ Public Key الخاص بك هنا (موجود في Account > API Keys)
-            emailjs.init('YOUR_PUBLIC_KEY'); // <-- غير هذا بمفتاحك الحقيقي
+            // Public Key الخاص بك
+            emailjs.init('jO00szsaAuuC7Gsly');
         })();
 
         // ==============================================
@@ -1181,13 +1171,12 @@
                 submitBtn.innerHTML = '<span>جاري الإرسال</span> <span class="loading-spinner"></span>';
                 submitBtn.disabled = true;
                 
-                // إرسال الإيميل عبر EmailJS
-                // استخدم بيانات الخدمة والقالب الخاصة بك هنا
+                // إرسال الإيميل عبر EmailJS - مع بياناتك الصحيحة
                 emailjs.send(
-                    'YOUR_SERVICE_ID',      // <-- غير هذا بمعرف الخدمة (Service ID)
-                    'YOUR_TEMPLATE_ID',     // <-- غير هذا بمعرف القالب (Template ID)
+                    'service_u22biwc',      // Service ID الخاص بك
+                    'template_jj5k7r9',     // Template ID الخاص بك
                     {
-                        to_email: 'Info@Odunex.com',
+                        to_email: 'Info@odunex.com',
                         to_name: 'فريق Odunex',
                         from_name: name,
                         from_email: email,
