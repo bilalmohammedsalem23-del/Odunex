@@ -1,1299 +1,218 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Odunex | اتصل بنا</title>
-    
-    <!-- أيقونة المتصفح (Favicon) -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
-    <link rel="shortcut icon" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/Location Logo.png">
-    
-    <!-- Google Fonts - Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
-    <script src="/maintenance-config.js"></script>
-    <script>
-        (function() {
-            const bypassCode = 'odunex2026';
-            const hasAccess = localStorage.getItem('odunex_access') === 'true';
-            const urlParams = new URLSearchParams(window.location.search);
-            const hasBypass = urlParams.get('bypass') === bypassCode;
+<meta charset="UTF-8">
+<title>اتصل بنا</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google reCAPTCHA -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+body{
+  font-family:Arial;
+  background:#f5f7fb;
+  padding:40px;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  font-size:14px;
+}
+
+textarea{
+  min-height:120px;
+}
+
+button{
+  margin-top:20px;
+  padding:12px;
+  width:100%;
+  background:#0066ff;
+  color:white;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#004ecc;
+}
+
+.alert{
+  margin-top:15px;
+  padding:10px;
+  border-radius:5px;
+  display:none;
+}
+
+.success{background:#d4edda;}
+.error{background:#f8d7da;}
+.warning{background:#fff3cd;}
+</style>
 
-            if (hasBypass) {
-                localStorage.setItem('odunex_access', 'true');
-                const newUrl = window.location.pathname + window.location.hash;
-                window.history.replaceState({}, document.title, newUrl);
-                return;
-            }
-
-            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-                window.location.replace('/maintenance-en.html');
-            }
-        })();
-    </script>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        :root {
-            --primary-purple: #7A5AF8;
-            --primary-blue: #2BB0ED;
-            --accent-blue: #4A7BFF;
-            --dark-text: #333333;
-            --body-text: #444444;
-            --secondary-text: #6B6B6B;
-            --light-text: #8A8A8A;
-            --section-bg: #F8F9FB;
-            --bg-white: #FFFFFF;
-            --border-color: #E6E8EC;
-            --icon-color: #666666;
-            --footer-bg: #F8F9FB;
-            --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
-            --input-bg: #f9f9f9;
-            
-            /* Dark mode colors */
-            --dark-bg: #0a0a1a;
-            --dark-card: #14142b;
-            --dark-border: #2a2a4a;
-            --dark-text-primary: #e0e0ff;
-            --dark-text-secondary: #c0c0e0;
-            --dark-text-muted: #a0a0c0;
-            --dark-input-bg: #1e1e36;
-            --dark-input-text: #ffffff;
-            --dark-input-placeholder: #a0a0c0;
-            --dark-hover: #7A5AF8;
-            --dark-glow: rgba(122, 90, 248, 0.3);
-            --dark-card-glow: rgba(122, 90, 248, 0.15);
-            --dark-card-bg: #1a1a35;
-            --dark-header-bg: #14142b;
-        }
-
-        body {
-            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
-            color: var(--dark-text);
-            line-height: 1.6;
-            padding-top: 80px;
-            overflow-x: hidden;
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ===== Dark Mode Styles ===== */
-        body.dark-mode {
-            background: var(--dark-bg);
-            color: var(--dark-text-primary);
-        }
-
-        body.dark-mode header {
-            background: var(--dark-header-bg);
-            border-bottom: 1px solid var(--dark-border);
-        }
-
-        body.dark-mode .nav-logo-text {
-            color: var(--dark-text-primary) !important;
-        }
-
-        body.dark-mode .nav-menu a {
-            color: var(--dark-text-secondary);
-        }
-
-        body.dark-mode .nav-menu a:hover,
-        body.dark-mode .nav-menu a.active {
-            color: var(--primary-purple);
-        }
-
-        body.dark-mode .lang-container,
-        body.dark-mode .dark-mode-container {
-            border-color: var(--dark-border);
-        }
-
-        body.dark-mode .lang-text,
-        body.dark-mode .dark-mode-toggle {
-            color: var(--dark-text-secondary);
-        }
-
-        body.dark-mode .globe-icon {
-            filter: invert(0.8);
-        }
-
-        body.dark-mode .contact-form,
-        body.dark-mode .info-card,
-        body.dark-mode .social-card {
-            background: var(--dark-card-bg);
-            border-color: var(--dark-border);
-            box-shadow: 0 10px 30px var(--dark-card-glow);
-        }
-
-        body.dark-mode .contact-form h2,
-        body.dark-mode .info-card h3,
-        body.dark-mode .social-card h3,
-        body.dark-mode .footer-brand-name {
-            color: var(--dark-text-primary) !important;
-        }
-
-        body.dark-mode .info-item span,
-        body.dark-mode .info-item a,
-        body.dark-mode .footer-tagline,
-        body.dark-mode .footer-copyright,
-        body.dark-mode .page-header p {
-            color: var(--dark-text-secondary) !important;
-        }
-
-        body.dark-mode .form-group input,
-        body.dark-mode .form-group textarea {
-            background: var(--dark-input-bg);
-            border-color: var(--dark-border);
-            color: var(--dark-input-text);
-        }
-
-        body.dark-mode .form-group input::placeholder,
-        body.dark-mode .form-group textarea::placeholder {
-            color: var(--dark-input-placeholder);
-        }
-
-        body.dark-mode .form-group label {
-            color: var(--dark-text-secondary);
-        }
-
-        body.dark-mode .social-icon-large {
-            background: var(--dark-input-bg);
-            color: var(--dark-text-secondary);
-        }
-
-        body.dark-mode .social-icon-large:hover {
-            background: var(--main-gradient);
-            color: white;
-        }
-
-        body.dark-mode .card-icon-large {
-            box-shadow: 0 5px 15px var(--dark-glow);
-        }
-
-        body.dark-mode .info-item i {
-            color: var(--primary-purple);
-        }
-
-        body.dark-mode .info-item a:hover {
-            color: var(--primary-purple);
-        }
-
-        body.dark-mode footer {
-            background: var(--dark-card-bg);
-            border-top: 1px solid var(--dark-border);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        /* ===== Header ===== */
-        header {
-            background: var(--bg-white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 12px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-logo-img {
-            height: 45px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .nav-logo-text {
-            font-size: 22px;
-            font-weight: 700;
-            color: #000000;
-            transition: color 0.3s ease;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            margin: 0;
-            overflow-x: auto;
-            padding: 5px 0;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .nav-menu::-webkit-scrollbar {
-            display: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: #6B6B6B;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            position: relative;
-        }
-
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            color: var(--primary-purple);
-        }
-
-        .nav-menu a:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
-        }
-
-        .nav-menu a.active {
-            transform: scale(1.05);
-        }
-
-        .nav-left {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .lang-container {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 5px 10px;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .lang-container:hover {
-            border-color: var(--primary-purple);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
-        }
-
-        .lang-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #555;
-            transition: color 0.3s ease;
-        }
-
-        .globe-icon {
-            width: 16px;
-            height: 16px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
-            background-size: contain;
-            transition: filter 0.3s ease;
-        }
-
-        .dark-mode-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 5px 10px;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode-container:hover {
-            border-color: var(--primary-purple);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
-        }
-
-        .dark-mode-toggle {
-            background: transparent;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #555;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s ease;
-        }
-
-        /* ===== Page Header ===== */
-        .page-header {
-            text-align: center;
-            padding: 40px 0 20px;
-        }
-
-        .page-header h1 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .page-header h1 span {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .page-header p {
-            font-size: 18px;
-            color: var(--secondary-text);
-            max-width: 600px;
-            margin: 0 auto;
-            transition: color 0.3s ease;
-        }
-
-        /* ===== Contact Section ===== */
-        .contact-section {
-            padding: 10px 0 40px;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 20px;
-            transform: scale(0.8);
-            transform-origin: top center;
-        }
-
-        /* ===== Left Side - Contact Form ===== */
-        .contact-form {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .form-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            position: relative;
-            flex-direction: row-reverse;
-        }
-
-        .envelope-container {
-            position: relative;
-            width: 187px;
-            height: 187px;
-            margin-right: 20px;
-        }
-
-        .envelope-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 20px rgba(122,90,248,0.2));
-            animation: bounce 2.5s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes bounce {
-            0%, 100% { 
-                transform: translateY(0); 
-            }
-            50% { 
-                transform: translateY(-20px); 
-            }
-        }
-
-        .form-header h2 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--dark-text);
-            margin: 0;
-            transition: color 0.3s ease;
-        }
-
-        .form-header h2 span {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: var(--dark-text);
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: 'Cairo', sans-serif;
-            transition: all 0.3s ease;
-            background: var(--input-bg);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary-purple);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(122,90,248,0.1);
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: var(--main-gradient);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 5px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(122,90,248,0.3);
-        }
-
-        .btn-submit i {
-            font-size: 16px;
-        }
-
-        /* ===== Right Side - Contact Info ===== */
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .info-card {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(122,90,248,0.1);
-            border-color: var(--primary-purple);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .card-icon-large {
-            width: 50px;
-            height: 50px;
-            background: var(--main-gradient);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .info-card:hover .card-icon-large {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(122,90,248,0.4);
-        }
-
-        .card-icon-large i {
-            font-size: 24px;
-            color: white;
-        }
-
-        .card-header h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--dark-text);
-            transition: color 0.3s ease;
-        }
-
-        .info-content {
-            padding-right: 10px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: border-color 0.3s ease;
-        }
-
-        .info-item:last-child {
-            border-bottom: none;
-        }
-
-        .info-item i {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-purple);
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover i {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 8px rgba(122,90,248,0.4));
-        }
-
-        .info-item a,
-        .info-item span {
-            color: var(--secondary-text);
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            flex: 1;
-        }
-
-        .info-item a:hover {
-            color: var(--primary-purple);
-            transform: translateX(-5px);
-            text-shadow: 0 0 8px rgba(122,90,248,0.3);
-        }
-
-        /* ===== Social Media Section ===== */
-        .social-card {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .social-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--dark-text);
-            margin-bottom: 20px;
-            text-align: center;
-            transition: color 0.3s ease;
-        }
-
-        .social-icons-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .social-icon-large {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(122,90,248,0.1), rgba(43,176,237,0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--primary-purple);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .social-icon-large:hover {
-            background: var(--main-gradient);
-            color: white;
-            transform: translateY(-5px) scale(1.15);
-            box-shadow: 0 0 30px rgba(122,90,248,0.5);
-        }
-
-        /* ===== Footer Section ===== */
-        footer {
-            background-color: var(--footer-bg);
-            width: 100%;
-            padding: 30px 0 20px;
-            text-align: center;
-            margin-top: auto;
-            transition: all 0.3s ease;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-brand-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 12px;
-        }
-
-        .footer-brand-text {
-            text-align: right;
-        }
-
-        .footer-brand-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--dark-text);
-            line-height: 1.2;
-            transition: color 0.3s ease;
-        }
-
-        .footer-tagline {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--secondary-text);
-            margin-top: 3px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-logo {
-            width: 50px;
-            height: 50px;
-        }
-
-        .footer-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .footer-copyright {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--light-text);
-            margin-top: 12px;
-            transition: color 0.3s ease;
-        }
-
-        /* ===== Message Alert Styles ===== */
-        .alert-message {
-            padding: 12px 15px;
-            border-radius: 12px;
-            margin: 15px 0;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideIn 0.3s ease;
-        }
-
-        .alert-message i {
-            font-size: 18px;
-        }
-
-        .alert-message.success {
-            background: #d4edda;
-            color: #155724;
-            border-right: 4px solid #28a745;
-        }
-
-        .alert-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border-right: 4px solid #dc3545;
-        }
-
-        .alert-message.warning {
-            background: #fff3cd;
-            color: #856404;
-            border-right: 4px solid #ffc107;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ===== Responsive Design ===== */
-        @media (max-width: 992px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                transform: scale(1);
-            }
-            
-            .page-header h1 {
-                font-size: 38px;
-            }
-
-            .form-header {
-                flex-direction: column-reverse;
-            }
-
-            .envelope-container {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header .container {
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-
-            .nav-right, .nav-left {
-                width: auto;
-            }
-
-            .nav-menu {
-                order: 3;
-                width: 100%;
-                justify-content: flex-start;
-                gap: 20px;
-            }
-
-            .page-header {
-                padding: 50px 0 20px;
-            }
-
-            .page-header h1 {
-                font-size: 34px;
-            }
-
-            .page-header p {
-                font-size: 16px;
-            }
-
-            .contact-form {
-                padding: 25px;
-            }
-
-            .envelope-container {
-                width: 150px;
-                height: 150px;
-            }
-
-            .form-header h2 {
-                font-size: 24px;
-            }
-
-            .info-card {
-                padding: 20px;
-            }
-
-            .card-header h3 {
-                font-size: 18px;
-            }
-
-            .social-icon-large {
-                width: 50px;
-                height: 50px;
-                font-size: 22px;
-            }
-
-            .footer-brand-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .footer-brand-text {
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .page-header {
-                padding: 60px 0 20px;
-            }
-
-            .page-header h1 {
-                font-size: 30px;
-            }
-
-            .page-header p {
-                font-size: 14px;
-            }
-
-            .contact-form {
-                padding: 20px;
-            }
-
-            .envelope-container {
-                width: 120px;
-                height: 120px;
-            }
-
-            .form-header h2 {
-                font-size: 22px;
-            }
-
-            .info-item a,
-            .info-item span {
-                font-size: 13px;
-            }
-
-            .social-icon-large {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-
-            .footer-brand-name {
-                font-size: 20px;
-            }
-
-            .footer-logo {
-                width: 45px;
-                height: 45px;
-            }
-
-            .footer-copyright {
-                font-size: 11px;
-            }
-        }
-    </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="nav-right">
-                <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
-                <span class="nav-logo-text">Odunex</span>
-            </div>
 
-            <div class="nav-menu">
-                <a href="index.html">الرئيسية</a>
-                <a href="features.html">المميزات</a>
-                <a href="pricing.html">الأسعار</a>
-                <a href="gallery.html">معرض الأعمال</a>
-                <a href="contact.html" class="active">اتصل بنا</a>
-            </div>
+<div class="container">
 
-            <div class="nav-left">
-                <div class="lang-container" onclick="switchLanguage()">
-                    <span class="lang-text">EN</span>
-                    <div class="globe-icon"></div>
-                </div>
-                <div class="dark-mode-container" onclick="toggleDarkMode()">
-                    <span class="dark-mode-toggle">☾</span>
-                </div>
-            </div>
-        </div>
-    </header>
+<h2>اتصل بنا</h2>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="container">
-                <h1><span>تواصل</span> معنا</h1>
-                <p>نحن هنا للإجابة على استفساراتك ومساعدتك في أي وقت</p>
-            </div>
-        </section>
+<form id="contactForm">
 
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-grid">
-                    <!-- Left Side - Contact Form -->
-                    <div class="contact-form">
-                        <div class="form-header">
-                            <div class="envelope-container">
-                                <img src="assets/images/Envelop.png" alt="رسالة" class="envelope-img">
-                            </div>
-                            <h2>أرسل <span>رسالة</span></h2>
-                        </div>
-                        
-                        <!-- مكان عرض رسائل التأكيد -->
-                        <div id="messageAlert" style="display: none;"></div>
-                        
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">الاسم الكامل</label>
-                                <input type="text" id="name" placeholder="أدخل اسمك الكامل" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">البريد الإلكتروني</label>
-                                <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">الموضوع</label>
-                                <input type="text" id="subject" placeholder="موضوع الرسالة" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">الرسالة</label>
-                                <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn-submit" id="submitBtn">
-                                <span>إرسال الرسالة</span>
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
+<input type="text" id="name" placeholder="الاسم">
+<input type="email" id="email" placeholder="البريد الإلكتروني">
+<input type="text" id="subject" placeholder="الموضوع">
+<textarea id="message" placeholder="رسالتك"></textarea>
 
-                    <!-- Right Side - Contact Info -->
-                    <div class="contact-info">
-                        <!-- Address Card -->
-                        <div class="info-card">
-                            <div class="card-header">
-                                <div class="card-icon-large">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <h3>العنوان</h3>
-                            </div>
-                            <div class="info-content">
-                                <div class="info-item">
-                                    <i class="fas fa-location-dot"></i>
-                                    <span>أربيل، القرية الإيطالية الثانية 215</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span>ساعات العمل: ٩ص - ٦م</span>
-                                </div>
-                            </div>
-                        </div>
+<!-- Honeypot -->
+<input type="text" id="website" style="display:none">
 
-                        <!-- Contact Details Card -->
-                        <div class="info-card">
-                            <div class="card-header">
-                                <div class="card-icon-large">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <h3>بيانات الاتصال</h3>
-                            </div>
-                            <div class="info-content">
-                                <div class="info-item">
-                                    <i class="fas fa-phone"></i>
-                                    <a href="tel:+9647506841035">+9647506841035</a>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <a href="mailto:info@odunex.com">info@odunex.com</a>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-globe"></i>
-                                    <a href="https://odunex.com" target="_blank">https://odunex.com</a>
-                                </div>
-                            </div>
-                        </div>
+<br><br>
 
-                        <!-- Social Media Card -->
-                        <div class="social-card">
-                            <h3>تابعنا على</h3>
-                            <div class="social-icons-grid">
-                                <a href="#" class="social-icon-large"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="social-icon-large"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="social-icon-large"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#" class="social-icon-large"><i class="fab fa-instagram"></i></a>
-                                <!-- أيقونة واتساب مربوطة بالرقم الجديد -->
-                                <a href="https://wa.me/9647506841035?text=مرحباً%20لدي%20استفسار%20عن%20نظام%20Odunex" class="social-icon-large" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                                <a href="#" class="social-icon-large"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+<div class="g-recaptcha" data-sitekey="6LfHpIssAAAAAI5yxIHZqJMD4zA-yNI9KOgpeUQo"></div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand-row">
-                <div class="footer-brand-text">
-                    <div class="footer-brand-name">Odunex</div>
-                    <div class="footer-tagline">حلول ERP الموحدة</div>
-                </div>
-                <div class="footer-logo">
-                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
-                </div>
-            </div>
-            <div class="footer-copyright">
-                © 2026 جميع الحقوق محفوظة لشركة Odunex | حلول ERP الموحدة
-            </div>
-        </div>
-    </footer>
+<button type="submit">إرسال الرسالة</button>
 
-    <script>
-        // ==============================================
-        // تهيئة EmailJS - مع بياناتك الحقيقية
-        // ==============================================
-        (function() {
-            // Public Key الخاص بك
-            emailjs.init('jO00szsaAuuC7Gsly');
-        })();
+<div id="alert" class="alert"></div>
 
-        // ==============================================
-        // نظام الحفاظ على الوضع الليلي/النهاري
-        // ==============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // استرجاع الوضع المحفوظ
-            const savedMode = localStorage.getItem('darkMode');
-            const toggleBtn = document.querySelector('.dark-mode-toggle');
-            
-            if (savedMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
-            } else {
-                document.body.classList.remove('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☾';
-            }
-            
-            // تحديث الرابط النشط
-            updateActiveLink();
-            
-            // ربط نموذج الاتصال
-            setupContactForm();
-        });
+</form>
 
-        // ==============================================
-        // إعداد نموذج الاتصال مع EmailJS
-        // ==============================================
-        function setupContactForm() {
-            const form = document.getElementById('contactForm');
-            
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                // جمع البيانات من النموذج
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const subject = document.getElementById('subject').value.trim();
-                const message = document.getElementById('message').value.trim();
-                
-                // التحقق من المدخلات
-                if (!name || !email || !subject || !message) {
-                    showAlert('الرجاء ملء جميع الحقول المطلوبة', 'warning');
-                    return;
-                }
-                
-                if (!isValidEmail(email)) {
-                    showAlert('الرجاء إدخال بريد إلكتروني صحيح', 'warning');
-                    return;
-                }
-                
-                // تغيير حالة الزر (إظهار التحميل)
-                const submitBtn = document.getElementById('submitBtn');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<span>جاري الإرسال</span> <span class="loading-spinner"></span>';
-                submitBtn.disabled = true;
-                
-                // إرسال الإيميل عبر EmailJS - مع بياناتك الصحيحة
-                emailjs.send(
-                    'service_u22biwc',      // Service ID الخاص بك
-                    'template_jj5k7r9',     // Template ID الخاص بك
-                    {
-                        to_email: 'Info@odunex.com',
-                        to_name: 'فريق Odunex',
-                        from_name: name,
-                        from_email: email,
-                        subject: subject,
-                        message: message,
-                        reply_to: email
-                    }
-                ).then(
-                    function(response) {
-                        console.log('✅ تم الإرسال بنجاح', response);
-                        
-                        // إظهار رسالة نجاح
-                        showAlert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً', 'success');
-                        
-                        // إعادة تعيين النموذج
-                        form.reset();
-                        
-                        // إعادة زر الإرسال لحالته الطبيعية
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    },
-                    function(error) {
-                        console.log('❌ فشل الإرسال', error);
-                        
-                        // إظهار رسالة خطأ
-                        showAlert('عذراً، حدث خطأ في الإرسال. الرجاء المحاولة مرة أخرى', 'error');
-                        
-                        // إعادة زر الإرسال لحالته الطبيعية
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                );
-            });
-        }
+</div>
 
-        // ==============================================
-        // دالة إظهار الرسائل
-        // ==============================================
-        function showAlert(message, type) {
-            const alertDiv = document.getElementById('messageAlert');
-            
-            // تحديد الأيقونة حسب نوع الرسالة
-            let icon = '';
-            if (type === 'success') icon = '✅';
-            else if (type === 'error') icon = '❌';
-            else if (type === 'warning') icon = '⚠️';
-            
-            // إنشاء محتوى الرسالة
-            alertDiv.innerHTML = `
-                <div class="alert-message ${type}">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
-                    <span>${icon} ${message}</span>
-                </div>
-            `;
-            
-            alertDiv.style.display = 'block';
-            
-            // إخفاء الرسالة بعد 5 ثواني
-            setTimeout(() => {
-                alertDiv.style.display = 'none';
-            }, 5000);
-        }
+<script>
+// تهيئة EmailJS
+(function(){
+  emailjs.init("YOUR_EMAILJS_USER_ID"); // ضع معرف مستخدم EmailJS هنا
+})();
 
-        // ==============================================
-        // دالة التحقق من البريد الإلكتروني
-        // ==============================================
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
+function showAlert(msg,type){
+  const alertBox=document.getElementById("alert");
+  alertBox.className="alert "+type;
+  alertBox.innerText=msg;
+  alertBox.style.display="block";
+}
 
-        // ==============================================
-        // دوال الموقع الأساسية
-        // ==============================================
-        function toggleDarkMode() {
-            const isDarkMode = document.body.classList.toggle('dark-mode');
-            const toggleBtn = document.querySelector('.dark-mode-toggle');
-            
-            if (isDarkMode) {
-                localStorage.setItem('darkMode', 'enabled');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                if (toggleBtn) toggleBtn.textContent = '☾';
-            }
-        }
+function sanitize(text){
+  return text.replace(/[<>]/g,"");
+}
 
-        function updateActiveLink() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.nav-menu a');
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-        }
+function validateEmail(email){
+  const pattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!pattern.test(email)) return false;
 
-        function switchLanguage() {
-            let currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            
-            const pageMap = {
-                'index.html': 'index-en.html',
-                'features.html': 'features-en.html',
-                'pricing.html': 'pricing-en.html',
-                'gallery.html': 'gallery-en.html',
-                'contact.html': 'contact-en.html',
-                'index-en.html': 'index.html',
-                'features-en.html': 'features.html',
-                'pricing-en.html': 'pricing.html',
-                'gallery-en.html': 'gallery.html',
-                'contact-en.html': 'contact.html'
-            };
-            
-            window.location.href = pageMap[currentPage] || 'index.html';
-        }
-    </script>
+  // حظر الايميلات المؤقتة والمشبوهة
+  const blockedDomains=[
+    "mailinator.com","tempmail.com","10minutemail.com",
+    "yopmail.com","guerrillamail.com","throwawaymail.com",
+    "fakeemail.com","trashmail.com","maildrop.cc"
+  ];
+  const domain=email.split("@")[1].toLowerCase();
+  if(blockedDomains.includes(domain)) return false;
+
+  return true;
+}
+
+function isSpam(text){
+  const spamWords=["crypto","bitcoin","casino","loan","porn","sex"];
+  text=text.toLowerCase();
+  for(let word of spamWords){
+    if(text.includes(word)){
+      return true;
+    }
+  }
+  return false;
+}
+
+async function sendEmail(name,email,subject,message){
+  try{
+    await emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message
+    });
+  }catch(e){
+    console.error(e);
+    throw new Error("خطأ في إرسال البريد الإلكتروني");
+  }
+}
+
+document.getElementById("contactForm").addEventListener("submit",async function(e){
+  e.preventDefault();
+
+  const name=sanitize(document.getElementById("name").value.trim());
+  const email=sanitize(document.getElementById("email").value.trim());
+  const subject=sanitize(document.getElementById("subject").value.trim());
+  const message=sanitize(document.getElementById("message").value.trim());
+  const honeypot=document.getElementById("website").value;
+
+  if(honeypot!==""){ return; } // روبوت
+
+  if(!name||!email||!subject||!message){
+    showAlert("يرجى ملء جميع الحقول","warning");
+    return;
+  }
+
+  if(!validateEmail(email)){
+    showAlert("البريد الإلكتروني غير صالح أو مؤقت","warning");
+    return;
+  }
+
+  if(isSpam(name+subject+message)){
+    showAlert("تم اكتشاف رسالة سبام","error");
+    return;
+  }
+
+  const recaptcha=grecaptcha.getResponse();
+  if(recaptcha.length===0){
+    showAlert("يرجى التحقق أنك لست روبوت","warning");
+    return;
+  }
+
+  const lastSend=localStorage.getItem("lastSend");
+  const now=Date.now();
+  if(lastSend && now-lastSend<30000){
+    showAlert("يمكن إرسال رسالة كل 30 ثانية","warning");
+    return;
+  }
+  localStorage.setItem("lastSend",now);
+
+  try{
+    await sendEmail(name,email,subject,message);
+    showAlert("تم إرسال الرسالة بنجاح","success");
+    document.getElementById("contactForm").reset();
+    grecaptcha.reset();
+  }catch(err){
+    showAlert("حدث خطأ أثناء الإرسال","error");
+  }
+
+});
+</script>
+
 </body>
 </html>
