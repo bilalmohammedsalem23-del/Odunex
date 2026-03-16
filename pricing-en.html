@@ -4,10 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | Pricing</title>
-    <!-- Google Fonts - Cairo Bold -->
+    
+    <!-- Favicon - Updated with Location Logo -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
+    <link rel="shortcut icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/Location Logo.png">
+    
+    <!-- Google Fonts - Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- DOMPurify - XSS Protection -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
+    <!-- Maintenance Config -->
+    <script src="/maintenance-config.js"></script>
+    <script>
+        (function() {
+            const bypassCode = 'odunex2026';
+            const hasAccess = localStorage.getItem('odunex_access') === 'true';
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasBypass = urlParams.get('bypass') === bypassCode;
+
+            if (hasBypass) {
+                localStorage.setItem('odunex_access', 'true');
+                const newUrl = window.location.pathname + window.location.hash;
+                window.history.replaceState({}, document.title, newUrl);
+                return;
+            }
+
+            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
+                window.location.replace('/maintenance-en.html');
+            }
+        })();
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -42,6 +84,9 @@
             --dark-card-bg: #1a1a35;
             --dark-header-bg: #14142b;
             --dark-glow: rgba(122, 90, 248, 0.3);
+            --dark-input-bg: #1e1e36;
+            --dark-input-text: #ffffff;
+            --dark-input-placeholder: #a0a0c0;
         }
 
         body {
@@ -62,7 +107,6 @@
             color: var(--dark-text-primary);
         }
 
-        /* Header in dark mode */
         body.dark-mode header {
             background: var(--dark-header-bg);
             border-bottom: 1px solid var(--dark-border);
@@ -95,7 +139,6 @@
             filter: invert(0.8);
         }
 
-        /* Pricing cards in dark mode */
         body.dark-mode .pricing-card {
             background: var(--dark-card-bg);
             border-color: var(--dark-border);
@@ -124,13 +167,12 @@
             border-bottom-color: var(--dark-border);
         }
 
-        /* Payment methods in dark mode */
         body.dark-mode .payment-section {
-            background-color: var(--dark-card-bg);
+            background-color: transparent;
         }
 
         body.dark-mode .payment-card {
-            background: var(--dark-card);
+            background: var(--dark-card-bg);
             border-color: var(--dark-border);
         }
 
@@ -138,7 +180,10 @@
             color: var(--dark-text-primary);
         }
 
-        /* Footer in dark mode */
+        body.dark-mode .payment-title-container {
+            border-top-color: var(--dark-border);
+        }
+
         body.dark-mode footer {
             background: var(--dark-card-bg);
             border-top: 1px solid var(--dark-border);
@@ -155,6 +200,10 @@
 
         body.dark-mode .page-header p {
             color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .modal-img-container {
+            background: var(--dark-card-bg);
         }
 
         .container {
@@ -233,7 +282,6 @@
             color: var(--primary-purple);
         }
 
-        /* Zoom and glow effect on menu links */
         .nav-menu a:hover {
             transform: scale(1.1);
             text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
@@ -367,7 +415,6 @@
             box-shadow: 0 25px 45px rgba(122,90,248,0.12);
         }
 
-        /* Most Popular Card - Middle */
         .pricing-card.popular {
             border: double 2px transparent;
             background-image: linear-gradient(var(--bg-white), var(--bg-white)), 
@@ -465,7 +512,6 @@
             width: 22px;
         }
 
-        /* ===== Compare Buttons ===== */
         .btn-compare-filled {
             width: 100%;
             padding: 14px;
@@ -585,7 +631,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* نفس عرض خطط التسعير */
         .payment-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -739,10 +784,6 @@
         .modal p {
             font-size: 18px;
             color: rgba(255,255,255,0.8);
-        }
-
-        body.dark-mode .modal-img-container {
-            background: var(--dark-card-bg);
         }
 
         /* ===== Footer Section ===== */
@@ -1058,7 +1099,7 @@
             </div>
         </section>
 
-        <!-- Payment Methods Section - بنفس عرض خطط التسعير -->
+        <!-- Payment Methods Section -->
         <section class="payment-section">
             <div class="container">
                 <h2 class="payment-title"><span>Payment</span> Methods</h2>
@@ -1159,8 +1200,47 @@
     </footer>
 
     <script>
-        // ===== Dark/Light Mode Preservation System =====
+        // ==============================================
+        // Security Functions (Standard for all pages)
+        // ==============================================
+        
+        // Sanitize function (prepared for future forms)
+        function sanitizeInput(text) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+            }
+            return text.replace(/[<>]/g, "");
+        }
+        
+        // Validate request origin (Domain Restriction)
+        function validateRequestOrigin() {
+            const referrer = document.referrer || '';
+            const currentDomain = window.location.hostname;
+            
+            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
+                console.warn('Request from external domain detected:', referrer);
+                return false;
+            }
+            return true;
+        }
+        
+        // Rate limiting check (3 seconds between page visits)
+        function checkRateLimit() {
+            const lastVisit = localStorage.getItem('lastPageVisit');
+            const now = Date.now();
+            
+            if (lastVisit && now - lastVisit < 3000) {
+                return false;
+            }
+            localStorage.setItem('lastPageVisit', now);
+            return true;
+        }
+
+        // ==============================================
+        // Dark Mode System
+        // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve saved mode
             const savedMode = localStorage.getItem('darkMode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
             
@@ -1172,9 +1252,15 @@
                 if (toggleBtn) toggleBtn.textContent = '☾';
             }
             
+            // Update active link
             updateActiveLink();
+            
+            // Apply security checks
+            validateRequestOrigin();
+            checkRateLimit();
         });
 
+        // Toggle dark mode function
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -1188,6 +1274,7 @@
             }
         }
 
+        // Update active link function
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
@@ -1200,10 +1287,15 @@
             });
         }
 
+        // Language switch function
         function switchLanguage() {
             window.location.href = 'pricing.html';
         }
 
+        // ==============================================
+        // Payment Modal Functions
+        // ==============================================
+        
         function openPaymentModal(method) {
             const modal = document.getElementById('paymentModal');
             const modalImage = document.getElementById('modalImage');
@@ -1250,6 +1342,7 @@
             document.getElementById('paymentModal').style.display = 'none';
         }
 
+        // Close modal on outside click
         window.onclick = function(event) {
             const modal = document.getElementById('paymentModal');
             if (event.target === modal) {
@@ -1257,5 +1350,29 @@
             }
         }
     </script>
+    
+    <!-- ============================================== -->
+    <!-- CSP Headers - Add these in your server config -->
+    <!-- ============================================== -->
+    <!-- 
+        Add these headers in your server configuration:
+        
+        Content-Security-Policy: 
+            default-src 'self';
+            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
+            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+            img-src 'self' data:;
+            frame-src https://www.google.com;
+            connect-src 'self';
+            frame-ancestors 'none';
+            base-uri 'self';
+            form-action 'self';
+        
+        Strict-Transport-Security: max-age=31536000; includeSubDomains
+        X-Content-Type-Options: nosniff
+        X-Frame-Options: DENY
+        Referrer-Policy: strict-origin-when-cross-origin
+    -->
 </body>
 </html>
