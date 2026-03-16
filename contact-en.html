@@ -4,31 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | Contact Us</title>
-    <!-- Google Fonts - Cairo -->
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
+    <link rel="shortcut icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
+    
+    <!-- Google Fonts - Cairo (supports both Arabic and English) -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <script src="/maintenance-config.js"></script>
-<script>
-(function() {
-    const bypassCode = 'odunex2026';
-    const hasAccess = localStorage.getItem('odunex_access') === 'true';
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasBypass = urlParams.get('bypass') === bypassCode;
+    
+    <!-- Google reCAPTCHA v3 (invisible) -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH"></script>
+    
+    <!-- DOMPurify - XSS Protection -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Maintenance Config (if any) -->
+    <script src="/maintenance-config.js"></script>
+    <script>
+        (function() {
+            const bypassCode = 'odunex2026';
+            const hasAccess = localStorage.getItem('odunex_access') === 'true';
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasBypass = urlParams.get('bypass') === bypassCode;
 
-    if (hasBypass) {
-        localStorage.setItem('odunex_access', 'true');
-        const newUrl = window.location.pathname + window.location.hash;
-        window.history.replaceState({}, document.title, newUrl);
-        return;
-    }
+            if (hasBypass) {
+                localStorage.setItem('odunex_access', 'true');
+                const newUrl = window.location.pathname + window.location.hash;
+                window.history.replaceState({}, document.title, newUrl);
+                return;
+            }
 
-    if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-        window.location.replace('/maintenance-en.html');
-    }
-})();
-</script>
+            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
+                window.location.replace('/maintenance-en.html');
+            }
+        })();
+    </script>
+    
     <style>
+        /* ===== STANDARD ODUNEX STYLES ===== */
+        /* This style block should be used across all pages for consistency */
+        
         * {
             margin: 0;
             padding: 0;
@@ -51,6 +78,9 @@
             --footer-bg: #F8F9FB;
             --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
             --input-bg: #f9f9f9;
+            
+            /* WhatsApp color */
+            --whatsapp-green: #25D366;
             
             /* Dark mode colors */
             --dark-bg: #0a0a1a;
@@ -81,13 +111,12 @@
             flex-direction: column;
         }
 
-        /* ===== Dark Mode Styles ===== */
+        /* ===== DARK MODE STYLES (Standard) ===== */
         body.dark-mode {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
         }
 
-        /* Header in dark mode */
         body.dark-mode header {
             background: var(--dark-header-bg);
             border-bottom: 1px solid var(--dark-border);
@@ -120,7 +149,6 @@
             filter: invert(0.8);
         }
 
-        /* Cards in dark mode */
         body.dark-mode .contact-form,
         body.dark-mode .info-card,
         body.dark-mode .social-card {
@@ -129,7 +157,6 @@
             box-shadow: 0 10px 30px var(--dark-card-glow);
         }
 
-        /* Titles in dark mode */
         body.dark-mode .contact-form h2,
         body.dark-mode .info-card h3,
         body.dark-mode .social-card h3,
@@ -137,7 +164,6 @@
             color: var(--dark-text-primary) !important;
         }
 
-        /* Content text in dark mode */
         body.dark-mode .info-item span,
         body.dark-mode .info-item a,
         body.dark-mode .footer-tagline,
@@ -146,7 +172,6 @@
             color: var(--dark-text-secondary) !important;
         }
 
-        /* Form fields in dark mode */
         body.dark-mode .form-group input,
         body.dark-mode .form-group textarea {
             background: var(--dark-input-bg);
@@ -163,7 +188,6 @@
             color: var(--dark-text-secondary);
         }
 
-        /* Social icons in dark mode */
         body.dark-mode .social-icon-large {
             background: var(--dark-input-bg);
             color: var(--dark-text-secondary);
@@ -174,7 +198,6 @@
             color: white;
         }
 
-        /* Card icons in dark mode */
         body.dark-mode .card-icon-large {
             box-shadow: 0 5px 15px var(--dark-glow);
         }
@@ -187,12 +210,12 @@
             color: var(--primary-purple);
         }
 
-        /* Footer in dark mode */
         body.dark-mode footer {
             background: var(--dark-card-bg);
             border-top: 1px solid var(--dark-border);
         }
 
+        /* ===== CONTAINER (Standard) ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -200,7 +223,7 @@
             width: 100%;
         }
 
-        /* ===== Header ===== */
+        /* ===== HEADER (Standard) ===== */
         header {
             background: var(--bg-white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -269,7 +292,6 @@
             color: var(--primary-purple);
         }
 
-        /* Zoom and glow effect on menu links */
         .nav-menu a:hover {
             transform: scale(1.1);
             text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
@@ -350,7 +372,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== Page Header ===== */
+        /* ===== PAGE HEADER ===== */
         .page-header {
             text-align: center;
             padding: 40px 0 20px;
@@ -376,7 +398,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== Contact Section ===== */
+        /* ===== CONTACT SECTION ===== */
         .contact-section {
             padding: 10px 0 40px;
         }
@@ -390,7 +412,7 @@
             transform-origin: top center;
         }
 
-        /* ===== Left Side - Contact Form ===== */
+        /* ===== LEFT SIDE - CONTACT FORM ===== */
         .contact-form {
             background: var(--bg-white);
             border-radius: 20px;
@@ -514,7 +536,7 @@
             font-size: 16px;
         }
 
-        /* ===== Right Side - Contact Info ===== */
+        /* ===== RIGHT SIDE - CONTACT INFO ===== */
         .contact-info {
             display: flex;
             flex-direction: column;
@@ -619,7 +641,7 @@
             text-shadow: 0 0 8px rgba(122,90,248,0.3);
         }
 
-        /* ===== Social Media Section ===== */
+        /* ===== SOCIAL MEDIA SECTION ===== */
         .social-card {
             background: var(--bg-white);
             border-radius: 20px;
@@ -666,7 +688,12 @@
             box-shadow: 0 0 30px rgba(122,90,248,0.5);
         }
 
-        /* ===== Footer Section ===== */
+        /* WhatsApp icon specific hover */
+        .social-icon-large .fa-whatsapp:hover {
+            color: var(--whatsapp-green);
+        }
+
+        /* ===== FOOTER SECTION (Standard) ===== */
         footer {
             background-color: var(--footer-bg);
             width: 100%;
@@ -729,7 +756,68 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== Responsive Design ===== */
+        /* ===== MESSAGE ALERT STYLES ===== */
+        .alert-message {
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-message i {
+            font-size: 18px;
+        }
+
+        .alert-message.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .alert-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .alert-message.warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -870,7 +958,7 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header (Standard for all pages) -->
     <header>
         <div class="container">
             <div class="nav-left">
@@ -912,7 +1000,7 @@
         <section class="contact-section">
             <div class="container">
                 <div class="contact-grid">
-                    <!-- Left Side - Contact Form -->
+                    <!-- Left Side - Contact Form (with all security measures) -->
                     <div class="contact-form">
                         <div class="form-header">
                             <div class="envelope-container">
@@ -921,7 +1009,10 @@
                             <h2>Send <span>Message</span></h2>
                         </div>
                         
-                        <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <!-- Message Alert Container -->
+                        <div id="messageAlert" style="display: none;"></div>
+                        
+                        <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
                                 <input type="text" id="name" placeholder="Enter your full name" required>
@@ -942,7 +1033,13 @@
                                 <textarea id="message" placeholder="Type your message here..." required></textarea>
                             </div>
                             
-                            <button type="submit" class="btn-submit">
+                            <!-- Honeypot field - hidden from humans, traps bots -->
+                            <input type="text" id="website" name="website" style="display:none" autocomplete="off">
+                            
+                            <!-- reCAPTCHA v3 token (invisible) -->
+                            <input type="hidden" id="recaptchaToken" name="recaptchaToken">
+                            
+                            <button type="submit" class="btn-submit" id="submitBtn">
                                 <span>Send Message</span>
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -982,11 +1079,12 @@
                             <div class="info-content">
                                 <div class="info-item">
                                     <i class="fas fa-phone"></i>
-                                    <a href="tel:+9647883002797">+9647883002797</a>
+                                    <a href="tel:+9647506841035">+9647506841035</a>
                                 </div>
                                 <div class="info-item">
                                     <i class="fas fa-envelope"></i>
-                                    <a href="mailto:info@odunex.com">info@odunex.com</a>
+                                    <!-- Protected email - appears after page load to avoid bots -->
+                                    <a href="#" id="protectedEmail" class="protected-email">Click to reveal email</a>
                                 </div>
                                 <div class="info-item">
                                     <i class="fas fa-globe"></i>
@@ -1003,7 +1101,8 @@
                                 <a href="#" class="social-icon-large"><i class="fab fa-twitter"></i></a>
                                 <a href="#" class="social-icon-large"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="#" class="social-icon-large"><i class="fab fa-instagram"></i></a>
-                                <a href="#" class="social-icon-large"><i class="fab fa-whatsapp"></i></a>
+                                <!-- WhatsApp icon linked to the new number -->
+                                <a href="https://wa.me/9647506841035?text=Hello%2C%20I%20have%20a%20question%20about%20Odunex%20system" class="social-icon-large" target="_blank"><i class="fab fa-whatsapp"></i></a>
                                 <a href="#" class="social-icon-large"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
@@ -1013,7 +1112,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (Standard for all pages) -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-row">
@@ -1032,9 +1131,89 @@
     </footer>
 
     <script>
-        // ===== Dark/Light Mode Preservation System =====
+        // ==============================================
+        // Initialize EmailJS with your credentials
+        // ==============================================
+        (function() {
+            // Your Public Key
+            emailjs.init('jO00szsaAuuC7Gsly');
+            
+            // Reveal protected email after page load
+            setTimeout(function() {
+                const emailLink = document.getElementById('protectedEmail');
+                if (emailLink) {
+                    emailLink.href = 'mailto:info@odunex.com';
+                    emailLink.textContent = 'info@odunex.com';
+                    emailLink.style.color = 'var(--primary-purple)';
+                    emailLink.style.fontWeight = '600';
+                }
+            }, 100);
+        })();
+
+        // ==============================================
+        // Security and Validation Functions
+        // ==============================================
+        
+        // Sanitize input using DOMPurify (XSS Protection)
+        function sanitizeWithDOMPurify(text) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+            }
+            return text.replace(/[<>]/g, "");
+        }
+        
+        // Validate email and block temporary email domains
+        function validateEmail(email) {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!pattern.test(email)) return false;
+            
+            const blockedDomains = [
+                "mailinator.com", "tempmail.com", "10minutemail.com",
+                "yopmail.com", "guerrillamail.com", "throwawaymail.com",
+                "fakeemail.com", "trashmail.com", "maildrop.cc",
+                "temp-mail.org", "tempinbox.com", "mailnesia.com",
+                "spam4.me", "dispostable.com", "getnada.com"
+            ];
+            
+            const domain = email.split("@")[1].toLowerCase();
+            if (blockedDomains.includes(domain)) return false;
+            
+            return true;
+        }
+        
+        // Detect spam messages
+        function isSpam(text) {
+            const spamWords = [
+                "crypto", "bitcoin", "casino", "loan", "porn", "sex",
+                "viagra", "xxx", "nude", "gambling", "poker"
+            ];
+            
+            text = text.toLowerCase();
+            for (let word of spamWords) {
+                if (text.includes(word)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        // Validate request origin (Domain Restriction)
+        function validateRequestOrigin() {
+            const referrer = document.referrer || '';
+            const currentDomain = window.location.hostname;
+            
+            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
+                console.warn('Request from external domain detected:', referrer);
+                return false;
+            }
+            
+            return true;
+        }
+
+        // ==============================================
+        // Dark Mode System
+        // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Retrieve saved mode
             const savedMode = localStorage.getItem('darkMode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
             
@@ -1046,11 +1225,152 @@
                 if (toggleBtn) toggleBtn.textContent = '☾';
             }
             
-            // Update active link
             updateActiveLink();
+            setupContactForm();
         });
 
-        // Toggle dark mode function
+        // ==============================================
+        // Setup Contact Form with all security measures
+        // ==============================================
+        function setupContactForm() {
+            const form = document.getElementById('contactForm');
+            
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                // Validate request origin
+                if (!validateRequestOrigin()) {
+                    showAlert('Unauthorized request', 'error');
+                    return;
+                }
+                
+                // Sanitize inputs
+                const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
+                const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
+                const subject = sanitizeWithDOMPurify(document.getElementById('subject').value.trim());
+                const message = sanitizeWithDOMPurify(document.getElementById('message').value.trim());
+                
+                // Check honeypot
+                const honeypot = document.getElementById('website').value;
+                if (honeypot !== "") {
+                    console.log("Bot detected (Honeypot)");
+                    showAlert('Suspicious activity detected', 'error');
+                    return;
+                }
+                
+                // Check required fields
+                if (!name || !email || !subject || !message) {
+                    showAlert('Please fill in all required fields', 'warning');
+                    return;
+                }
+                
+                // Validate email
+                if (!validateEmail(email)) {
+                    showAlert('Invalid or temporary email address', 'warning');
+                    return;
+                }
+                
+                // Check for spam
+                if (isSpam(name + subject + message)) {
+                    showAlert('Spam detected', 'error');
+                    return;
+                }
+                
+                // Get reCAPTCHA v3 token
+                let recaptchaToken = '';
+                try {
+                    recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'});
+                    document.getElementById('recaptchaToken').value = recaptchaToken;
+                } catch (error) {
+                    console.error('reCAPTCHA error:', error);
+                    showAlert('Security verification failed. Please refresh the page.', 'error');
+                    return;
+                }
+                
+                // Verify reCAPTCHA token exists
+                if (!recaptchaToken || recaptchaToken.length < 10) {
+                    showAlert('Security verification failed', 'error');
+                    return;
+                }
+                
+                // Rate limiting (30 seconds between messages)
+                const lastSend = localStorage.getItem('lastSend');
+                const now = Date.now();
+                if (lastSend && now - lastSend < 30000) {
+                    const secondsLeft = Math.ceil((30000 - (now - lastSend)) / 1000);
+                    showAlert(`Please wait ${secondsLeft} seconds before sending another message`, 'warning');
+                    return;
+                }
+                
+                // Change button state (show loading)
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span>Sending</span> <span class="loading-spinner"></span>';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Send email via EmailJS
+                    await emailjs.send(
+                        'service_u22biwc',      // Your Service ID
+                        'template_jj5k7r9',     // Your Template ID
+                        {
+                            to_email: 'Info@odunex.com',
+                            to_name: 'Odunex Team',
+                            from_name: name,
+                            from_email: email,
+                            subject: subject,
+                            message: message,
+                            reply_to: email
+                        }
+                    );
+                    
+                    // Save send time
+                    localStorage.setItem('lastSend', now);
+                    
+                    showAlert('Your message has been sent successfully! We will reply to you soon.', 'success');
+                    
+                    // Reset form
+                    form.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                } catch (error) {
+                    console.error('❌ Send failed:', error);
+                    showAlert('Sorry, an error occurred. Please try again.', 'error');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        // ==============================================
+        // Show Alert Messages
+        // ==============================================
+        function showAlert(message, type) {
+            const alertDiv = document.getElementById('messageAlert');
+            
+            let icon = '';
+            if (type === 'success') icon = '✅';
+            else if (type === 'error') icon = '❌';
+            else if (type === 'warning') icon = '⚠️';
+            
+            alertDiv.innerHTML = `
+                <div class="alert-message ${type}">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
+                    <span>${icon} ${message}</span>
+                </div>
+            `;
+            
+            alertDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // ==============================================
+        // Utility Functions
+        // ==============================================
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -1064,7 +1384,6 @@
             }
         }
 
-        // Update active link function
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
@@ -1077,7 +1396,6 @@
             });
         }
 
-        // Language switch function
         function switchLanguage() {
             let currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             
@@ -1091,29 +1409,30 @@
             
             window.location.href = pageMap[currentPage] || 'index.html';
         }
-
-        // Form submission handler
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Simple validation
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all required fields');
-                return;
-            }
-            
-            // Show success message
-            alert('Your message has been sent successfully! We will reply to you soon.');
-            
-            // Reset form
-            document.getElementById('contactForm').reset();
-        }
     </script>
+    
+    <!-- ============================================== -->
+    <!-- CSP Headers - Add these in your server config -->
+    <!-- ============================================== -->
+    <!-- 
+        Add these headers in your server configuration:
+        
+        Content-Security-Policy: 
+            default-src 'self';
+            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
+            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+            img-src 'self' data:;
+            frame-src https://www.google.com;
+            connect-src 'self' https://api.emailjs.com;
+            frame-ancestors 'none';
+            base-uri 'self';
+            form-action 'self';
+        
+        Strict-Transport-Security: max-age=31536000; includeSubDomains
+        X-Content-Type-Options: nosniff
+        X-Frame-Options: DENY
+        Referrer-Policy: strict-origin-when-cross-origin
+    -->
 </body>
 </html>
