@@ -1,15 +1,25 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
       ".github/**"
     ],
+
     "headers": [
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg|ico|webp|css|js|woff|woff2|ttf|eot)",
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|ico|woff|woff2|ttf|eot)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -39,18 +49,14 @@
         ]
       }
     ],
-    "redirects": [
+
+    "rewrites": [
       {
-        "source": "/index-en.html",
-        "destination": "/",
-        "type": 301
-      },
-      {
-        "source": "/index.html",
-        "destination": "/",
-        "type": 301
+        "source": "/",
+        "destination": "/index.html"
       }
     ],
+
     "cleanUrls": true,
     "trailingSlash": false
   }
