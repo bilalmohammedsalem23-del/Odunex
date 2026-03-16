@@ -4,31 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | معرض الأعمال</title>
+    
+    <!-- Favicon - تحديث بأيقونة المتصفح الجديدة -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
+    <link rel="shortcut icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/Location Logo.png">
+    
     <!-- Google Fonts - Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <script src="/maintenance-config.js"></script>
-<script>
-(function() {
-    const bypassCode = 'odunex2026';
-    const hasAccess = localStorage.getItem('odunex_access') === 'true';
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasBypass = urlParams.get('bypass') === bypassCode;
+    
+    <!-- DOMPurify - حماية XSS (للنماذج المستقبلية) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
+    <!-- سكريبت الصيانة -->
+    <script src="/maintenance-config.js"></script>
+    <script>
+        (function() {
+            const bypassCode = 'odunex2026';
+            const hasAccess = localStorage.getItem('odunex_access') === 'true';
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasBypass = urlParams.get('bypass') === bypassCode;
 
-    if (hasBypass) {
-        localStorage.setItem('odunex_access', 'true');
-        const newUrl = window.location.pathname + window.location.hash;
-        window.history.replaceState({}, document.title, newUrl);
-        return;
-    }
+            if (hasBypass) {
+                localStorage.setItem('odunex_access', 'true');
+                const newUrl = window.location.pathname + window.location.hash;
+                window.history.replaceState({}, document.title, newUrl);
+                return;
+            }
 
-    if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-        window.location.replace('/maintenance-en.html');
-    }
-})();
-</script>
+            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
+                window.location.replace('/maintenance-en.html');
+            }
+        })();
+    </script>
+    
     <style>
+        /* ===== أنماط Odunex القياسية ===== */
         * {
             margin: 0;
             padding: 0;
@@ -135,6 +158,14 @@
             background: var(--tag-gradient);
             color: white;
             box-shadow: 0 3px 8px var(--dark-glow);
+        }
+
+        body.dark-mode .gallery-card:hover .tag {
+            box-shadow: 0 5px 15px var(--dark-glow);
+        }
+
+        body.dark-mode .gallery-card:hover .icon-box {
+            box-shadow: 0 0 25px var(--dark-glow);
         }
 
         /* Footer in dark mode */
@@ -449,34 +480,6 @@
             box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
         }
 
-        /* للشاشات المتوسطة */
-        @media (max-width: 1100px) {
-            .gallery-card {
-                padding: 20px 15px;
-            }
-            
-            .card-title {
-                font-size: 17px;
-            }
-            
-            .card-description {
-                font-size: 12px;
-            }
-            
-            .tag {
-                font-size: 10px;
-                padding: 3px 8px;
-            }
-        }
-
-        /* للشاشات الصغيرة */
-        @media (max-width: 900px) {
-            .tag {
-                font-size: 10px;
-                padding: 3px 6px;
-            }
-        }
-
         /* ===== Footer ===== */
         footer {
             background-color: var(--card-bg);
@@ -785,9 +788,47 @@
     </footer>
 
     <script>
-        // ===== Dark/Light Mode Preservation System =====
+        // ==============================================
+        // دوال الحماية (قياسية لجميع الصفحات)
+        // ==============================================
+        
+        // دالة تنظيف المدخلات (للنماذج المستقبلية)
+        function sanitizeInput(text) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+            }
+            return text.replace(/[<>]/g, "");
+        }
+        
+        // التحقق من مصدر الطلب (Domain Restriction)
+        function validateRequestOrigin() {
+            const referrer = document.referrer || '';
+            const currentDomain = window.location.hostname;
+            
+            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
+                console.warn('طلب من نطاق خارجي:', referrer);
+                return false;
+            }
+            return true;
+        }
+        
+        // التحقق من معدل التكرار (Rate Limiting)
+        function checkRateLimit() {
+            const lastVisit = localStorage.getItem('lastPageVisit');
+            const now = Date.now();
+            
+            if (lastVisit && now - lastVisit < 3000) { // 3 ثواني بين زيارات الصفحات
+                return false;
+            }
+            localStorage.setItem('lastPageVisit', now);
+            return true;
+        }
+
+        // ==============================================
+        // نظام الوضع الليلي/النهاري
+        // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Retrieve saved mode
+            // استرجاع الوضع المحفوظ
             const savedMode = localStorage.getItem('darkMode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
             
@@ -799,11 +840,15 @@
                 if (toggleBtn) toggleBtn.textContent = '☾';
             }
             
-            // Update active link
+            // تحديث الرابط النشط
             updateActiveLink();
+            
+            // تطبيق فحوصات الأمان
+            validateRequestOrigin();
+            checkRateLimit();
         });
 
-        // Toggle dark mode function
+        // دالة تبديل الوضع الليلي
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -817,7 +862,7 @@
             }
         }
 
-        // Update active link function
+        // دالة تحديث الرابط النشط
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
@@ -830,7 +875,7 @@
             });
         }
 
-        // Language switch function
+        // دالة تبديل اللغة
         function switchLanguage() {
             let currentPage = window.location.pathname.split('/').pop() || 'gallery.html';
             
@@ -845,5 +890,29 @@
             window.location.href = pageMap[currentPage] || 'index-en.html';
         }
     </script>
+    
+    <!-- ============================================== -->
+    <!-- ترويسات CSP - أضفها في إعدادات السيرفر -->
+    <!-- ============================================== -->
+    <!-- 
+        أضف هذه الترويسات في إعدادات السيرفر:
+        
+        Content-Security-Policy: 
+            default-src 'self';
+            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
+            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+            img-src 'self' data:;
+            frame-src https://www.google.com;
+            connect-src 'self';
+            frame-ancestors 'none';
+            base-uri 'self';
+            form-action 'self';
+        
+        Strict-Transport-Security: max-age=31536000; includeSubDomains
+        X-Content-Type-Options: nosniff
+        X-Frame-Options: DENY
+        Referrer-Policy: strict-origin-when-cross-origin
+    -->
 </body>
 </html>
