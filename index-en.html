@@ -29,7 +29,7 @@
         })();
     </script>
     
-    <!-- Favicon - Updated with Location Logo -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
@@ -59,6 +59,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <style>
+        /* جميع الأنماط كما هي من التصميم الأصلي */
         * {
             margin: 0;
             padding: 0;
@@ -2041,18 +2042,11 @@
             });
         }
 
+        // ==============================================
+        // Language Switch - مثل pricing-en.html تماماً
+        // ==============================================
         function switchLanguage() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
-            
-            const pageMap = {
-                'index-en.html': 'index.html',
-                'features-en.html': 'features.html',
-                'pricing-en.html': 'pricing.html',
-                'gallery-en.html': 'gallery.html',
-                'contact-en.html': 'contact.html'
-            };
-            
-            window.location.href = pageMap[currentPage] || 'index.html';
+            window.location.href = 'index.html?v=' + Math.random();
         }
 
         function toggleFAQ(element) {
