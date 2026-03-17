@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | المميزات</title>
     
-    <!-- Favicon - تحديث بأيقونة المتصفح الجديدة -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
@@ -25,33 +25,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- DOMPurify - حماية XSS (للنماذج المستقبلية) -->
+    <!-- DOMPurify - حماية XSS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
-    <!-- سكريبت الصيانة -->
-    <script src="/maintenance-config.js"></script>
-    <script>
-        (function() {
-            const bypassCode = 'odunex2026';
-            const hasAccess = localStorage.getItem('odunex_access') === 'true';
-            const urlParams = new URLSearchParams(window.location.search);
-            const hasBypass = urlParams.get('bypass') === bypassCode;
-
-            if (hasBypass) {
-                localStorage.setItem('odunex_access', 'true');
-                const newUrl = window.location.pathname + window.location.hash;
-                window.history.replaceState({}, document.title, newUrl);
-                return;
-            }
-
-            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-                window.location.replace('/maintenance-en.html');
-            }
-        })();
-    </script>
-    
     <style>
-        /* ===== أنماط Odunex القياسية ===== */
+        /* جميع الأنماط كما هي من التصميم الأصلي */
         * {
             margin: 0;
             padding: 0;
@@ -186,7 +164,7 @@
             width: 100%;
         }
 
-        /* ===== الهيدر القياسي ===== */
+        /* ===== الهيدر ===== */
         header {
             background: var(--bg-white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -440,7 +418,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== الفوتر القياسي ===== */
+        /* ===== الفوتر ===== */
         footer {
             background-color: var(--footer-bg);
             width: 100%;
@@ -607,7 +585,7 @@
     </style>
 </head>
 <body>
-    <!-- الهيدر القياسي -->
+    <!-- الهيدر -->
     <header>
         <div class="container">
             <div class="nav-right">
@@ -649,42 +627,36 @@
         <section class="features-section">
             <div class="container">
                 <div class="features-grid">
-                    <!-- قابلية التوسع -->
                     <div class="feature-card">
                         <div class="feature-icon">📈</div>
                         <h3 class="feature-title">قابلية التوسع</h3>
                         <p class="feature-description">منصة مرنة وقابلة للتوسع تناسب نمو أعمالك.</p>
                     </div>
 
-                    <!-- أمان البيانات -->
                     <div class="feature-card">
                         <div class="feature-icon">🔒</div>
                         <h3 class="feature-title">أمان البيانات</h3>
                         <p class="feature-description">أمن بيانات شامل وحماية متقدمة على مدار الساعة.</p>
                     </div>
 
-                    <!-- التكامل -->
                     <div class="feature-card">
                         <div class="feature-icon">🔄</div>
                         <h3 class="feature-title">تكامل</h3>
                         <p class="feature-description">دمج سلس لجميع وظائف الأعمال في منصة واحدة متكاملة.</p>
                     </div>
 
-                    <!-- الكفاءة التشغيلية -->
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
                         <h3 class="feature-title">الكفاءة التشغيلية</h3>
                         <p class="feature-description">تحسين الكفاءة وتعظيم الإنتاجية التشغيلية.</p>
                     </div>
 
-                    <!-- الوصول العالمي -->
                     <div class="feature-card">
                         <div class="feature-icon">🌍</div>
                         <h3 class="feature-title">الوصول العالمي</h3>
                         <p class="feature-description">الوصول إلى أعمالك من أي مكان وفي أي وقت.</p>
                     </div>
 
-                    <!-- الدعم الفني -->
                     <div class="feature-card">
                         <div class="feature-icon">🎧</div>
                         <h3 class="feature-title">الدعم الفني</h3>
@@ -695,7 +667,7 @@
         </section>
     </main>
 
-    <!-- الفوتر القياسي -->
+    <!-- الفوتر -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-row">
@@ -715,10 +687,9 @@
 
     <script>
         // ==============================================
-        // دوال الحماية (قياسية لجميع الصفحات)
+        // دوال الحماية الأساسية
         // ==============================================
         
-        // دالة تنظيف المدخلات (للنماذج المستقبلية)
         function sanitizeInput(text) {
             if (typeof DOMPurify !== 'undefined') {
                 return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
@@ -726,7 +697,6 @@
             return text.replace(/[<>]/g, "");
         }
         
-        // التحقق من مصدر الطلب (Domain Restriction)
         function validateRequestOrigin() {
             const referrer = document.referrer || '';
             const currentDomain = window.location.hostname;
@@ -738,12 +708,11 @@
             return true;
         }
         
-        // التحقق من معدل التكرار (Rate Limiting)
         function checkRateLimit() {
             const lastVisit = localStorage.getItem('lastPageVisit');
             const now = Date.now();
             
-            if (lastVisit && now - lastVisit < 3000) { // 3 ثواني بين زيارات الصفحات
+            if (lastVisit && now - lastVisit < 3000) {
                 return false;
             }
             localStorage.setItem('lastPageVisit', now);
@@ -751,10 +720,9 @@
         }
 
         // ==============================================
-        // نظام الوضع الليلي/النهاري
+        // نظام الوضع الليلي
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // استرجاع الوضع المحفوظ
             const savedMode = localStorage.getItem('darkMode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
             
@@ -766,15 +734,11 @@
                 if (toggleBtn) toggleBtn.textContent = '☾';
             }
             
-            // تحديث الرابط النشط
             updateActiveLink();
-            
-            // تطبيق فحوصات الأمان
             validateRequestOrigin();
             checkRateLimit();
         });
 
-        // دالة تبديل الوضع الليلي
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -788,7 +752,6 @@
             }
         }
 
-        // دالة تحديث الرابط النشط
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
@@ -801,44 +764,44 @@
             });
         }
 
-        // دالة تبديل اللغة
+        // ==============================================
+        // دالة تبديل اللغة - تعمل بالاتجاهين (عربي ←→ إنجليزي)
+        // ==============================================
         function switchLanguage() {
+            // الحصول على اسم الصفحة الحالية
             let currentPage = window.location.pathname.split('/').pop() || 'features.html';
             
+            // خريطة التحويل الكاملة (ثنائية الاتجاه)
             const pageMap = {
+                // من عربي إلى إنجليزي
                 'index.html': 'index-en.html',
                 'features.html': 'features-en.html',
                 'pricing.html': 'pricing-en.html',
                 'gallery.html': 'gallery-en.html',
-                'contact.html': 'contact-en.html'
+                'contact.html': 'contact-en.html',
+                
+                // من إنجليزي إلى عربي (للأمان)
+                'index-en.html': 'index.html',
+                'features-en.html': 'features.html',
+                'pricing-en.html': 'pricing.html',
+                'gallery-en.html': 'gallery.html',
+                'contact-en.html': 'contact.html'
             };
             
-            window.location.href = pageMap[currentPage] || 'index-en.html';
+            // تحديد الصفحة المستهدفة
+            let targetPage = pageMap[currentPage];
+            
+            // إذا كانت الصفحة غير موجودة في الخريطة (حالة نادرة)
+            if (!targetPage) {
+                // إذا كان الملف يحتوي على -en نحذفها، وإذا لم يحتوي نضيفها
+                targetPage = currentPage.includes('-en') 
+                    ? currentPage.replace('-en', '')      // features-en.html → features.html
+                    : currentPage.replace('.html', '-en.html'); // features.html → features-en.html
+            }
+            
+            // إضافة معلمة عشوائية لمنع التخزين المؤقت
+            window.location.href = targetPage + '?v=' + Math.random();
         }
     </script>
-    
-    <!-- ============================================== -->
-    <!-- ترويسات CSP - أضفها في إعدادات السيرفر -->
-    <!-- ============================================== -->
-    <!-- 
-        أضف هذه الترويسات في إعدادات السيرفر:
-        
-        Content-Security-Policy: 
-            default-src 'self';
-            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
-            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
-            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
-            img-src 'self' data:;
-            frame-src https://www.google.com;
-            connect-src 'self';
-            frame-ancestors 'none';
-            base-uri 'self';
-            form-action 'self';
-        
-        Strict-Transport-Security: max-age=31536000; includeSubDomains
-        X-Content-Type-Options: nosniff
-        X-Frame-Options: DENY
-        Referrer-Policy: strict-origin-when-cross-origin
-    -->
 </body>
 </html>
