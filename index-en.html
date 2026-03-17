@@ -2063,7 +2063,17 @@
         }
 
         function switchLanguage() {
-            window.location.href = 'index.html';
+            const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
+            
+            const pageMap = {
+                'index-en.html': 'index.html',
+                'features-en.html': 'features.html',
+                'pricing-en.html': 'pricing.html',
+                'gallery-en.html': 'gallery.html',
+                'contact-en.html': 'contact.html'
+            };
+            
+            window.location.href = pageMap[currentPage] || 'index.html';
         }
 
         function toggleFAQ(element) {
