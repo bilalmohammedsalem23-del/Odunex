@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | Features</title>
     
-    <!-- Favicon - Updated with Location Logo -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
@@ -25,35 +25,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- DOMPurify - XSS Protection (imported for future forms) -->
+    <!-- DOMPurify - XSS Protection -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
-    <!-- Security Script -->
-    <script src="/maintenance-config.js"></script>
-    <script>
-        (function() {
-            const bypassCode = 'odunex2026';
-            const hasAccess = localStorage.getItem('odunex_access') === 'true';
-            const urlParams = new URLSearchParams(window.location.search);
-            const hasBypass = urlParams.get('bypass') === bypassCode;
-
-            if (hasBypass) {
-                localStorage.setItem('odunex_access', 'true');
-                const newUrl = window.location.pathname + window.location.hash;
-                window.history.replaceState({}, document.title, newUrl);
-                return;
-            }
-
-            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-                window.location.replace('/maintenance-en.html');
-            }
-        })();
-    </script>
-    
     <style>
-        /* ===== STANDARD ODUNEX STYLES ===== */
-        /* This style block should be used across all pages for consistency */
-        
+        /* جميع الأنماط كما هي من التصميم الأصلي */
         * {
             margin: 0;
             padding: 0;
@@ -180,7 +156,6 @@
             color: var(--dark-text-secondary) !important;
         }
 
-        /* ===== CONTAINER (Standard) ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -188,7 +163,7 @@
             width: 100%;
         }
 
-        /* ===== HEADER (Standard) ===== */
+        /* ===== HEADER ===== */
         header {
             background: var(--bg-white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -442,7 +417,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== FOOTER SECTION (Standard) ===== */
+        /* ===== FOOTER ===== */
         footer {
             background-color: var(--footer-bg);
             width: 100%;
@@ -506,7 +481,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
+        /* ===== Responsive Design ===== */
         @media (max-width: 992px) {
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -610,7 +585,7 @@
     </style>
 </head>
 <body>
-    <!-- Header (Standard for all pages) -->
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="nav-left">
@@ -652,42 +627,36 @@
         <section class="features-section">
             <div class="container">
                 <div class="features-grid">
-                    <!-- Scalability -->
                     <div class="feature-card">
                         <div class="feature-icon">📈</div>
                         <h3 class="feature-title">Scalability</h3>
                         <p class="feature-description">A flexible and scalable platform that grows with your business.</p>
                     </div>
 
-                    <!-- Data Security -->
                     <div class="feature-card">
                         <div class="feature-icon">🔒</div>
                         <h3 class="feature-title">Data Security</h3>
                         <p class="feature-description">Comprehensive data security and advanced protection around the clock.</p>
                     </div>
 
-                    <!-- Integration -->
                     <div class="feature-card">
                         <div class="feature-icon">🔄</div>
                         <h3 class="feature-title">Integration</h3>
                         <p class="feature-description">Seamless integration of all business functions in one unified platform.</p>
                     </div>
 
-                    <!-- Operational Efficiency -->
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
                         <h3 class="feature-title">Operational Efficiency</h3>
                         <p class="feature-description">Improve efficiency and maximize operational productivity.</p>
                     </div>
 
-                    <!-- Global Access -->
                     <div class="feature-card">
                         <div class="feature-icon">🌍</div>
                         <h3 class="feature-title">Global Access</h3>
                         <p class="feature-description">Access your business from anywhere, at any time.</p>
                     </div>
 
-                    <!-- Technical Support -->
                     <div class="feature-card">
                         <div class="feature-icon">🎧</div>
                         <h3 class="feature-title">Technical Support</h3>
@@ -698,7 +667,7 @@
         </section>
     </main>
 
-    <!-- Footer (Standard for all pages) -->
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-row">
@@ -718,10 +687,9 @@
 
     <script>
         // ==============================================
-        // Security Functions (Standard for all pages)
+        // دوال الحماية الأساسية
         // ==============================================
         
-        // Sanitize function (prepared for future forms)
         function sanitizeInput(text) {
             if (typeof DOMPurify !== 'undefined') {
                 return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
@@ -729,7 +697,6 @@
             return text.replace(/[<>]/g, "");
         }
         
-        // Validate request origin (Domain Restriction)
         function validateRequestOrigin() {
             const referrer = document.referrer || '';
             const currentDomain = window.location.hostname;
@@ -741,12 +708,11 @@
             return true;
         }
         
-        // Rate limiting check (30 seconds)
         function checkRateLimit() {
             const lastVisit = localStorage.getItem('lastPageVisit');
             const now = Date.now();
             
-            if (lastVisit && now - lastVisit < 3000) { // 3 seconds for page navigation
+            if (lastVisit && now - lastVisit < 3000) {
                 return false;
             }
             localStorage.setItem('lastPageVisit', now);
@@ -754,10 +720,9 @@
         }
 
         // ==============================================
-        // Dark Mode System
+        // نظام الوضع الليلي
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Retrieve saved mode
             const savedMode = localStorage.getItem('darkMode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
             
@@ -769,15 +734,11 @@
                 if (toggleBtn) toggleBtn.textContent = '☾';
             }
             
-            // Update active link
             updateActiveLink();
-            
-            // Apply security checks
             validateRequestOrigin();
             checkRateLimit();
         });
 
-        // Toggle dark mode function
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -791,7 +752,6 @@
             }
         }
 
-        // Update active link function
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
@@ -804,7 +764,9 @@
             });
         }
 
-        // Language switch function
+        // ==============================================
+        // دالة تبديل اللغة - نسخة إنجليزية
+        // ==============================================
         function switchLanguage() {
             let currentPage = window.location.pathname.split('/').pop() || 'features-en.html';
             
@@ -813,35 +775,17 @@
                 'features-en.html': 'features.html',
                 'pricing-en.html': 'pricing.html',
                 'gallery-en.html': 'gallery.html',
-                'contact-en.html': 'contact.html'
+                'contact-en.html': 'contact.html',
+                'index.html': 'index-en.html',
+                'features.html': 'features-en.html',
+                'pricing.html': 'pricing-en.html',
+                'gallery.html': 'gallery-en.html',
+                'contact.html': 'contact-en.html'
             };
             
-            window.location.href = pageMap[currentPage] || 'index.html';
+            const target = pageMap[currentPage] || 'index.html';
+            window.location.href = target + '?v=' + Math.random();
         }
     </script>
-    
-    <!-- ============================================== -->
-    <!-- CSP Headers - Add these in your server config -->
-    <!-- ============================================== -->
-    <!-- 
-        Add these headers in your server configuration:
-        
-        Content-Security-Policy: 
-            default-src 'self';
-            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
-            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
-            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
-            img-src 'self' data:;
-            frame-src https://www.google.com;
-            connect-src 'self';
-            frame-ancestors 'none';
-            base-uri 'self';
-            form-action 'self';
-        
-        Strict-Transport-Security: max-age=31536000; includeSubDomains
-        X-Content-Type-Options: nosniff
-        X-Frame-Options: DENY
-        Referrer-Policy: strict-origin-when-cross-origin
-    -->
 </body>
 </html>
