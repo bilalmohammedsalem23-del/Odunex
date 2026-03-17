@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | Our Portfolio</title>
     
-    <!-- Favicon - Updated with Location Logo -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
@@ -29,7 +29,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
     <style>
-        /* ===== STANDARD ODUNEX STYLES ===== */
+        /* جميع الأنماط كما هي من التصميم الأصلي */
         * {
             margin: 0;
             padding: 0;
@@ -112,7 +112,6 @@
             filter: invert(0.8);
         }
 
-        /* Gallery cards in dark mode */
         body.dark-mode .gallery-card {
             background: var(--dark-card-bg);
             border-color: var(--dark-border);
@@ -126,7 +125,6 @@
             color: var(--dark-text-secondary) !important;
         }
 
-        /* Icon boxes in dark mode */
         body.dark-mode .icon-box {
             background: var(--icon-gradient);
             box-shadow: 0 5px 15px var(--dark-glow);
@@ -150,7 +148,6 @@
             box-shadow: 0 0 25px var(--dark-glow);
         }
 
-        /* Footer in dark mode */
         body.dark-mode footer {
             background: var(--dark-card-bg);
             border-top: 1px solid var(--dark-border);
@@ -385,7 +382,6 @@
             box-shadow: 0 20px 40px rgba(123, 44, 191, 0.15);
         }
 
-        /* Icon Box - Gradient */
         .icon-box {
             width: 50px;
             height: 50px;
@@ -405,13 +401,11 @@
             transition: all 0.3s ease;
         }
 
-        /* Combined Effect for Icon - Zoom with Glow */
         .gallery-card:hover .icon-box {
             transform: scale(1.1);
             box-shadow: 0 0 25px rgba(123, 44, 191, 0.6);
         }
 
-        /* Card Title */
         .card-title {
             font-size: 18px;
             font-weight: 700;
@@ -421,7 +415,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Card Description */
         .card-description {
             font-size: 13px;
             color: var(--medium-gray);
@@ -432,7 +425,6 @@
             transition: color 0.3s ease;
         }
 
-        /* Tags Container */
         .tags-container {
             display: flex;
             flex-wrap: wrap;
@@ -440,7 +432,6 @@
             margin-top: auto;
         }
 
-        /* Individual Tag - Gradient */
         .tag {
             background: var(--tag-gradient);
             color: white;
@@ -454,7 +445,6 @@
             white-space: nowrap;
         }
 
-        /* Combined Effect for Tag - Lift with Slight Zoom */
         .gallery-card:hover .tag {
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
@@ -769,10 +759,9 @@
 
     <script>
         // ==============================================
-        // Security Functions (Standard for all pages)
+        // Security Functions
         // ==============================================
         
-        // Sanitize function (prepared for future forms)
         function sanitizeInput(text) {
             if (typeof DOMPurify !== 'undefined') {
                 return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
@@ -780,7 +769,6 @@
             return text.replace(/[<>]/g, "");
         }
         
-        // Validate request origin (Domain Restriction)
         function validateRequestOrigin() {
             const referrer = document.referrer || '';
             const currentDomain = window.location.hostname;
@@ -792,7 +780,6 @@
             return true;
         }
         
-        // Rate limiting check (3 seconds between page visits)
         function checkRateLimit() {
             const lastVisit = localStorage.getItem('lastPageVisit');
             const now = Date.now();
@@ -808,7 +795,6 @@
         // Dark Mode System
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Retrieve saved mode
             const savedMode = localStorage.getItem('darkMode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
             
@@ -820,15 +806,11 @@
                 if (toggleBtn) toggleBtn.textContent = '☾';
             }
             
-            // Update active link
             updateActiveLink();
-            
-            // Apply security checks
             validateRequestOrigin();
             checkRateLimit();
         });
 
-        // Toggle dark mode function
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -842,7 +824,6 @@
             }
         }
 
-        // Update active link function
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
@@ -855,19 +836,11 @@
             });
         }
 
-        // Language switch function
+        // ==============================================
+        // Language Switch - مثل pricing-en.html تماماً
+        // ==============================================
         function switchLanguage() {
-            let currentPage = window.location.pathname.split('/').pop() || 'gallery-en.html';
-            
-            const pageMap = {
-                'index-en.html': 'index.html',
-                'features-en.html': 'features.html',
-                'pricing-en.html': 'pricing.html',
-                'gallery-en.html': 'gallery.html',
-                'contact-en.html': 'contact.html'
-            };
-            
-            window.location.href = pageMap[currentPage] || 'index.html';
+            window.location.href = 'gallery.html?v=' + Math.random();
         }
     </script>
 </body>
