@@ -1,11 +1,847 @@
-{
-  "hosting": {
-    "public": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**",
-      ".github/**"
-    ]
-  }
-}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Odunex | Features</title>
+    
+    <!-- Favicon - Updated with Location Logo -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
+    <link rel="shortcut icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/Location Logo.png">
+    
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- DOMPurify - XSS Protection (imported for future forms) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
+    <!-- Security Script -->
+    <script src="/maintenance-config.js"></script>
+    <script>
+        (function() {
+            const bypassCode = 'odunex2026';
+            const hasAccess = localStorage.getItem('odunex_access') === 'true';
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasBypass = urlParams.get('bypass') === bypassCode;
+
+            if (hasBypass) {
+                localStorage.setItem('odunex_access', 'true');
+                const newUrl = window.location.pathname + window.location.hash;
+                window.history.replaceState({}, document.title, newUrl);
+                return;
+            }
+
+            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
+                window.location.replace('/maintenance-en.html');
+            }
+        })();
+    </script>
+    
+    <style>
+        /* ===== STANDARD ODUNEX STYLES ===== */
+        /* This style block should be used across all pages for consistency */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --primary-purple: #7A5AF8;
+            --primary-blue: #2BB0ED;
+            --accent-blue: #4A7BFF;
+            --dark-text: #333333;
+            --body-text: #444444;
+            --secondary-text: #6B6B6B;
+            --light-text: #8A8A8A;
+            --section-bg: #F8F9FB;
+            --bg-white: #FFFFFF;
+            --border-color: #E6E8EC;
+            --icon-color: #666666;
+            --footer-bg: #F8F9FB;
+            --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            --input-bg: #f9f9f9;
+            
+            /* Dark mode colors */
+            --dark-bg: #0a0a1a;
+            --dark-card: #14142b;
+            --dark-border: #2a2a4a;
+            --dark-text-primary: #e0e0ff;
+            --dark-text-secondary: #c0c0e0;
+            --dark-text-muted: #a0a0c0;
+            --dark-card-bg: #1a1a35;
+            --dark-header-bg: #14142b;
+            --dark-glow: rgba(122, 90, 248, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding-top: 80px;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== Dark Mode Styles ===== */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
+        }
+
+        body.dark-mode header {
+            background: var(--dark-header-bg);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .nav-logo-text {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .nav-menu a {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .nav-menu a:hover,
+        body.dark-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .lang-container,
+        body.dark-mode .dark-mode-container {
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .lang-text,
+        body.dark-mode .dark-mode-toggle {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .globe-icon {
+            filter: invert(0.8);
+        }
+
+        body.dark-mode .feature-card {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .feature-title {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .feature-description {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .feature-icon {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .feature-card:hover .feature-icon {
+            background: var(--main-gradient);
+            color: white;
+        }
+
+        body.dark-mode footer {
+            background: var(--dark-card-bg);
+            border-top: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .footer-brand-name {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .footer-tagline,
+        body.dark-mode .footer-copyright {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .page-header p {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        /* ===== CONTAINER (Standard) ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ===== HEADER (Standard) ===== */
+        header {
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            overflow-x: auto;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6B6B6B;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        .nav-menu a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
+        }
+
+        .nav-menu a.active {
+            transform: scale(1.05);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        }
+
+        .lang-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background-size: contain;
+            transition: filter 0.3s ease;
+        }
+
+        .dark-mode-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        }
+
+        .dark-mode-toggle {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #555;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            padding: 20px 0 70px;
+            flex: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(122,90,248,0.1);
+            border-color: var(--primary-purple);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--main-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, rgba(122,90,248,0.1), rgba(43,176,237,0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--primary-purple);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--main-gradient);
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .feature-description {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--secondary-text);
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== FOOTER SECTION (Standard) ===== */
+        footer {
+            background-color: var(--footer-bg);
+            width: 100%;
+            padding: 35px 0 25px;
+            text-align: center;
+            margin-top: auto;
+            transition: all 0.3s ease;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-text {
+            text-align: center;
+        }
+
+        .footer-brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text);
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        .footer-tagline {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--secondary-text);
+            margin-top: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--light-text);
+            margin-top: 12px;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .page-header h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-left, .nav-right {
+                width: auto;
+            }
+
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .page-header {
+                padding: 50px 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .page-header p {
+                font-size: 18px;
+                padding: 0 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            .footer-brand-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-brand-text {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 60px 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .page-header p {
+                font-size: 16px;
+            }
+
+            .feature-title {
+                font-size: 20px;
+            }
+
+            .feature-description {
+                font-size: 15px;
+            }
+
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+
+            .footer-brand-name {
+                font-size: 22px;
+            }
+
+            .footer-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .footer-copyright {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (Standard for all pages) -->
+    <header>
+        <div class="container">
+            <div class="nav-left">
+                <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
+                <span class="nav-logo-text">Odunex</span>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index-en.html">Home</a>
+                <a href="features-en.html" class="active">Features</a>
+                <a href="pricing-en.html">Pricing</a>
+                <a href="gallery-en.html">Portfolio</a>
+                <a href="contact-en.html">Contact</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="lang-container" onclick="switchLanguage()">
+                    <span class="lang-text">عربي</span>
+                    <div class="globe-icon"></div>
+                </div>
+                <div class="dark-mode-container" onclick="toggleDarkMode()">
+                    <span class="dark-mode-toggle">☾</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Features</h1>
+                <p>Everything you need to manage your business efficiently and securely in one place</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <!-- Scalability -->
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Scalability</h3>
+                        <p class="feature-description">A flexible and scalable platform that grows with your business.</p>
+                    </div>
+
+                    <!-- Data Security -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Data Security</h3>
+                        <p class="feature-description">Comprehensive data security and advanced protection around the clock.</p>
+                    </div>
+
+                    <!-- Integration -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">Integration</h3>
+                        <p class="feature-description">Seamless integration of all business functions in one unified platform.</p>
+                    </div>
+
+                    <!-- Operational Efficiency -->
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Operational Efficiency</h3>
+                        <p class="feature-description">Improve efficiency and maximize operational productivity.</p>
+                    </div>
+
+                    <!-- Global Access -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3 class="feature-title">Global Access</h3>
+                        <p class="feature-description">Access your business from anywhere, at any time.</p>
+                    </div>
+
+                    <!-- Technical Support -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🎧</div>
+                        <h3 class="feature-title">Technical Support</h3>
+                        <p class="feature-description">24/7 specialized technical support to ensure business continuity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Standard for all pages) -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand-row">
+                <div class="footer-brand-text">
+                    <div class="footer-brand-name">Odunex</div>
+                    <div class="footer-tagline">Unified ERP Solutions</div>
+                </div>
+                <div class="footer-logo">
+                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2026 Odunex | Unified ERP Solutions. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==============================================
+        // Security Functions (Standard for all pages)
+        // ==============================================
+        
+        // Sanitize function (prepared for future forms)
+        function sanitizeInput(text) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+            }
+            return text.replace(/[<>]/g, "");
+        }
+        
+        // Validate request origin (Domain Restriction)
+        function validateRequestOrigin() {
+            const referrer = document.referrer || '';
+            const currentDomain = window.location.hostname;
+            
+            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
+                console.warn('Request from external domain detected:', referrer);
+                return false;
+            }
+            return true;
+        }
+        
+        // Rate limiting check (30 seconds)
+        function checkRateLimit() {
+            const lastVisit = localStorage.getItem('lastPageVisit');
+            const now = Date.now();
+            
+            if (lastVisit && now - lastVisit < 3000) { // 3 seconds for page navigation
+                return false;
+            }
+            localStorage.setItem('lastPageVisit', now);
+            return true;
+        }
+
+        // ==============================================
+        // Dark Mode System
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve saved mode
+            const savedMode = localStorage.getItem('darkMode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+            
+            // Update active link
+            updateActiveLink();
+            
+            // Apply security checks
+            validateRequestOrigin();
+            checkRateLimit();
+        });
+
+        // Toggle dark mode function
+        function toggleDarkMode() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (isDarkMode) {
+                localStorage.setItem('darkMode', 'enabled');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+        }
+
+        // Update active link function
+        function updateActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Language switch function
+        function switchLanguage() {
+            let currentPage = window.location.pathname.split('/').pop() || 'features-en.html';
+            
+            const pageMap = {
+                'index-en.html': 'index.html',
+                'features-en.html': 'features.html',
+                'pricing-en.html': 'pricing.html',
+                'gallery-en.html': 'gallery.html',
+                'contact-en.html': 'contact.html'
+            };
+            
+            window.location.href = pageMap[currentPage] || 'index.html';
+        }
+    </script>
+    
+    <!-- ============================================== -->
+    <!-- CSP Headers - Add these in your server config -->
+    <!-- ============================================== -->
+    <!-- 
+        Add these headers in your server configuration:
+        
+        Content-Security-Policy: 
+            default-src 'self';
+            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
+            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
+            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+            img-src 'self' data:;
+            frame-src https://www.google.com;
+            connect-src 'self';
+            frame-ancestors 'none';
+            base-uri 'self';
+            form-action 'self';
+        
+        Strict-Transport-Security: max-age=31536000; includeSubDomains
+        X-Content-Type-Options: nosniff
+        X-Frame-Options: DENY
+        Referrer-Policy: strict-origin-when-cross-origin
+    -->
+</body>
+</html>
