@@ -156,7 +156,6 @@
             color: var(--dark-text-secondary) !important;
         }
 
-        /* ===== الحاوية القياسية ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -765,42 +764,10 @@
         }
 
         // ==============================================
-        // دالة تبديل اللغة - تعمل بالاتجاهين (عربي ←→ إنجليزي)
+        // دالة تبديل اللغة - مثل pricing.html تماماً
         // ==============================================
         function switchLanguage() {
-            // الحصول على اسم الصفحة الحالية
-            let currentPage = window.location.pathname.split('/').pop() || 'features.html';
-            
-            // خريطة التحويل الكاملة (ثنائية الاتجاه)
-            const pageMap = {
-                // من عربي إلى إنجليزي
-                'index.html': 'index-en.html',
-                'features.html': 'features-en.html',
-                'pricing.html': 'pricing-en.html',
-                'gallery.html': 'gallery-en.html',
-                'contact.html': 'contact-en.html',
-                
-                // من إنجليزي إلى عربي (للأمان)
-                'index-en.html': 'index.html',
-                'features-en.html': 'features.html',
-                'pricing-en.html': 'pricing.html',
-                'gallery-en.html': 'gallery.html',
-                'contact-en.html': 'contact.html'
-            };
-            
-            // تحديد الصفحة المستهدفة
-            let targetPage = pageMap[currentPage];
-            
-            // إذا كانت الصفحة غير موجودة في الخريطة (حالة نادرة)
-            if (!targetPage) {
-                // إذا كان الملف يحتوي على -en نحذفها، وإذا لم يحتوي نضيفها
-                targetPage = currentPage.includes('-en') 
-                    ? currentPage.replace('-en', '')      // features-en.html → features.html
-                    : currentPage.replace('.html', '-en.html'); // features.html → features-en.html
-            }
-            
-            // إضافة معلمة عشوائية لمنع التخزين المؤقت
-            window.location.href = targetPage + '?v=' + Math.random();
+            window.location.href = 'features-en.html?v=' + Math.random();
         }
     </script>
 </body>
