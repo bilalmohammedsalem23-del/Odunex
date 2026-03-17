@@ -29,27 +29,6 @@
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
-    <script src="/maintenance-config.js"></script>
-    <script>
-        (function() {
-            const bypassCode = 'odunex2026';
-            const hasAccess = localStorage.getItem('odunex_access') === 'true';
-            const urlParams = new URLSearchParams(window.location.search);
-            const hasBypass = urlParams.get('bypass') === bypassCode;
-
-            if (hasBypass) {
-                localStorage.setItem('odunex_access', 'true');
-                const newUrl = window.location.pathname + window.location.hash;
-                window.history.replaceState({}, document.title, newUrl);
-                return;
-            }
-
-            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-                window.location.replace('/maintenance-en.html');
-            }
-        })();
-    </script>
-    
     <style>
         /* جميع الأنماط كما هي من التصميم الأصلي */
         * {
@@ -1024,7 +1003,7 @@
                             <!-- حقل Honeypot - للبوتات فقط -->
                             <input type="text" id="website" name="website" style="display:none" autocomplete="off">
                             
-                            <!-- reCAPTCHA v3 token (سيتم ملؤه تلقائياً) -->
+                            <!-- reCAPTCHA v3 token -->
                             <input type="hidden" id="recaptchaToken" name="recaptchaToken">
                             
                             <button type="submit" class="btn-submit" id="submitBtn">
@@ -1071,7 +1050,7 @@
                                 </div>
                                 <div class="info-item">
                                     <i class="fas fa-envelope"></i>
-                                    <!-- البريد محمي من البوتات - يظهر بعد تحميل الصفحة -->
+                                    <!-- البريد محمي من البوتات -->
                                     <a href="#" id="protectedEmail" class="protected-email">عرض البريد الإلكتروني</a>
                                 </div>
                                 <div class="info-item">
@@ -1122,7 +1101,6 @@
         // تهيئة EmailJS - مع بياناتك الحقيقية
         // ==============================================
         (function() {
-            // Public Key الخاص بك
             emailjs.init('jO00szsaAuuC7Gsly');
             
             // إظهار البريد الإلكتروني المحمي بعد تحميل الصفحة
@@ -1138,11 +1116,9 @@
         })();
 
         // ==============================================
-        // التحقق من reCAPTCHA (نسخة مبسطة بدون server-side)
+        // التحقق من reCAPTCHA
         // ==============================================
         async function verifyRecaptcha(token) {
-            // للتبسيط، نحن نثق أن reCAPTCHA يعمل بشكل صحيح
-            // لأن Google يتولى التحقق نيابة عنا
             if (!token || token.length < 10) {
                 return false;
             }
@@ -1150,14 +1126,12 @@
         }
 
         // ==============================================
-        // التحقق من مصدر الطلب (Domain Restriction)
+        // التحقق من مصدر الطلب
         // ==============================================
         function validateRequestOrigin() {
-            // التحقق أن الطلب قادم من نفس الموقع
             const referrer = document.referrer || '';
             const currentDomain = window.location.hostname;
             
-            // إذا كان هناك referrer وتحقق أنه من خارج الموقع
             if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
                 console.warn('Request from external domain detected:', referrer);
                 return false;
@@ -1212,7 +1186,7 @@
         }
 
         // ==============================================
-        // نظام الحفاظ على الوضع الليلي/النهاري
+        // نظام الوضع الليلي/النهاري
         // ==============================================
         document.addEventListener('DOMContentLoaded', function() {
             const savedMode = localStorage.getItem('darkMode');
@@ -1231,7 +1205,7 @@
         });
 
         // ==============================================
-        // إعداد نموذج الاتصال مع جميع وسائل الحماية
+        // إعداد نموذج الاتصال
         // ==============================================
         function setupContactForm() {
             const form = document.getElementById('contactForm');
@@ -1239,19 +1213,16 @@
             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 
-                // التحقق من مصدر الطلب
                 if (!validateRequestOrigin()) {
                     showAlert('طلب غير مصرح به', 'error');
                     return;
                 }
                 
-                // تنظيف المدخلات
                 const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
                 const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
                 const subject = sanitizeWithDOMPurify(document.getElementById('subject').value.trim());
                 const message = sanitizeWithDOMPurify(document.getElementById('message').value.trim());
                 
-                // التحقق من Honeypot
                 const honeypot = document.getElementById('website').value;
                 if (honeypot !== "") {
                     console.log("تم حظر بوت (Honeypot)");
@@ -1259,25 +1230,21 @@
                     return;
                 }
                 
-                // التحقق من الحقول المطلوبة
                 if (!name || !email || !subject || !message) {
                     showAlert('الرجاء ملء جميع الحقول المطلوبة', 'warning');
                     return;
                 }
                 
-                // التحقق من الإيميل
                 if (!validateEmail(email)) {
                     showAlert('البريد الإلكتروني غير صالح أو غير مسموح به', 'warning');
                     return;
                 }
                 
-                // التحقق من كلمات السبام
                 if (isSpam(name + subject + message)) {
                     showAlert('تم اكتشاف رسالة غير مرغوب فيها', 'error');
                     return;
                 }
                 
-                // الحصول على token من reCAPTCHA v3
                 let recaptchaToken = '';
                 try {
                     recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'});
@@ -1288,13 +1255,11 @@
                     return;
                 }
                 
-                // التحقق من reCAPTCHA (client-side فقط)
                 if (!recaptchaToken || recaptchaToken.length < 10) {
                     showAlert('فشل التحقق الأمني', 'error');
                     return;
                 }
                 
-                // التحقق من الوقت بين الإرسالات (30 ثانية)
                 const lastSend = localStorage.getItem('lastSend');
                 const now = Date.now();
                 if (lastSend && now - lastSend < 30000) {
@@ -1303,17 +1268,15 @@
                     return;
                 }
                 
-                // تغيير حالة الزر
                 const submitBtn = document.getElementById('submitBtn');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<span>جاري الإرسال</span> <span class="loading-spinner"></span>';
                 submitBtn.disabled = true;
                 
                 try {
-                    // إرسال الإيميل عبر EmailJS
                     await emailjs.send(
-                        'service_u22biwc',      // Service ID الخاص بك
-                        'template_jj5k7r9',     // Template ID الخاص بك
+                        'service_u22biwc',
+                        'template_jj5k7r9',
                         {
                             to_email: 'Info@odunex.com',
                             to_name: 'فريق Odunex',
@@ -1325,7 +1288,6 @@
                         }
                     );
                     
-                    // حفظ وقت الإرسال
                     localStorage.setItem('lastSend', now);
                     
                     showAlert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً', 'success');
@@ -1390,43 +1352,33 @@
             });
         }
 
+        // ==============================================
+        // دالة تبديل اللغة - نسخة عربية (للعمل مع الروابط النظيفة)
+        // ==============================================
         function switchLanguage() {
-            let currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            // الحصول على المسار الحالي
+            let path = window.location.pathname;
             
-            const pageMap = {
-                'index.html': 'index-en.html',
-                'features.html': 'features-en.html',
-                'pricing.html': 'pricing-en.html',
-                'gallery.html': 'gallery-en.html',
-                'contact.html': 'contact-en.html',
-                'index-en.html': 'index.html',
-                'features-en.html': 'features.html',
-                'pricing-en.html': 'pricing.html',
-                'gallery-en.html': 'gallery.html',
-                'contact-en.html': 'contact.html'
-            };
+            // تحديد الصفحة المستهدفة بناءً على المسار
+            let target = '';
             
-            window.location.href = pageMap[currentPage] || 'index.html';
+            if (path === '/' || path.includes('index')) {
+                target = '/index-en.html';
+            } else if (path.includes('features')) {
+                target = '/features-en.html';
+            } else if (path.includes('pricing')) {
+                target = '/pricing-en.html';
+            } else if (path.includes('gallery')) {
+                target = '/gallery-en.html';
+            } else if (path.includes('contact')) {
+                target = '/contact-en.html';
+            } else {
+                target = '/index-en.html';
+            }
+            
+            // إضافة معلمة عشوائية لمنع التخزين المؤقت
+            window.location.href = target + '?v=' + Math.random();
         }
     </script>
-    
-    <!-- ============================================== -->
-    <!-- رأس CSP - للتوثيق (يتم إضافته عبر السيرفر) -->
-    <!-- ============================================== -->
-    <!-- 
-        أضف هذه الهيدرات في إعدادات السيرفر:
-        
-        Content-Security-Policy: 
-            default-src 'self';
-            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
-            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
-            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
-            img-src 'self' data:;
-            frame-src https://www.google.com;
-            connect-src 'self' https://api.emailjs.com;
-            frame-ancestors 'none';
-            base-uri 'self';
-            form-action 'self';
-    -->
 </body>
 </html>
