@@ -28,28 +28,6 @@
     <!-- DOMPurify - حماية XSS (للنماذج المستقبلية) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
-    <!-- سكريبت الصيانة -->
-    <script src="/maintenance-config.js"></script>
-    <script>
-        (function() {
-            const bypassCode = 'odunex2026';
-            const hasAccess = localStorage.getItem('odunex_access') === 'true';
-            const urlParams = new URLSearchParams(window.location.search);
-            const hasBypass = urlParams.get('bypass') === bypassCode;
-
-            if (hasBypass) {
-                localStorage.setItem('odunex_access', 'true');
-                const newUrl = window.location.pathname + window.location.hash;
-                window.history.replaceState({}, document.title, newUrl);
-                return;
-            }
-
-            if (SITE_UNDER_MAINTENANCE && !hasAccess && !window.location.pathname.includes('maintenance')) {
-                window.location.replace('/maintenance-en.html');
-            }
-        })();
-    </script>
-    
     <style>
         /* ===== أنماط Odunex القياسية ===== */
         * {
@@ -890,29 +868,5 @@
             window.location.href = pageMap[currentPage] || 'index-en.html';
         }
     </script>
-    
-    <!-- ============================================== -->
-    <!-- ترويسات CSP - أضفها في إعدادات السيرفر -->
-    <!-- ============================================== -->
-    <!-- 
-        أضف هذه الترويسات في إعدادات السيرفر:
-        
-        Content-Security-Policy: 
-            default-src 'self';
-            script-src 'self' https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
-            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline';
-            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
-            img-src 'self' data:;
-            frame-src https://www.google.com;
-            connect-src 'self';
-            frame-ancestors 'none';
-            base-uri 'self';
-            form-action 'self';
-        
-        Strict-Transport-Security: max-age=31536000; includeSubDomains
-        X-Content-Type-Options: nosniff
-        X-Frame-Options: DENY
-        Referrer-Policy: strict-origin-when-cross-origin
-    -->
 </body>
 </html>
