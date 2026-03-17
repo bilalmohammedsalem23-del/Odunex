@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -1397,8 +1398,10 @@
         }
 
         function switchLanguage() {
-            let currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
+            // Get current page filename
+            const currentPage = window.location.pathname.split('/').pop() || 'contact-en.html';
             
+            // Map English pages to Arabic pages
             const pageMap = {
                 'index-en.html': 'index.html',
                 'features-en.html': 'features.html',
@@ -1407,6 +1410,7 @@
                 'contact-en.html': 'contact.html'
             };
             
+            // Redirect to corresponding Arabic page
             window.location.href = pageMap[currentPage] || 'index.html';
         }
     </script>
@@ -1436,3 +1440,4 @@
     -->
 </body>
 </html>
+```
