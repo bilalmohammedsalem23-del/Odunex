@@ -103,48 +103,30 @@
         body.dark-mode .globe-icon {
             filter: invert(0.8);
         }
-        body.dark-mode .pricing-card,
         body.dark-mode .pricing-plan-card,
         body.dark-mode .support-card,
         body.dark-mode .service-card,
-        body.dark-mode .consulting-item {
+        body.dark-mode .consulting-item,
+        body.dark-mode .cart-sidebar {
             background: var(--dark-card-bg);
             border-color: var(--dark-border);
         }
-        body.dark-mode .pricing-card.popular {
-            background-image: linear-gradient(var(--dark-card-bg), var(--dark-card-bg)), var(--main-gradient);
+        body.dark-mode .cart-sidebar {
+            background: var(--dark-card-bg);
         }
-        body.dark-mode .card-title,
-        body.dark-mode .price-yearly,
         body.dark-mode .plan-header h3,
         body.dark-mode .support-card h3,
         body.dark-mode .service-card h3,
-        body.dark-mode .consulting-info h3 {
+        body.dark-mode .consulting-info h3,
+        body.dark-mode .cart-title {
             color: var(--dark-text-primary) !important;
         }
-        body.dark-mode .features-list li,
         body.dark-mode .plan-features li,
         body.dark-mode .support-card li,
         body.dark-mode .service-card p,
-        body.dark-mode .consulting-info p {
+        body.dark-mode .consulting-info p,
+        body.dark-mode .cart-item span {
             color: var(--dark-text-secondary) !important;
-            border-bottom-color: var(--dark-border);
-        }
-        body.dark-mode .price-box {
-            border-bottom-color: var(--dark-border);
-        }
-        body.dark-mode .payment-section {
-            background-color: transparent;
-        }
-        body.dark-mode .payment-card {
-            background: var(--dark-card-bg);
-            border-color: var(--dark-border);
-        }
-        body.dark-mode .payment-card h3 {
-            color: var(--dark-text-primary);
-        }
-        body.dark-mode .payment-title-container {
-            border-top-color: var(--dark-border);
         }
         body.dark-mode footer {
             background: var(--dark-card-bg);
@@ -160,9 +142,6 @@
         body.dark-mode .page-header p,
         body.dark-mode .section-subtitle {
             color: var(--dark-text-secondary) !important;
-        }
-        body.dark-mode .modal-img-container {
-            background: var(--dark-card-bg);
         }
 
         .container {
@@ -343,202 +322,7 @@
             font-size: 18px;
         }
 
-        /* Original Pricing Section */
-        .pricing-section {
-            margin: 20px 0 40px;
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            width: 100%;
-        }
-        .pricing-card {
-            background: var(--bg-white);
-            border-radius: 28px;
-            padding: 35px 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            border: 2px solid transparent;
-        }
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 45px rgba(122,90,248,0.12);
-        }
-        .pricing-card.popular {
-            border: double 2px transparent;
-            background-image: linear-gradient(var(--bg-white), var(--bg-white)), var(--main-gradient);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(122,90,248,0.15);
-            z-index: 2;
-        }
-        .pricing-card.popular:hover {
-            transform: scale(1.05) translateY(-8px);
-        }
-        .popular-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--main-gradient);
-            color: white;
-            padding: 8px 30px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            box-shadow: 0 5px 15px rgba(122,90,248,0.3);
-        }
-        .card-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--dark-text);
-            text-align: center;
-            transition: color 0.3s ease;
-        }
-        .price-box {
-            text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed var(--border-color);
-            transition: border-color 0.3s ease;
-        }
-        .price-monthly {
-            font-size: 42px;
-            font-weight: 700;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            line-height: 1.2;
-        }
-        .price-monthly small {
-            font-size: 16px;
-            font-weight: 400;
-            color: var(--light-text);
-            -webkit-text-fill-color: var(--light-text);
-        }
-        .price-yearly {
-            font-size: 18px;
-            color: var(--secondary-text);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .features-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-        .features-list li {
-            padding: 12px 0;
-            font-size: 16px;
-            color: var(--secondary-text);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-        .features-list li:last-child { border-bottom: none; }
-        .features-list li i {
-            color: var(--primary-purple);
-            font-size: 18px;
-            width: 22px;
-        }
-        .btn-compare-filled {
-            width: 100%;
-            padding: 14px;
-            background: var(--main-gradient);
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: white;
-            box-shadow: 0 5px 15px rgba(122,90,248,0.2);
-        }
-        .btn-compare-filled:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(122,90,248,0.3);
-        }
-        .btn-compare-filled i {
-            font-size: 16px;
-            transition: transform 0.3s;
-        }
-        .btn-compare-filled:hover i {
-            transform: translateX(-5px);
-        }
-        .btn-compare-outline {
-            width: 100%;
-            padding: 14px;
-            background: transparent;
-            border: 2px solid transparent;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: relative;
-            color: var(--primary-purple);
-            background-image: var(--main-gradient);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .btn-compare-outline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50px;
-            padding: 2px;
-            background: var(--main-gradient);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-        .btn-compare-outline i {
-            font-size: 16px;
-            transition: transform 0.3s;
-            background: var(--main-gradient);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .btn-compare-outline:hover {
-            background: var(--main-gradient);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.2);
-            color: white;
-            background-clip: unset;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: white;
-        }
-        .btn-compare-outline:hover i {
-            background: white;
-            background-clip: unset;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: white;
-            transform: translateX(-5px);
-        }
-        .btn-compare-outline:hover::before { opacity: 0; }
-
-        /* New Pricing Plans Cards */
+        /* Pricing Plans Cards */
         .pricing-plans-section,
         .support-section,
         .additional-services,
@@ -626,29 +410,22 @@
         .plan-features li .unavailable { color: #ef4444; }
         .plan-footer {
             text-align: center;
+            margin-top: 15px;
         }
         .btn-plan {
             display: inline-block;
             padding: 12px 30px;
             border-radius: 50px;
-            background: transparent;
-            border: 2px solid var(--primary-purple);
-            color: var(--primary-purple);
+            background: var(--main-gradient);
+            color: white;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-plan:hover {
-            background: var(--main-gradient);
-            color: white;
-            border-color: transparent;
-        }
-        .btn-plan-primary {
-            background: var(--main-gradient);
-            color: white;
-            border: none;
-        }
-        .btn-plan-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(122,90,248,0.3);
         }
@@ -710,22 +487,18 @@
             display: inline-block;
             padding: 10px 25px;
             border-radius: 50px;
-            background: transparent;
-            border: 2px solid var(--primary-purple);
-            color: var(--primary-purple);
+            background: var(--main-gradient);
+            color: white;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-support:hover {
-            background: var(--main-gradient);
-            color: white;
-            border-color: transparent;
-        }
-        .btn-support-primary {
-            background: var(--main-gradient);
-            color: white;
-            border: none;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.3);
         }
 
         /* Additional Services */
@@ -773,6 +546,24 @@
             font-size: 13px;
             color: var(--secondary-text);
         }
+        .btn-service {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .btn-service:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.3);
+        }
 
         /* Consulting Services */
         .consulting-grid {
@@ -788,6 +579,7 @@
             border-radius: 12px;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            align-items: center;
         }
         .consulting-item:hover {
             border-color: var(--primary-purple);
@@ -814,6 +606,167 @@
             font-size: 14px;
             font-weight: 600;
             color: var(--primary-purple);
+        }
+        .btn-consulting {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .btn-consulting:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.3);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: var(--bg-white);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .cart-sidebar.open {
+            right: 0;
+        }
+        .cart-header {
+            padding: 20px;
+            background: var(--main-gradient);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cart-items {
+            flex: 1;
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .cart-item-price {
+            font-size: 12px;
+            color: var(--primary-purple);
+            font-weight: 600;
+        }
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+        }
+        .cart-total {
+            padding: 20px;
+            border-top: 2px solid var(--border-color);
+            background: var(--section-bg);
+        }
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .cart-total-range {
+            color: var(--primary-purple);
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--light-text);
+        }
+        .btn-checkout {
+            width: 100%;
+            padding: 12px;
+            background: var(--main-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.3);
+        }
+        .cart-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--main-gradient);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(122,90,248,0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .cart-toggle:hover {
+            transform: scale(1.1);
+        }
+        .cart-toggle i {
+            font-size: 24px;
+            color: white;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Payment Methods */
@@ -1020,7 +973,6 @@
 
         /* Responsive */
         @media (max-width: 992px) {
-            .pricing-grid,
             .pricing-plans-grid,
             .support-plans-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1028,13 +980,11 @@
             .payment-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .pricing-card.popular,
             .pricing-plan-card.popular {
                 transform: scale(1);
             }
-            .pricing-card.popular:hover,
             .pricing-plan-card.popular:hover {
-                transform: translateY(-8px);
+                transform: translateY(-5px);
             }
         }
         @media (max-width: 768px) {
@@ -1054,19 +1004,16 @@
             }
             .page-header h1 { font-size: 36px; }
             .page-header p { font-size: 18px; }
-            .pricing-grid,
             .pricing-plans-grid,
             .support-plans-grid {
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
             }
-            .pricing-card,
             .pricing-plan-card,
             .support-card {
                 width: 100%;
             }
-            .pricing-card.popular,
             .pricing-plan-card.popular {
                 transform: scale(1);
             }
@@ -1091,6 +1038,9 @@
             .section-title {
                 font-size: 28px;
             }
+            .cart-sidebar {
+                width: 320px;
+            }
         }
         @media (max-width: 480px) {
             .page-header {
@@ -1098,13 +1048,8 @@
             }
             .page-header h1 { font-size: 32px; }
             .page-header p { font-size: 16px; }
-            .card-title,
             .plan-header h3,
             .support-card h3 { font-size: 24px; }
-            .price-monthly { font-size: 36px; }
-            .features-list li,
-            .plan-features li,
-            .support-card li { font-size: 15px; }
             .payment-title { font-size: 28px; }
             .payment-card {
                 padding: 15px 15px 25px;
@@ -1120,6 +1065,10 @@
             }
             .services-grid {
                 grid-template-columns: 1fr;
+            }
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
             }
         }
     </style>
@@ -1159,66 +1108,6 @@
             </div>
         </section>
 
-        <!-- Original Pricing Section -->
-        <section class="pricing-section">
-            <div class="container">
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h2 class="card-title">مبتدئ</h2>
-                        <div class="price-box">
-                            <div class="price-monthly">$10 <small>/شهرياً</small></div>
-                            <div class="price-yearly">$200 سنوياً</div>
-                        </div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check-circle"></i> ميزات رقمية أساسية</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات البريد</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات التركيز</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات العمل الأساسية</li>
-                        </ul>
-                        <button class="btn-compare-outline">
-                            <span>قارن</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                    </div>
-                    <div class="pricing-card popular">
-                        <div class="popular-badge">الأكثر شعبية</div>
-                        <h2 class="card-title">احترافي</h2>
-                        <div class="price-box">
-                            <div class="price-monthly">$79 <small>/شهرياً</small></div>
-                            <div class="price-yearly">$250 سنوياً</div>
-                        </div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check-circle"></i> ميزات رقمية أساسية</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات البريد</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات التركيز</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات العمل الأساسية</li>
-                        </ul>
-                        <button class="btn-compare-filled">
-                            <span>قارن</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                    </div>
-                    <div class="pricing-card">
-                        <h2 class="card-title">مؤسسي</h2>
-                        <div class="price-box">
-                            <div class="price-monthly">$100 <small>/شهرياً</small></div>
-                            <div class="price-yearly">$360 سنوياً</div>
-                        </div>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check-circle"></i> ميزات رقمية أساسية</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات البريد</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات التركيز</li>
-                            <li><i class="fas fa-check-circle"></i> ميزات العمل الأساسية</li>
-                        </ul>
-                        <button class="btn-compare-outline">
-                            <span>قارن</span>
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- ERP Implementation Plans Section -->
         <section class="pricing-plans-section">
             <div class="container">
@@ -1226,7 +1115,7 @@
                 <p class="section-subtitle">اختر الخطة المناسبة لبدء رحلة التحول الرقمي</p>
                 
                 <div class="pricing-plans-grid">
-                    <div class="pricing-plan-card">
+                    <div class="pricing-plan-card" data-plan="starter" data-name="Starter" data-min="500" data-max="800">
                         <div class="plan-header">
                             <h3>Starter</h3>
                             <div class="plan-price">
@@ -1245,19 +1134,16 @@
                                 <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
                                 <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
                                 <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية</li>
-                                <li><i class="fas fa-times"></i> <span class="unavailable">المحاسبة المتقدمة</span></li>
-                                <li><i class="fas fa-times"></i> <span class="unavailable">إدارة المخزون</span></li>
-                                <li><i class="fas fa-times"></i> <span class="unavailable">المبيعات والمشتريات</span></li>
                                 <li><i class="fas fa-check-circle"></i> تدريب 2 ساعة</li>
                                 <li><i class="fas fa-check-circle"></i> دعم 7 أيام بعد التشغيل</li>
                             </ul>
                         </div>
                         <div class="plan-footer">
-                            <a href="#" class="btn-plan">اطلب الخطة</a>
+                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Starter" data-min="500" data-max="800">اطلب الخطة</button>
                         </div>
                     </div>
 
-                    <div class="pricing-plan-card popular">
+                    <div class="pricing-plan-card popular" data-plan="professional" data-name="Professional" data-min="2000" data-max="3500">
                         <div class="popular-badge">الأكثر طلباً</div>
                         <div class="plan-header">
                             <h3>Professional</h3>
@@ -1276,8 +1162,7 @@
                                 <li><i class="fas fa-user"></i> <strong>12 مستخدم</strong></li>
                                 <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
                                 <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
-                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية</li>
-                                <li><i class="fas fa-check-circle"></i> المحاسبة المتقدمة</li>
+                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية والمتقدمة</li>
                                 <li><i class="fas fa-check-circle"></i> إدارة المخزون</li>
                                 <li><i class="fas fa-check-circle"></i> المبيعات والمشتريات</li>
                                 <li><i class="fas fa-check-circle"></i> التقارير المالية</li>
@@ -1288,11 +1173,11 @@
                             </ul>
                         </div>
                         <div class="plan-footer">
-                            <a href="#" class="btn-plan btn-plan-primary">اطلب الخطة</a>
+                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Professional" data-min="2000" data-max="3500">اطلب الخطة</button>
                         </div>
                     </div>
 
-                    <div class="pricing-plan-card">
+                    <div class="pricing-plan-card" data-plan="enterprise" data-name="Enterprise" data-min="0" data-max="0" data-custom="true">
                         <div class="plan-header">
                             <h3>Enterprise</h3>
                             <div class="plan-price">
@@ -1321,7 +1206,7 @@
                             </ul>
                         </div>
                         <div class="plan-footer">
-                            <a href="#" class="btn-plan">اطلب الخطة</a>
+                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Enterprise" data-custom="true">اطلب الخطة</button>
                         </div>
                     </div>
                 </div>
@@ -1335,7 +1220,7 @@
                 <p class="section-subtitle">اختر باقة الدعم المناسبة لعملك</p>
                 
                 <div class="support-plans-grid">
-                    <div class="support-card">
+                    <div class="support-card" data-support="basic" data-name="دعم Basic" data-price="100">
                         <h3>Basic</h3>
                         <div class="price">$100 <span>/شهرياً</span></div>
                         <ul>
@@ -1344,9 +1229,9 @@
                             <li><i class="fas fa-database"></i> نسخ احتياطي أسبوعي</li>
                             <li><i class="fas fa-clock"></i> وقت الاستجابة: 48 ساعة</li>
                         </ul>
-                        <a href="#" class="btn-support">اشترك الآن</a>
+                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Basic" data-price="100">اشترك الآن</button>
                     </div>
-                    <div class="support-card popular">
+                    <div class="support-card popular" data-support="professional" data-name="دعم Professional" data-price="250">
                         <div class="popular-badge">الأكثر طلباً</div>
                         <h3>Professional</h3>
                         <div class="price">$250 <span>/شهرياً</span></div>
@@ -1359,9 +1244,9 @@
                             <li><i class="fas fa-code"></i> 3 ساعات تطوير شهرياً</li>
                             <li><i class="fas fa-clock"></i> وقت الاستجابة: 24 ساعة</li>
                         </ul>
-                        <a href="#" class="btn-support btn-support-primary">اشترك الآن</a>
+                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Professional" data-price="250">اشترك الآن</button>
                     </div>
-                    <div class="support-card">
+                    <div class="support-card" data-support="enterprise" data-name="دعم Enterprise" data-price="500">
                         <h3>Enterprise</h3>
                         <div class="price">$500 <span>/شهرياً</span></div>
                         <ul>
@@ -1372,7 +1257,7 @@
                             <li><i class="fas fa-code"></i> 10 ساعات تطوير شهرياً</li>
                             <li><i class="fas fa-clock"></i> وقت الاستجابة: 12 ساعة</li>
                         </ul>
-                        <a href="#" class="btn-support">اشترك الآن</a>
+                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Enterprise" data-price="500">اشترك الآن</button>
                     </div>
                 </div>
             </div>
@@ -1385,47 +1270,54 @@
                 <p class="section-subtitle">خدمات إضافية لتعزيز نظامك</p>
                 
                 <div class="services-grid">
-                    <div class="service-card">
+                    <div class="service-card" data-service="hosting" data-name="استضافة الخادم" data-min="25" data-max="250">
                         <i class="fas fa-server"></i>
                         <h3>استضافة الخادم</h3>
                         <p class="price">$25 – $250 <span>/شهر</span></p>
                         <p>استضافة آمنة وسريعة للنظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="استضافة الخادم" data-min="25" data-max="250">اطلب الخدمة</button>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-service="backup" data-name="إعداد النسخ الاحتياطي" data-price="10">
                         <i class="fas fa-database"></i>
                         <h3>إعداد النسخ الاحتياطي</h3>
                         <p class="price">$10 <span>/شهر</span></p>
                         <p>نسخ احتياطي تلقائي للبيانات</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="إعداد النسخ الاحتياطي" data-price="10">اطلب الخدمة</button>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-service="reports" data-name="تقارير مخصصة" data-min="100" data-max="500">
                         <i class="fas fa-chart-line"></i>
                         <h3>تقارير مخصصة</h3>
                         <p class="price">$100 – $500</p>
                         <p>تصميم تقارير حسب احتياجك</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تقارير مخصصة" data-min="100" data-max="500">اطلب الخدمة</button>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-service="api" data-name="تكامل API" data-min="300" data-max="1500">
                         <i class="fas fa-plug"></i>
                         <h3>تكامل API</h3>
                         <p class="price">$300 – $1,500</p>
                         <p>ربط النظام مع تطبيقات خارجية</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تكامل API" data-min="300" data-max="1500">اطلب الخدمة</button>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-service="website" data-name="تكامل موقع إلكتروني" data-min="300" data-max="1000">
                         <i class="fas fa-globe"></i>
                         <h3>تكامل موقع إلكتروني</h3>
                         <p class="price">$300 – $1,000</p>
                         <p>ربط المتجر الإلكتروني مع النظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تكامل موقع إلكتروني" data-min="300" data-max="1000">اطلب الخدمة</button>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-service="training" data-name="تدريب إضافي" data-price="25">
                         <i class="fas fa-chalkboard-teacher"></i>
                         <h3>تدريب إضافي</h3>
                         <p class="price">$25 <span>/ساعة</span></p>
                         <p>تدريب الموظفين على النظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تدريب إضافي" data-price="25">اطلب الخدمة</button>
                     </div>
-                    <div class="service-card">
+                    <div class="service-card" data-service="custom" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">
                         <i class="fas fa-puzzle-piece"></i>
                         <h3>تطوير وحدات مخصصة</h3>
                         <p class="price">$500 – $5,000</p>
                         <p>تطوير مميزات خاصة بشركتك</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">اطلب الخدمة</button>
                     </div>
                 </div>
             </div>
@@ -1438,117 +1330,131 @@
                 <p class="section-subtitle">استشارات احترافية لتعظيم استفادتك من النظام</p>
                 
                 <div class="consulting-grid">
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="annual_reports" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">
                         <i class="fas fa-file-alt"></i>
                         <div class="consulting-info">
                             <h3>إعداد التقارير السنوية</h3>
                             <p>إعداد التقارير المالية السنوية (P&L، Balance Sheet، Cash Flow)</p>
                             <span class="price">$300 – $800</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="fiscal_close" data-name="تقفيل السنة المالية" data-min="200" data-max="500">
                         <i class="fas fa-calendar-alt"></i>
                         <div class="consulting-info">
                             <h3>تقفيل السنة المالية</h3>
                             <p>Closing Fiscal Year وإعداد Opening Balance</p>
                             <span class="price">$200 – $500</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تقفيل السنة المالية" data-min="200" data-max="500">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="audit" data-name="التدقيق السنوي" data-min="500" data-max="2000">
                         <i class="fas fa-search"></i>
                         <div class="consulting-info">
                             <h3>التدقيق السنوي</h3>
                             <p>مراجعة العمليات المالية داخل النظام وتحليل القيود</p>
                             <span class="price">$500 – $2,000</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="التدقيق السنوي" data-min="500" data-max="2000">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="risk" data-name="إدارة المخاطر" data-min="800" data-max="2500">
                         <i class="fas fa-shield-alt"></i>
                         <div class="consulting-info">
                             <h3>إدارة المخاطر</h3>
                             <p>تحليل المخاطر التشغيلية والمالية وإعداد Risk Matrix</p>
                             <span class="price">$800 – $2,500</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إدارة المخاطر" data-min="800" data-max="2500">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="sop" data-name="إعداد سياسات وإجراءات SOP" data-min="500" data-max="1500">
                         <i class="fas fa-file-signature"></i>
                         <div class="consulting-info">
                             <h3>إعداد سياسات وإجراءات SOP</h3>
                             <p>كتابة السياسات التشغيلية وربطها بالنظام</p>
                             <span class="price">$500 – $1,500</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد سياسات وإجراءات SOP" data-min="500" data-max="1500">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="dashboard" data-name="إعداد Dashboard تنفيذي" data-min="300" data-max="900">
                         <i class="fas fa-tachometer-alt"></i>
                         <div class="consulting-info">
                             <h3>إعداد Dashboard تنفيذي</h3>
                             <p>تصميم لوحة تحكم للإدارة KPI Dashboard</p>
                             <span class="price">$300 – $900</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد Dashboard تنفيذي" data-min="300" data-max="900">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="data_analysis" data-name="تحليل البيانات" data-min="200" data-max="700">
                         <i class="fas fa-chart-bar"></i>
                         <div class="consulting-info">
                             <h3>تحليل البيانات</h3>
                             <p>استخراج وتحليل بيانات المبيعات والعمليات</p>
                             <span class="price">$200 – $700</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل البيانات" data-min="200" data-max="700">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="staff_training" data-name="تدريب الموظفين" data-min="25" data-max="80" data-hourly="true">
                         <i class="fas fa-chalkboard-teacher"></i>
                         <div class="consulting-info">
                             <h3>تدريب الموظفين</h3>
                             <p>تدريب المحاسبة والمبيعات والمخازن</p>
                             <span class="price">$25 – $80 / ساعة</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تدريب الموظفين" data-min="25" data-max="80" data-hourly="true">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="tax" data-name="إعداد النظام للامتثال الضريبي" data-min="200" data-max="600">
                         <i class="fas fa-file-invoice-dollar"></i>
                         <div class="consulting-info">
                             <h3>إعداد النظام للامتثال الضريبي</h3>
                             <p>إعداد الضرائب VAT أو Tax Setup</p>
                             <span class="price">$200 – $600</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد النظام للامتثال الضريبي" data-min="200" data-max="600">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="internal_control" data-name="إعداد نظام الرقابة الداخلية" data-min="500" data-max="1500">
                         <i class="fas fa-lock"></i>
                         <div class="consulting-info">
                             <h3>إعداد نظام الرقابة الداخلية</h3>
                             <p>تصميم Internal Control داخل النظام</p>
                             <span class="price">$500 – $1,500</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد نظام الرقابة الداخلية" data-min="500" data-max="1500">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="iso" data-name="إعداد وتطبيق ISO" data-min="2000" data-max="9000">
                         <i class="fas fa-certificate"></i>
                         <div class="consulting-info">
                             <h3>إعداد وتطبيق ISO</h3>
                             <p>إعداد الشركة للحصول على شهادات ISO</p>
                             <span class="price">$2,000 – $9,000</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد وتطبيق ISO" data-min="2000" data-max="9000">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="process" data-name="تحليل العمليات Business Process" data-min="800" data-max="3000">
                         <i class="fas fa-chart-line"></i>
                         <div class="consulting-info">
                             <h3>تحليل العمليات Business Process</h3>
                             <p>تحليل العمليات وتحسينها داخل ERP</p>
                             <span class="price">$800 – $3,000</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل العمليات Business Process" data-min="800" data-max="3000">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="supply_chain" data-name="تحليل سلسلة التوريد" data-min="600" data-max="2000">
                         <i class="fas fa-truck"></i>
                         <div class="consulting-info">
                             <h3>تحليل سلسلة التوريد</h3>
                             <p>تحسين عمليات المشتريات والمخزون</p>
                             <span class="price">$600 – $2,000</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل سلسلة التوريد" data-min="600" data-max="2000">اطلب الاستشارة</button>
                     </div>
-                    <div class="consulting-item">
+                    <div class="consulting-item" data-consult="cfo" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">
                         <i class="fas fa-chart-pie"></i>
                         <div class="consulting-info">
                             <h3>استشارات الإدارة المالية</h3>
                             <p>CFO Advisory باستخدام تقارير ERP</p>
                             <span class="price">$300 – $1,000</span>
                         </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">اطلب الاستشارة</button>
                     </div>
                 </div>
             </div>
@@ -1612,6 +1518,31 @@
         </section>
     </main>
 
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">سلة المشتريات فارغة</div>
+        </div>
+        <div class="cart-total" id="cartTotal" style="display: none;">
+            <div class="cart-total-row">
+                <span>المجموع الكلي:</span>
+                <span class="cart-total-range" id="totalRange">$0 – $0</span>
+            </div>
+            <button class="btn-checkout" onclick="sendToWhatsApp()">
+                <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <div class="cart-toggle" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
     <!-- Payment Modal -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal">
@@ -1642,66 +1573,190 @@
     </footer>
 
     <script>
-        // Security Functions
-        function sanitizeInput(text) {
-            if (typeof DOMPurify !== 'undefined') {
-                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
-            }
-            return text.replace(/[<>]/g, "");
+        // Cart System
+        let cart = [];
+
+        // Add to cart function
+        function addToCart(item) {
+            cart.push(item);
+            updateCartUI();
         }
-        
-        function validateRequestOrigin() {
-            const referrer = document.referrer || '';
-            const currentDomain = window.location.hostname;
-            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
-                console.warn('Request from external domain detected:', referrer);
-                return false;
-            }
-            return true;
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
         }
-        
-        function checkRateLimit() {
-            const lastVisit = localStorage.getItem('lastPageVisit');
-            const now = Date.now();
-            if (lastVisit && now - lastVisit < 3000) {
-                return false;
+
+        function updateCartUI() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartTotalDiv = document.getElementById('cartTotal');
+            const cartCount = document.getElementById('cartCount');
+            
+            cartCount.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<div class="cart-empty">سلة المشتريات فارغة</div>';
+                cartTotalDiv.style.display = 'none';
+                return;
             }
-            localStorage.setItem('lastPageVisit', now);
-            return true;
+            
+            cartTotalDiv.style.display = 'block';
+            
+            let html = '';
+            let totalMin = 0;
+            let totalMax = 0;
+            
+            cart.forEach((item, index) => {
+                let priceDisplay = '';
+                let minVal = 0;
+                let maxVal = 0;
+                
+                if (item.min && item.max) {
+                    priceDisplay = `$${item.min} – $${item.max}`;
+                    minVal = item.min;
+                    maxVal = item.max;
+                } else if (item.price) {
+                    priceDisplay = `$${item.price}`;
+                    minVal = item.price;
+                    maxVal = item.price;
+                } else if (item.custom) {
+                    priceDisplay = 'سعر مخصص';
+                    minVal = 0;
+                    maxVal = 0;
+                }
+                
+                totalMin += minVal;
+                totalMax += maxVal;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${priceDisplay}</div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            cartItemsDiv.innerHTML = html;
+            
+            let totalDisplay = '';
+            if (totalMin === totalMax && totalMin > 0) {
+                totalDisplay = `$${totalMin}`;
+            } else if (totalMin > 0 || totalMax > 0) {
+                totalDisplay = `$${totalMin} – $${totalMax}`;
+            } else {
+                totalDisplay = 'سعر مخصص';
+            }
+            
+            document.getElementById('totalRange').textContent = totalDisplay;
+        }
+
+        // Event listeners for add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const type = this.dataset.type;
+                const name = this.dataset.name;
+                const item = { name: name, type: type };
+                
+                if (this.dataset.min && this.dataset.max) {
+                    item.min = parseInt(this.dataset.min);
+                    item.max = parseInt(this.dataset.max);
+                }
+                if (this.dataset.price) {
+                    item.price = parseInt(this.dataset.price);
+                }
+                if (this.dataset.custom === 'true') {
+                    item.custom = true;
+                }
+                if (this.dataset.hourly === 'true') {
+                    item.hourly = true;
+                }
+                
+                addToCart(item);
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.textContent = `✓ تم إضافة "${name}" إلى السلة`;
+                notification.style.position = 'fixed';
+                notification.style.bottom = '100px';
+                notification.style.right = '30px';
+                notification.style.backgroundColor = '#10b981';
+                notification.style.color = 'white';
+                notification.style.padding = '12px 20px';
+                notification.style.borderRadius = '8px';
+                notification.style.zIndex = '1002';
+                notification.style.fontWeight = '600';
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 2000);
+            });
+        });
+
+        // Cart sidebar functions
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        // Send to WhatsApp
+        function sendToWhatsApp() {
+            if (cart.length === 0) {
+                alert('السلة فارغة. أضف بعض الخدمات أولاً.');
+                return;
+            }
+            
+            let message = '📋 *طلب خدمات Odunex*\n\n';
+            message += '*الخدمات المطلوبة:*\n';
+            
+            cart.forEach((item, index) => {
+                let priceDisplay = '';
+                if (item.min && item.max) {
+                    priceDisplay = ` ($${item.min} – $${item.max})`;
+                } else if (item.price) {
+                    priceDisplay = ` ($${item.price})`;
+                } else if (item.custom) {
+                    priceDisplay = ` (سعر مخصص)`;
+                }
+                message += `${index + 1}. ${item.name}${priceDisplay}\n`;
+            });
+            
+            let totalMin = cart.reduce((sum, item) => sum + (item.min || item.price || 0), 0);
+            let totalMax = cart.reduce((sum, item) => sum + (item.max || item.price || 0), 0);
+            
+            message += '\n*المجموع:* ';
+            if (totalMin === totalMax && totalMin > 0) {
+                message += `$${totalMin}`;
+            } else if (totalMin > 0 || totalMax > 0) {
+                message += `$${totalMin} – $${totalMax}`;
+            } else {
+                message += 'سعر مخصص';
+            }
+            
+            message += '\n\n*للتواصل:* يرجى التواصل معنا لتأكيد الطلب وتفاصيل الدفع.';
+            
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/9647506841035?text=${encodedMessage}`, '_blank');
         }
 
         // Dark Mode
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedMode = localStorage.getItem('darkMode');
-            const toggleBtn = document.querySelector('.dark-mode-toggle');
-            if (savedMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
-            } else {
-                document.body.classList.remove('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☾';
-            }
-            updateActiveLink();
-            validateRequestOrigin();
-            checkRateLimit();
-        });
-
         function toggleDarkMode() {
-            const isDarkMode = document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
-            if (isDarkMode) {
+            if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkMode', 'enabled');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
+                toggleBtn.textContent = '☀️';
             } else {
                 localStorage.setItem('darkMode', 'disabled');
-                if (toggleBtn) toggleBtn.textContent = '☾';
+                toggleBtn.textContent = '☾';
             }
         }
 
         function updateActiveLink() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navLinks = document.querySelectorAll('.nav-menu a');
-            navLinks.forEach(link => {
+            const currentPage = window.location.pathname.split('/').pop() || 'pricing.html';
+            document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === currentPage) {
                     link.classList.add('active');
@@ -1764,6 +1819,19 @@
                 modal.style.display = 'none';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedMode = localStorage.getItem('darkMode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+            updateActiveLink();
+        });
     </script>
 </body>
 </html>
