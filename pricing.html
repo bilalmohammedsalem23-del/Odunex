@@ -140,15 +140,34 @@
             -webkit-text-fill-color: var(--primary-purple);
             color: var(--primary-purple);
         }
-        body.light-mode .payment-card {
-            background: var(--bg-white);
-            border-color: var(--border-color);
+        body.light-mode .card .front {
+            background-color: var(--bg-white);
         }
-        body.light-mode .payment-card .payment-name {
-            color: var(--dark-text) !important;
+        body.light-mode .card .back {
+            background-color: var(--bg-white);
         }
-        body.light-mode .payment-card .qr-note {
-            color: var(--secondary-text) !important;
+        body.light-mode .card .back::before {
+            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--primary-blue), var(--primary-purple), transparent);
+        }
+        body.light-mode .card .back-content {
+            background-color: var(--bg-white);
+        }
+        body.light-mode .card .back-content .payment-name {
+            color: var(--dark-text);
+        }
+        body.light-mode .card .back-content .qr-note {
+            color: var(--secondary-text);
+        }
+        body.light-mode .card .front .front-content .badge {
+            background-color: rgba(0,0,0,0.1);
+            color: var(--primary-purple);
+        }
+        body.light-mode .card .front .description {
+            background-color: rgba(0,0,0,0.05);
+            box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.05);
+        }
+        body.light-mode .card .front .description .title p {
+            color: var(--dark-text);
         }
 
         .container {
@@ -249,9 +268,9 @@
             background-size: contain;
         }
 
-        /* Theme Switch - Modified size */
+        /* Theme Switch Button */
         .theme-switch {
-            --toggle-size: 10px;
+            --toggle-size: 12px;
             --container-width: 4.8em;
             --container-height: 2.2em;
             --container-radius: 5em;
@@ -271,7 +290,6 @@
         }
 
         .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
-            -webkit-box-sizing: border-box;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -723,7 +741,7 @@
             transform: translateY(-2px);
         }
 
-        /* Payment Methods - Square Cards */
+        /* ===== 3D Flip Payment Cards ===== */
         .payment-section {
             padding: 40px 0 60px;
             text-align: center;
@@ -743,60 +761,217 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
+            justify-items: center;
         }
 
-        /* Square Payment Card Styles */
-        .payment-card {
-            background: var(--dark-card-bg);
-            border-radius: 20px;
-            padding: 25px 20px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--dark-border);
+        /* 3D Card Styles */
+        .card {
+            overflow: visible;
+            width: 100%;
+            max-width: 280px;
+            height: 320px;
             cursor: pointer;
-            text-align: center;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 500ms;
+            box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+
+        .front, .back {
+            background-color: var(--dark-card-bg);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--dark-border);
+        }
+
+        .back {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .back::before {
+            position: absolute;
+            content: ' ';
+            display: block;
+            width: 200px;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--primary-blue), var(--primary-purple), transparent);
+            animation: rotation_481 6000ms infinite linear;
+        }
+
+        @keyframes rotation_481 {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        .back-content {
+            position: absolute;
+            width: 96%;
+            height: 96%;
+            background-color: var(--dark-card-bg);
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            aspect-ratio: 1 / 1;
-            justify-content: space-between;
-        }
-        .payment-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-purple);
-            box-shadow: 0 15px 30px rgba(122,90,248,0.2);
-        }
-        .payment-icon {
-            font-size: 48px;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-        .payment-name {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--dark-text-primary);
-            margin-bottom: 20px;
-        }
-        .qr-wrapper {
-            width: 100%;
-            display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px 0;
+            gap: 15px;
+            z-index: 2;
         }
-        .payment-qr {
-            width: 120px;
-            height: 120px;
+
+        .back-content .payment-qr {
+            width: 140px;
+            height: 140px;
             object-fit: contain;
             border-radius: 12px;
             background: white;
             padding: 8px;
         }
-        .qr-note {
+
+        .back-content .payment-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-text-primary);
+            margin-top: 10px;
+        }
+
+        .back-content .qr-note {
             font-size: 12px;
             color: var(--dark-text-secondary);
-            margin-top: 12px;
+        }
+
+        .front {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(122,90,248,0.1), rgba(43,176,237,0.1));
+        }
+
+        .card:hover .content {
+            transform: rotateY(180deg);
+        }
+
+        .front .front-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .front-content .badge {
+            background-color: rgba(122,90,248,0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            width: fit-content;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-purple);
+            margin-top: 20px;
+        }
+
+        .front .description {
+            box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.2);
+            width: 90%;
+            padding: 15px;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .front .description .title {
+            font-size: 14px;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .front .description .title p {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .front .description .card-footer {
+            color: rgba(255,255,255,0.8);
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .front .img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--primary-purple);
+            position: absolute;
+            filter: blur(25px);
+            animation: floating 2600ms infinite linear;
+            opacity: 0.5;
+        }
+
+        .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: -30px;
+            right: -30px;
+            background-color: var(--primary-purple);
+            animation-delay: -500ms;
+        }
+
+        .circle:nth-child(2) {
+            background-color: var(--primary-blue);
+            left: -40px;
+            bottom: -40px;
+            width: 140px;
+            height: 140px;
+            animation-delay: -1200ms;
+        }
+
+        .circle:nth-child(3) {
+            background-color: var(--primary-purple);
+            right: 30px;
+            bottom: 20px;
+            width: 80px;
+            height: 80px;
+            animation-delay: -800ms;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-15px) translateX(5px); }
+            100% { transform: translateY(0px) translateX(0px); }
         }
 
         /* Cart Sidebar */
@@ -1027,15 +1202,16 @@
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
+                align-items: center;
             }
+            .card { max-width: 280px; height: 320px; }
             .cart-sidebar { width: 320px; }
-            .payment-card { aspect-ratio: auto; min-height: 280px; }
-            .payment-qr { width: 100px; height: 100px; }
         }
         @media (max-width: 480px) {
             .page-header h1 { font-size: 32px; }
             .cart-sidebar { width: 100%; right: -100%; }
-            .payment-qr { width: 90px; height: 90px; }
+            .card { max-width: 260px; height: 300px; }
+            .back-content .payment-qr { width: 110px; height: 110px; }
         }
     </style>
 </head>
@@ -1455,58 +1631,183 @@
             </div>
         </section>
 
-        <!-- Payment Methods Section - Square Cards -->
+        <!-- Payment Methods Section - 3D Flip Cards -->
         <section class="payment-section">
             <div class="container">
                 <h2 class="payment-title"><span>طرق</span> الدفع</h2>
                 <div class="payment-grid">
-                    <div class="payment-card" onclick="openPaymentModal('qcard')">
-                        <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
-                        <div class="payment-name">كي كارد</div>
-                        <div class="qr-wrapper">
-                            <img src="assets/images/Q card.gif" alt="كي كارد" class="payment-qr">
+                    <!-- Ki Card -->
+                    <div class="card" onclick="openPaymentModal('qcard')">
+                        <div class="content">
+                            <div class="front">
+                                <div class="img">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="front-content">
+                                    <small class="badge">دفع آمن</small>
+                                    <div class="description">
+                                        <div class="title">
+                                            <p>كي كارد</p>
+                                        </div>
+                                        <p class="card-footer">ادفع بسهولة وأمان</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Q card.gif" alt="كي كارد" class="payment-qr">
+                                    <div class="payment-name">كي كارد</div>
+                                    <div class="qr-note">امسح رمز QR للدفع</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="qr-note">امسح رمز QR للدفع</div>
                     </div>
-                    <div class="payment-card" onclick="openPaymentModal('zain')">
-                        <div class="payment-icon"><i class="fas fa-mobile-alt"></i></div>
-                        <div class="payment-name">زين كاش</div>
-                        <div class="qr-wrapper">
-                            <img src="assets/images/Zain.gif" alt="زين كاش" class="payment-qr">
+
+                    <!-- Zain Cash -->
+                    <div class="card" onclick="openPaymentModal('zain')">
+                        <div class="content">
+                            <div class="front">
+                                <div class="img">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="front-content">
+                                    <small class="badge">دفع آمن</small>
+                                    <div class="description">
+                                        <div class="title">
+                                            <p>زين كاش</p>
+                                        </div>
+                                        <p class="card-footer">ادفع بسهولة وأمان</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Zain.gif" alt="زين كاش" class="payment-qr">
+                                    <div class="payment-name">زين كاش</div>
+                                    <div class="qr-note">امسح رمز QR للدفع</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="qr-note">امسح رمز QR للدفع</div>
                     </div>
-                    <div class="payment-card" onclick="openPaymentModal('fib')">
-                        <div class="payment-icon"><i class="fas fa-university"></i></div>
-                        <div class="payment-name">مصرف العراق الأول FIB</div>
-                        <div class="qr-wrapper">
-                            <img src="assets/images/FIB.gif" alt="FIB" class="payment-qr">
+
+                    <!-- FIB -->
+                    <div class="card" onclick="openPaymentModal('fib')">
+                        <div class="content">
+                            <div class="front">
+                                <div class="img">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="front-content">
+                                    <small class="badge">دفع آمن</small>
+                                    <div class="description">
+                                        <div class="title">
+                                            <p>مصرف العراق الأول FIB</p>
+                                        </div>
+                                        <p class="card-footer">ادفع بسهولة وأمان</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/FIB.gif" alt="FIB" class="payment-qr">
+                                    <div class="payment-name">مصرف العراق الأول FIB</div>
+                                    <div class="qr-note">امسح رمز QR للدفع</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="qr-note">امسح رمز QR للدفع</div>
                     </div>
-                    <div class="payment-card" onclick="openPaymentModal('altaeef')">
-                        <div class="payment-icon"><i class="fas fa-landmark"></i></div>
-                        <div class="payment-name">مصرف الطيف الاسلامي</div>
-                        <div class="qr-wrapper">
-                            <img src="assets/images/al taeef.gif" alt="مصرف الطيف الاسلامي" class="payment-qr">
+
+                    <!-- Al Taeef Islamic Bank -->
+                    <div class="card" onclick="openPaymentModal('altaeef')">
+                        <div class="content">
+                            <div class="front">
+                                <div class="img">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="front-content">
+                                    <small class="badge">دفع آمن</small>
+                                    <div class="description">
+                                        <div class="title">
+                                            <p>مصرف الطيف الاسلامي</p>
+                                        </div>
+                                        <p class="card-footer">ادفع بسهولة وأمان</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/al taeef.gif" alt="مصرف الطيف الاسلامي" class="payment-qr">
+                                    <div class="payment-name">مصرف الطيف الاسلامي</div>
+                                    <div class="qr-note">امسح رمز QR للدفع</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="qr-note">امسح رمز QR للدفع</div>
                     </div>
-                    <div class="payment-card" onclick="openPaymentModal('fastpay')">
-                        <div class="payment-icon"><i class="fas fa-bolt"></i></div>
-                        <div class="payment-name">فاست بي</div>
-                        <div class="qr-wrapper">
-                            <img src="assets/images/Fast pay.gif" alt="فاست بي" class="payment-qr">
+
+                    <!-- Fast Pay -->
+                    <div class="card" onclick="openPaymentModal('fastpay')">
+                        <div class="content">
+                            <div class="front">
+                                <div class="img">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="front-content">
+                                    <small class="badge">دفع آمن</small>
+                                    <div class="description">
+                                        <div class="title">
+                                            <p>فاست بي</p>
+                                        </div>
+                                        <p class="card-footer">ادفع بسهولة وأمان</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Fast pay.gif" alt="فاست بي" class="payment-qr">
+                                    <div class="payment-name">فاست بي</div>
+                                    <div class="qr-note">امسح رمز QR للدفع</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="qr-note">امسح رمز QR للدفع</div>
                     </div>
-                    <div class="payment-card" onclick="openPaymentModal('asia')">
-                        <div class="payment-icon"><i class="fas fa-exchange-alt"></i></div>
-                        <div class="payment-name">اسيا بي</div>
-                        <div class="qr-wrapper">
-                            <img src="assets/images/Asia.gif" alt="اسيا بي" class="payment-qr">
+
+                    <!-- Asia Bee -->
+                    <div class="card" onclick="openPaymentModal('asia')">
+                        <div class="content">
+                            <div class="front">
+                                <div class="img">
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="front-content">
+                                    <small class="badge">دفع آمن</small>
+                                    <div class="description">
+                                        <div class="title">
+                                            <p>اسيا بي</p>
+                                        </div>
+                                        <p class="card-footer">ادفع بسهولة وأمان</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Asia.gif" alt="اسيا بي" class="payment-qr">
+                                    <div class="payment-name">اسيا بي</div>
+                                    <div class="qr-note">امسح رمز QR للدفع</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="qr-note">امسح رمز QR للدفع</div>
                     </div>
                 </div>
             </div>
