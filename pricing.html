@@ -47,24 +47,24 @@
             --popular-gradient: linear-gradient(135deg, rgba(122,90,248,0.05), rgba(43,176,237,0.05));
             --whatsapp-green: #25D366;
             
-            /* Dark mode colors - matching homepage */
-            --dark-bg: #0a0a1a;
-            --dark-card: #14142b;
-            --dark-border: #2a2a4a;
-            --dark-text-primary: #e0e0ff;
-            --dark-text-secondary: #c0c0e0;
-            --dark-text-muted: #a0a0c0;
-            --dark-card-bg: #1a1a35;
-            --dark-header-bg: #14142b;
+            /* Dark mode colors - Dark navy blue background */
+            --dark-bg: #0a0a2a;
+            --dark-card: #0f0f2a;
+            --dark-border: #1e2a4a;
+            --dark-text-primary: #ffffff;
+            --dark-text-secondary: #cbd5e6;
+            --dark-text-muted: #94a3b8;
+            --dark-card-bg: #111133;
+            --dark-header-bg: #0a0a2a;
             --dark-glow: rgba(122, 90, 248, 0.3);
-            --dark-input-bg: #1e1e36;
+            --dark-input-bg: #1a1a3a;
             --dark-input-text: #ffffff;
-            --dark-input-placeholder: #a0a0c0;
+            --dark-input-placeholder: #94a3b8;
         }
 
         body {
-            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
-            color: var(--dark-text);
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
             line-height: 1.6;
             padding-top: 80px;
             overflow-x: hidden;
@@ -74,7 +74,79 @@
             flex-direction: column;
         }
 
-        /* Dark Mode Styles - matching homepage exactly */
+        /* Light mode override - but we want dark by default */
+        body.light-mode {
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            color: var(--dark-text);
+        }
+        body.light-mode header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+        }
+        body.light-mode .nav-logo-text {
+            color: #000000 !important;
+        }
+        body.light-mode .nav-menu a {
+            color: #6B6B6B;
+        }
+        body.light-mode .nav-menu a:hover,
+        body.light-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+        body.light-mode .lang-container,
+        body.light-mode .dark-mode-container {
+            border-color: #ddd;
+        }
+        body.light-mode .lang-text,
+        body.light-mode .dark-mode-toggle {
+            color: #555;
+        }
+        body.light-mode .globe-icon {
+            filter: invert(0);
+        }
+        body.light-mode .pricing-plan-card,
+        body.light-mode .support-card,
+        body.light-mode .service-card,
+        body.light-mode .consulting-item,
+        body.light-mode .cart-sidebar {
+            background: var(--bg-white);
+            border-color: var(--border-color);
+        }
+        body.light-mode .plan-header h3,
+        body.light-mode .support-card h3,
+        body.light-mode .service-card h3,
+        body.light-mode .consulting-info h3 {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .plan-features li,
+        body.light-mode .support-card li,
+        body.light-mode .service-card p,
+        body.light-mode .consulting-info p {
+            color: var(--secondary-text) !important;
+        }
+        body.light-mode footer {
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border-color);
+        }
+        body.light-mode .footer-brand-name {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .footer-tagline,
+        body.light-mode .footer-copyright {
+            color: var(--secondary-text) !important;
+        }
+        body.light-mode .page-header p,
+        body.light-mode .section-subtitle {
+            color: var(--secondary-text) !important;
+        }
+        body.light-mode .payment-card {
+            background: var(--bg-white);
+            border-color: var(--border-color);
+        }
+        body.light-mode .payment-card h3 {
+            color: var(--dark-text) !important;
+        }
+
         body.dark-mode {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
@@ -181,8 +253,8 @@
 
         /* Header */
         header {
-            background: var(--bg-white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: var(--dark-header-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             padding: 12px 0;
             position: fixed;
             top: 0;
@@ -191,6 +263,7 @@
             z-index: 1000;
             width: 100%;
             transition: all 0.3s ease;
+            border-bottom: 1px solid var(--dark-border);
         }
         header .container {
             display: flex;
@@ -210,7 +283,7 @@
         .nav-logo-text {
             font-size: 22px;
             font-weight: 700;
-            color: #000000;
+            color: var(--dark-text-primary);
             transition: color 0.3s ease;
         }
         .nav-menu {
@@ -228,7 +301,7 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
-            color: #6B6B6B;
+            color: var(--dark-text-secondary);
             transition: all 0.3s ease;
             white-space: nowrap;
             position: relative;
@@ -253,7 +326,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            border: 2px solid #ddd;
+            border: 2px solid var(--dark-border);
             border-radius: 8px;
             padding: 5px 10px;
             background: transparent;
@@ -268,13 +341,13 @@
         .lang-text {
             font-size: 14px;
             font-weight: 600;
-            color: #555;
+            color: var(--dark-text-secondary);
             transition: color 0.3s ease;
         }
         .globe-icon {
             width: 16px;
             height: 16px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23c0c0e0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
             background-size: contain;
             transition: filter 0.3s ease;
         }
@@ -282,7 +355,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #ddd;
+            border: 2px solid var(--dark-border);
             border-radius: 8px;
             padding: 5px 10px;
             background: transparent;
@@ -299,7 +372,7 @@
             border: none;
             font-size: 18px;
             cursor: pointer;
-            color: #555;
+            color: var(--dark-text-secondary);
             width: 24px;
             height: 24px;
             display: flex;
@@ -317,6 +390,7 @@
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 15px;
+            color: var(--dark-text-primary);
         }
         .page-header h1 span {
             background: var(--main-gradient);
@@ -325,7 +399,7 @@
         }
         .page-header p {
             font-size: 20px;
-            color: var(--secondary-text);
+            color: var(--dark-text-secondary);
             max-width: 700px;
             margin: 0 auto;
             transition: color 0.3s ease;
@@ -337,6 +411,7 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 15px;
+            color: var(--dark-text-primary);
         }
         .section-title .gradient-text {
             background: var(--main-gradient);
@@ -345,7 +420,7 @@
         }
         .section-subtitle {
             text-align: center;
-            color: var(--secondary-text);
+            color: var(--dark-text-secondary);
             margin-bottom: 40px;
             font-size: 18px;
         }
@@ -356,7 +431,7 @@
         .additional-services,
         .consulting-services {
             padding: 60px 0;
-            background: var(--section-bg);
+            background: transparent;
         }
         .pricing-plans-grid {
             display: grid;
@@ -364,19 +439,19 @@
             gap: 30px;
         }
         .pricing-plan-card {
-            background: var(--bg-white);
+            background: var(--dark-card-bg);
             border-radius: 24px;
             padding: 30px;
             position: relative;
             transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
         }
         .pricing-plan-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(122,90,248,0.15);
+            box-shadow: 0 20px 40px rgba(122,90,248,0.2);
             border-color: var(--primary-purple);
         }
         .pricing-plan-card.popular {
@@ -402,6 +477,7 @@
             font-weight: 700;
             margin-bottom: 15px;
             text-align: center;
+            color: var(--dark-text-primary);
         }
         .plan-price {
             text-align: center;
@@ -410,6 +486,7 @@
         .plan-price .currency {
             font-size: 20px;
             vertical-align: top;
+            color: var(--dark-text-secondary);
         }
         .plan-price .price {
             font-size: 42px;
@@ -420,11 +497,11 @@
         }
         .plan-price .period {
             font-size: 14px;
-            color: var(--light-text);
+            color: var(--dark-text-muted);
         }
         .plan-desc {
             text-align: center;
-            color: var(--light-text);
+            color: var(--dark-text-muted);
             font-size: 14px;
             margin-bottom: 20px;
         }
@@ -438,11 +515,11 @@
         .plan-features li {
             padding: 8px 0;
             font-size: 14px;
-            color: var(--secondary-text);
+            color: var(--dark-text-secondary);
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--dark-border);
         }
         .plan-features li:last-child { border-bottom: none; }
         .plan-features li i {
@@ -470,7 +547,7 @@
         }
         .btn-plan:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.3);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
         }
 
         /* Support Plans */
@@ -480,19 +557,19 @@
             gap: 30px;
         }
         .support-card {
-            background: var(--bg-white);
+            background: var(--dark-card-bg);
             border-radius: 20px;
             padding: 30px;
             text-align: center;
             position: relative;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--dark-border);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
         }
         .support-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(122,90,248,0.1);
+            box-shadow: 0 15px 30px rgba(122,90,248,0.2);
             border-color: var(--primary-purple);
         }
         .support-card.popular {
@@ -501,16 +578,18 @@
         .support-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
+            color: var(--dark-text-primary);
         }
         .support-card .price {
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 20px;
+            color: var(--primary-purple);
         }
         .support-card .price span {
             font-size: 14px;
             font-weight: 400;
-            color: var(--light-text);
+            color: var(--dark-text-muted);
         }
         .support-card ul {
             list-style: none;
@@ -524,6 +603,7 @@
             align-items: center;
             gap: 10px;
             font-size: 14px;
+            color: var(--dark-text-secondary);
         }
         .support-card li i {
             width: 20px;
@@ -544,27 +624,27 @@
         }
         .btn-support:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.3);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
         }
 
-        /* Additional Services - 9 services */
+        /* Additional Services */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
         .service-card {
-            background: var(--bg-white);
+            background: var(--dark-card-bg);
             border-radius: 20px;
             padding: 25px;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--dark-border);
         }
         .service-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-purple);
-            box-shadow: 0 10px 25px rgba(122,90,248,0.1);
+            box-shadow: 0 10px 25px rgba(122,90,248,0.2);
         }
         .service-card i {
             font-size: 40px;
@@ -577,6 +657,7 @@
         .service-card h3 {
             font-size: 18px;
             margin-bottom: 10px;
+            color: var(--dark-text-primary);
         }
         .service-card .price {
             font-size: 20px;
@@ -590,7 +671,7 @@
         }
         .service-card p {
             font-size: 13px;
-            color: var(--secondary-text);
+            color: var(--dark-text-secondary);
         }
         .btn-service {
             display: inline-block;
@@ -608,10 +689,10 @@
         }
         .btn-service:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(122,90,248,0.3);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.4);
         }
 
-        /* Consulting Services - 15 services */
+        /* Consulting Services */
         .consulting-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -621,15 +702,15 @@
             display: flex;
             gap: 15px;
             padding: 15px;
-            background: var(--bg-white);
+            background: var(--dark-card-bg);
             border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--dark-border);
             transition: all 0.3s ease;
             align-items: center;
         }
         .consulting-item:hover {
             border-color: var(--primary-purple);
-            box-shadow: 0 5px 15px rgba(122,90,248,0.1);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.2);
         }
         .consulting-item i {
             font-size: 28px;
@@ -642,10 +723,11 @@
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 5px;
+            color: var(--dark-text-primary);
         }
         .consulting-info p {
             font-size: 13px;
-            color: var(--secondary-text);
+            color: var(--dark-text-secondary);
             margin-bottom: 5px;
         }
         .consulting-info .price {
@@ -669,7 +751,7 @@
         }
         .btn-consulting:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(122,90,248,0.3);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.4);
         }
 
         /* Cart Sidebar */
@@ -679,13 +761,14 @@
             top: 0;
             width: 380px;
             height: 100vh;
-            background: var(--bg-white);
-            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            background: var(--dark-card-bg);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
             z-index: 1001;
             transition: right 0.3s ease;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            border-left: 1px solid var(--dark-border);
         }
         .cart-sidebar.open {
             right: 0;
@@ -718,7 +801,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--dark-border);
         }
         .cart-item-info {
             flex: 1;
@@ -726,6 +809,7 @@
         .cart-item-name {
             font-weight: 600;
             font-size: 14px;
+            color: var(--dark-text-primary);
         }
         .cart-item-price {
             font-size: 12px;
@@ -742,14 +826,15 @@
         }
         .cart-total {
             padding: 20px;
-            border-top: 2px solid var(--border-color);
-            background: var(--section-bg);
+            border-top: 2px solid var(--dark-border);
+            background: rgba(0,0,0,0.2);
         }
         .cart-total-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
             font-weight: 600;
+            color: var(--dark-text-primary);
         }
         .cart-total-range {
             color: var(--primary-purple);
@@ -759,7 +844,7 @@
         .cart-empty {
             text-align: center;
             padding: 40px;
-            color: var(--light-text);
+            color: var(--dark-text-muted);
         }
         .btn-checkout {
             width: 100%;
@@ -775,7 +860,7 @@
         }
         .btn-checkout:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.3);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
         }
         .cart-toggle {
             position: fixed;
@@ -789,7 +874,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(122,90,248,0.4);
+            box-shadow: 0 5px 20px rgba(122,90,248,0.5);
             z-index: 1000;
             transition: all 0.3s ease;
         }
@@ -824,6 +909,7 @@
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 40px;
+            color: var(--dark-text-primary);
         }
         .payment-title span {
             background: var(--main-gradient);
@@ -837,12 +923,12 @@
             width: 100%;
         }
         .payment-card {
-            background: var(--bg-white);
+            background: var(--dark-card-bg);
             border-radius: 20px;
             padding: 20px 20px 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--dark-border);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -852,7 +938,7 @@
         }
         .payment-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(122,90,248,0.15);
+            box-shadow: 0 15px 35px rgba(122,90,248,0.3);
             border-color: var(--primary-purple);
         }
         .payment-card::before {
@@ -892,12 +978,12 @@
             margin-top: 20px;
             text-align: center;
             padding: 10px 0;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--dark-border);
         }
         .payment-card h3 {
             font-size: 16px;
             font-weight: 700;
-            color: var(--dark-text);
+            color: var(--dark-text-primary);
             margin: 0;
         }
 
@@ -941,10 +1027,10 @@
         .modal-img-container {
             width: 100%;
             aspect-ratio: 1/1;
-            background: var(--bg-white);
+            background: var(--dark-card-bg);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
         .modal-img {
             width: 100%;
@@ -964,12 +1050,13 @@
 
         /* Footer */
         footer {
-            background-color: var(--footer-bg);
+            background-color: var(--dark-card-bg);
             width: 100%;
             padding: 35px 0 25px;
             text-align: center;
             margin-top: auto;
             transition: all 0.3s ease;
+            border-top: 1px solid var(--dark-border);
         }
         .footer-container {
             max-width: 1200px;
@@ -989,14 +1076,14 @@
         .footer-brand-name {
             font-size: 24px;
             font-weight: 700;
-            color: var(--dark-text);
+            color: var(--dark-text-primary);
             line-height: 1.2;
             transition: color 0.3s ease;
         }
         .footer-tagline {
             font-size: 15px;
             font-weight: 600;
-            color: var(--secondary-text);
+            color: var(--dark-text-secondary);
             margin-top: 3px;
             transition: color 0.3s ease;
         }
@@ -1012,7 +1099,7 @@
         .footer-copyright {
             font-size: 14px;
             font-weight: 500;
-            color: var(--light-text);
+            color: var(--dark-text-muted);
             margin-top: 12px;
             transition: color 0.3s ease;
         }
@@ -1138,7 +1225,7 @@
                     <div class="globe-icon"></div>
                 </div>
                 <div class="dark-mode-container" onclick="toggleDarkMode()">
-                    <span class="dark-mode-toggle">☾</span>
+                    <span class="dark-mode-toggle">☀️</span>
                 </div>
             </div>
         </div>
@@ -1804,14 +1891,14 @@
         }
 
         function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-                toggleBtn.textContent = '☀️';
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
                 toggleBtn.textContent = '☾';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                toggleBtn.textContent = '☀️';
             }
         }
 
@@ -1881,14 +1968,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const savedMode = localStorage.getItem('darkMode');
+            const savedTheme = localStorage.getItem('theme');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
-            if (savedMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
-            } else {
-                document.body.classList.remove('dark-mode');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
                 if (toggleBtn) toggleBtn.textContent = '☾';
+            } else {
+                document.body.classList.remove('light-mode');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
             }
             updateActiveLink();
         });
