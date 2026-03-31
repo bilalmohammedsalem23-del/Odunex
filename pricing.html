@@ -1,202 +1,2164 @@
-.theme-switch {
-  --toggle-size: 30px;
-  /* the size is adjusted using font-size,
-     this is not transform scale,
-     so you can choose any size */
-  --container-width: 5.625em;
-  --container-height: 2.5em;
-  --container-radius: 6.25em;
-  /* radius 0 - minecraft mode :) */
-  --container-light-bg: #3D7EAE;
-  --container-night-bg: #1D1F2C;
-  --circle-container-diameter: 3.375em;
-  --sun-moon-diameter: 2.125em;
-  --sun-bg: #ECCA2F;
-  --moon-bg: #C4C9D1;
-  --spot-color: #959DB1;
-  --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
-  --stars-color: #fff;
-  --clouds-color: #F3FDFF;
-  --back-clouds-color: #AACADF;
-  --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
-  --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Odunex | الأسعار</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
+    <link rel="shortcut icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- DOMPurify -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
 
-.theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-size: var(--toggle-size);
-}
+        :root {
+            --primary-purple: #7A5AF8;
+            --primary-blue: #2BB0ED;
+            --accent-blue: #4A7BFF;
+            --dark-text: #333333;
+            --body-text: #444444;
+            --secondary-text: #6B6B6B;
+            --light-text: #8A8A8A;
+            --section-bg: #F8F9FB;
+            --bg-white: #FFFFFF;
+            --border-color: #E6E8EC;
+            --icon-color: #666666;
+            --footer-bg: #F8F9FB;
+            --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            --popular-gradient: linear-gradient(135deg, rgba(122,90,248,0.05), rgba(43,176,237,0.05));
+            --whatsapp-green: #25D366;
+            
+            /* Dark mode colors - Dark navy blue background */
+            --dark-bg: #0a0a2a;
+            --dark-card: #0f0f2a;
+            --dark-border: #1e2a4a;
+            --dark-text-primary: #ffffff;
+            --dark-text-secondary: #cbd5e6;
+            --dark-text-muted: #94a3b8;
+            --dark-card-bg: #111133;
+            --dark-header-bg: #0a0a2a;
+            --dark-glow: rgba(122, 90, 248, 0.3);
+            --dark-input-bg: #1a1a3a;
+            --dark-input-text: #ffffff;
+            --dark-input-placeholder: #94a3b8;
+        }
 
-.theme-switch__container {
-  width: var(--container-width);
-  height: var(--container-height);
-  background-color: var(--container-light-bg);
-  border-radius: var(--container-radius);
-  overflow: hidden;
-  cursor: pointer;
-  -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
-  box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
-  -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
-  transition: var(--transition);
-  position: relative;
-}
+        /* الوضع الليلي (الافتراضي) */
+        body {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-.theme-switch__container::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
-  box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
-  border-radius: var(--container-radius)
-}
+        /* الوضع النهاري */
+        body.light-mode {
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            color: var(--dark-text);
+        }
+        body.light-mode header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+        }
+        body.light-mode .nav-logo-text {
+            color: #000000 !important;
+        }
+        body.light-mode .nav-menu a {
+            color: #6B6B6B;
+        }
+        body.light-mode .nav-menu a:hover,
+        body.light-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+        body.light-mode .lang-container {
+            border-color: #ddd;
+        }
+        body.light-mode .pricing-plan-card,
+        body.light-mode .support-card,
+        body.light-mode .service-card,
+        body.light-mode .consulting-item,
+        body.light-mode .cart-sidebar {
+            background: var(--bg-white);
+            border-color: var(--border-color);
+        }
+        body.light-mode .plan-header h3,
+        body.light-mode .support-card h3,
+        body.light-mode .service-card h3,
+        body.light-mode .consulting-info h3 {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .plan-features li,
+        body.light-mode .support-card li,
+        body.light-mode .service-card p,
+        body.light-mode .consulting-info p {
+            color: var(--secondary-text) !important;
+        }
+        body.light-mode footer {
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border-color);
+        }
+        body.light-mode .footer-brand-name {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .footer-tagline,
+        body.light-mode .footer-copyright {
+            color: var(--secondary-text) !important;
+        }
+        body.light-mode .page-header p,
+        body.light-mode .section-subtitle {
+            color: var(--secondary-text) !important;
+        }
+        body.light-mode .section-title {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .page-header h1 {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .payment-card .front,
+        body.light-mode .payment-card .back {
+            background-color: var(--bg-white);
+            border-color: var(--border-color);
+        }
+        body.light-mode .payment-card .front h3 {
+            color: var(--dark-text) !important;
+        }
+        body.light-mode .payment-card .back-content p {
+            color: var(--secondary-text);
+        }
 
-.theme-switch__checkbox {
-  display: none;
-}
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
+        }
+        body.dark-mode header {
+            background: var(--dark-header-bg);
+            border-bottom: 1px solid var(--dark-border);
+        }
+        body.dark-mode .nav-logo-text {
+            color: var(--dark-text-primary) !important;
+        }
+        body.dark-mode .nav-menu a {
+            color: var(--dark-text-secondary);
+        }
+        body.dark-mode .nav-menu a:hover,
+        body.dark-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+        body.dark-mode .lang-container {
+            border-color: var(--dark-border);
+        }
+        body.dark-mode .pricing-plan-card,
+        body.dark-mode .support-card,
+        body.dark-mode .service-card,
+        body.dark-mode .consulting-item,
+        body.dark-mode .cart-sidebar {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+        body.dark-mode .cart-sidebar {
+            background: var(--dark-card-bg);
+        }
+        body.dark-mode .plan-header h3,
+        body.dark-mode .support-card h3,
+        body.dark-mode .service-card h3,
+        body.dark-mode .consulting-info h3,
+        body.dark-mode .cart-title {
+            color: var(--dark-text-primary) !important;
+        }
+        body.dark-mode .plan-features li,
+        body.dark-mode .support-card li,
+        body.dark-mode .service-card p,
+        body.dark-mode .consulting-info p,
+        body.dark-mode .cart-item span {
+            color: var(--dark-text-secondary) !important;
+        }
+        body.dark-mode .plan-price .period,
+        body.dark-mode .plan-desc {
+            color: var(--dark-text-muted) !important;
+        }
+        body.dark-mode footer {
+            background: var(--dark-card-bg);
+            border-top: 1px solid var(--dark-border);
+        }
+        body.dark-mode .footer-brand-name {
+            color: var(--dark-text-primary) !important;
+        }
+        body.dark-mode .footer-tagline,
+        body.dark-mode .footer-copyright {
+            color: var(--dark-text-secondary) !important;
+        }
+        body.dark-mode .page-header p,
+        body.dark-mode .section-subtitle {
+            color: var(--dark-text-secondary) !important;
+        }
+        body.dark-mode .page-header h1 span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .section-title .gradient-text {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .popular-badge {
+            background: var(--main-gradient);
+        }
+        body.dark-mode .payment-card .front,
+        body.dark-mode .payment-card .back {
+            background-color: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+        body.dark-mode .payment-card .front h3 {
+            color: var(--dark-text-primary);
+        }
+        body.dark-mode .payment-card .back-content p {
+            color: var(--dark-text-secondary);
+        }
 
-.theme-switch__circle-container {
-  width: var(--circle-container-diameter);
-  height: var(--circle-container-diameter);
-  background-color: rgba(255, 255, 255, 0.1);
-  position: absolute;
-  left: var(--circle-container-offset);
-  top: var(--circle-container-offset);
-  border-radius: var(--container-radius);
-  -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-transition: var(--circle-transition);
-  -o-transition: var(--circle-transition);
-  transition: var(--circle-transition);
-  pointer-events: none;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
 
-.theme-switch__sun-moon-container {
-  pointer-events: auto;
-  position: relative;
-  z-index: 2;
-  width: var(--sun-moon-diameter);
-  height: var(--sun-moon-diameter);
-  margin: auto;
-  border-radius: var(--container-radius);
-  background-color: var(--sun-bg);
-  -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
-  box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
-  -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
-  filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
-  overflow: hidden;
-  -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
-  transition: var(--transition);
-}
+        /* Header */
+        header {
+            background: var(--dark-header-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-text-primary);
+            transition: color 0.3s ease;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            overflow-x: auto;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .nav-menu::-webkit-scrollbar { display: none; }
+        .nav-menu a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-text-secondary);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+        .nav-menu a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
+        }
+        .nav-menu a.active {
+            transform: scale(1.05);
+        }
+        .nav-left {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 2px solid var(--dark-border);
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        }
+        .lang-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-text-secondary);
+            transition: color 0.3s ease;
+        }
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23c0c0e0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background-size: contain;
+            transition: filter 0.3s ease;
+        }
 
-.theme-switch__moon {
-  -webkit-transform: translateX(100%);
-  -ms-transform: translateX(100%);
-  transform: translateX(100%);
-  width: 100%;
-  height: 100%;
-  background-color: var(--moon-bg);
-  border-radius: inherit;
-  -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
-  box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
-  -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
-  transition: var(--transition);
-  position: relative;
-}
+        /* Theme Switch Button */
+        .theme-switch {
+            --toggle-size: 30px;
+            --container-width: 5.625em;
+            --container-height: 2.5em;
+            --container-radius: 6.25em;
+            --container-light-bg: #3D7EAE;
+            --container-night-bg: #1D1F2C;
+            --circle-container-diameter: 3.375em;
+            --sun-moon-diameter: 2.125em;
+            --sun-bg: #ECCA2F;
+            --moon-bg: #C4C9D1;
+            --spot-color: #959DB1;
+            --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+            --stars-color: #fff;
+            --clouds-color: #F3FDFF;
+            --back-clouds-color: #AACADF;
+            --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
+            --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
+        }
 
-.theme-switch__spot {
-  position: absolute;
-  top: 0.75em;
-  left: 0.312em;
-  width: 0.75em;
-  height: 0.75em;
-  border-radius: var(--container-radius);
-  background-color: var(--spot-color);
-  -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
-  box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
-}
+        .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: var(--toggle-size);
+        }
 
-.theme-switch__spot:nth-of-type(2) {
-  width: 0.375em;
-  height: 0.375em;
-  top: 0.937em;
-  left: 1.375em;
-}
+        .theme-switch__container {
+            width: var(--container-width);
+            height: var(--container-height);
+            background-color: var(--container-light-bg);
+            border-radius: var(--container-radius);
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+            box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+            -webkit-transition: var(--transition);
+            -o-transition: var(--transition);
+            transition: var(--transition);
+            position: relative;
+        }
 
-.theme-switch__spot:nth-last-of-type(3) {
-  width: 0.25em;
-  height: 0.25em;
-  top: 0.312em;
-  left: 0.812em;
-}
+        .theme-switch__container::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+            box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+            border-radius: var(--container-radius);
+        }
 
-.theme-switch__clouds {
-  width: 1.25em;
-  height: 1.25em;
-  background-color: var(--clouds-color);
-  border-radius: var(--container-radius);
-  position: absolute;
-  bottom: -0.625em;
-  left: 0.312em;
-  -webkit-box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
-  box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
-  -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
-  -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
-  transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
-}
+        .theme-switch__checkbox {
+            display: none;
+        }
 
-.theme-switch__stars-container {
-  position: absolute;
-  color: var(--stars-color);
-  top: -100%;
-  left: 0.312em;
-  width: 2.75em;
-  height: auto;
-  -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
-  transition: var(--transition);
-}
+        .theme-switch__circle-container {
+            width: var(--circle-container-diameter);
+            height: var(--circle-container-diameter);
+            background-color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            left: var(--circle-container-offset);
+            top: var(--circle-container-offset);
+            border-radius: var(--container-radius);
+            -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-transition: var(--circle-transition);
+            -o-transition: var(--circle-transition);
+            transition: var(--circle-transition);
+            pointer-events: none;
+        }
 
-/* actions */
+        .theme-switch__sun-moon-container {
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+            width: var(--sun-moon-diameter);
+            height: var(--sun-moon-diameter);
+            margin: auto;
+            border-radius: var(--container-radius);
+            background-color: var(--sun-bg);
+            -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+            box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+            -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+            filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+            overflow: hidden;
+            -webkit-transition: var(--transition);
+            -o-transition: var(--transition);
+            transition: var(--transition);
+        }
 
-.theme-switch__checkbox:checked + .theme-switch__container {
-  background-color: var(--container-night-bg);
-}
+        .theme-switch__moon {
+            -webkit-transform: translateX(100%);
+            -ms-transform: translateX(100%);
+            transform: translateX(100%);
+            width: 100%;
+            height: 100%;
+            background-color: var(--moon-bg);
+            border-radius: inherit;
+            -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+            box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+            -webkit-transition: var(--transition);
+            -o-transition: var(--transition);
+            transition: var(--transition);
+            position: relative;
+        }
 
-.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
-  left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
-}
+        .theme-switch__spot {
+            position: absolute;
+            top: 0.75em;
+            left: 0.312em;
+            width: 0.75em;
+            height: 0.75em;
+            border-radius: var(--container-radius);
+            background-color: var(--spot-color);
+            -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+            box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+        }
 
-.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container:hover {
-  left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em)
-}
+        .theme-switch__spot:nth-of-type(2) {
+            width: 0.375em;
+            height: 0.375em;
+            top: 0.937em;
+            left: 1.375em;
+        }
 
-.theme-switch__circle-container:hover {
-  left: calc(var(--circle-container-offset) + 0.187em);
-}
+        .theme-switch__spot:nth-last-of-type(3) {
+            width: 0.25em;
+            height: 0.25em;
+            top: 0.312em;
+            left: 0.812em;
+        }
 
-.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
-  -webkit-transform: translate(0);
-  -ms-transform: translate(0);
-  transform: translate(0);
-}
+        .theme-switch__clouds {
+            width: 1.25em;
+            height: 1.25em;
+            background-color: var(--clouds-color);
+            border-radius: var(--container-radius);
+            position: absolute;
+            bottom: -0.625em;
+            left: 0.312em;
+            -webkit-box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+            box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+            -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+            -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+            transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+        }
 
-.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
-  bottom: -4.062em;
-}
+        .theme-switch__stars-container {
+            position: absolute;
+            color: var(--stars-color);
+            top: -100%;
+            left: 0.312em;
+            width: 2.75em;
+            height: auto;
+            -webkit-transition: var(--transition);
+            -o-transition: var(--transition);
+            transition: var(--transition);
+        }
 
-.theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
+        .theme-switch__checkbox:checked + .theme-switch__container {
+            background-color: var(--container-night-bg);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+            left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
+            -webkit-transform: translate(0);
+            -ms-transform: translate(0);
+            transform: translate(0);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
+            bottom: -4.062em;
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark-text-primary);
+        }
+        .page-header h1 span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-header p {
+            font-size: 20px;
+            color: var(--dark-text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--dark-text-primary);
+        }
+        .section-title .gradient-text {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--dark-text-secondary);
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        /* Pricing Plans Cards */
+        .pricing-plans-section,
+        .support-section,
+        .additional-services,
+        .consulting-services {
+            padding: 60px 0;
+            background: transparent;
+        }
+        .pricing-plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .pricing-plan-card {
+            background: var(--dark-card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(122,90,248,0.2);
+            border-color: var(--primary-purple);
+        }
+        .pricing-plan-card.popular {
+            border: 2px solid var(--primary-purple);
+            transform: scale(1.02);
+        }
+        .pricing-plan-card.popular:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--main-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .plan-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--dark-text-primary);
+        }
+        .plan-price {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .plan-price .currency {
+            font-size: 20px;
+            vertical-align: top;
+            color: var(--dark-text-secondary);
+        }
+        .plan-price .price {
+            font-size: 42px;
+            font-weight: 700;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .plan-price .period {
+            font-size: 14px;
+            color: var(--dark-text-muted);
+        }
+        .plan-desc {
+            text-align: center;
+            color: var(--dark-text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .plan-features {
+            flex: 1;
+        }
+        .plan-features ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        .plan-features li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--dark-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        .plan-features li:last-child { border-bottom: none; }
+        .plan-features li i {
+            width: 18px;
+            font-size: 14px;
+        }
+        .plan-features li i.fa-check-circle { color: #10b981; }
+        .plan-features li i.fa-times { color: #ef4444; }
+        .plan-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-plan {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-plan:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
+        }
+
+        /* Support Plans */
+        .support-plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .support-card {
+            background: var(--dark-card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            border: 1px solid var(--dark-border);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(122,90,248,0.2);
+            border-color: var(--primary-purple);
+        }
+        .support-card.popular {
+            border: 2px solid var(--primary-purple);
+        }
+        .support-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark-text-primary);
+        }
+        .support-card .price {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-purple);
+        }
+        .support-card .price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--dark-text-muted);
+        }
+        .support-card ul {
+            list-style: none;
+            margin-bottom: 25px;
+            text-align: right;
+            flex: 1;
+        }
+        .support-card li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--dark-text-secondary);
+        }
+        .support-card li i {
+            width: 20px;
+            color: var(--primary-purple);
+        }
+        .btn-support {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-support:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
+        }
+
+        /* Additional Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .service-card {
+            background: var(--dark-card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-purple);
+            box-shadow: 0 10px 25px rgba(122,90,248,0.2);
+        }
+        .service-card i {
+            font-size: 40px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .service-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-text-primary);
+        }
+        .service-card .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+        .service-card .price span {
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .service-card p {
+            font-size: 13px;
+            color: var(--dark-text-secondary);
+        }
+        .btn-service {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .btn-service:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.4);
+        }
+
+        /* Consulting Services */
+        .consulting-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .consulting-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: var(--dark-card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--dark-border);
+            transition: all 0.3s ease;
+            align-items: center;
+        }
+        .consulting-item:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.2);
+        }
+        .consulting-item i {
+            font-size: 28px;
+            color: var(--primary-purple);
+        }
+        .consulting-info {
+            flex: 1;
+        }
+        .consulting-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark-text-primary);
+        }
+        .consulting-info p {
+            font-size: 13px;
+            color: var(--dark-text-secondary);
+            margin-bottom: 5px;
+        }
+        .consulting-info .price {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+        .btn-consulting {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: var(--main-gradient);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .btn-consulting:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(122,90,248,0.4);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 380px;
+            height: 100vh;
+            background: var(--dark-card-bg);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            border-left: 1px solid var(--dark-border);
+        }
+        .cart-sidebar.open {
+            right: 0;
+        }
+        .cart-header {
+            padding: 20px;
+            background: var(--main-gradient);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cart-items {
+            flex: 1;
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-text-primary);
+        }
+        .cart-item-price {
+            font-size: 12px;
+            color: var(--primary-purple);
+            font-weight: 600;
+        }
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+        }
+        .cart-total {
+            padding: 20px;
+            border-top: 2px solid var(--dark-border);
+            background: rgba(0,0,0,0.2);
+        }
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-text-primary);
+        }
+        .cart-total-range {
+            color: var(--primary-purple);
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--dark-text-muted);
+        }
+        .btn-checkout {
+            width: 100%;
+            padding: 12px;
+            background: var(--main-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
+        }
+        .cart-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--main-gradient);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(122,90,248,0.5);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .cart-toggle:hover {
+            transform: scale(1.1);
+        }
+        .cart-toggle i {
+            font-size: 24px;
+            color: white;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Payment Methods - Flip Cards */
+        .payment-section {
+            padding: 40px 0 60px;
+            text-align: center;
+        }
+        .payment-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--dark-text-primary);
+        }
+        .payment-title span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+        
+        /* Flip Card Styles */
+        .payment-card {
+            background-color: transparent;
+            width: 100%;
+            height: 280px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .payment-card .card-flip {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 20px;
+        }
+        
+        .payment-card:hover .card-flip {
+            transform: rotateY(180deg);
+        }
+        
+        .payment-card .front,
+        .payment-card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-card-bg);
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .payment-card .front {
+            transform: rotateY(0deg);
+        }
+        
+        .payment-card .back {
+            transform: rotateY(180deg);
+        }
+        
+        .payment-card .front h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-text-primary);
+            margin-top: 15px;
+        }
+        
+        .payment-card .qr-img {
+            width: 80%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        
+        .payment-card .back-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .payment-card .back-content p {
+            margin-top: 15px;
+            font-size: 12px;
+            color: var(--dark-text-secondary);
+        }
+        
+        .payment-icon {
+            font-size: 48px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-card-bg);
+            width: 100%;
+            padding: 35px 0 25px;
+            text-align: center;
+            margin-top: auto;
+            transition: all 0.3s ease;
+            border-top: 1px solid var(--dark-border);
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-brand-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .footer-brand-text {
+            text-align: center;
+        }
+        .footer-brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text-primary);
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+        .footer-tagline {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark-text-secondary);
+            margin-top: 3px;
+            transition: color 0.3s ease;
+        }
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark-text-muted);
+            margin-top: 12px;
+            transition: color 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .pricing-plans-grid,
+            .support-plans-grid,
+            .services-grid,
+            .consulting-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pricing-plan-card.popular {
+                transform: scale(1);
+            }
+            .pricing-plan-card.popular:hover {
+                transform: translateY(-5px);
+            }
+        }
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .nav-right, .nav-left { width: auto; }
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+            .page-header {
+                padding: 50px 0 20px;
+            }
+            .page-header h1 { font-size: 36px; }
+            .page-header p { font-size: 18px; }
+            .pricing-plans-grid,
+            .support-plans-grid,
+            .services-grid,
+            .consulting-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+            .pricing-plan-card,
+            .support-card,
+            .service-card {
+                width: 100%;
+            }
+            .pricing-plan-card.popular {
+                transform: scale(1);
+            }
+            .payment-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .payment-title {
+                font-size: 30px;
+            }
+            .footer-brand-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-brand-text {
+                text-align: center;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .cart-sidebar {
+                width: 320px;
+            }
+            .payment-card {
+                height: 260px;
+            }
+        }
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 60px 0 20px;
+            }
+            .page-header h1 { font-size: 32px; }
+            .page-header p { font-size: 16px; }
+            .plan-header h3,
+            .support-card h3 { font-size: 24px; }
+            .payment-title { font-size: 28px; }
+            .footer-brand-name { font-size: 22px; }
+            .footer-logo { width: 50px; height: 50px; }
+            .footer-copyright { font-size: 12px; }
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            .payment-card {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-right">
+                <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
+                <span class="nav-logo-text">Odunex</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html">الرئيسية</a>
+                <a href="features.html">المميزات</a>
+                <a href="pricing.html" class="active">الأسعار</a>
+                <a href="gallery.html">معرض الأعمال</a>
+                <a href="contact.html">اتصل بنا</a>
+            </div>
+            <div class="nav-left">
+                <div class="lang-container" onclick="switchLanguage()">
+                    <span class="lang-text">EN</span>
+                    <div class="globe-icon"></div>
+                </div>
+                <label class="theme-switch">
+                    <input type="checkbox" class="theme-switch__checkbox" id="themeToggle">
+                    <div class="theme-switch__container">
+                        <div class="theme-switch__circle-container">
+                            <div class="theme-switch__sun-moon-container">
+                                <div class="theme-switch__moon">
+                                    <div class="theme-switch__spot"></div>
+                                    <div class="theme-switch__spot"></div>
+                                    <div class="theme-switch__spot"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="theme-switch__stars-container">
+                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 0L12.5 7.5L20 10L12.5 12.5L10 20L7.5 12.5L0 10L7.5 7.5L10 0Z" />
+                            </svg>
+                        </div>
+                        <div class="theme-switch__clouds"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1><span>خطط</span> الأسعار</h1>
+                <p>اختر الباقة المناسبة لبدء رحلة التحول الرقمي</p>
+            </div>
+        </section>
+
+        <!-- ERP Implementation Plans Section -->
+        <section class="pricing-plans-section">
+            <div class="container">
+                <div class="pricing-plans-grid">
+                    <div class="pricing-plan-card" data-plan="starter" data-name="Starter" data-min="500" data-max="800">
+                        <div class="plan-header">
+                            <h3>Starter</h3>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="price">500</span>
+                                <span class="period">– $800</span>
+                            </div>
+                            <p class="plan-desc">لمنشآت البداية</p>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> نظام ERPNext أو Odoo</li>
+                                <li><i class="fas fa-check-circle"></i> تركيب النظام</li>
+                                <li><i class="fas fa-check-circle"></i> إعداد الشركة على النظام</li>
+                                <li><i class="fas fa-user"></i> <strong>2 مستخدم</strong></li>
+                                <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
+                                <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
+                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية</li>
+                                <li><i class="fas fa-check-circle"></i> تدريب 2 ساعة</li>
+                                <li><i class="fas fa-check-circle"></i> دعم 7 أيام بعد التشغيل</li>
+                            </ul>
+                        </div>
+                        <div class="plan-footer">
+                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Starter" data-min="500" data-max="800">اطلب الخطة</button>
+                        </div>
+                    </div>
+
+                    <div class="pricing-plan-card popular" data-plan="professional" data-name="Professional" data-min="2000" data-max="3500">
+                        <div class="popular-badge">الأكثر طلباً</div>
+                        <div class="plan-header">
+                            <h3>Professional</h3>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="price">2,000</span>
+                                <span class="period">– $3,500</span>
+                            </div>
+                            <p class="plan-desc">للشركات النامية</p>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> نظام ERPNext أو Odoo</li>
+                                <li><i class="fas fa-check-circle"></i> تركيب النظام</li>
+                                <li><i class="fas fa-check-circle"></i> إعداد الشركة على النظام</li>
+                                <li><i class="fas fa-user"></i> <strong>12 مستخدم</strong></li>
+                                <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
+                                <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
+                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية والمتقدمة</li>
+                                <li><i class="fas fa-check-circle"></i> إدارة المخزون</li>
+                                <li><i class="fas fa-check-circle"></i> المبيعات والمشتريات</li>
+                                <li><i class="fas fa-check-circle"></i> التقارير المالية</li>
+                                <li><i class="fas fa-check-circle"></i> تخصيص محدود</li>
+                                <li><i class="fas fa-check-circle"></i> ترحيل البيانات</li>
+                                <li><i class="fas fa-check-circle"></i> تدريب 6 ساعات</li>
+                                <li><i class="fas fa-check-circle"></i> دعم 30 يوم بعد التشغيل</li>
+                            </ul>
+                        </div>
+                        <div class="plan-footer">
+                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Professional" data-min="2000" data-max="3500">اطلب الخطة</button>
+                        </div>
+                    </div>
+
+                    <div class="pricing-plan-card" data-plan="enterprise" data-name="Enterprise" data-min="0" data-max="0" data-custom="true">
+                        <div class="plan-header">
+                            <h3>Enterprise</h3>
+                            <div class="plan-price">
+                                <span class="currency">$</span>
+                                <span class="price">مخصص</span>
+                            </div>
+                            <p class="plan-desc">للمؤسسات الكبرى</p>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> نظام ERPNext أو Odoo</li>
+                                <li><i class="fas fa-check-circle"></i> تركيب النظام</li>
+                                <li><i class="fas fa-check-circle"></i> إعداد الشركة على النظام</li>
+                                <li><i class="fas fa-user"></i> <strong>مستخدمين غير محدود</strong></li>
+                                <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
+                                <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
+                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية والمتقدمة</li>
+                                <li><i class="fas fa-check-circle"></i> إدارة المخزون</li>
+                                <li><i class="fas fa-check-circle"></i> المبيعات والمشتريات</li>
+                                <li><i class="fas fa-check-circle"></i> التقارير المالية</li>
+                                <li><i class="fas fa-check-circle"></i> تخصيص متقدم</li>
+                                <li><i class="fas fa-check-circle"></i> تكامل API</li>
+                                <li><i class="fas fa-check-circle"></i> ترحيل البيانات</li>
+                                <li><i class="fas fa-check-circle"></i> تدريب كامل</li>
+                                <li><i class="fas fa-check-circle"></i> دعم 90 يوم بعد التشغيل</li>
+                            </ul>
+                        </div>
+                        <div class="plan-footer">
+                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Enterprise" data-custom="true">اطلب الخطة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Plans Section -->
+        <section class="support-section">
+            <div class="container">
+                <h2 class="section-title">خطط <span class="gradient-text">الدعم الفني</span></h2>
+                <p class="section-subtitle">اختر باقة الدعم المناسبة لعملك</p>
+                
+                <div class="support-plans-grid">
+                    <div class="support-card" data-support="basic" data-name="دعم Basic" data-price="100">
+                        <h3>Basic</h3>
+                        <div class="price">$100 <span>/شهرياً</span></div>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i> دعم عبر البريد الإلكتروني</li>
+                            <li><i class="fas fa-bug"></i> إصلاح الأخطاء</li>
+                            <li><i class="fas fa-database"></i> نسخ احتياطي أسبوعي</li>
+                            <li><i class="fas fa-clock"></i> وقت الاستجابة: 48 ساعة</li>
+                        </ul>
+                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Basic" data-price="100">اشترك الآن</button>
+                    </div>
+                    <div class="support-card popular" data-support="professional" data-name="دعم Professional" data-price="250">
+                        <div class="popular-badge">الأكثر طلباً</div>
+                        <h3>Professional</h3>
+                        <div class="price">$250 <span>/شهرياً</span></div>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i> دعم عبر البريد الإلكتروني</li>
+                            <li><i class="fab fa-whatsapp"></i> دعم عبر واتساب</li>
+                            <li><i class="fas fa-bug"></i> إصلاح الأخطاء</li>
+                            <li><i class="fas fa-sync-alt"></i> تحديثات النظام</li>
+                            <li><i class="fas fa-database"></i> نسخ احتياطي أسبوعي</li>
+                            <li><i class="fas fa-code"></i> 3 ساعات تطوير شهرياً</li>
+                            <li><i class="fas fa-clock"></i> وقت الاستجابة: 24 ساعة</li>
+                        </ul>
+                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Professional" data-price="250">اشترك الآن</button>
+                    </div>
+                    <div class="support-card" data-support="enterprise" data-name="دعم Enterprise" data-price="500">
+                        <h3>Enterprise</h3>
+                        <div class="price">$500 <span>/شهرياً</span></div>
+                        <ul>
+                            <li><i class="fas fa-headset"></i> دعم كامل</li>
+                            <li><i class="fas fa-bug"></i> إصلاح الأخطاء</li>
+                            <li><i class="fas fa-sync-alt"></i> تحديثات النظام</li>
+                            <li><i class="fas fa-database"></i> نسخ احتياطي يومي</li>
+                            <li><i class="fas fa-code"></i> 10 ساعات تطوير شهرياً</li>
+                            <li><i class="fas fa-clock"></i> وقت الاستجابة: 12 ساعة</li>
+                        </ul>
+                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Enterprise" data-price="500">اشترك الآن</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Services Section -->
+        <section class="additional-services">
+            <div class="container">
+                <h2 class="section-title">الخدمات <span class="gradient-text">الإضافية</span></h2>
+                <p class="section-subtitle">خدمات إضافية لتعزيز نظامك</p>
+                
+                <div class="services-grid">
+                    <div class="service-card" data-service="hosting" data-name="استضافة الخادم" data-min="25" data-max="250">
+                        <i class="fas fa-server"></i>
+                        <h3>استضافة الخادم</h3>
+                        <p class="price">$25 – $250 <span>/شهر</span></p>
+                        <p>استضافة آمنة وسريعة للنظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="استضافة الخادم" data-min="25" data-max="250">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="reports" data-name="تقارير مخصصة" data-min="100" data-max="500">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>تقارير مخصصة</h3>
+                        <p class="price">$100 – $500</p>
+                        <p>تصميم تقارير حسب احتياجك</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تقارير مخصصة" data-min="100" data-max="500">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="api" data-name="تكامل API" data-min="300" data-max="1500">
+                        <i class="fas fa-plug"></i>
+                        <h3>تكامل API</h3>
+                        <p class="price">$300 – $1,500</p>
+                        <p>ربط النظام مع تطبيقات خارجية</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تكامل API" data-min="300" data-max="1500">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="website" data-name="تكامل موقع إلكتروني" data-min="300" data-max="1000">
+                        <i class="fas fa-globe"></i>
+                        <h3>تكامل موقع إلكتروني</h3>
+                        <p class="price">$300 – $1,000</p>
+                        <p>ربط المتجر الإلكتروني مع النظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تكامل موقع إلكتروني" data-min="300" data-max="1000">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="training" data-name="تدريب إضافي" data-price="25">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>تدريب إضافي</h3>
+                        <p class="price">$25 <span>/ساعة</span></p>
+                        <p>تدريب الموظفين على النظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تدريب إضافي" data-price="25">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="custom" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <h3>تطوير وحدات مخصصة</h3>
+                        <p class="price">$500 – $5,000</p>
+                        <p>تطوير مميزات خاصة بشركتك</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="mobile" data-name="تطبيق موبايل" data-min="1000" data-max="3000">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>تطبيق موبايل</h3>
+                        <p class="price">$1,000 – $3,000</p>
+                        <p>تطبيق مخصص للوصول للنظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تطبيق موبايل" data-min="1000" data-max="3000">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="pos" data-name="نظام نقاط البيع" data-min="300" data-max="800">
+                        <i class="fas fa-cash-register"></i>
+                        <h3>نظام نقاط البيع</h3>
+                        <p class="price">$300 – $800</p>
+                        <p>ربط نظام POS مع ERP</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="نظام نقاط البيع" data-min="300" data-max="800">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="hr" data-name="نظام الموارد البشرية" data-min="400" data-max="1200">
+                        <i class="fas fa-users"></i>
+                        <h3>نظام الموارد البشرية</h3>
+                        <p class="price">$400 – $1,200</p>
+                        <p>إدارة الموظفين والرواتب</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="نظام الموارد البشرية" data-min="400" data-max="1200">اطلب الخدمة</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consulting Services Section -->
+        <section class="consulting-services">
+            <div class="container">
+                <h2 class="section-title">الخدمات <span class="gradient-text">الاستشارية</span></h2>
+                <p class="section-subtitle">استشارات احترافية لتعظيم استفادتك من النظام</p>
+                
+                <div class="consulting-grid">
+                    <div class="consulting-item" data-consult="annual_reports" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">
+                        <i class="fas fa-file-alt"></i>
+                        <div class="consulting-info">
+                            <h3>إعداد التقارير السنوية</h3>
+                            <p>إعداد التقارير المالية السنوية (P&L، Balance Sheet، Cash Flow)</p>
+                            <span class="price">$300 – $800</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="fiscal_close" data-name="تقفيل السنة المالية" data-min="200" data-max="500">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="consulting-info">
+                            <h3>تقفيل السنة المالية</h3>
+                            <p>Closing Fiscal Year وإعداد Opening Balance</p>
+                            <span class="price">$200 – $500</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تقفيل السنة المالية" data-min="200" data-max="500">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="audit" data-name="التدقيق السنوي" data-min="500" data-max="2000">
+                        <i class="fas fa-search"></i>
+                        <div class="consulting-info">
+                            <h3>التدقيق السنوي</h3>
+                            <p>مراجعة العمليات المالية داخل النظام وتحليل القيود</p>
+                            <span class="price">$500 – $2,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="التدقيق السنوي" data-min="500" data-max="2000">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="risk" data-name="إدارة المخاطر" data-min="800" data-max="2500">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="consulting-info">
+                            <h3>إدارة المخاطر</h3>
+                            <p>تحليل المخاطر التشغيلية والمالية وإعداد Risk Matrix</p>
+                            <span class="price">$800 – $2,500</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إدارة المخاطر" data-min="800" data-max="2500">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="sop" data-name="إعداد سياسات وإجراءات SOP" data-min="500" data-max="1500">
+                        <i class="fas fa-file-signature"></i>
+                        <div class="consulting-info">
+                            <h3>إعداد سياسات وإجراءات SOP</h3>
+                            <p>كتابة السياسات التشغيلية وربطها بالنظام</p>
+                            <span class="price">$500 – $1,500</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد سياسات وإجراءات SOP" data-min="500" data-max="1500">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="dashboard" data-name="إعداد Dashboard تنفيذي" data-min="300" data-max="900">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <div class="consulting-info">
+                            <h3>إعداد Dashboard تنفيذي</h3>
+                            <p>تصميم لوحة تحكم للإدارة KPI Dashboard</p>
+                            <span class="price">$300 – $900</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد Dashboard تنفيذي" data-min="300" data-max="900">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="data_analysis" data-name="تحليل البيانات" data-min="200" data-max="700">
+                        <i class="fas fa-chart-bar"></i>
+                        <div class="consulting-info">
+                            <h3>تحليل البيانات</h3>
+                            <p>استخراج وتحليل بيانات المبيعات والعمليات</p>
+                            <span class="price">$200 – $700</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل البيانات" data-min="200" data-max="700">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="staff_training" data-name="تدريب الموظفين" data-min="25" data-max="80" data-hourly="true">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <div class="consulting-info">
+                            <h3>تدريب الموظفين</h3>
+                            <p>تدريب المحاسبة والمبيعات والمخازن</p>
+                            <span class="price">$25 – $80 / ساعة</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تدريب الموظفين" data-min="25" data-max="80" data-hourly="true">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="tax" data-name="إعداد النظام للامتثال الضريبي" data-min="200" data-max="600">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <div class="consulting-info">
+                            <h3>إعداد النظام للامتثال الضريبي</h3>
+                            <p>إعداد الضرائب VAT أو Tax Setup</p>
+                            <span class="price">$200 – $600</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد النظام للامتثال الضريبي" data-min="200" data-max="600">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="internal_control" data-name="إعداد نظام الرقابة الداخلية" data-min="500" data-max="1500">
+                        <i class="fas fa-lock"></i>
+                        <div class="consulting-info">
+                            <h3>إعداد نظام الرقابة الداخلية</h3>
+                            <p>تصميم Internal Control داخل النظام</p>
+                            <span class="price">$500 – $1,500</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد نظام الرقابة الداخلية" data-min="500" data-max="1500">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="iso" data-name="إعداد وتطبيق ISO" data-min="2000" data-max="9000">
+                        <i class="fas fa-certificate"></i>
+                        <div class="consulting-info">
+                            <h3>إعداد وتطبيق ISO</h3>
+                            <p>إعداد الشركة للحصول على شهادات ISO</p>
+                            <span class="price">$2,000 – $9,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد وتطبيق ISO" data-min="2000" data-max="9000">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="process" data-name="تحليل العمليات Business Process" data-min="800" data-max="3000">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="consulting-info">
+                            <h3>تحليل العمليات Business Process</h3>
+                            <p>تحليل العمليات وتحسينها داخل ERP</p>
+                            <span class="price">$800 – $3,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل العمليات Business Process" data-min="800" data-max="3000">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="supply_chain" data-name="تحليل سلسلة التوريد" data-min="600" data-max="2000">
+                        <i class="fas fa-truck"></i>
+                        <div class="consulting-info">
+                            <h3>تحليل سلسلة التوريد</h3>
+                            <p>تحسين عمليات المشتريات والمخزون</p>
+                            <span class="price">$600 – $2,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل سلسلة التوريد" data-min="600" data-max="2000">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="cfo" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">
+                        <i class="fas fa-chart-pie"></i>
+                        <div class="consulting-info">
+                            <h3>استشارات الإدارة المالية</h3>
+                            <p>CFO Advisory باستخدام تقارير ERP</p>
+                            <span class="price">$300 – $1,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">اطلب الاستشارة</button>
+                    </div>
+                    <div class="consulting-item" data-consult="custom_consulting" data-name="استشارة مخصصة" data-min="100" data-max="5000" data-custom="true">
+                        <i class="fas fa-comments"></i>
+                        <div class="consulting-info">
+                            <h3>استشارة مخصصة</h3>
+                            <p>استشارة حسب احتياجك الخاص</p>
+                            <span class="price">$100 – $5,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارة مخصصة" data-min="100" data-max="5000">اطلب الاستشارة</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods Section - Flip Cards -->
+        <section class="payment-section">
+            <div class="container">
+                <h2 class="payment-title"><span>طرق</span> الدفع</h2>
+                <div class="payment-grid">
+                    <div class="payment-card" onclick="openPaymentModal('qcard')">
+                        <div class="card-flip">
+                            <div class="front">
+                                <i class="fas fa-credit-card payment-icon"></i>
+                                <h3>كي كارد</h3>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Q card.gif" alt="كي كارد" class="qr-img">
+                                    <p>امسح رمز QR للدفع</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-card" onclick="openPaymentModal('zain')">
+                        <div class="card-flip">
+                            <div class="front">
+                                <i class="fas fa-mobile-alt payment-icon"></i>
+                                <h3>زين كاش</h3>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Zain.gif" alt="زين كاش" class="qr-img">
+                                    <p>امسح رمز QR للدفع</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-card" onclick="openPaymentModal('fib')">
+                        <div class="card-flip">
+                            <div class="front">
+                                <i class="fas fa-university payment-icon"></i>
+                                <h3>FIb</h3>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/FIB.gif" alt="FIb" class="qr-img">
+                                    <p>امسح رمز QR للدفع</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-card" onclick="openPaymentModal('altaeef')">
+                        <div class="card-flip">
+                            <div class="front">
+                                <i class="fas fa-landmark payment-icon"></i>
+                                <h3>مصرف الطيف الاسلامي</h3>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/al taeef.gif" alt="مصرف الطيف الاسلامي" class="qr-img">
+                                    <p>امسح رمز QR للدفع</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-card" onclick="openPaymentModal('fastpay')">
+                        <div class="card-flip">
+                            <div class="front">
+                                <i class="fas fa-bolt payment-icon"></i>
+                                <h3>فاست بي</h3>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Fast pay.gif" alt="فاست بي" class="qr-img">
+                                    <p>امسح رمز QR للدفع</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-card" onclick="openPaymentModal('asia')">
+                        <div class="card-flip">
+                            <div class="front">
+                                <i class="fas fa-exchange-alt payment-icon"></i>
+                                <h3>اسيا حوالة</h3>
+                            </div>
+                            <div class="back">
+                                <div class="back-content">
+                                    <img src="assets/images/Asia.gif" alt="اسيا حوالة" class="qr-img">
+                                    <p>امسح رمز QR للدفع</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">سلة المشتريات فارغة</div>
+        </div>
+        <div class="cart-total" id="cartTotal" style="display: none;">
+            <div class="cart-total-row">
+                <span>المجموع الكلي:</span>
+                <span class="cart-total-range" id="totalRange">$0 – $0</span>
+            </div>
+            <button class="btn-checkout" onclick="sendToWhatsApp()">
+                <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <div class="cart-toggle" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal">
+            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+            <div class="modal-img-container" id="modalImageContainer">
+                <img src="" alt="طريقة الدفع" class="modal-img" id="modalImage">
+            </div>
+            <h3 id="modalTitle">طريقة الدفع</h3>
+            <p id="modalDescription">امسح رمز QR للدفع</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand-row">
+                <div class="footer-brand-text">
+                    <div class="footer-brand-name">Odunex</div>
+                    <div class="footer-tagline">حلول ERP الموحدة</div>
+                </div>
+                <div class="footer-logo">
+                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2026 جميع الحقوق محفوظة لشركة Odunex | حلول ERP الموحدة
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart System
+        let cart = [];
+
+        function addToCart(item) {
+            cart.push(item);
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartTotalDiv = document.getElementById('cartTotal');
+            const cartCount = document.getElementById('cartCount');
+            
+            cartCount.textContent = cart.length;
+            
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<div class="cart-empty">سلة المشتريات فارغة</div>';
+                cartTotalDiv.style.display = 'none';
+                return;
+            }
+            
+            cartTotalDiv.style.display = 'block';
+            
+            let html = '';
+            let totalMin = 0;
+            let totalMax = 0;
+            
+            cart.forEach((item, index) => {
+                let priceDisplay = '';
+                let minVal = 0;
+                let maxVal = 0;
+                
+                if (item.min && item.max) {
+                    priceDisplay = `$${item.min} – $${item.max}`;
+                    minVal = item.min;
+                    maxVal = item.max;
+                } else if (item.price) {
+                    priceDisplay = `$${item.price}`;
+                    minVal = item.price;
+                    maxVal = item.price;
+                } else if (item.custom) {
+                    priceDisplay = 'سعر مخصص';
+                    minVal = 0;
+                    maxVal = 0;
+                }
+                
+                totalMin += minVal;
+                totalMax += maxVal;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${priceDisplay}</div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${index})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            cartItemsDiv.innerHTML = html;
+            
+            let totalDisplay = '';
+            if (totalMin === totalMax && totalMin > 0) {
+                totalDisplay = `$${totalMin}`;
+            } else if (totalMin > 0 || totalMax > 0) {
+                totalDisplay = `$${totalMin} – $${totalMax}`;
+            } else {
+                totalDisplay = 'سعر مخصص';
+            }
+            
+            document.getElementById('totalRange').textContent = totalDisplay;
+        }
+
+        // Event listeners for add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const type = this.dataset.type;
+                const name = this.dataset.name;
+                const item = { name: name, type: type };
+                
+                if (this.dataset.min && this.dataset.max) {
+                    item.min = parseInt(this.dataset.min);
+                    item.max = parseInt(this.dataset.max);
+                }
+                if (this.dataset.price) {
+                    item.price = parseInt(this.dataset.price);
+                }
+                if (this.dataset.custom === 'true') {
+                    item.custom = true;
+                }
+                if (this.dataset.hourly === 'true') {
+                    item.hourly = true;
+                }
+                
+                addToCart(item);
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.textContent = `✓ تم إضافة "${name}" إلى السلة`;
+                notification.style.position = 'fixed';
+                notification.style.bottom = '100px';
+                notification.style.right = '30px';
+                notification.style.backgroundColor = '#10b981';
+                notification.style.color = 'white';
+                notification.style.padding = '12px 20px';
+                notification.style.borderRadius = '8px';
+                notification.style.zIndex = '1002';
+                notification.style.fontWeight = '600';
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 2000);
+            });
+        });
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        function sendToWhatsApp() {
+            if (cart.length === 0) {
+                alert('السلة فارغة. أضف بعض الخدمات أولاً.');
+                return;
+            }
+            
+            let message = '📋 *طلب خدمات Odunex*\n\n';
+            message += '*الخدمات المطلوبة:*\n';
+            
+            cart.forEach((item, index) => {
+                let priceDisplay = '';
+                if (item.min && item.max) {
+                    priceDisplay = ` ($${item.min} – $${item.max})`;
+                } else if (item.price) {
+                    priceDisplay = ` ($${item.price})`;
+                } else if (item.custom) {
+                    priceDisplay = ` (سعر مخصص)`;
+                }
+                message += `${index + 1}. ${item.name}${priceDisplay}\n`;
+            });
+            
+            let totalMin = cart.reduce((sum, item) => sum + (item.min || item.price || 0), 0);
+            let totalMax = cart.reduce((sum, item) => sum + (item.max || item.price || 0), 0);
+            
+            message += '\n*المجموع:* ';
+            if (totalMin === totalMax && totalMin > 0) {
+                message += `$${totalMin}`;
+            } else if (totalMin > 0 || totalMax > 0) {
+                message += `$${totalMin} – $${totalMax}`;
+            } else {
+                message += 'سعر مخصص';
+            }
+            
+            message += '\n\n*للتواصل:* يرجى التواصل معنا لتأكيد الطلب وتفاصيل الدفع.';
+            
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/9647506841035?text=${encodedMessage}`, '_blank');
+        }
+
+        // Theme Toggle Function
+        function setTheme(isDark) {
+            const themeToggle = document.getElementById('themeToggle');
+            if (isDark) {
+                document.body.classList.remove('light-mode');
+                if (themeToggle) themeToggle.checked = false;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.add('light-mode');
+                if (themeToggle) themeToggle.checked = true;
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function toggleTheme() {
+            const isLightMode = document.body.classList.contains('light-mode');
+            setTheme(!isLightMode);
+        }
+
+        function updateActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'pricing.html';
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function switchLanguage() {
+            window.location.href = 'pricing-en.html';
+        }
+
+        function openPaymentModal(method) {
+            const modal = document.getElementById('paymentModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            switch(method) {
+                case 'qcard':
+                    modalImage.src = 'assets/images/Q card.gif';
+                    modalTitle.textContent = 'كي كارد';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق كي كارد';
+                    break;
+                case 'zain':
+                    modalImage.src = 'assets/images/Zain.gif';
+                    modalTitle.textContent = 'زين كاش';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق زين كاش';
+                    break;
+                case 'fib':
+                    modalImage.src = 'assets/images/FIB.gif';
+                    modalTitle.textContent = 'FIb';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق FIb';
+                    break;
+                case 'altaeef':
+                    modalImage.src = 'assets/images/al taeef.gif';
+                    modalTitle.textContent = 'مصرف الطيف الاسلامي';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق مصرف الطيف';
+                    break;
+                case 'fastpay':
+                    modalImage.src = 'assets/images/Fast pay.gif';
+                    modalTitle.textContent = 'فاست بي';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق فاست بي';
+                    break;
+                case 'asia':
+                    modalImage.src = 'assets/images/Asia.gif';
+                    modalTitle.textContent = 'اسيا حوالة';
+                    modalDescription.textContent = 'امسح رمز QR مع تطبيق اسيا حوالة';
+                    break;
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                if (themeToggle) themeToggle.checked = true;
+            } else {
+                document.body.classList.remove('light-mode');
+                if (themeToggle) themeToggle.checked = false;
+            }
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('change', toggleTheme);
+            }
+            
+            updateActiveLink();
+        });
+    </script>
+</body>
+</html>
