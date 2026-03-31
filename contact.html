@@ -508,6 +508,96 @@
             font-size: 16px;
         }
 
+        /* ===== 3D Message Card Effect ===== */
+        .message-3d-container {
+            width: 100%;
+            margin: 15px 0;
+            perspective: 1000px;
+        }
+
+        .message-3d-card {
+            padding-top: 30px;
+            border: 2px solid transparent;
+            transform-style: preserve-3d;
+            background: linear-gradient(135deg, #0000 18.75%, rgba(122,90,248,0.1) 0 31.25%, #0000 0),
+                        repeating-linear-gradient(45deg, rgba(122,90,248,0.05) -6.25% 6.25%, rgba(43,176,237,0.05) 0 18.75%);
+            background-size: 60px 60px;
+            background-position: 0 0, 0 0;
+            background-color: rgba(122,90,248,0.05);
+            width: 100%;
+            box-shadow: rgba(142, 142, 142, 0.3) 0px 30px 30px -10px;
+            transition: all 0.5s ease-in-out;
+            border-radius: 16px;
+        }
+
+        .message-3d-card:hover {
+            background-position: -100px 100px, -100px 100px;
+            transform: rotate3d(0.5, 1, 0, 15deg);
+        }
+
+        .message-3d-content {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+            transition: all 0.5s ease-in-out;
+            padding: 20px 25px;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+        }
+
+        .message-3d-content .message-title {
+            display: inline-block;
+            color: white;
+            font-size: 20px;
+            font-weight: 900;
+            transition: all 0.5s ease-in-out;
+            transform: translate3d(0px, 0px, 30px);
+            margin-bottom: 10px;
+        }
+
+        .message-3d-content .message-title i {
+            margin-left: 10px;
+        }
+
+        .message-3d-content .message-text {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.95);
+            transition: all 0.5s ease-in-out;
+            transform: translate3d(0px, 0px, 25px);
+            line-height: 1.5;
+        }
+
+        .message-3d-content .message-subtext {
+            margin-top: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.5s ease-in-out;
+            transform: translate3d(0px, 0px, 20px);
+        }
+
+        .message-icon-box {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate3d(0px, 0px, 40px);
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 17px 10px -10px;
+        }
+
+        .message-icon-box i {
+            font-size: 28px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         /* ===== Right Side - Contact Info ===== */
         .contact-info {
             display: flex;
@@ -723,7 +813,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== Message Alert Styles ===== */
+        /* ===== Simple Alert Styles (fallback) ===== */
         .alert-message {
             padding: 12px 15px;
             border-radius: 12px;
@@ -976,7 +1066,7 @@
                             <h2>أرسل <span>رسالة</span></h2>
                         </div>
                         
-                        <!-- مكان عرض رسائل التأكيد -->
+                        <!-- مكان عرض رسائل التأكيد بتأثير 3D -->
                         <div id="messageAlert" style="display: none;"></div>
                         
                         <form id="contactForm">
@@ -1046,12 +1136,11 @@
                             <div class="info-content">
                                 <div class="info-item">
                                     <i class="fas fa-phone"></i>
-                                    <a href="tel:+9647506841035">+9647506841035</a>
+                                    <a href="https://wa.me/9647506841035" target="_blank">+9647506841035</a>
                                 </div>
                                 <div class="info-item">
                                     <i class="fas fa-envelope"></i>
-                                    <!-- البريد محمي من البوتات -->
-                                    <a href="#" id="protectedEmail" class="protected-email">عرض البريد الإلكتروني</a>
+                                    <a href="mailto:info@odunex.com">info@odunex.com</a>
                                 </div>
                                 <div class="info-item">
                                     <i class="fas fa-globe"></i>
@@ -1098,47 +1187,11 @@
 
     <script>
         // ==============================================
-        // تهيئة EmailJS - مع بياناتك الحقيقية
+        // تهيئة EmailJS
         // ==============================================
         (function() {
             emailjs.init('jO00szsaAuuC7Gsly');
-            
-            // إظهار البريد الإلكتروني المحمي بعد تحميل الصفحة
-            setTimeout(function() {
-                const emailLink = document.getElementById('protectedEmail');
-                if (emailLink) {
-                    emailLink.href = 'mailto:info@odunex.com';
-                    emailLink.textContent = 'info@odunex.com';
-                    emailLink.style.color = 'var(--primary-purple)';
-                    emailLink.style.fontWeight = '600';
-                }
-            }, 100);
         })();
-
-        // ==============================================
-        // التحقق من reCAPTCHA
-        // ==============================================
-        async function verifyRecaptcha(token) {
-            if (!token || token.length < 10) {
-                return false;
-            }
-            return true;
-        }
-
-        // ==============================================
-        // التحقق من مصدر الطلب
-        // ==============================================
-        function validateRequestOrigin() {
-            const referrer = document.referrer || '';
-            const currentDomain = window.location.hostname;
-            
-            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
-                console.warn('Request from external domain detected:', referrer);
-                return false;
-            }
-            
-            return true;
-        }
 
         // ==============================================
         // دوال الحماية والتنظيف
@@ -1186,23 +1239,64 @@
         }
 
         // ==============================================
-        // نظام الوضع الليلي/النهاري
+        // دالة عرض الرسالة بتأثير 3D
         // ==============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedMode = localStorage.getItem('darkMode');
-            const toggleBtn = document.querySelector('.dark-mode-toggle');
+        function show3DMessage(message, type) {
+            const alertDiv = document.getElementById('messageAlert');
             
-            if (savedMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
-            } else {
-                document.body.classList.remove('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☾';
+            let icon = '';
+            let title = '';
+            let subtext = '';
+            
+            if (type === 'success') {
+                icon = 'fa-check-circle';
+                title = 'تم الإرسال بنجاح!';
+                subtext = 'شكراً لتواصلك معنا، سنقوم بالرد عليك قريباً';
+            } else if (type === 'error') {
+                icon = 'fa-exclamation-circle';
+                title = 'عذراً!';
+                subtext = 'حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى';
+            } else if (type === 'warning') {
+                icon = 'fa-exclamation-triangle';
+                title = 'تنبيه';
+                subtext = message;
+                message = '';
             }
             
-            updateActiveLink();
-            setupContactForm();
-        });
+            alertDiv.innerHTML = `
+                <div class="message-3d-container">
+                    <div class="message-3d-card">
+                        <div class="message-icon-box">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="message-3d-content">
+                            <div class="message-title">
+                                <i class="fas ${icon}"></i>
+                                ${title}
+                            </div>
+                            <div class="message-text">
+                                ${message || (type === 'success' ? 'تم إرسال رسالتك بنجاح!' : (type === 'error' ? 'حدث خطأ في الإرسال' : subtext))}
+                            </div>
+                            ${subtext && type !== 'warning' ? `<div class="message-subtext">${subtext}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            alertDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                alertDiv.style.opacity = '0';
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                    alertDiv.style.opacity = '1';
+                }, 500);
+            }, 5000);
+        }
+
+        function showAlert(message, type) {
+            show3DMessage(message, type);
+        }
 
         // ==============================================
         // إعداد نموذج الاتصال
@@ -1212,11 +1306,6 @@
             
             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
-                
-                if (!validateRequestOrigin()) {
-                    showAlert('طلب غير مصرح به', 'error');
-                    return;
-                }
                 
                 const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
                 const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
@@ -1305,28 +1394,6 @@
             });
         }
 
-        function showAlert(message, type) {
-            const alertDiv = document.getElementById('messageAlert');
-            
-            let icon = '';
-            if (type === 'success') icon = '✅';
-            else if (type === 'error') icon = '❌';
-            else if (type === 'warning') icon = '⚠️';
-            
-            alertDiv.innerHTML = `
-                <div class="alert-message ${type}">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
-                    <span>${icon} ${message}</span>
-                </div>
-            `;
-            
-            alertDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                alertDiv.style.display = 'none';
-            }, 5000);
-        }
-
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -1352,14 +1419,8 @@
             });
         }
 
-        // ==============================================
-        // دالة تبديل اللغة - نسخة عربية (للعمل مع الروابط النظيفة)
-        // ==============================================
         function switchLanguage() {
-            // الحصول على المسار الحالي
             let path = window.location.pathname;
-            
-            // تحديد الصفحة المستهدفة بناءً على المسار
             let target = '';
             
             if (path === '/' || path.includes('index')) {
@@ -1376,9 +1437,24 @@
                 target = '/index-en.html';
             }
             
-            // إضافة معلمة عشوائية لمنع التخزين المؤقت
             window.location.href = target + '?v=' + Math.random();
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedMode = localStorage.getItem('darkMode');
+            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☀️';
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (toggleBtn) toggleBtn.textContent = '☾';
+            }
+            
+            updateActiveLink();
+            setupContactForm();
+        });
     </script>
 </body>
 </html>
