@@ -45,8 +45,9 @@
             --footer-bg: #F8F9FB;
             --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
             --popular-gradient: linear-gradient(135deg, rgba(122,90,248,0.05), rgba(43,176,237,0.05));
+            --whatsapp-green: #25D366;
             
-            /* Dark mode colors */
+            /* Dark mode colors - matching homepage */
             --dark-bg: #0a0a1a;
             --dark-card: #14142b;
             --dark-border: #2a2a4a;
@@ -73,7 +74,7 @@
             flex-direction: column;
         }
 
-        /* Dark Mode Styles */
+        /* Dark Mode Styles - matching homepage */
         body.dark-mode {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
@@ -128,6 +129,10 @@
         body.dark-mode .cart-item span {
             color: var(--dark-text-secondary) !important;
         }
+        body.dark-mode .plan-price .period,
+        body.dark-mode .plan-desc {
+            color: var(--dark-text-muted) !important;
+        }
         body.dark-mode footer {
             background: var(--dark-card-bg);
             border-top: 1px solid var(--dark-border);
@@ -142,6 +147,19 @@
         body.dark-mode .page-header p,
         body.dark-mode .section-subtitle {
             color: var(--dark-text-secondary) !important;
+        }
+        body.dark-mode .page-header h1 .black-text {
+            color: var(--dark-text-primary) !important;
+        }
+        body.dark-mode .payment-card {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+        body.dark-mode .payment-card h3 {
+            color: var(--dark-text-primary) !important;
+        }
+        body.dark-mode .payment-title-container {
+            border-top-color: var(--dark-border);
         }
 
         .container {
@@ -343,6 +361,8 @@
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
         }
         .pricing-plan-card:hover {
             transform: translateY(-5px);
@@ -355,6 +375,17 @@
         }
         .pricing-plan-card.popular:hover {
             transform: scale(1.02) translateY(-5px);
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--main-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
         }
         .plan-header h3 {
             font-size: 24px;
@@ -387,6 +418,9 @@
             font-size: 14px;
             margin-bottom: 20px;
         }
+        .plan-features {
+            flex: 1;
+        }
         .plan-features ul {
             list-style: none;
             margin-bottom: 25px;
@@ -410,7 +444,7 @@
         .plan-features li .unavailable { color: #ef4444; }
         .plan-footer {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
         .btn-plan {
             display: inline-block;
@@ -430,7 +464,7 @@
             box-shadow: 0 10px 20px rgba(122,90,248,0.3);
         }
 
-        /* Support Plans */
+        /* Support Plans - Horizontal buttons */
         .support-plans-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -444,6 +478,8 @@
             position: relative;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         .support-card:hover {
             transform: translateY(-5px);
@@ -470,7 +506,8 @@
         .support-card ul {
             list-style: none;
             margin-bottom: 25px;
-            text-align: left;
+            text-align: right;
+            flex: 1;
         }
         .support-card li {
             padding: 8px 0;
@@ -501,10 +538,10 @@
             box-shadow: 0 10px 20px rgba(122,90,248,0.3);
         }
 
-        /* Additional Services */
+        /* Additional Services - 9 services */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
         .service-card {
@@ -565,10 +602,10 @@
             box-shadow: 0 5px 15px rgba(122,90,248,0.3);
         }
 
-        /* Consulting Services */
+        /* Consulting Services - 15 services */
         .consulting-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
         }
         .consulting-item {
@@ -974,7 +1011,9 @@
         /* Responsive */
         @media (max-width: 992px) {
             .pricing-plans-grid,
-            .support-plans-grid {
+            .support-plans-grid,
+            .services-grid,
+            .consulting-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .payment-grid {
@@ -1005,13 +1044,16 @@
             .page-header h1 { font-size: 36px; }
             .page-header p { font-size: 18px; }
             .pricing-plans-grid,
-            .support-plans-grid {
+            .support-plans-grid,
+            .services-grid,
+            .consulting-grid {
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
             }
             .pricing-plan-card,
-            .support-card {
+            .support-card,
+            .service-card {
                 width: 100%;
             }
             .pricing-plan-card.popular {
@@ -1060,12 +1102,6 @@
             .footer-copyright { font-size: 12px; }
             .modal h3 { font-size: 20px; }
             .modal p { font-size: 16px; }
-            .consulting-grid {
-                grid-template-columns: 1fr;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
             .cart-sidebar {
                 width: 100%;
                 right: -100%;
@@ -1100,19 +1136,19 @@
     </header>
 
     <main>
-        <!-- Page Header -->
+        <!-- Page Header - Modified -->
         <section class="page-header">
             <div class="container">
                 <h1><span>خطط</span> الأسعار</h1>
-                <p>اختر الخطة المناسبة لحجم أعمالك</p>
+                <p>اختر الباقة المناسبة لبدء رحلة التحول الرقمي</p>
             </div>
         </section>
 
         <!-- ERP Implementation Plans Section -->
         <section class="pricing-plans-section">
             <div class="container">
-                <h2 class="section-title">خطط <span class="gradient-text">تنفيذ ERP</span></h2>
-                <p class="section-subtitle">اختر الخطة المناسبة لبدء رحلة التحول الرقمي</p>
+                <h2 class="section-title">خطط <span class="gradient-text">التنفيذ</span></h2>
+                <p class="section-subtitle">اختر الباقة المناسبة لبدء رحلة التحول الرقمي</p>
                 
                 <div class="pricing-plans-grid">
                     <div class="pricing-plan-card" data-plan="starter" data-name="Starter" data-min="500" data-max="800">
@@ -1263,7 +1299,7 @@
             </div>
         </section>
 
-        <!-- Additional Services Section -->
+        <!-- Additional Services Section - 9 services (removed backup service) -->
         <section class="additional-services">
             <div class="container">
                 <h2 class="section-title">الخدمات <span class="gradient-text">الإضافية</span></h2>
@@ -1276,13 +1312,6 @@
                         <p class="price">$25 – $250 <span>/شهر</span></p>
                         <p>استضافة آمنة وسريعة للنظام</p>
                         <button class="btn-service add-to-cart" data-type="service" data-name="استضافة الخادم" data-min="25" data-max="250">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="backup" data-name="إعداد النسخ الاحتياطي" data-price="10">
-                        <i class="fas fa-database"></i>
-                        <h3>إعداد النسخ الاحتياطي</h3>
-                        <p class="price">$10 <span>/شهر</span></p>
-                        <p>نسخ احتياطي تلقائي للبيانات</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="إعداد النسخ الاحتياطي" data-price="10">اطلب الخدمة</button>
                     </div>
                     <div class="service-card" data-service="reports" data-name="تقارير مخصصة" data-min="100" data-max="500">
                         <i class="fas fa-chart-line"></i>
@@ -1319,11 +1348,32 @@
                         <p>تطوير مميزات خاصة بشركتك</p>
                         <button class="btn-service add-to-cart" data-type="service" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">اطلب الخدمة</button>
                     </div>
+                    <div class="service-card" data-service="mobile" data-name="تطبيق موبايل" data-min="1000" data-max="3000">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>تطبيق موبايل</h3>
+                        <p class="price">$1,000 – $3,000</p>
+                        <p>تطبيق مخصص للوصول للنظام</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="تطبيق موبايل" data-min="1000" data-max="3000">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="pos" data-name="نظام نقاط البيع" data-min="300" data-max="800">
+                        <i class="fas fa-cash-register"></i>
+                        <h3>نظام نقاط البيع</h3>
+                        <p class="price">$300 – $800</p>
+                        <p>ربط نظام POS مع ERP</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="نظام نقاط البيع" data-min="300" data-max="800">اطلب الخدمة</button>
+                    </div>
+                    <div class="service-card" data-service="hr" data-name="نظام الموارد البشرية" data-min="400" data-max="1200">
+                        <i class="fas fa-users"></i>
+                        <h3>نظام الموارد البشرية</h3>
+                        <p class="price">$400 – $1,200</p>
+                        <p>إدارة الموظفين والرواتب</p>
+                        <button class="btn-service add-to-cart" data-type="service" data-name="نظام الموارد البشرية" data-min="400" data-max="1200">اطلب الخدمة</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Consulting Services Section -->
+        <!-- Consulting Services Section - 15 services (added custom consulting) -->
         <section class="consulting-services">
             <div class="container">
                 <h2 class="section-title">الخدمات <span class="gradient-text">الاستشارية</span></h2>
@@ -1456,6 +1506,15 @@
                         </div>
                         <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">اطلب الاستشارة</button>
                     </div>
+                    <div class="consulting-item" data-consult="custom_consulting" data-name="استشارة مخصصة" data-min="100" data-max="5000" data-custom="true">
+                        <i class="fas fa-comments"></i>
+                        <div class="consulting-info">
+                            <h3>استشارة مخصصة</h3>
+                            <p>استشارة حسب احتياجك الخاص</p>
+                            <span class="price">$100 – $5,000</span>
+                        </div>
+                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارة مخصصة" data-min="100" data-max="5000">اطلب الاستشارة</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1576,7 +1635,6 @@
         // Cart System
         let cart = [];
 
-        // Add to cart function
         function addToCart(item) {
             cart.push(item);
             updateCartUI();
@@ -1696,12 +1754,10 @@
             });
         });
 
-        // Cart sidebar functions
         function toggleCart() {
             document.getElementById('cartSidebar').classList.toggle('open');
         }
 
-        // Send to WhatsApp
         function sendToWhatsApp() {
             if (cart.length === 0) {
                 alert('السلة فارغة. أضف بعض الخدمات أولاً.');
@@ -1741,7 +1797,6 @@
             window.open(`https://wa.me/9647506841035?text=${encodedMessage}`, '_blank');
         }
 
-        // Dark Mode
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             const toggleBtn = document.querySelector('.dark-mode-toggle');
@@ -1768,7 +1823,6 @@
             window.location.href = 'pricing-en.html';
         }
 
-        // Payment Modal Functions
         function openPaymentModal(method) {
             const modal = document.getElementById('paymentModal');
             const modalImage = document.getElementById('modalImage');
