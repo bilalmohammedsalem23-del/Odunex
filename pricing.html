@@ -44,10 +44,8 @@
             --icon-color: #666666;
             --footer-bg: #F8F9FB;
             --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
-            --popular-gradient: linear-gradient(135deg, rgba(122,90,248,0.05), rgba(43,176,237,0.05));
-            --whatsapp-green: #25D366;
             
-            /* Dark mode colors - Dark navy blue background */
+            /* Dark mode colors */
             --dark-bg: #0a0a2a;
             --dark-card: #0f0f2a;
             --dark-border: #1e2a4a;
@@ -56,13 +54,9 @@
             --dark-text-muted: #94a3b8;
             --dark-card-bg: #111133;
             --dark-header-bg: #0a0a2a;
-            --dark-glow: rgba(122, 90, 248, 0.3);
-            --dark-input-bg: #1a1a3a;
-            --dark-input-text: #ffffff;
-            --dark-input-placeholder: #94a3b8;
         }
 
-        /* الوضع الليلي (الافتراضي) */
+        /* Default Dark Mode */
         body {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
@@ -75,7 +69,7 @@
             flex-direction: column;
         }
 
-        /* الوضع النهاري */
+        /* Light Mode */
         body.light-mode {
             background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
             color: var(--dark-text);
@@ -138,106 +132,13 @@
         body.light-mode .page-header h1 {
             color: var(--dark-text) !important;
         }
-        body.light-mode .payment-card .front,
-        body.light-mode .payment-card .back {
-            background-color: var(--bg-white);
-            border-color: var(--border-color);
+        body.light-mode .payment-title {
+            color: #000000 !important;
         }
-        body.light-mode .payment-card .front h3 {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .payment-card .back-content p {
-            color: var(--secondary-text);
-        }
-
-        body.dark-mode {
-            background: var(--dark-bg);
-            color: var(--dark-text-primary);
-        }
-        body.dark-mode header {
-            background: var(--dark-header-bg);
-            border-bottom: 1px solid var(--dark-border);
-        }
-        body.dark-mode .nav-logo-text {
-            color: var(--dark-text-primary) !important;
-        }
-        body.dark-mode .nav-menu a {
-            color: var(--dark-text-secondary);
-        }
-        body.dark-mode .nav-menu a:hover,
-        body.dark-mode .nav-menu a.active {
+        body.light-mode .payment-title span {
+            background: none;
+            -webkit-text-fill-color: var(--primary-purple);
             color: var(--primary-purple);
-        }
-        body.dark-mode .lang-container {
-            border-color: var(--dark-border);
-        }
-        body.dark-mode .pricing-plan-card,
-        body.dark-mode .support-card,
-        body.dark-mode .service-card,
-        body.dark-mode .consulting-item,
-        body.dark-mode .cart-sidebar {
-            background: var(--dark-card-bg);
-            border-color: var(--dark-border);
-        }
-        body.dark-mode .cart-sidebar {
-            background: var(--dark-card-bg);
-        }
-        body.dark-mode .plan-header h3,
-        body.dark-mode .support-card h3,
-        body.dark-mode .service-card h3,
-        body.dark-mode .consulting-info h3,
-        body.dark-mode .cart-title {
-            color: var(--dark-text-primary) !important;
-        }
-        body.dark-mode .plan-features li,
-        body.dark-mode .support-card li,
-        body.dark-mode .service-card p,
-        body.dark-mode .consulting-info p,
-        body.dark-mode .cart-item span {
-            color: var(--dark-text-secondary) !important;
-        }
-        body.dark-mode .plan-price .period,
-        body.dark-mode .plan-desc {
-            color: var(--dark-text-muted) !important;
-        }
-        body.dark-mode footer {
-            background: var(--dark-card-bg);
-            border-top: 1px solid var(--dark-border);
-        }
-        body.dark-mode .footer-brand-name {
-            color: var(--dark-text-primary) !important;
-        }
-        body.dark-mode .footer-tagline,
-        body.dark-mode .footer-copyright {
-            color: var(--dark-text-secondary) !important;
-        }
-        body.dark-mode .page-header p,
-        body.dark-mode .section-subtitle {
-            color: var(--dark-text-secondary) !important;
-        }
-        body.dark-mode .page-header h1 span {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        body.dark-mode .section-title .gradient-text {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        body.dark-mode .popular-badge {
-            background: var(--main-gradient);
-        }
-        body.dark-mode .payment-card .front,
-        body.dark-mode .payment-card .back {
-            background-color: var(--dark-card-bg);
-            border-color: var(--dark-border);
-        }
-        body.dark-mode .payment-card .front h3 {
-            color: var(--dark-text-primary);
-        }
-        body.dark-mode .payment-card .back-content p {
-            color: var(--dark-text-secondary);
         }
 
         .container {
@@ -306,13 +207,6 @@
         .nav-menu a.active {
             color: var(--primary-purple);
         }
-        .nav-menu a:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
-        }
-        .nav-menu a.active {
-            transform: scale(1.05);
-        }
         .nav-left {
             display: flex;
             gap: 15px;
@@ -332,23 +226,20 @@
         .lang-container:hover {
             border-color: var(--primary-purple);
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
         }
         .lang-text {
             font-size: 14px;
             font-weight: 600;
             color: var(--dark-text-secondary);
-            transition: color 0.3s ease;
         }
         .globe-icon {
             width: 16px;
             height: 16px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23c0c0e0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
             background-size: contain;
-            transition: filter 0.3s ease;
         }
 
-        /* Theme Switch Button */
+        /* Theme Switch */
         .theme-switch {
             --toggle-size: 30px;
             --container-width: 5.625em;
@@ -368,15 +259,12 @@
             --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
             --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
         }
-
         .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
-            -webkit-box-sizing: border-box;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-size: var(--toggle-size);
         }
-
         .theme-switch__container {
             width: var(--container-width);
             height: var(--container-height);
@@ -384,28 +272,21 @@
             border-radius: var(--container-radius);
             overflow: hidden;
             cursor: pointer;
-            -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
             box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
-            -webkit-transition: var(--transition);
-            -o-transition: var(--transition);
             transition: var(--transition);
             position: relative;
         }
-
         .theme-switch__container::before {
             content: "";
             position: absolute;
             z-index: 1;
             inset: 0;
-            -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
-            box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+            box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
             border-radius: var(--container-radius);
         }
-
         .theme-switch__checkbox {
             display: none;
         }
-
         .theme-switch__circle-container {
             width: var(--circle-container-diameter);
             height: var(--circle-container-diameter);
@@ -414,17 +295,11 @@
             left: var(--circle-container-offset);
             top: var(--circle-container-offset);
             border-radius: var(--container-radius);
-            -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
-            box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
-            display: -webkit-box;
-            display: -ms-flexbox;
+            box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1);
             display: flex;
-            -webkit-transition: var(--circle-transition);
-            -o-transition: var(--circle-transition);
             transition: var(--circle-transition);
             pointer-events: none;
         }
-
         .theme-switch__sun-moon-container {
             pointer-events: auto;
             position: relative;
@@ -434,32 +309,18 @@
             margin: auto;
             border-radius: var(--container-radius);
             background-color: var(--sun-bg);
-            -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
-            box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
-            -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
-            filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
             overflow: hidden;
-            -webkit-transition: var(--transition);
-            -o-transition: var(--transition);
             transition: var(--transition);
         }
-
         .theme-switch__moon {
-            -webkit-transform: translateX(100%);
-            -ms-transform: translateX(100%);
             transform: translateX(100%);
             width: 100%;
             height: 100%;
             background-color: var(--moon-bg);
             border-radius: inherit;
-            -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
-            box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
-            -webkit-transition: var(--transition);
-            -o-transition: var(--transition);
             transition: var(--transition);
             position: relative;
         }
-
         .theme-switch__spot {
             position: absolute;
             top: 0.75em;
@@ -468,24 +329,19 @@
             height: 0.75em;
             border-radius: var(--container-radius);
             background-color: var(--spot-color);
-            -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
-            box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
         }
-
         .theme-switch__spot:nth-of-type(2) {
             width: 0.375em;
             height: 0.375em;
             top: 0.937em;
             left: 1.375em;
         }
-
         .theme-switch__spot:nth-last-of-type(3) {
             width: 0.25em;
             height: 0.25em;
             top: 0.312em;
             left: 0.812em;
         }
-
         .theme-switch__clouds {
             width: 1.25em;
             height: 1.25em;
@@ -494,13 +350,8 @@
             position: absolute;
             bottom: -0.625em;
             left: 0.312em;
-            -webkit-box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
-            box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
-            -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
-            -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
             transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
         }
-
         .theme-switch__stars-container {
             position: absolute;
             color: var(--stars-color);
@@ -508,33 +359,26 @@
             left: 0.312em;
             width: 2.75em;
             height: auto;
-            -webkit-transition: var(--transition);
-            -o-transition: var(--transition);
             transition: var(--transition);
         }
-
+        .theme-switch__stars-container svg {
+            width: 100%;
+            height: auto;
+        }
         .theme-switch__checkbox:checked + .theme-switch__container {
             background-color: var(--container-night-bg);
         }
-
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
             left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
         }
-
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
-            -webkit-transform: translate(0);
-            -ms-transform: translate(0);
             transform: translate(0);
         }
-
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
             bottom: -4.062em;
         }
-
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
             top: 50%;
-            -webkit-transform: translateY(-50%);
-            -ms-transform: translateY(-50%);
             transform: translateY(-50%);
         }
 
@@ -559,7 +403,6 @@
             color: var(--dark-text-secondary);
             max-width: 700px;
             margin: 0 auto;
-            transition: color 0.3s ease;
         }
 
         /* Section Titles */
@@ -615,9 +458,6 @@
             border: 2px solid var(--primary-purple);
             transform: scale(1.02);
         }
-        .pricing-plan-card.popular:hover {
-            transform: scale(1.02) translateY(-5px);
-        }
         .popular-badge {
             position: absolute;
             top: -12px;
@@ -640,21 +480,12 @@
             text-align: center;
             margin-bottom: 10px;
         }
-        .plan-price .currency {
-            font-size: 20px;
-            vertical-align: top;
-            color: var(--dark-text-secondary);
-        }
         .plan-price .price {
             font-size: 42px;
             font-weight: 700;
             background: var(--main-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .plan-price .period {
-            font-size: 14px;
-            color: var(--dark-text-muted);
         }
         .plan-desc {
             text-align: center;
@@ -679,16 +510,7 @@
             border-bottom: 1px solid var(--dark-border);
         }
         .plan-features li:last-child { border-bottom: none; }
-        .plan-features li i {
-            width: 18px;
-            font-size: 14px;
-        }
         .plan-features li i.fa-check-circle { color: #10b981; }
-        .plan-features li i.fa-times { color: #ef4444; }
-        .plan-footer {
-            text-align: center;
-            margin-top: 20px;
-        }
         .btn-plan {
             display: inline-block;
             padding: 12px 30px;
@@ -696,8 +518,6 @@
             background: var(--main-gradient);
             color: white;
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -718,7 +538,6 @@
             border-radius: 20px;
             padding: 30px;
             text-align: center;
-            position: relative;
             border: 1px solid var(--dark-border);
             transition: all 0.3s ease;
             display: flex;
@@ -726,7 +545,6 @@
         }
         .support-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(122,90,248,0.2);
             border-color: var(--primary-purple);
         }
         .support-card.popular {
@@ -742,11 +560,6 @@
             font-weight: 700;
             margin-bottom: 20px;
             color: var(--primary-purple);
-        }
-        .support-card .price span {
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--dark-text-muted);
         }
         .support-card ul {
             list-style: none;
@@ -773,8 +586,6 @@
             background: var(--main-gradient);
             color: white;
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -801,7 +612,6 @@
         .service-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-purple);
-            box-shadow: 0 10px 25px rgba(122,90,248,0.2);
         }
         .service-card i {
             font-size: 40px;
@@ -822,10 +632,6 @@
             color: var(--primary-purple);
             margin-bottom: 10px;
         }
-        .service-card .price span {
-            font-size: 12px;
-            font-weight: 400;
-        }
         .service-card p {
             font-size: 13px;
             color: var(--dark-text-secondary);
@@ -837,8 +643,6 @@
             background: var(--main-gradient);
             color: white;
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             margin-top: 15px;
@@ -867,7 +671,6 @@
         }
         .consulting-item:hover {
             border-color: var(--primary-purple);
-            box-shadow: 0 5px 15px rgba(122,90,248,0.2);
         }
         .consulting-item i {
             font-size: 28px;
@@ -899,8 +702,6 @@
             background: var(--main-gradient);
             color: white;
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             font-size: 12px;
@@ -908,7 +709,119 @@
         }
         .btn-consulting:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(122,90,248,0.4);
+        }
+
+        /* Payment Methods - Flip Cards */
+        .payment-section {
+            padding: 40px 0 60px;
+            text-align: center;
+        }
+        .payment-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--dark-text-primary);
+        }
+        .payment-title span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* Flip Card Styles */
+        .payment-card {
+            overflow: visible;
+            width: 100%;
+            height: 280px;
+            cursor: pointer;
+        }
+        .payment-card .content {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 500ms;
+            box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.3);
+            border-radius: 16px;
+        }
+        .payment-card .front, .payment-card .back {
+            background-color: var(--dark-card-bg);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--dark-border);
+        }
+        .payment-card .back {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .payment-card .back::before {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 200px;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--primary-blue), var(--primary-purple), transparent);
+            animation: rotation_481 6000ms infinite linear;
+        }
+        .payment-card .back-content {
+            position: absolute;
+            width: 96%;
+            height: 96%;
+            background-color: var(--dark-card-bg);
+            border-radius: 12px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        @keyframes rotation_481 {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        .payment-card .front {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .payment-card:hover .content {
+            transform: rotateY(180deg);
+        }
+        .payment-card .front i {
+            font-size: 48px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        .payment-card .front h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-text-primary);
+        }
+        .payment-card .qr-img {
+            width: 85%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        .payment-card .back-content p {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--dark-text-secondary);
         }
 
         /* Cart Sidebar */
@@ -927,9 +840,7 @@
             overflow-y: auto;
             border-left: 1px solid var(--dark-border);
         }
-        .cart-sidebar.open {
-            right: 0;
-        }
+        .cart-sidebar.open { right: 0; }
         .cart-header {
             padding: 20px;
             background: var(--main-gradient);
@@ -938,10 +849,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .cart-header h3 {
-            font-size: 20px;
-            font-weight: 700;
-        }
+        .cart-header h3 { font-size: 20px; font-weight: 700; }
         .close-cart {
             background: none;
             border: none;
@@ -949,19 +857,13 @@
             font-size: 24px;
             cursor: pointer;
         }
-        .cart-items {
-            flex: 1;
-            padding: 20px;
-        }
+        .cart-items { flex: 1; padding: 20px; }
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
             border-bottom: 1px solid var(--dark-border);
-        }
-        .cart-item-info {
-            flex: 1;
         }
         .cart-item-name {
             font-weight: 600;
@@ -978,13 +880,10 @@
             border: none;
             color: #ef4444;
             cursor: pointer;
-            font-size: 16px;
-            padding: 5px;
         }
         .cart-total {
             padding: 20px;
             border-top: 2px solid var(--dark-border);
-            background: rgba(0,0,0,0.2);
         }
         .cart-total-row {
             display: flex;
@@ -1013,7 +912,6 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 15px;
-            transition: all 0.3s ease;
         }
         .btn-checkout:hover {
             transform: translateY(-2px);
@@ -1033,15 +931,8 @@
             cursor: pointer;
             box-shadow: 0 5px 20px rgba(122,90,248,0.5);
             z-index: 1000;
-            transition: all 0.3s ease;
         }
-        .cart-toggle:hover {
-            transform: scale(1.1);
-        }
-        .cart-toggle i {
-            font-size: 24px;
-            color: white;
-        }
+        .cart-toggle i { font-size: 24px; color: white; }
         .cart-count {
             position: absolute;
             top: -5px;
@@ -1057,113 +948,55 @@
             justify-content: center;
         }
 
-        /* Payment Methods - Flip Cards */
-        .payment-section {
-            padding: 40px 0 60px;
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal {
+            width: 90%;
+            max-width: 500px;
             text-align: center;
-        }
-        .payment-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: var(--dark-text-primary);
-        }
-        .payment-title span {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            width: 100%;
-        }
-        
-        /* Flip Card Styles */
-        .payment-card {
-            background-color: transparent;
-            width: 100%;
-            height: 280px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-        
-        .payment-card .card-flip {
             position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            border-radius: 20px;
         }
-        
-        .payment-card:hover .card-flip {
-            transform: rotateY(180deg);
-        }
-        
-        .payment-card .front,
-        .payment-card .back {
+        .close-modal {
             position: absolute;
+            top: -40px;
+            left: 0;
+            font-size: 32px;
+            cursor: pointer;
+            color: white;
+        }
+        .close-modal:hover { color: var(--primary-purple); }
+        .modal-img-container {
             width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            aspect-ratio: 1/1;
             background: var(--dark-card-bg);
-            border: 1px solid var(--dark-border);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            border-radius: 24px;
+            overflow: hidden;
         }
-        
-        .payment-card .front {
-            transform: rotateY(0deg);
-        }
-        
-        .payment-card .back {
-            transform: rotateY(180deg);
-        }
-        
-        .payment-card .front h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--dark-text-primary);
-            margin-top: 15px;
-        }
-        
-        .payment-card .qr-img {
-            width: 80%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 12px;
-        }
-        
-        .payment-card .back-content {
+        .modal-img {
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            object-fit: cover;
         }
-        
-        .payment-card .back-content p {
-            margin-top: 15px;
-            font-size: 12px;
-            color: var(--dark-text-secondary);
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin: 20px 0 10px;
         }
-        
-        .payment-icon {
-            font-size: 48px;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+        .modal p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
         }
 
         /* Footer */
@@ -1173,13 +1006,7 @@
             padding: 35px 0 25px;
             text-align: center;
             margin-top: auto;
-            transition: all 0.3s ease;
             border-top: 1px solid var(--dark-border);
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
         .footer-brand-row {
             display: flex;
@@ -1188,27 +1015,18 @@
             gap: 15px;
             margin-bottom: 12px;
         }
-        .footer-brand-text {
-            text-align: center;
-        }
         .footer-brand-name {
             font-size: 24px;
             font-weight: 700;
             color: var(--dark-text-primary);
-            line-height: 1.2;
-            transition: color 0.3s ease;
         }
         .footer-tagline {
             font-size: 15px;
             font-weight: 600;
             color: var(--dark-text-secondary);
             margin-top: 3px;
-            transition: color 0.3s ease;
         }
-        .footer-logo {
-            width: 55px;
-            height: 55px;
-        }
+        .footer-logo { width: 55px; height: 55px; }
         .footer-logo img {
             width: 100%;
             height: 100%;
@@ -1219,103 +1037,29 @@
             font-weight: 500;
             color: var(--dark-text-muted);
             margin-top: 12px;
-            transition: color 0.3s ease;
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
-            .pricing-plans-grid,
-            .support-plans-grid,
-            .services-grid,
-            .consulting-grid {
+            .pricing-plans-grid, .support-plans-grid, .services-grid, .consulting-grid, .payment-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            .payment-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .pricing-plan-card.popular {
-                transform: scale(1);
-            }
-            .pricing-plan-card.popular:hover {
-                transform: translateY(-5px);
             }
         }
         @media (max-width: 768px) {
-            header .container {
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            .nav-right, .nav-left { width: auto; }
-            .nav-menu {
-                order: 3;
-                width: 100%;
-                justify-content: flex-start;
-                gap: 20px;
-            }
-            .page-header {
-                padding: 50px 0 20px;
-            }
+            header .container { flex-wrap: wrap; gap: 15px; }
+            .nav-menu { order: 3; width: 100%; justify-content: flex-start; gap: 20px; }
             .page-header h1 { font-size: 36px; }
-            .page-header p { font-size: 18px; }
-            .pricing-plans-grid,
-            .support-plans-grid,
-            .services-grid,
-            .consulting-grid {
+            .pricing-plans-grid, .support-plans-grid, .services-grid, .consulting-grid, .payment-grid {
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
             }
-            .pricing-plan-card,
-            .support-card,
-            .service-card {
-                width: 100%;
-            }
-            .pricing-plan-card.popular {
-                transform: scale(1);
-            }
-            .payment-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .payment-title {
-                font-size: 30px;
-            }
-            .footer-brand-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .footer-brand-text {
-                text-align: center;
-            }
-            .section-title {
-                font-size: 28px;
-            }
-            .cart-sidebar {
-                width: 320px;
-            }
-            .payment-card {
-                height: 260px;
-            }
+            .payment-card { height: 260px; }
+            .cart-sidebar { width: 320px; }
         }
         @media (max-width: 480px) {
-            .page-header {
-                padding: 60px 0 20px;
-            }
             .page-header h1 { font-size: 32px; }
-            .page-header p { font-size: 16px; }
-            .plan-header h3,
-            .support-card h3 { font-size: 24px; }
-            .payment-title { font-size: 28px; }
-            .footer-brand-name { font-size: 22px; }
-            .footer-logo { width: 50px; height: 50px; }
-            .footer-copyright { font-size: 12px; }
-            .cart-sidebar {
-                width: 100%;
-                right: -100%;
-            }
-            .payment-card {
-                height: 240px;
-            }
+            .payment-card { height: 240px; }
+            .cart-sidebar { width: 100%; right: -100%; }
         }
     </style>
 </head>
@@ -1341,6 +1085,12 @@
                 <label class="theme-switch">
                     <input type="checkbox" class="theme-switch__checkbox" id="themeToggle">
                     <div class="theme-switch__container">
+                        <div class="theme-switch__clouds"></div>
+                        <div class="theme-switch__stars-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
                         <div class="theme-switch__circle-container">
                             <div class="theme-switch__sun-moon-container">
                                 <div class="theme-switch__moon">
@@ -1350,12 +1100,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="theme-switch__stars-container">
-                            <svg viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 0L12.5 7.5L20 10L12.5 12.5L10 20L7.5 12.5L0 10L7.5 7.5L10 0Z" />
-                            </svg>
-                        </div>
-                        <div class="theme-switch__clouds"></div>
                     </div>
                 </label>
             </div>
@@ -1379,9 +1123,7 @@
                         <div class="plan-header">
                             <h3>Starter</h3>
                             <div class="plan-price">
-                                <span class="currency">$</span>
-                                <span class="price">500</span>
-                                <span class="period">– $800</span>
+                                <span class="price">$500 – $800</span>
                             </div>
                             <p class="plan-desc">لمنشآت البداية</p>
                         </div>
@@ -1408,9 +1150,7 @@
                         <div class="plan-header">
                             <h3>Professional</h3>
                             <div class="plan-price">
-                                <span class="currency">$</span>
-                                <span class="price">2,000</span>
-                                <span class="period">– $3,500</span>
+                                <span class="price">$2,000 – $3,500</span>
                             </div>
                             <p class="plan-desc">للشركات النامية</p>
                         </div>
@@ -1437,12 +1177,11 @@
                         </div>
                     </div>
 
-                    <div class="pricing-plan-card" data-plan="enterprise" data-name="Enterprise" data-min="0" data-max="0" data-custom="true">
+                    <div class="pricing-plan-card" data-plan="enterprise" data-name="Enterprise" data-custom="true">
                         <div class="plan-header">
                             <h3>Enterprise</h3>
                             <div class="plan-price">
-                                <span class="currency">$</span>
-                                <span class="price">مخصص</span>
+                                <span class="price">سعر مخصص</span>
                             </div>
                             <p class="plan-desc">للمؤسسات الكبرى</p>
                         </div>
@@ -1478,7 +1217,6 @@
             <div class="container">
                 <h2 class="section-title">خطط <span class="gradient-text">الدعم الفني</span></h2>
                 <p class="section-subtitle">اختر باقة الدعم المناسبة لعملك</p>
-                
                 <div class="support-plans-grid">
                     <div class="support-card" data-support="basic" data-name="دعم Basic" data-price="100">
                         <h3>Basic</h3>
@@ -1528,7 +1266,6 @@
             <div class="container">
                 <h2 class="section-title">الخدمات <span class="gradient-text">الإضافية</span></h2>
                 <p class="section-subtitle">خدمات إضافية لتعزيز نظامك</p>
-                
                 <div class="services-grid">
                     <div class="service-card" data-service="hosting" data-name="استضافة الخادم" data-min="25" data-max="250">
                         <i class="fas fa-server"></i>
@@ -1602,13 +1339,12 @@
             <div class="container">
                 <h2 class="section-title">الخدمات <span class="gradient-text">الاستشارية</span></h2>
                 <p class="section-subtitle">استشارات احترافية لتعظيم استفادتك من النظام</p>
-                
                 <div class="consulting-grid">
                     <div class="consulting-item" data-consult="annual_reports" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">
                         <i class="fas fa-file-alt"></i>
                         <div class="consulting-info">
                             <h3>إعداد التقارير السنوية</h3>
-                            <p>إعداد التقارير المالية السنوية (P&L، Balance Sheet، Cash Flow)</p>
+                            <p>إعداد التقارير المالية السنوية</p>
                             <span class="price">$300 – $800</span>
                         </div>
                         <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">اطلب الاستشارة</button>
@@ -1626,7 +1362,7 @@
                         <i class="fas fa-search"></i>
                         <div class="consulting-info">
                             <h3>التدقيق السنوي</h3>
-                            <p>مراجعة العمليات المالية داخل النظام وتحليل القيود</p>
+                            <p>مراجعة العمليات المالية داخل النظام</p>
                             <span class="price">$500 – $2,000</span>
                         </div>
                         <button class="btn-consulting add-to-cart" data-type="consulting" data-name="التدقيق السنوي" data-min="500" data-max="2000">اطلب الاستشارة</button>
@@ -1635,7 +1371,7 @@
                         <i class="fas fa-shield-alt"></i>
                         <div class="consulting-info">
                             <h3>إدارة المخاطر</h3>
-                            <p>تحليل المخاطر التشغيلية والمالية وإعداد Risk Matrix</p>
+                            <p>تحليل المخاطر التشغيلية والمالية</p>
                             <span class="price">$800 – $2,500</span>
                         </div>
                         <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إدارة المخاطر" data-min="800" data-max="2500">اطلب الاستشارة</button>
@@ -1749,9 +1485,9 @@
                 <h2 class="payment-title"><span>طرق</span> الدفع</h2>
                 <div class="payment-grid">
                     <div class="payment-card" onclick="openPaymentModal('qcard')">
-                        <div class="card-flip">
+                        <div class="content">
                             <div class="front">
-                                <i class="fas fa-credit-card payment-icon"></i>
+                                <i class="fas fa-credit-card"></i>
                                 <h3>كي كارد</h3>
                             </div>
                             <div class="back">
@@ -1763,9 +1499,9 @@
                         </div>
                     </div>
                     <div class="payment-card" onclick="openPaymentModal('zain')">
-                        <div class="card-flip">
+                        <div class="content">
                             <div class="front">
-                                <i class="fas fa-mobile-alt payment-icon"></i>
+                                <i class="fas fa-mobile-alt"></i>
                                 <h3>زين كاش</h3>
                             </div>
                             <div class="back">
@@ -1777,23 +1513,23 @@
                         </div>
                     </div>
                     <div class="payment-card" onclick="openPaymentModal('fib')">
-                        <div class="card-flip">
+                        <div class="content">
                             <div class="front">
-                                <i class="fas fa-university payment-icon"></i>
-                                <h3>FIb</h3>
+                                <i class="fas fa-university"></i>
+                                <h3>مصرف العراق الأول FIB</h3>
                             </div>
                             <div class="back">
                                 <div class="back-content">
-                                    <img src="assets/images/FIB.gif" alt="FIb" class="qr-img">
+                                    <img src="assets/images/FIB.gif" alt="FIB" class="qr-img">
                                     <p>امسح رمز QR للدفع</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="payment-card" onclick="openPaymentModal('altaeef')">
-                        <div class="card-flip">
+                        <div class="content">
                             <div class="front">
-                                <i class="fas fa-landmark payment-icon"></i>
+                                <i class="fas fa-landmark"></i>
                                 <h3>مصرف الطيف الاسلامي</h3>
                             </div>
                             <div class="back">
@@ -1805,9 +1541,9 @@
                         </div>
                     </div>
                     <div class="payment-card" onclick="openPaymentModal('fastpay')">
-                        <div class="card-flip">
+                        <div class="content">
                             <div class="front">
-                                <i class="fas fa-bolt payment-icon"></i>
+                                <i class="fas fa-bolt"></i>
                                 <h3>فاست بي</h3>
                             </div>
                             <div class="back">
@@ -1819,14 +1555,14 @@
                         </div>
                     </div>
                     <div class="payment-card" onclick="openPaymentModal('asia')">
-                        <div class="card-flip">
+                        <div class="content">
                             <div class="front">
-                                <i class="fas fa-exchange-alt payment-icon"></i>
-                                <h3>اسيا حوالة</h3>
+                                <i class="fas fa-exchange-alt"></i>
+                                <h3>اسيا بي</h3>
                             </div>
                             <div class="back">
                                 <div class="back-content">
-                                    <img src="assets/images/Asia.gif" alt="اسيا حوالة" class="qr-img">
+                                    <img src="assets/images/Asia.gif" alt="اسيا بي" class="qr-img">
                                     <p>امسح رمز QR للدفع</p>
                                 </div>
                             </div>
@@ -1866,7 +1602,7 @@
     <div class="modal-overlay" id="paymentModal">
         <div class="modal">
             <span class="close-modal" onclick="closePaymentModal()">&times;</span>
-            <div class="modal-img-container" id="modalImageContainer">
+            <div class="modal-img-container">
                 <img src="" alt="طريقة الدفع" class="modal-img" id="modalImage">
             </div>
             <h3 id="modalTitle">طريقة الدفع</h3>
@@ -1939,8 +1675,6 @@
                     maxVal = item.price;
                 } else if (item.custom) {
                     priceDisplay = 'سعر مخصص';
-                    minVal = 0;
-                    maxVal = 0;
                 }
                 
                 totalMin += minVal;
@@ -1973,13 +1707,11 @@
             document.getElementById('totalRange').textContent = totalDisplay;
         }
 
-        // Event listeners for add to cart buttons
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const type = this.dataset.type;
                 const name = this.dataset.name;
-                const item = { name: name, type: type };
+                const item = { name: name };
                 
                 if (this.dataset.min && this.dataset.max) {
                     item.min = parseInt(this.dataset.min);
@@ -1991,13 +1723,9 @@
                 if (this.dataset.custom === 'true') {
                     item.custom = true;
                 }
-                if (this.dataset.hourly === 'true') {
-                    item.hourly = true;
-                }
                 
                 addToCart(item);
                 
-                // Show notification
                 const notification = document.createElement('div');
                 notification.textContent = `✓ تم إضافة "${name}" إلى السلة`;
                 notification.style.position = 'fixed';
@@ -2057,7 +1785,7 @@
             window.open(`https://wa.me/9647506841035?text=${encodedMessage}`, '_blank');
         }
 
-        // Theme Toggle Function
+        // Theme Toggle
         function setTheme(isDark) {
             const themeToggle = document.getElementById('themeToggle');
             if (isDark) {
@@ -2095,37 +1823,21 @@
             const modalImage = document.getElementById('modalImage');
             const modalTitle = document.getElementById('modalTitle');
             const modalDescription = document.getElementById('modalDescription');
-            switch(method) {
-                case 'qcard':
-                    modalImage.src = 'assets/images/Q card.gif';
-                    modalTitle.textContent = 'كي كارد';
-                    modalDescription.textContent = 'امسح رمز QR مع تطبيق كي كارد';
-                    break;
-                case 'zain':
-                    modalImage.src = 'assets/images/Zain.gif';
-                    modalTitle.textContent = 'زين كاش';
-                    modalDescription.textContent = 'امسح رمز QR مع تطبيق زين كاش';
-                    break;
-                case 'fib':
-                    modalImage.src = 'assets/images/FIB.gif';
-                    modalTitle.textContent = 'FIb';
-                    modalDescription.textContent = 'امسح رمز QR مع تطبيق FIb';
-                    break;
-                case 'altaeef':
-                    modalImage.src = 'assets/images/al taeef.gif';
-                    modalTitle.textContent = 'مصرف الطيف الاسلامي';
-                    modalDescription.textContent = 'امسح رمز QR مع تطبيق مصرف الطيف';
-                    break;
-                case 'fastpay':
-                    modalImage.src = 'assets/images/Fast pay.gif';
-                    modalTitle.textContent = 'فاست بي';
-                    modalDescription.textContent = 'امسح رمز QR مع تطبيق فاست بي';
-                    break;
-                case 'asia':
-                    modalImage.src = 'assets/images/Asia.gif';
-                    modalTitle.textContent = 'اسيا حوالة';
-                    modalDescription.textContent = 'امسح رمز QR مع تطبيق اسيا حوالة';
-                    break;
+            
+            const methods = {
+                qcard: { img: 'assets/images/Q card.gif', title: 'كي كارد', desc: 'امسح رمز QR مع تطبيق كي كارد' },
+                zain: { img: 'assets/images/Zain.gif', title: 'زين كاش', desc: 'امسح رمز QR مع تطبيق زين كاش' },
+                fib: { img: 'assets/images/FIB.gif', title: 'مصرف العراق الأول FIB', desc: 'امسح رمز QR مع تطبيق FIB' },
+                altaeef: { img: 'assets/images/al taeef.gif', title: 'مصرف الطيف الاسلامي', desc: 'امسح رمز QR مع تطبيق مصرف الطيف' },
+                fastpay: { img: 'assets/images/Fast pay.gif', title: 'فاست بي', desc: 'امسح رمز QR مع تطبيق فاست بي' },
+                asia: { img: 'assets/images/Asia.gif', title: 'اسيا بي', desc: 'امسح رمز QR مع تطبيق اسيا بي' }
+            };
+            
+            const data = methods[method];
+            if (data) {
+                modalImage.src = data.img;
+                modalTitle.textContent = data.title;
+                modalDescription.textContent = data.desc;
             }
             modal.style.display = 'flex';
         }
