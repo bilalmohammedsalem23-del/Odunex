@@ -74,7 +74,7 @@
             flex-direction: column;
         }
 
-        /* Dark Mode Styles - matching homepage */
+        /* Dark Mode Styles - matching homepage exactly */
         body.dark-mode {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
@@ -148,8 +148,10 @@
         body.dark-mode .section-subtitle {
             color: var(--dark-text-secondary) !important;
         }
-        body.dark-mode .page-header h1 .black-text {
-            color: var(--dark-text-primary) !important;
+        body.dark-mode .page-header h1 span {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         body.dark-mode .payment-card {
             background: var(--dark-card-bg);
@@ -160,6 +162,14 @@
         }
         body.dark-mode .payment-title-container {
             border-top-color: var(--dark-border);
+        }
+        body.dark-mode .section-title .gradient-text {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .popular-badge {
+            background: var(--main-gradient);
         }
 
         .container {
@@ -441,7 +451,6 @@
         }
         .plan-features li i.fa-check-circle { color: #10b981; }
         .plan-features li i.fa-times { color: #ef4444; }
-        .plan-features li .unavailable { color: #ef4444; }
         .plan-footer {
             text-align: center;
             margin-top: 20px;
@@ -464,7 +473,7 @@
             box-shadow: 0 10px 20px rgba(122,90,248,0.3);
         }
 
-        /* Support Plans - Horizontal buttons */
+        /* Support Plans */
         .support-plans-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1136,7 +1145,7 @@
     </header>
 
     <main>
-        <!-- Page Header - Modified -->
+        <!-- Page Header -->
         <section class="page-header">
             <div class="container">
                 <h1><span>خطط</span> الأسعار</h1>
@@ -1144,12 +1153,9 @@
             </div>
         </section>
 
-        <!-- ERP Implementation Plans Section -->
+        <!-- ERP Implementation Plans Section - Title and subtitle removed as requested -->
         <section class="pricing-plans-section">
             <div class="container">
-                <h2 class="section-title">خطط <span class="gradient-text">التنفيذ</span></h2>
-                <p class="section-subtitle">اختر الباقة المناسبة لبدء رحلة التحول الرقمي</p>
-                
                 <div class="pricing-plans-grid">
                     <div class="pricing-plan-card" data-plan="starter" data-name="Starter" data-min="500" data-max="800">
                         <div class="plan-header">
@@ -1299,7 +1305,7 @@
             </div>
         </section>
 
-        <!-- Additional Services Section - 9 services (removed backup service) -->
+        <!-- Additional Services Section - 9 services -->
         <section class="additional-services">
             <div class="container">
                 <h2 class="section-title">الخدمات <span class="gradient-text">الإضافية</span></h2>
@@ -1373,7 +1379,7 @@
             </div>
         </section>
 
-        <!-- Consulting Services Section - 15 services (added custom consulting) -->
+        <!-- Consulting Services Section - 15 services -->
         <section class="consulting-services">
             <div class="container">
                 <h2 class="section-title">الخدمات <span class="gradient-text">الاستشارية</span></h2>
