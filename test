@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fashion Industry Through A Lense</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. إعدادات الصفحة العامة --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            /* الخلفية سوداء بالكامل كما في الصورة */
+            background-color: #000000;
+            color: #ffffff;
+            /* استخدام خط Poppins كخط أساسي للنصوص الصغيرة */
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* حاوية الصفحة بالكامل لتوسيط المحتوى عمودياً */
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between; /* توزيع العناصر (قائمة أعلى، محتوى وسط) */
+            padding: 20px 0;
+        }
+
+        /* --- 2. تصميم قائمة التنقل العلوي (Navbar) --- */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* توسيط القائمة أفقياً */
+            padding: 20px 0;
+            position: absolute; /* لجعلها فوق الصورة */
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 35px; /* المسافة بين الروابط */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff; /* لون النص أبيض */
+            font-size: 14px;
+            text-transform: uppercase; /* حروف كبيرة */
+            letter-spacing: 2px; /* مسافة بين الحروف */
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        /* تأثير عند تمرير الماوس */
+        .nav-links a:hover {
+            color: #aaaaaa;
+        }
+
+        /* --- 3. تصميم محتوى المنتصف (الصورة والعنوان) --- */
+        .hero-content {
+            flex: 1; /* تأخذ باقي المساحة المتاحة */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* توسيط عمودي */
+            align-items: center; /* توسيط أفقي */
+            text-align: center;
+            margin-top: 80px; /* تعويض لمكان الـ Navbar المطلق */
+        }
+
+        /* إعدادات الصورة */
+        .hero-image-container {
+            max-width: 600px; /* أقصى عرض للصورة */
+            width: 90%;
+            margin-bottom: 20px; /* مسافة بين الصورة والنص */
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            /* تأثير "Vignette" أو تدرج أسود حول الصورة لدمجها مع الخلفية */
+            box-shadow: 0 0 100px 50px rgba(0,0,0,0.9) inset, 0 0 100px 80px rgba(0,0,0,1);
+        }
+
+        /* تصميم العنوان العريض (The Fashion Industry...) */
+        .hero-text {
+            /* استخدام خط Oswald العريض والجريء */
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase; /* حروف كبيرة */
+            font-size: 42px; /* حجم خط كبير */
+            line-height: 1.2; /*المسافة بين السطرين */
+            letter-spacing: 1px; /* مسافة بسيطة بين الحروف لزيادة الوضوح */
+            color: #ffffff;
+            margin-top: -30px; /* لتقريب النص من الصورة كما في الصورة الأصلية */
+            padding: 0 20px;
+        }
+
+        /* سطر جديد في العنوان */
+        .hero-text span {
+            display: block;
+        }
+
+        /* --- 4. تصميم العناصر الجانبية العائمة (Scrolling icons) --- */
+        .side-widgets {
+            position: fixed;
+            right: 15px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        /* عنصر التمرير العلوي (الأرجواني) */
+        .scroll-top {
+            background-color: #6c34e0; /* نفس اللون الأرجواني في الصورة */
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* عنصر الأدوات الجانبي (شفاف) */
+        .side-tool {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+
+        /* --- 5. استجابة التصميم للشاشات الصغيرة (Mobile) --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+                padding: 0 10px;
+            }
+            .nav-links a {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+            .hero-text {
+                font-size: 28px;
+                margin-top: 10px;
+            }
+            .hero-image-container {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <header>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </header>
+
+        <main class="hero-content">
+            <div class="hero-image-container">
+                <img src="image_0.png" alt="Fashion Model Portrait">
+            </div>
+            
+            <h1 class="hero-text">
+                <span>The Fashion Industry</span>
+                <span>Through A Lense</span>
+            </h1>
+        </main>
+
+    </div>
+
+    <div class="side-widgets">
+        <div class="side-tool">⚙️</div>
+        <div class="scroll-top">▲</div>
+    </div>
+
+</body>
+</html>
