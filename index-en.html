@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Odunex | Unified ERP Solutions</title>
     
-    <!-- Redirect to unified domain (supports www and non-www) -->
+    <!-- Redirect to unified domain -->
     <script>
         (function() {
             const primaryDomain = 'odunex.com';
@@ -38,10 +38,6 @@
     <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
     <link rel="shortcut icon" href="assets/images/Location Logo.png">
     <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/Location Logo.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/Location Logo.png">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -50,10 +46,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Google reCAPTCHA v3 (invisible) -->
+    <!-- Google reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH"></script>
     
-    <!-- DOMPurify - XSS Protection -->
+    <!-- DOMPurify -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
     <!-- EmailJS SDK -->
@@ -318,20 +314,20 @@
             color: var(--primary-blue);
         }
 
-        /* Splash Screen with Video */
+        /* Splash Screen with Video - MUST BE VISIBLE FIRST */
         .splash-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0a2a, #0a0a1a);
+            background: #000;
             z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.8s ease;
         }
         .splash-video {
             position: absolute;
@@ -347,11 +343,12 @@
             z-index: 2;
             text-align: center;
             animation: fadeInUp 0.8s ease;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
             padding: 40px 60px;
             border-radius: 30px;
             border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 50px rgba(122,90,248,0.3);
         }
         .splash-logo {
             width: 150px;
@@ -416,7 +413,7 @@
             width: 100%;
         }
 
-        /* ===== Header ===== */
+        /* Header */
         header {
             background: var(--bg-white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -524,7 +521,7 @@
             transition: filter 0.3s ease;
         }
 
-        /* ===== Theme Switch Button ===== */
+        /* Theme Switch Button */
         .theme-switch {
             --toggle-size: 12px;
             --container-width: 4.8em;
@@ -668,19 +665,15 @@
             transform: translateY(-50%);
         }
 
-        /* ===== Hero Section ===== */
+        /* Hero Section */
         .hero {
             text-align: center;
             padding: 50px 0 40px;
         }
 
         @keyframes gentleBounce {
-            0%, 100% { 
-                transform: translateY(0); 
-            }
-            50% { 
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .hero-logo {
@@ -756,25 +749,6 @@
             box-shadow: 0 10px 20px rgba(122,90,248,0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--primary-purple);
-            color: var(--primary-purple);
-            font-size: 16px;
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 180px;
-        }
-
-        .btn-secondary:hover {
-            transform: scale(1.05) translateY(-2px);
-            background: rgba(122,90,248,0.05);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.2);
-        }
-
         .btn-whatsapp {
             background: var(--whatsapp-green);
             color: white;
@@ -800,11 +774,7 @@
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
         }
 
-        .btn-whatsapp i {
-            font-size: 18px;
-        }
-
-        /* ===== Statistics Section ===== */
+        /* Statistics Section */
         .statistics-section {
             background-color: var(--section-bg);
             padding: 70px 0;
@@ -863,7 +833,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== Testimonials Section ===== */
+        /* Testimonials Section */
         .testimonials-section {
             background-color: var(--section-bg);
             padding: 80px 0;
@@ -936,10 +906,6 @@
             color: var(--star-gold);
         }
 
-        .star-empty {
-            color: var(--star-empty);
-        }
-
         .testimonial-text {
             font-size: 16px;
             font-weight: 500;
@@ -971,7 +937,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ===== FAQ Section ===== */
+        /* FAQ Section */
         .faq-section {
             background-color: var(--section-bg);
             padding: 80px 0 30px;
@@ -1070,17 +1036,11 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== Footer Section ===== */
+        /* Footer */
         footer {
             background-color: var(--footer-bg);
             width: 100%;
@@ -1105,16 +1065,10 @@
             margin-bottom: 20px;
         }
 
-        .footer-brand-text {
-            text-align: center;
-        }
-
         .footer-brand-name {
             font-size: 24px;
             font-weight: 700;
             color: var(--dark-text);
-            line-height: 1.2;
-            transition: color 0.3s ease;
         }
 
         .footer-tagline {
@@ -1122,7 +1076,6 @@
             font-weight: 600;
             color: var(--secondary-text);
             margin-top: 3px;
-            transition: color 0.3s ease;
         }
 
         .footer-logo {
@@ -1136,7 +1089,6 @@
             object-fit: contain;
         }
 
-        /* Social Icons in Footer */
         .footer-social {
             margin: 20px 0;
         }
@@ -1227,7 +1179,7 @@
             bottom: 80px;
         }
 
-        /* ===== Trial Modal Styles ===== */
+        /* Trial Modal */
         .trial-modal-overlay {
             display: none;
             position: fixed;
@@ -1257,14 +1209,8 @@
         }
 
         @keyframes modalSlideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .trial-close {
@@ -1440,246 +1386,76 @@
             border-left: 4px solid #ffc107;
         }
 
-        /* ===== Responsive Design ===== */
+        /* Responsive */
         @media (max-width: 992px) {
-            .stats-grid {
-                gap: 40px;
-            }
-            
-            .testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .hero-logo {
-                width: 252px;
-            }
-            
-            h1 {
-                font-size: 40px;
-            }
+            .stats-grid { gap: 40px; }
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-logo { width: 252px; }
+            h1 { font-size: 40px; }
         }
 
         @media (max-width: 768px) {
-            header .container {
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-
-            .nav-left, .nav-right {
-                width: auto;
-            }
-
-            .nav-menu {
-                order: 3;
-                width: 100%;
-                justify-content: flex-start;
-                gap: 20px;
-            }
-
-            .hero {
-                padding: 60px 0 30px;
-            }
-
-            .hero-logo {
-                width: 210px;
-            }
-
-            h1 {
-                font-size: 32px;
-            }
-
-            .subheadline {
-                font-size: 20px;
-            }
-
-            .description {
-                font-size: 16px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .btn-primary, .btn-secondary, .btn-whatsapp {
-                width: 100%;
-                max-width: 280px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .testimonials-title,
-            .faq-title {
-                font-size: 32px;
-            }
-
-            .testimonials-subtitle,
-            .faq-subtitle {
-                font-size: 16px;
-                margin-bottom: 30px;
-            }
-
-            .footer-brand-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-            }
-            .whatsapp-float i {
-                font-size: 26px;
-            }
-            
-            .splash-content {
-                padding: 25px 35px;
-                margin: 0 20px;
-            }
-            .splash-title {
-                font-size: 32px;
-            }
-            .splash-subtitle {
-                font-size: 14px;
-            }
-            .splash-logo {
-                width: 120px;
-            }
-            .enter-btn {
-                padding: 10px 30px;
-                font-size: 16px;
-            }
+            header .container { flex-wrap: wrap; gap: 15px; }
+            .nav-left, .nav-right { width: auto; }
+            .nav-menu { order: 3; width: 100%; justify-content: flex-start; gap: 20px; }
+            .hero { padding: 60px 0 30px; }
+            .hero-logo { width: 210px; }
+            h1 { font-size: 32px; }
+            .subheadline { font-size: 20px; }
+            .description { font-size: 16px; }
+            .cta-buttons { flex-direction: column; gap: 12px; }
+            .btn-primary, .btn-whatsapp { width: 100%; max-width: 280px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
+            .testimonials-title, .faq-title { font-size: 32px; }
+            .testimonials-subtitle, .faq-subtitle { font-size: 16px; margin-bottom: 30px; }
+            .footer-brand-row { flex-direction: column; gap: 10px; }
+            .whatsapp-float { width: 50px; height: 50px; }
+            .whatsapp-float i { font-size: 26px; }
+            .splash-content { padding: 25px 35px; margin: 0 20px; }
+            .splash-title { font-size: 32px; }
+            .splash-subtitle { font-size: 14px; }
+            .splash-logo { width: 120px; }
+            .enter-btn { padding: 10px 30px; font-size: 16px; }
         }
 
         @media (max-width: 480px) {
-            .hero {
-                padding: 70px 0 20px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .stat-icon-box {
-                width: 55px;
-                height: 55px;
-            }
-
-            .stat-icon-box svg {
-                width: 24px;
-                height: 24px;
-            }
-
-            .stat-number {
-                font-size: 32px;
-            }
-
-            .stat-label {
-                font-size: 14px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            .hero-logo {
-                width: 168px;
-            }
-
-            .testimonials-title,
-            .faq-title {
-                font-size: 28px;
-            }
-
-            .testimonials-grid {
-                gap: 15px;
-            }
-
-            .testimonial-card {
-                padding: 20px;
-            }
-
-            .testimonial-text {
-                font-size: 14px;
-            }
-
-            .client-name {
-                font-size: 16px;
-            }
-
-            .client-role {
-                font-size: 12px;
-            }
-
-            .faq-item {
-                padding: 15px 20px;
-            }
-
-            .question-text {
-                font-size: 16px;
-            }
-
-            .answer-text {
-                font-size: 14px;
-            }
-
-            .footer-brand-name {
-                font-size: 22px;
-            }
-
-            .footer-logo {
-                width: 50px;
-                height: 50px;
-            }
-
-            .footer-copyright {
-                font-size: 12px;
-            }
-            
-            .footer-social-icons a {
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
-            }
-            
-            .whatsapp-float {
-                width: 45px;
-                height: 45px;
-            }
-            .whatsapp-float i {
-                font-size: 22px;
-            }
-            
-            .splash-content {
-                padding: 20px 25px;
-            }
-            .splash-title {
-                font-size: 28px;
-            }
-            .splash-logo {
-                width: 100px;
-            }
-            .enter-btn {
-                padding: 8px 25px;
-                font-size: 14px;
-            }
+            .hero { padding: 70px 0 20px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .stat-icon-box { width: 55px; height: 55px; }
+            .stat-icon-box svg { width: 24px; height: 24px; }
+            .stat-number { font-size: 32px; }
+            .stat-label { font-size: 14px; }
+            h1 { font-size: 28px; }
+            .hero-logo { width: 168px; }
+            .testimonials-title, .faq-title { font-size: 28px; }
+            .testimonials-grid { gap: 15px; }
+            .testimonial-card { padding: 20px; }
+            .testimonial-text { font-size: 14px; }
+            .client-name { font-size: 16px; }
+            .client-role { font-size: 12px; }
+            .faq-item { padding: 15px 20px; }
+            .question-text { font-size: 16px; }
+            .answer-text { font-size: 14px; }
+            .footer-brand-name { font-size: 22px; }
+            .footer-logo { width: 50px; height: 50px; }
+            .footer-copyright { font-size: 12px; }
+            .footer-social-icons a { width: 35px; height: 35px; font-size: 16px; }
+            .whatsapp-float { width: 45px; height: 45px; }
+            .whatsapp-float i { font-size: 22px; }
+            .splash-content { padding: 20px 25px; }
+            .splash-title { font-size: 28px; }
+            .splash-logo { width: 100px; }
+            .enter-btn { padding: 8px 25px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
-    <!-- Splash Screen with Video -->
+    <!-- Splash Screen with Video - Appears First -->
     <div class="splash-overlay" id="splashScreen">
         <video autoplay muted loop playsinline class="splash-video" id="splashVideo">
             <source src="assets/Front.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
         <div class="splash-content">
             <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="splash-logo">
@@ -1773,46 +1549,28 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-icon-box">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
+                            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         </div>
                         <div class="stat-number" data-target="1500">1500+</div>
                         <div class="stat-label">Active Clients</div>
                     </div>
-
                     <div class="stat-item">
                         <div class="stat-icon-box">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                            </svg>
+                            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                         </div>
                         <div class="stat-number" data-target="320">320+</div>
                         <div class="stat-label">Projects Completed</div>
                     </div>
-
                     <div class="stat-item">
                         <div class="stat-icon-box">
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <line x1="12" y1="2" x2="12" y2="22"/>
-                            </svg>
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
                         </div>
                         <div class="stat-number" data-target="15">15</div>
                         <div class="stat-label">Countries Worldwide</div>
                     </div>
-
                     <div class="stat-item">
                         <div class="stat-icon-box">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                                <path d="M12 12c-2.21 0-4 1.79-4 4h8c0-2.21-1.79-4-4-4z"/>
-                                <circle cx="8" cy="10" r="2"/>
-                                <circle cx="16" cy="10" r="2"/>
-                            </svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 12c-2.21 0-4 1.79-4 4h8c0-2.21-1.79-4-4-4z"/><circle cx="8" cy="10" r="2"/><circle cx="16" cy="10" r="2"/></svg>
                         </div>
                         <div class="stat-number" data-target="99">99%</div>
                         <div class="stat-label">Client Satisfaction</div>
@@ -1826,95 +1584,45 @@
                 <h2 class="testimonials-title">
                     <span class="black-part">What</span> <span class="gradient-part">Our Clients Say</span>
                 </h2>
-                <p class="testimonials-subtitle">
-                    Real testimonials from clients who trust us to manage their business
-                </p>
-
+                <p class="testimonials-subtitle">Real testimonials from clients who trust us to manage their business</p>
                 <div class="testimonials-grid">
-                    <!-- Testimonial 1 - Ahmed Al-Saadi -->
                     <div class="testimonial-card">
-                        <div class="star-rating">
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+                        <div class="star-rating"><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
                         <p class="testimonial-text">"Since adopting Odunex, our financial operations have become more transparent and streamlined. The real-time reports help us make faster and more accurate decisions."</p>
                         <div class="testimonial-divider"></div>
                         <div class="client-name">Ahmed Al-Saadi</div>
                         <div class="client-role">CFO - Al-Rowad Group</div>
                     </div>
-
-                    <!-- Testimonial 2 - Layla Abdullah -->
                     <div class="testimonial-card">
-                        <div class="star-rating">
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+                        <div class="star-rating"><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
                         <p class="testimonial-text">"Odunex helped us reduce month-end closing time by 60%, and data accuracy is unmatched. I highly recommend it."</p>
                         <div class="testimonial-divider"></div>
                         <div class="client-name">Layla Abdullah</div>
                         <div class="client-role">Head of Accounting - Al-Manar Company</div>
                     </div>
-
-                    <!-- Testimonial 3 - Mohammed Al-Omar -->
                     <div class="testimonial-card">
-                        <div class="star-rating">
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+                        <div class="star-rating"><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
                         <p class="testimonial-text">"The user interface is simple and easy to use, and the technical support is very responsive. Odunex has changed the way we work for the better."</p>
                         <div class="testimonial-divider"></div>
                         <div class="client-name">Mohammed Al-Omar</div>
                         <div class="client-role">Operations Manager - Integrated Technology Company</div>
                     </div>
-
-                    <!-- Testimonial 4 - Saad Al-Hashemi -->
                     <div class="testimonial-card">
-                        <div class="star-rating">
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+                        <div class="star-rating"><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
                         <p class="testimonial-text">"The best investment we made this year. Odunex helped us unify data across different branches and improve operational efficiency."</p>
                         <div class="testimonial-divider"></div>
                         <div class="client-name">Saad Al-Hashemi</div>
                         <div class="client-role">CEO - Al-Hashemi Holding Group</div>
                     </div>
-
-                    <!-- Testimonial 5 - Noor Jamal -->
                     <div class="testimonial-card">
-                        <div class="star-rating">
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+                        <div class="star-rating"><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
                         <p class="testimonial-text">"Odunex helped us track inventory and sales in real-time. We now have clear visibility into company performance at any moment."</p>
                         <div class="testimonial-divider"></div>
                         <div class="client-name">Noor Jamal</div>
                         <div class="client-role">Marketing Director - Al-Ofoq Trading Company</div>
                     </div>
-
-                    <!-- Testimonial 6 - Fahad Al-Subaie -->
                     <div class="testimonial-card">
-                        <div class="star-rating">
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+                        <div class="star-rating"><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
                         <p class="testimonial-text">"After trying several systems, I can confidently say Odunex is the most comprehensive and easy to use. The support team is always available to answer any questions."</p>
                         <div class="testimonial-divider"></div>
                         <div class="client-name">Fahad Al-Subaie</div>
@@ -1926,97 +1634,16 @@
 
         <section class="faq-section">
             <div class="container">
-                <h2 class="faq-title">
-                    <span class="black-part">Frequently Asked</span> <span class="gradient-part">Questions</span>
-                </h2>
-                <p class="faq-subtitle">
-                    Answers to the most common questions from our clients
-                </p>
-
+                <h2 class="faq-title"><span class="black-part">Frequently Asked</span> <span class="gradient-part">Questions</span></h2>
+                <p class="faq-subtitle">Answers to the most common questions from our clients</p>
                 <div class="faq-container">
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">What is Odunex?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            Odunex is an integrated ERP accounting system that brings all your business operations together — from accounting and inventory to HR and sales — in one easy-to-use, secure cloud platform.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">Can I try the system before subscribing?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            Yes, we offer a 14-day free trial with full features, no credit card required. You can start immediately and explore all functionalities.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">Does the system fully support Arabic?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            Absolutely! The system is fully designed to support Arabic with RTL interface, in addition to English support. All reports and invoices can be issued in either language.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">How is my data protected?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            We use 256-bit SSL encryption and automatic daily backups with protected servers in certified data centers. Your data is protected by the highest global security standards.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">Can the system integrate with other platforms?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            Yes, Odunex supports integration with payment gateways, POS systems, e-commerce platforms, and shipping services through flexible APIs.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">What technical support options are available?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            We provide 24/7 technical support via phone, email, and live chat. We also offer free training upon subscription and a comprehensive library of tutorials.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" onclick="toggleFAQ(this)">
-                        <div class="faq-question">
-                            <span class="question-text">Can the system be customized to my needs?</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="answer-text">
-                            Yes, the system is flexible and fully customizable. You can add custom fields, modify workflows, and create custom reports to suit your business needs.
-                        </div>
-                    </div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">What is Odunex?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">Odunex is an integrated ERP accounting system that brings all your business operations together — from accounting and inventory to HR and sales — in one easy-to-use, secure cloud platform.</div></div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">Can I try the system before subscribing?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">Yes, we offer a 14-day free trial with full features, no credit card required. You can start immediately and explore all functionalities.</div></div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">Does the system fully support Arabic?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">Absolutely! The system is fully designed to support Arabic with RTL interface, in addition to English support. All reports and invoices can be issued in either language.</div></div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">How is my data protected?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">We use 256-bit SSL encryption and automatic daily backups with protected servers in certified data centers. Your data is protected by the highest global security standards.</div></div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">Can the system integrate with other platforms?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">Yes, Odunex supports integration with payment gateways, POS systems, e-commerce platforms, and shipping services through flexible APIs.</div></div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">What technical support options are available?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">We provide 24/7 technical support via phone, email, and live chat. We also offer free training upon subscription and a comprehensive library of tutorials.</div></div>
+                    <div class="faq-item" onclick="toggleFAQ(this)"><div class="faq-question"><span class="question-text">Can the system be customized to my needs?</span><svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="answer-text">Yes, the system is flexible and fully customizable. You can add custom fields, modify workflows, and create custom reports to suit your business needs.</div></div>
                 </div>
             </div>
         </section>
@@ -2025,112 +1652,17 @@
     <footer>
         <div class="footer-container">
             <div class="footer-brand-row">
-                <div class="footer-brand-text">
-                    <div class="footer-brand-name">Odunex</div>
-                    <div class="footer-tagline">Unified ERP Solutions</div>
-                </div>
-                <div class="footer-logo">
-                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
-                </div>
+                <div class="footer-brand-text"><div class="footer-brand-name">Odunex</div><div class="footer-tagline">Unified ERP Solutions</div></div>
+                <div class="footer-logo"><img src="assets/images/odonex-logo.png.png" alt="Odunex Logo"></div>
             </div>
-            
-            <!-- Social Media Icons -->
-            <div class="footer-social">
-                <div class="footer-social-icons">
-                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/9647506841035" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-copyright">
-                © 2026 Odunex | Unified ERP Solutions. All rights reserved.
-            </div>
+            <div class="footer-social"><div class="footer-social-icons"><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="#" target="_blank"><i class="fab fa-twitter"></i></a><a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="#" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://wa.me/9647506841035" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="#" target="_blank"><i class="fab fa-youtube"></i></a></div></div>
+            <div class="footer-copyright">© 2026 Odunex | Unified ERP Solutions. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/9647506841035?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20Odunex%20services" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-        <span class="tooltip">Contact us on WhatsApp</span>
-    </a>
+    <a href="https://wa.me/9647506841035?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20Odunex%20services" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i><span class="tooltip">Contact us on WhatsApp</span></a>
 
-    <!-- Trial Modal -->
-    <div class="trial-modal-overlay" id="trialModal">
-        <div class="trial-modal">
-            <div class="trial-close" onclick="closeTrialModal()">&times;</div>
-            
-            <div class="trial-header">
-                <h2><span>Start</span> Your Free Trial</h2>
-                <p>We offer integrated ERP solutions for your business</p>
-            </div>
-            
-            <div class="trial-form">
-                <input type="text" id="website" name="website" style="display:none" autocomplete="off">
-                <input type="hidden" id="recaptchaToken" name="recaptchaToken">
-                
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Full Name</label>
-                    <input type="text" id="fullName" placeholder="Enter your full name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-envelope"></i> Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email address" required>
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-phone"></i> Phone Number <span style="color: #ff4444;">*</span></label>
-                    <input type="tel" id="phone" placeholder="Example: 07701234567" required>
-                    <small style="display: block; color: #666; margin-top: 5px; font-size: 12px;">
-                        Enter a valid phone number for contact
-                    </small>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label><i class="fas fa-building"></i> Company Name</label>
-                        <input type="text" id="companyName" placeholder="Your company name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-briefcase"></i> Company Field</label>
-                        <select id="companyField" required>
-                            <option value="">Select field</option>
-                            <option value="Trading">Trading</option>
-                            <option value="Services">Services</option>
-                            <option value="Manufacturing">Manufacturing</option>
-                            <option value="Construction">Construction</option>
-                            <option value="Education">Education</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Real Estate">Real Estate</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="trial-message" id="trialMessage"></div>
-                
-                <button class="trial-submit" onclick="submitTrialRequest()" id="submitBtn">
-                    <span>Request Trial</span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-                
-                <div class="trial-loading" id="trialLoading">
-                    <div class="trial-spinner"></div>
-                    <p>Sending your request...</p>
-                </div>
-                
-                <div class="trial-note">
-                    <i class="fas fa-shield-alt"></i>
-                    Your request will be sent to our team and we'll get back to you shortly
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="trial-modal-overlay" id="trialModal"><div class="trial-modal"><div class="trial-close" onclick="closeTrialModal()">&times;</div><div class="trial-header"><h2><span>Start</span> Your Free Trial</h2><p>We offer integrated ERP solutions for your business</p></div><div class="trial-form"><input type="text" id="website" name="website" style="display:none" autocomplete="off"><input type="hidden" id="recaptchaToken" name="recaptchaToken"><div class="form-group"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="fullName" placeholder="Enter your full name" required></div><div class="form-group"><label><i class="fas fa-envelope"></i> Email Address</label><input type="email" id="email" placeholder="Enter your email address" required></div><div class="form-group"><label><i class="fas fa-phone"></i> Phone Number <span style="color: #ff4444;">*</span></label><input type="tel" id="phone" placeholder="Example: 07701234567" required><small style="display: block; color: #666; margin-top: 5px; font-size: 12px;">Enter a valid phone number for contact</small></div><div class="form-row"><div class="form-group"><label><i class="fas fa-building"></i> Company Name</label><input type="text" id="companyName" placeholder="Your company name" required></div><div class="form-group"><label><i class="fas fa-briefcase"></i> Company Field</label><select id="companyField" required><option value="">Select field</option><option value="Trading">Trading</option><option value="Services">Services</option><option value="Manufacturing">Manufacturing</option><option value="Construction">Construction</option><option value="Education">Education</option><option value="Healthcare">Healthcare</option><option value="Real Estate">Real Estate</option><option value="Other">Other</option></select></div></div><div class="trial-message" id="trialMessage"></div><button class="trial-submit" onclick="submitTrialRequest()" id="submitBtn"><span>Request Trial</span><i class="fas fa-arrow-right"></i></button><div class="trial-loading" id="trialLoading"><div class="trial-spinner"></div><p>Sending your request...</p></div><div class="trial-note"><i class="fas fa-shield-alt"></i> Your request will be sent to our team and we'll get back to you shortly</div></div></div></div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -2272,23 +1804,11 @@
         }
 
         // Rotating Keywords
-        const wordsArray = [
-            "Integration","Centralization","Flexibility","Scalability","Automation","Transparency",
-            "Accuracy","Speed","Reliability","Customization","Reports","Analytics",
-            "Security","Tracking","Organization","Efficiency","Unification","Control","Productivity"
-        ];
-
+        const wordsArray = ["Integration","Centralization","Flexibility","Scalability","Automation","Transparency","Accuracy","Speed","Reliability","Customization","Reports","Analytics","Security","Tracking","Organization","Efficiency","Unification","Control","Productivity"];
         const wordDisplay = document.getElementById('wordDisplay');
         let index = 0;
         if (wordDisplay) wordDisplay.textContent = wordsArray[index];
-
-        setInterval(() => {
-            if (wordDisplay) {
-                index = (index + 1) % wordsArray.length;
-                wordDisplay.textContent = wordsArray[index];
-            }
-        }, 2000);
-
+        setInterval(() => { if (wordDisplay) { index = (index + 1) % wordsArray.length; wordDisplay.textContent = wordsArray[index]; } }, 2000);
         const wordsWrapper = document.querySelector('.words');
         if (wordsWrapper) {
             let maxWidth = 0;
@@ -2300,16 +1820,12 @@
             tempSpan.style.fontWeight = '600';
             tempSpan.style.fontFamily = 'Poppins, sans-serif';
             document.body.appendChild(tempSpan);
-            wordsArray.forEach(word => {
-                tempSpan.textContent = word;
-                const width = tempSpan.offsetWidth;
-                if (width > maxWidth) maxWidth = width;
-            });
+            wordsArray.forEach(word => { tempSpan.textContent = word; const width = tempSpan.offsetWidth; if (width > maxWidth) maxWidth = width; });
             document.body.removeChild(tempSpan);
             wordsWrapper.style.minWidth = (maxWidth + 12) + 'px';
         }
 
-        // Splash Screen with Video and Sound
+        // Splash Screen with Video
         const splashScreen = document.getElementById('splashScreen');
         const enterBtn = document.getElementById('enterSiteBtn');
         const splashVideo = document.getElementById('splashVideo');
@@ -2324,41 +1840,24 @@
             splashScreen.style.display = 'flex';
         }
         
-        enterBtn.addEventListener('click', function() {
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            splashScreen.classList.add('splash-hidden');
-            setTimeout(() => {
-                splashScreen.style.display = 'none';
-                if (splashVideo) splashVideo.pause();
-                localStorage.setItem('hasSeenSplash', 'true');
-            }, 500);
-        });
+        if (enterBtn) {
+            enterBtn.addEventListener('click', function() {
+                audio.play().catch(e => console.log('Audio play failed:', e));
+                splashScreen.classList.add('splash-hidden');
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    if (splashVideo) splashVideo.pause();
+                    localStorage.setItem('hasSeenSplash', 'true');
+                }, 500);
+            });
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const savedMode = localStorage.getItem('darkMode');
             const themeToggle = document.getElementById('themeToggle');
-            
-            if (savedMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                if (themeToggle) themeToggle.checked = true;
-            } else {
-                document.body.classList.remove('dark-mode');
-                if (themeToggle) themeToggle.checked = false;
-            }
-            
-            if (themeToggle) {
-                themeToggle.addEventListener('change', function(e) {
-                    const isDarkMode = e.target.checked;
-                    if (isDarkMode) {
-                        document.body.classList.add('dark-mode');
-                        localStorage.setItem('darkMode', 'enabled');
-                    } else {
-                        document.body.classList.remove('dark-mode');
-                        localStorage.setItem('darkMode', 'disabled');
-                    }
-                });
-            }
-            
+            if (savedMode === 'enabled') { document.body.classList.add('dark-mode'); if (themeToggle) themeToggle.checked = true; }
+            else { document.body.classList.remove('dark-mode'); if (themeToggle) themeToggle.checked = false; }
+            if (themeToggle) { themeToggle.addEventListener('change', function(e) { if (e.target.checked) { document.body.classList.add('dark-mode'); localStorage.setItem('darkMode', 'enabled'); } else { document.body.classList.remove('dark-mode'); localStorage.setItem('darkMode', 'disabled'); } }); }
             updateActiveLink();
             startCountersOnScroll();
             const trialBtn = document.getElementById('openTrialModalBtn');
@@ -2372,16 +1871,9 @@
             navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === currentPage) link.classList.add('active'); });
         }
 
-        function switchLanguage() {
-            window.location.href = 'index.html?v=' + Math.random();
-        }
-
-        function toggleFAQ(element) {
-            const allItems = document.querySelectorAll('.faq-item');
-            allItems.forEach(item => { if (item !== element) item.classList.remove('active'); });
-            element.classList.toggle('active');
-        }
-
+        function switchLanguage() { window.location.href = 'index.html?v=' + Math.random(); }
+        function toggleFAQ(element) { const allItems = document.querySelectorAll('.faq-item'); allItems.forEach(item => { if (item !== element) item.classList.remove('active'); }); element.classList.toggle('active'); }
+        
         function animateCounter(element, start, end, duration, prefix = '') {
             let startTimestamp = null;
             const step = (timestamp) => {
