@@ -1,493 +1,1059 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Odunex - Dynamic Rotating Keywords</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Odunex | Features</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/images/Location Logo.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="assets/images/Location Logo.png">
+    <link rel="shortcut icon" href="assets/images/Location Logo.png">
+    <link rel="apple-touch-icon" href="assets/images/Location Logo.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- DOMPurify -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
     <style>
-        /* Import Poppins font for consistency with original design */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --primary-purple: #7A5AF8;
+            --primary-blue: #2BB0ED;
+            --accent-blue: #4A7BFF;
+            --dark-text: #333333;
+            --body-text: #444444;
+            --secondary-text: #6B6B6B;
+            --light-text: #8A8A8A;
+            --section-bg: #F8F9FB;
+            --bg-white: #FFFFFF;
+            --border-color: #E6E8EC;
+            --icon-color: #666666;
+            --footer-bg: #F8F9FB;
+            --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            --whatsapp-green: #25D366;
+            
+            /* Dark mode colors */
+            --dark-bg: #0a0a1a;
+            --dark-card: #14142b;
+            --dark-border: #2a2a4a;
+            --dark-text-primary: #e0e0ff;
+            --dark-text-secondary: #c0c0e0;
+            --dark-text-muted: #a0a0c0;
+            --dark-card-bg: #1a1a35;
+            --dark-header-bg: #14142b;
+            --dark-glow: rgba(122, 90, 248, 0.3);
         }
 
         body {
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding-top: 80px;
+            overflow-x: hidden;
+            width: 100%;
             min-height: 100vh;
-            background: linear-gradient(145deg, #0a0a1a 0%, #0a0a2a 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== Dark Mode Styles ===== */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
+        }
+
+        body.dark-mode header {
+            background: var(--dark-header-bg);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .nav-logo-text {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .nav-menu a {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .nav-menu a:hover,
+        body.dark-mode .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .lang-container {
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .lang-text {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .globe-icon {
+            filter: invert(0.8);
+        }
+
+        body.dark-mode .feature-card {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .feature-title {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .feature-description {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .feature-icon {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary-purple);
+        }
+
+        body.dark-mode .feature-card:hover .feature-icon {
+            background: var(--main-gradient);
+            color: white;
+        }
+
+        body.dark-mode footer {
+            background: var(--dark-card-bg);
+            border-top: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .footer-brand-name {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .footer-tagline,
+        body.dark-mode .footer-copyright {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .page-header p {
+            color: var(--dark-text-secondary) !important;
+        }
+        
+        body.dark-mode .footer-social-icons a {
+            background: rgba(255,255,255,0.1);
+            color: var(--dark-text-secondary);
+        }
+        
+        body.dark-mode .footer-social-icons a:hover {
+            background: var(--main-gradient);
+            color: white;
+        }
+        
+        body.dark-mode .whatsapp-float .tooltip {
+            background: var(--dark-card-bg);
+            color: var(--dark-text-primary);
+            border-color: var(--dark-border);
+        }
+        
+        body.light-mode .whatsapp-float .tooltip {
+            background: var(--bg-white);
+            color: var(--dark-text);
+            border-color: var(--border-color);
+        }
+        
+        body.light-mode .footer-social-icons a {
+            background: rgba(0,0,0,0.05);
+            color: var(--secondary-text);
+        }
+        
+        body.light-mode .footer-social-icons a:hover {
+            background: var(--main-gradient);
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #000000;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            overflow-x: auto;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6B6B6B;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-purple);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-container:hover {
+            border-color: var(--primary-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        }
+
+        .lang-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .globe-icon {
+            width: 16px;
+            height: 16px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background-size: contain;
+            transition: filter 0.3s ease;
+        }
+
+        /* ===== THEME SWITCH BUTTON ===== */
+        .theme-switch {
+            --toggle-size: 12px;
+            --container-width: 4.8em;
+            --container-height: 2.2em;
+            --container-radius: 5em;
+            --container-light-bg: #3D7EAE;
+            --container-night-bg: #1D1F2C;
+            --circle-container-diameter: 2.8em;
+            --sun-moon-diameter: 1.8em;
+            --sun-bg: #ECCA2F;
+            --moon-bg: #C4C9D1;
+            --spot-color: #959DB1;
+            --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+            --stars-color: #fff;
+            --clouds-color: #F3FDFF;
+            --back-clouds-color: #AACADF;
+            --transition: .4s cubic-bezier(0, -0.02, 0.4, 1.25);
+            --circle-transition: .25s cubic-bezier(0, -0.02, 0.35, 1.17);
+        }
+
+        .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: var(--toggle-size);
+        }
+
+        .theme-switch__container {
+            width: var(--container-width);
+            height: var(--container-height);
+            background-color: var(--container-light-bg);
+            border-radius: var(--container-radius);
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0em -0.05em 0.05em rgba(0, 0, 0, 0.25), 0em 0.05em 0.1em rgba(255, 255, 255, 0.94);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .theme-switch__container::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            box-shadow: 0em 0.03em 0.1em rgba(0, 0, 0, 0.25) inset;
+            border-radius: var(--container-radius);
+        }
+
+        .theme-switch__checkbox {
+            display: none;
+        }
+
+        .theme-switch__circle-container {
+            width: var(--circle-container-diameter);
+            height: var(--circle-container-diameter);
+            background-color: rgba(255, 255, 255, 0.15);
+            position: absolute;
+            left: var(--circle-container-offset);
+            top: var(--circle-container-offset);
+            border-radius: var(--container-radius);
+            display: flex;
+            transition: var(--circle-transition);
+            pointer-events: none;
+        }
+
+        .theme-switch__sun-moon-container {
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+            width: var(--sun-moon-diameter);
+            height: var(--sun-moon-diameter);
+            margin: auto;
+            border-radius: var(--container-radius);
+            background-color: var(--sun-bg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .theme-switch__moon {
+            transform: translateX(100%);
+            width: 100%;
+            height: 100%;
+            background-color: var(--moon-bg);
+            border-radius: inherit;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .theme-switch__spot {
+            position: absolute;
+            top: 0.6em;
+            left: 0.25em;
+            width: 0.6em;
+            height: 0.6em;
+            border-radius: var(--container-radius);
+            background-color: var(--spot-color);
+        }
+
+        .theme-switch__spot:nth-of-type(2) {
+            width: 0.3em;
+            height: 0.3em;
+            top: 0.8em;
+            left: 1.1em;
+        }
+
+        .theme-switch__spot:nth-last-of-type(3) {
+            width: 0.2em;
+            height: 0.2em;
+            top: 0.25em;
+            left: 0.65em;
+        }
+
+        .theme-switch__clouds {
+            width: 1em;
+            height: 1em;
+            background-color: var(--clouds-color);
+            border-radius: var(--container-radius);
+            position: absolute;
+            bottom: -0.5em;
+            left: 0.25em;
+            transition: 0.4s ease;
+        }
+
+        .theme-switch__stars-container {
+            position: absolute;
+            color: var(--stars-color);
+            top: -100%;
+            left: 0.25em;
+            width: 2.2em;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .theme-switch__stars-container svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container {
+            background-color: var(--container-night-bg);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+            left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
+            transform: translate(0);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
+            bottom: -3.2em;
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            padding: 20px 0 70px;
+            flex: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(122,90,248,0.1);
+            border-color: var(--primary-purple);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--main-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, rgba(122,90,248,0.1), rgba(43,176,237,0.1));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            padding: 1rem;
+            font-size: 36px;
+            color: var(--primary-purple);
+            transition: all 0.3s ease;
         }
 
-        /* Card styling - enhanced with subtle glow and depth */
-        .card {
-            --bg-color: #111;
-            background-color: var(--bg-color);
-            padding: 1rem 2rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(149, 106, 250, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .feature-card:hover .feature-icon {
+            background: var(--main-gradient);
+            color: white;
         }
 
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(149, 106, 250, 0.4);
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
         }
 
-        /* Loader container: "Odunex" static + animated words container */
-        .loader {
-            color: rgb(124, 124, 124);
-            font-family: "Poppins", sans-serif;
+        .feature-description {
+            font-size: 16px;
             font-weight: 500;
-            font-size: 25px;
-            box-sizing: content-box;
-            height: 40px;
-            padding: 10px 10px;
+            color: var(--secondary-text);
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== WHATSAPP FLOAT BUTTON ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--whatsapp-green);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            border-radius: 8px;
-            gap: 4px;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
-
-        /* Static brand text "Odunex" with gradient and slight boldness */
-        .brand-static {
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-            white-space: nowrap;
-            text-shadow: 0 0 8px rgba(149, 106, 250, 0.3);
-            margin-right: 4px;
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
         }
-
-        /* Words wrapper: clipping container for vertical carousel */
-        .words {
-            overflow: hidden;
-            position: relative;
-            height: 40px;          /* fixed height matching line-height */
-            line-height: 40px;
-            display: inline-block;
-            vertical-align: bottom;
-            flex-shrink: 0;
-            min-width: 140px;      /* ensures smooth width for longest word */
+        .whatsapp-float i {
+            font-size: 32px;
+            color: white;
         }
-
-        /* Gradient overlay to softly fade top/bottom edges */
-        .words::after {
-            content: "";
+        .whatsapp-float .tooltip {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                var(--bg-color) 10%,
-                transparent 30%,
-                transparent 70%,
-                var(--bg-color) 90%
-            );
-            z-index: 20;
-            pointer-events: none;   /* allows clicking through if needed */
-            border-radius: 4px;
-        }
-
-        /* Inner container for the animated list */
-        .words-list {
-            display: flex;
-            flex-direction: column;
-            animation: scrollWords 12s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-            will-change: transform;
-        }
-
-        /* Each word styling - vibrant purple matching original color scheme */
-        .word {
-            display: block;
-            height: 40px;
-            line-height: 40px;
-            padding-left: 8px;
-            padding-right: 4px;
-            color: #956afa;
+            bottom: 70px;
+            right: -10px;
+            background: var(--bg-white);
+            color: var(--dark-text);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 600;
             white-space: nowrap;
-            font-size: 25px;
-            letter-spacing: -0.2px;
-            text-shadow: 0 0 6px rgba(149, 106, 250, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+        }
+        .whatsapp-float:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 80px;
         }
 
-        /* 
-            KEYFRAMES: smooth vertical carousel that cycles through 18 words.
-            Total words: 18. Each step moves -100% per word.
-            We want a seamless loop: from 0% to -1700% (since 18 words = 1700% offset)
-            To make the transition smooth and pause briefly at each word, we use keyframe steps.
-            Duration: 12s total, each word gets ~0.66s visible, but with slight ease for fluid motion.
-            However to replicate the original feel of "spin" but with many items, 
-            we create an animation that translates Y stepwise.
-            
-            Original spin_4991 had keyframes with jumps. We'll create a modern stepped-but-smooth 
-            scroll that cycles through all words and then resets seamlessly.
-            
-            Approach: Use percentage keyframes that translate Y from 0 to -(N-1)*100% 
-            where N = number of words. Since we have 18 words, final offset = -1700%.
-            We add an extra identical clone of the first word at the end to create infinite seamless loop? 
-            Simpler: duplicate the first word at bottom of list, and animate to -(totalItems-1)*100%, 
-            then reset without jump. But the HTML structure uses original words repeated? Better: 
-            we use exact 18 unique words, and animation goes to -1700%, and then resets to 0% with 
-            no jump by using infinite and the fact that after 100% it resets to 0, but that causes 
-            a hard reset. To avoid abrupt jump, we duplicate first word at end in HTML, increase item count.
-            For silky infinite loop: add first word again at bottom => 19 items, animation to -1800%,
-            then resetting is seamless because identical word appears.
-            This ensures the carousel looks continuous.
-        */
-
-        /* Build words array with 18 unique Arabic/tech words, plus a duplicate of first for smooth loop */
-        /* We'll handle via HTML structure: inside .words-list we will have 19 spans (original 18 + clone of first) */
-        
-        /* Animation for 19 items: from 0% to -1800% (since each 100% per item) */
-        @keyframes smoothWordScroll {
-            0% {
-                transform: translateY(0);
-            }
-            5% {
-                transform: translateY(0);
-            }
-            10% {
-                transform: translateY(-100%);
-            }
-            15% {
-                transform: translateY(-100%);
-            }
-            20% {
-                transform: translateY(-200%);
-            }
-            25% {
-                transform: translateY(-200%);
-            }
-            30% {
-                transform: translateY(-300%);
-            }
-            35% {
-                transform: translateY(-300%);
-            }
-            40% {
-                transform: translateY(-400%);
-            }
-            45% {
-                transform: translateY(-400%);
-            }
-            50% {
-                transform: translateY(-500%);
-            }
-            55% {
-                transform: translateY(-500%);
-            }
-            60% {
-                transform: translateY(-600%);
-            }
-            65% {
-                transform: translateY(-600%);
-            }
-            70% {
-                transform: translateY(-700%);
-            }
-            75% {
-                transform: translateY(-700%);
-            }
-            80% {
-                transform: translateY(-800%);
-            }
-            85% {
-                transform: translateY(-800%);
-            }
-            90% {
-                transform: translateY(-900%);
-            }
-            95% {
-                transform: translateY(-900%);
-            }
-            100% {
-                transform: translateY(-1000%);
-            }
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--footer-bg);
+            width: 100%;
+            padding: 40px 0 25px;
+            text-align: center;
+            margin-top: auto;
+            transition: all 0.3s ease;
+            border-top: 1px solid var(--border-color);
         }
 
-        /* Since we have 19 items, we need full range up to -1800% (18 steps). 
-           Redefine with better precision using dynamic keyframes? but we can use JS? 
-           However better to generate precise keyframes for 19 items = 1800% offset.
-           Let's create a more robust keyframe with steps using modern approach:
-           We can set animation duration long enough and use steps? But client expects smooth like original.
-           Better: use JavaScript to set keyframes? but for simplicity and reliability, I'll craft keyframes
-           that cover all 19 positions. Because there are many words, we want each word to be visible for 
-           a moment. The original spin_4991 had percentages like 10%,25% etc. For 19 words we can define
-           distribution: each word gets about 5.26% of animation time. We'll create keyframes that 
-           show each word for ~0.6s in a 12s animation. Let's do precise.
-           
-           Since writing 38 keyframes manually is messy, I'll use a more elegant solution:
-           Use CSS custom properties and a script? but better to keep pure CSS.
-           
-           Alternative: Use JavaScript to inject style? but the requirement is pure HTML/CSS ideally.
-           However the initial instruction is to modify given code. I can add a style with generated keyframes.
-           But to maintain readability, I'll use a simpler approach: use steps(19) with transition? 
-           But not smooth. 
-           
-           Better: use an infinite linear animation that moves Y at constant speed? No, we need discrete words.
-           
-           I'll implement a JS-free but CSS-only approach using 'animation-timing-function: steps(1)'? not smooth.
-           
-           Considering user experience: the original had smooth transitions between words. I'll create 
-           smooth transitions between each word using cubic-bezier and defining keyframes for each word.
-           
-           Because there are 19 items, I will generate dynamic keyframes via style injection using 
-           JavaScript to keep HTML/CSS clean but fulfill exact functionality. Since the problem asks 
-           to change text content and style, I can include minimal JS to ensure perfect timing without 
-           writing thousands of lines of CSS. However the output expects working interactive snippet.
-           
-           I'll produce clean solution: Use modern CSS with @keyframes and 19 steps using a precomputed
-           keyframe set. Given the context, it's acceptable to use script to calculate keyframes for 
-           precision. I'll generate robust keyframes that respect all words.
-           
-           I'll write a script that on load inserts dynamic keyframes based on word count.
-           This ensures perfect loop and smoothness matching original aesthetics.
-        */
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-        /* Fallback: base styles for words container */
-        .words-list {
+        .footer-brand-row {
             display: flex;
-            flex-direction: column;
-            will-change: transform;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        /* responsive: on smaller screens, adjust font size slightly */
-        @media (max-width: 550px) {
-            .loader {
-                font-size: 18px;
-                height: 32px;
+        .footer-brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .footer-tagline {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--secondary-text);
+            margin-top: 3px;
+        }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Social Icons in Footer */
+        .footer-social {
+            margin: 20px 0;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-size: 18px;
+        }
+
+        .footer-social-icons a:hover {
+            background: var(--main-gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--light-text);
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
             }
-            .words {
-                height: 32px;
-                line-height: 32px;
-                min-width: 110px;
-            }
-            .word {
-                height: 32px;
-                line-height: 32px;
-                font-size: 18px;
-                padding-left: 6px;
-            }
-            .brand-static {
-                font-size: 18px;
+            
+            .page-header h1 {
+                font-size: 42px;
             }
         }
 
-        /* subtle pulsing glow for brand name */
-        @keyframes softGlow {
-            0% { text-shadow: 0 0 2px rgba(149, 106, 250, 0.2); }
-            100% { text-shadow: 0 0 10px rgba(149, 106, 250, 0.5); }
+        @media (max-width: 768px) {
+            header .container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-left, .nav-right {
+                width: auto;
+            }
+
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .page-header {
+                padding: 50px 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .page-header p {
+                font-size: 18px;
+                padding: 0 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            .footer-brand-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-float i {
+                font-size: 26px;
+            }
         }
-        .brand-static {
-            animation: softGlow 2s infinite alternate;
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 60px 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .page-header p {
+                font-size: 16px;
+            }
+
+            .feature-title {
+                font-size: 20px;
+            }
+
+            .feature-description {
+                font-size: 15px;
+            }
+
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+
+            .footer-brand-name {
+                font-size: 22px;
+            }
+
+            .footer-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .footer-copyright {
+                font-size: 12px;
+            }
+            
+            .footer-social-icons a {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+            }
+            .whatsapp-float i {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
-<div class="card">
-    <div class="loader">
-        <span class="brand-static">Odunex</span>
-        <div class="words">
-            <div class="words-list" id="wordsList">
-                <!-- Dynamic words will be populated by JS to ensure correct order and seamless loop -->
-                <!-- But we will also keep static fallback; however use JS to construct proper list with clone -->
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-left">
+                <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
+                <span class="nav-logo-text">Odunex</span>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index-en.html">Home</a>
+                <a href="features-en.html" class="active">Features</a>
+                <a href="pricing-en.html">Pricing</a>
+                <a href="gallery-en.html">Portfolio</a>
+                <a href="contact-en.html">Contact</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="lang-container" onclick="switchLanguage()">
+                    <span class="lang-text">عربي</span>
+                    <div class="globe-icon"></div>
+                </div>
+                <label class="theme-switch">
+                    <input type="checkbox" class="theme-switch__checkbox" id="themeToggle">
+                    <div class="theme-switch__container">
+                        <div class="theme-switch__clouds"></div>
+                        <div class="theme-switch__stars-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <div class="theme-switch__circle-container">
+                            <div class="theme-switch__sun-moon-container">
+                                <div class="theme-switch__moon">
+                                    <div class="theme-switch__spot"></div>
+                                    <div class="theme-switch__spot"></div>
+                                    <div class="theme-switch__spot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
             </div>
         </div>
-    </div>
-</div>
+    </header>
 
-<script>
-    // Array of keywords in exact order as requested:
-    // تكامل, مركزية, مرونة, قابلية_التوسع, أتمتة, شفافية, دقة, سرعة, موثوقية, تخصيص, تقارير, تحليلات, أمان, تتبع, تنظيم, كفاءة, توحيد, رقابة, إنتاجية
-    // Note: user provided list:
-    // تكامل
-    // مركزية
-    // مرونة
-    // قابلية_التوسع
-    // أتمتة
-    // شفافية
-    // دقة
-    // سرعة
-    // موثوقية
-    // تخصيص
-    // تقارير
-    // تحليلات
-    // أمان
-    // تتبع
-    // تنظيم
-    // كفاءة
-    // توحيد
-    // رقابة
-    // إنتاجية
-    // That's 19 words! (I counted: 1 تكامل,2 مركزية,3 مرونة,4 قابلية_التوسع,5 أتمتة,6 شفافية,7 دقة,8 سرعة,9 موثوقية,10 تخصيص,11 تقارير,12 تحليلات,13 أمان,14 تتبع,15 تنظيم,16 كفاءة,17 توحيد,18 رقابة,19 إنتاجية)
-    
-    const wordsArray = [
-        "تكامل",
-        "مركزية",
-        "مرونة",
-        "قابلية_التوسع",
-        "أتمتة",
-        "شفافية",
-        "دقة",
-        "سرعة",
-        "موثوقية",
-        "تخصيص",
-        "تقارير",
-        "تحليلات",
-        "أمان",
-        "تتبع",
-        "تنظيم",
-        "كفاءة",
-        "توحيد",
-        "رقابة",
-        "إنتاجية"
-    ];
-    
-    // For seamless infinite loop, we duplicate the first word at the end.
-    // So total items for animation = original length + 1 (clone of first)
-    const itemsForAnimation = [...wordsArray, wordsArray[0]];
-    
-    // Populate the words-list div with spans
-    const wordsListContainer = document.getElementById('wordsList');
-    if (wordsListContainer) {
-        wordsListContainer.innerHTML = '';
-        itemsForAnimation.forEach(wordText => {
-            const span = document.createElement('span');
-            span.className = 'word';
-            span.textContent = wordText;
-            wordsListContainer.appendChild(span);
-        });
-    }
-    
-    // Number of items in the scrolling list (including clone)
-    const totalItems = itemsForAnimation.length; // should be 20 (19+1)
-    // Each item represents a 100% vertical translation (height)
-    // Total translateY needed to show last item (the clone) is -(totalItems - 1) * 100%
-    const maxOffset = (totalItems - 1) * 100; // e.g., 19 items -> 1900%
-    
-    // Generate dynamic keyframes for smooth stepwise animation similar to original spin_4991 style
-    // We'll create keyframes that pause briefly at each word, then transition to next.
-    // The original had smooth translation with holds at certain percentages.
-    // We'll design: each word occupies equal duration (100% / (totalItems) but we have hold and move)
-    // For better UX, each word stays visible for about 0.6s, transition 0.2s in 12s total.
-    // Simpler: Use steps? but smoother: create keyframes with increments.
-    // Since we need clean carousel, we can set keyframes based on equal distribution.
-    // duration 14 seconds for better readability (12s feels fast for 19 words). Let's do 15s.
-    // But original duration was 4s for 4 words. For 19 words we increase to 14s, maintaining readability.
-    
-    const animationDuration = 16; // seconds - comfortable to read each word
-    const stepPercent = 100 / (totalItems - 1); // since we have (totalItems-1) transitions
-    
-    // Build keyframes rule string
-    let keyframesRule = `@keyframes smoothWordScroll {\n`;
-    // Add starting point
-    keyframesRule += `  0% { transform: translateY(0); }\n`;
-    
-    for (let i = 1; i <= totalItems - 1; i++) {
-        // The offset percentage where word i (0-index) is fully visible
-        const startPercent = (i - 1) * stepPercent;
-        const endPercent = i * stepPercent;
-        const translateValue = -i * 100;
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Features</h1>
+                <p>Everything you need to manage your business efficiently and securely in one place</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Scalability</h3>
+                        <p class="feature-description">A flexible and scalable platform that grows with your business.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Data Security</h3>
+                        <p class="feature-description">Comprehensive data security and advanced protection around the clock.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">Integration</h3>
+                        <p class="feature-description">Seamless integration of all business functions in one unified platform.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Operational Efficiency</h3>
+                        <p class="feature-description">Improve efficiency and maximize operational productivity.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3 class="feature-title">Global Access</h3>
+                        <p class="feature-description">Access your business from anywhere, at any time.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎧</div>
+                        <h3 class="feature-title">Technical Support</h3>
+                        <p class="feature-description">24/7 specialized technical support to ensure business continuity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/9647506841035?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20Odunex%20services" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">Contact us on WhatsApp</span>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand-row">
+                <div class="footer-brand-text">
+                    <div class="footer-brand-name">Odunex</div>
+                    <div class="footer-tagline">Unified ERP Solutions</div>
+                </div>
+                <div class="footer-logo">
+                    <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
+                </div>
+            </div>
+            
+            <!-- Social Media Icons -->
+            <div class="footer-social">
+                <div class="footer-social-icons">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/9647506841035" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                © 2026 Odunex | Unified ERP Solutions. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==============================================
+        // Security Functions
+        // ==============================================
         
-        // Hold at start of word position for a little (optional, but we'll set both start and end of transition)
-        // To mimic original style: we create a slight hold at each word by setting same transform at start and end of segment
-        // But simpler: we create smooth transition from previous offset to new offset between keyframes.
-        // Since we want word to be stable before next move, we can add small hold. Let's produce typical carousel:
-        // At each "stepPercent" we move to next, but we keep stable before.
-        // Better: use two keyframes per step: one for end of hold and one for start of next.
-        // To maintain simplicity and smoothness like original, we'll do:
-        // From previous offset to new offset, with ease. No need extra hold, it's readable.
-        // I'll define progressive keyframes at each stepPercent, transform reaches target.
-        keyframesRule += `  ${endPercent}% { transform: translateY(-${i * 100}%); }\n`;
-    }
-    // Final frame ensure we end at full offset
-    keyframesRule += `  100% { transform: translateY(-${maxOffset}%); }\n`;
-    keyframesRule += `}`;
-    
-    // Inject style into head
-    const styleElement = document.createElement('style');
-    styleElement.textContent = keyframesRule;
-    document.head.appendChild(styleElement);
-    
-    // Apply animation to .words-list with dynamic duration and easing similar to original spin_4991 ease
-    const wordsList = document.querySelector('.words-list');
-    if (wordsList) {
-        wordsList.style.animation = `smoothWordScroll ${animationDuration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite`;
-        // Add a small delay to ensure initial frame shows first word (تكامل)
-        wordsList.style.animationFillMode = 'forwards';
-    }
-    
-    // Additional enhancement: ensure the .words container has correct height and no overflow hidden issues
-    // Also adjust min-width for longest word (قابلية_التوسع or إنتاجية) 
-    const wordsWrapper = document.querySelector('.words');
-    if (wordsWrapper) {
-        // measure longest word to prevent clipping
-        let maxWidth = 0;
-        const tempSpan = document.createElement('span');
-        tempSpan.className = 'word';
-        tempSpan.style.visibility = 'hidden';
-        tempSpan.style.position = 'absolute';
-        tempSpan.style.whiteSpace = 'nowrap';
-        document.body.appendChild(tempSpan);
-        
-        wordsArray.forEach(word => {
-            tempSpan.textContent = word;
-            const width = tempSpan.offsetWidth;
-            if (width > maxWidth) maxWidth = width;
-        });
-        document.body.removeChild(tempSpan);
-        if (maxWidth > 0) {
-            wordsWrapper.style.minWidth = (maxWidth + 12) + 'px';
-        } else {
-            wordsWrapper.style.minWidth = '150px';
+        function sanitizeInput(text) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+            }
+            return text.replace(/[<>]/g, "");
         }
-    }
-    
-    // Also mirror original loader spacing to make "Odunex" + animated words look harmonious
-    const loaderDiv = document.querySelector('.loader');
-    if (loaderDiv) {
-        loaderDiv.style.gap = '8px';
-        loaderDiv.style.alignItems = 'center';
-    }
-    
-    // For extra polish, ensure the brand-static has no line-height issues
-    const brandSpan = document.querySelector('.brand-static');
-    if (brandSpan) {
-        brandSpan.style.lineHeight = '40px';
-        brandSpan.style.display = 'inline-block';
-    }
-    
-    // Adjust card responsiveness if needed
-    // Also ensure gradient overlay does not block text selection but it's fine
-    // Force hardware acceleration for smoother animation
-    if (wordsList) {
-        wordsList.style.transform = 'translateZ(0)';
-        wordsList.style.backfaceVisibility = 'hidden';
-    }
-    
-    // Optional: small tweak to match original's rounded corners perfectly
-    const cardElem = document.querySelector('.card');
-    if (cardElem) {
-        cardElem.style.overflow = 'hidden';
-    }
-</script>
+        
+        function validateRequestOrigin() {
+            const referrer = document.referrer || '';
+            const currentDomain = window.location.hostname;
+            
+            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
+                console.warn('Request from external domain detected:', referrer);
+                return false;
+            }
+            return true;
+        }
+        
+        function checkRateLimit() {
+            const lastVisit = localStorage.getItem('lastPageVisit');
+            const now = Date.now();
+            
+            if (lastVisit && now - lastVisit < 3000) {
+                return false;
+            }
+            localStorage.setItem('lastPageVisit', now);
+            return true;
+        }
 
-<!-- Explanation of changes:
-     1. Replaced "loading" text with "Odunex" using a styled span with gradient.
-     2. Replaced old word list (buttons, forms, switches, cards, buttons) with the provided 19 keywords:
-        تكامل, مركزية, مرونة, قابلية_التوسع, أتمتة, شفافية, دقة, سرعة, موثوقية, تخصيص, تقارير, تحليلات, أمان, تتبع, تنظيم, كفاءة, توحيد, رقابة, إنتاجية.
-     3. Used dynamic JavaScript to create seamless infinite vertical carousel with smooth transitions.
-     4. Maintained original visual style (purple #956afa, Poppins font, gradient overlay, dark card background).
-     5. Animation replicates original spin_4991 smooth stepwise movement but adapted for 19+1 items.
-     6. Responsive design and subtle hover glow for enhanced UX.
--->
+        // ==============================================
+        // Theme Toggle Function
+        // ==============================================
+        function setTheme(isDark) {
+            const themeToggle = document.getElementById('themeToggle');
+            if (isDark) {
+                document.body.classList.remove('dark-mode');
+                if (themeToggle) themeToggle.checked = false;
+                localStorage.setItem('darkMode', 'disabled');
+            } else {
+                document.body.classList.add('dark-mode');
+                if (themeToggle) themeToggle.checked = true;
+                localStorage.setItem('darkMode', 'enabled');
+            }
+        }
+
+        function toggleTheme(e) {
+            const isDarkMode = e.target.checked;
+            setTheme(!isDarkMode);
+        }
+
+        function updateActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'features-en.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ==============================================
+        // Language Switch
+        // ==============================================
+        function switchLanguage() {
+            window.location.href = 'features.html?v=' + Math.random();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedMode = localStorage.getItem('darkMode');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                if (themeToggle) themeToggle.checked = true;
+            } else {
+                document.body.classList.remove('dark-mode');
+                if (themeToggle) themeToggle.checked = false;
+            }
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('change', toggleTheme);
+            }
+            
+            updateActiveLink();
+            validateRequestOrigin();
+            checkRateLimit();
+        });
+    </script>
 </body>
 </html>
