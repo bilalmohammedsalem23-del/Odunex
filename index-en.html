@@ -43,8 +43,9 @@
     <link rel="apple-touch-icon" sizes="114x114" href="assets/images/Location Logo.png">
     <link rel="apple-touch-icon" sizes="144x144" href="assets/images/Location Logo.png">
     
-    <!-- Google Fonts - Cairo -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -59,7 +60,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <style>
-        /* جميع الأنماط كما هي من التصميم الأصلي */
         * {
             margin: 0;
             padding: 0;
@@ -83,11 +83,8 @@
             --icon-color: #666666;
             --footer-bg: #F8F9FB;
             --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
-            
-            /* WhatsApp color */
             --whatsapp-green: #25D366;
             
-            /* Dark mode colors */
             --dark-bg: #0a0a1a;
             --dark-card: #14142b;
             --dark-border: #2a2a4a;
@@ -114,178 +111,302 @@
             flex-direction: column;
         }
 
-        /* ===== Dark Mode Styles ===== */
         body.dark-mode {
             background: var(--dark-bg);
             color: var(--dark-text-primary);
         }
-
         body.dark-mode header {
             background: var(--dark-header-bg);
             border-bottom: 1px solid var(--dark-border);
         }
-
         body.dark-mode .nav-logo-text {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode .nav-menu a {
             color: var(--dark-text-secondary);
         }
-
         body.dark-mode .nav-menu a:hover,
         body.dark-mode .nav-menu a.active {
             color: var(--primary-purple);
         }
-
-        body.dark-mode .lang-container,
-        body.dark-mode .dark-mode-container {
+        body.dark-mode .lang-container {
             border-color: var(--dark-border);
         }
-
-        body.dark-mode .lang-text,
-        body.dark-mode .dark-mode-toggle {
+        body.dark-mode .lang-text {
             color: var(--dark-text-secondary);
         }
-
         body.dark-mode .globe-icon {
             filter: invert(0.8);
         }
-
         body.dark-mode .black-text,
         body.dark-mode .subheadline {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode .description {
             color: var(--dark-text-secondary) !important;
         }
-
         body.dark-mode .btn-secondary {
             color: var(--primary-purple);
             border-color: var(--primary-purple);
         }
-        
         body.dark-mode .btn-whatsapp {
             background: var(--whatsapp-green);
             color: white;
         }
-        
-        body.dark-mode .btn-whatsapp:hover {
-            background: #20B859;
-        }
-
         body.dark-mode .statistics-section {
             background-color: var(--dark-card-bg);
         }
-
         body.dark-mode .stat-number {
             background: var(--main-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         body.dark-mode .stat-label {
             color: var(--dark-text-secondary) !important;
         }
-
         body.dark-mode .testimonials-section {
             background-color: var(--dark-card-bg);
         }
-
         body.dark-mode .testimonial-card {
             background-color: var(--dark-card);
             border-color: var(--dark-border);
         }
-
         body.dark-mode .testimonial-text,
         body.dark-mode .client-name {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode .client-role {
             color: var(--dark-text-secondary) !important;
         }
-
         body.dark-mode .testimonials-title .black-part {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode .faq-section {
             background-color: var(--dark-card-bg);
         }
-
         body.dark-mode .faq-item {
             background-color: var(--dark-card);
             border-color: var(--dark-border);
         }
-
         body.dark-mode .question-text {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode .answer-text {
             color: var(--dark-text-secondary) !important;
         }
-
         body.dark-mode .faq-title .black-part {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode footer {
             background: var(--dark-card-bg);
             border-top: 1px solid var(--dark-border);
         }
-
         body.dark-mode .footer-brand-name {
             color: var(--dark-text-primary) !important;
         }
-
         body.dark-mode .footer-tagline,
         body.dark-mode .footer-copyright {
             color: var(--dark-text-secondary) !important;
         }
-
         body.dark-mode .trial-modal {
             background: var(--dark-card-bg);
         }
-
         body.dark-mode .trial-close {
             background: var(--dark-input-bg);
             color: var(--dark-text-secondary);
         }
-
         body.dark-mode .trial-close:hover {
             background: var(--primary-purple);
             color: white;
         }
-
         body.dark-mode .trial-header h2 {
             color: var(--dark-text-primary);
         }
-
         body.dark-mode .trial-header p {
             color: var(--dark-text-secondary);
         }
-
         body.dark-mode .trial-form .form-group label {
             color: var(--dark-text-primary);
         }
-
         body.dark-mode .trial-form .form-group input,
         body.dark-mode .trial-form .form-group select {
             background: var(--dark-input-bg);
             border-color: var(--dark-border);
             color: var(--dark-input-text);
         }
-
         body.dark-mode .trial-form .form-group input::placeholder {
             color: var(--dark-input-placeholder);
         }
-
         body.dark-mode .trial-note {
             color: var(--dark-text-secondary);
             border-top-color: var(--dark-border);
+        }
+        
+        /* Rotating Keywords Styles */
+        .rotating-words-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .rotating-card {
+            background-color: rgba(0,0,0,0);
+            padding: 0.6rem 1.2rem;
+            border-radius: 1rem;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2), 0 0 0 1px rgba(122,90,248,0.2);
+            display: inline-block;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .rotating-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(0,0,0,0.25), 0 0 0 1px rgba(122,90,248,0.4);
+        }
+        .loader-words {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            height: 28px;
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        .brand-static {
+            font-weight: 700;
+            font-size: 18px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+            text-shadow: 0 0 6px rgba(122,90,248,0.3);
+            line-height: 28px;
+            animation: softGlow 2s infinite alternate;
+        }
+        body.dark-mode .brand-static {
+            background: linear-gradient(135deg, #ffffff, #c084fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 1px rgba(122,90,248,0.2); }
+            100% { text-shadow: 0 0 6px rgba(122,90,248,0.5); }
+        }
+        .words {
+            overflow: hidden;
+            position: relative;
+            height: 28px;
+            line-height: 28px;
+            display: inline-block;
+            vertical-align: bottom;
+            flex-shrink: 0;
+            min-width: 100px;
+        }
+        .word {
+            display: block;
+            height: 28px;
+            line-height: 28px;
+            padding-left: 6px;
+            color: var(--primary-purple);
+            font-weight: 600;
+            font-size: 18px;
+            white-space: nowrap;
+            text-shadow: 0 0 4px rgba(122,90,248,0.3);
+        }
+        body.dark-mode .word {
+            color: var(--primary-blue);
+        }
+
+        /* Splash Screen with Video */
+        .splash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a2a, #0a0a1a);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+        .splash-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .splash-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 0.8s ease;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            padding: 40px 60px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .splash-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            animation: gentleBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(122,90,248,0.5));
+        }
+        .splash-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .splash-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+        }
+        .enter-btn {
+            background: var(--main-gradient);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 14px 40px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(122,90,248,0.4);
+        }
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(122,90,248,0.5);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .splash-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .container {
@@ -364,18 +485,9 @@
             color: var(--primary-purple);
         }
 
-        .nav-menu a:hover {
-            transform: scale(1.1);
-            text-shadow: 0 0 10px rgba(122, 90, 248, 0.5);
-        }
-
-        .nav-menu a.active {
-            transform: scale(1.05);
-        }
-
         .nav-right {
             display: flex;
-            gap: 8px;
+            gap: 15px;
             align-items: center;
         }
 
@@ -412,36 +524,148 @@
             transition: filter 0.3s ease;
         }
 
-        .dark-mode-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 5px 10px;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* ===== Theme Switch Button ===== */
+        .theme-switch {
+            --toggle-size: 12px;
+            --container-width: 4.8em;
+            --container-height: 2.2em;
+            --container-radius: 5em;
+            --container-light-bg: #3D7EAE;
+            --container-night-bg: #1D1F2C;
+            --circle-container-diameter: 2.8em;
+            --sun-moon-diameter: 1.8em;
+            --sun-bg: #ECCA2F;
+            --moon-bg: #C4C9D1;
+            --spot-color: #959DB1;
+            --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+            --stars-color: #fff;
+            --clouds-color: #F3FDFF;
+            --back-clouds-color: #AACADF;
+            --transition: .4s cubic-bezier(0, -0.02, 0.4, 1.25);
+            --circle-transition: .25s cubic-bezier(0, -0.02, 0.35, 1.17);
         }
 
-        .dark-mode-container:hover {
-            border-color: var(--primary-purple);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
+        .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: var(--toggle-size);
         }
 
-        .dark-mode-toggle {
-            background: transparent;
-            border: none;
-            font-size: 18px;
+        .theme-switch__container {
+            width: var(--container-width);
+            height: var(--container-height);
+            background-color: var(--container-light-bg);
+            border-radius: var(--container-radius);
+            overflow: hidden;
             cursor: pointer;
-            color: #555;
-            width: 24px;
-            height: 24px;
+            box-shadow: 0em -0.05em 0.05em rgba(0, 0, 0, 0.25), 0em 0.05em 0.1em rgba(255, 255, 255, 0.94);
+            transition: var(--transition);
+            position: relative;
+        }
+        .theme-switch__container::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            box-shadow: 0em 0.03em 0.1em rgba(0, 0, 0, 0.25) inset;
+            border-radius: var(--container-radius);
+        }
+        .theme-switch__checkbox {
+            display: none;
+        }
+        .theme-switch__circle-container {
+            width: var(--circle-container-diameter);
+            height: var(--circle-container-diameter);
+            background-color: rgba(255, 255, 255, 0.15);
+            position: absolute;
+            left: var(--circle-container-offset);
+            top: var(--circle-container-offset);
+            border-radius: var(--container-radius);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s ease;
+            transition: var(--circle-transition);
+            pointer-events: none;
+        }
+        .theme-switch__sun-moon-container {
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+            width: var(--sun-moon-diameter);
+            height: var(--sun-moon-diameter);
+            margin: auto;
+            border-radius: var(--container-radius);
+            background-color: var(--sun-bg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .theme-switch__moon {
+            transform: translateX(100%);
+            width: 100%;
+            height: 100%;
+            background-color: var(--moon-bg);
+            border-radius: inherit;
+            transition: var(--transition);
+            position: relative;
+        }
+        .theme-switch__spot {
+            position: absolute;
+            top: 0.6em;
+            left: 0.25em;
+            width: 0.6em;
+            height: 0.6em;
+            border-radius: var(--container-radius);
+            background-color: var(--spot-color);
+        }
+        .theme-switch__spot:nth-of-type(2) {
+            width: 0.3em;
+            height: 0.3em;
+            top: 0.8em;
+            left: 1.1em;
+        }
+        .theme-switch__spot:nth-last-of-type(3) {
+            width: 0.2em;
+            height: 0.2em;
+            top: 0.25em;
+            left: 0.65em;
+        }
+        .theme-switch__clouds {
+            width: 1em;
+            height: 1em;
+            background-color: var(--clouds-color);
+            border-radius: var(--container-radius);
+            position: absolute;
+            bottom: -0.5em;
+            left: 0.25em;
+            transition: 0.4s ease;
+        }
+        .theme-switch__stars-container {
+            position: absolute;
+            color: var(--stars-color);
+            top: -100%;
+            left: 0.25em;
+            width: 2.2em;
+            height: auto;
+            transition: var(--transition);
+        }
+        .theme-switch__stars-container svg {
+            width: 100%;
+            height: auto;
+        }
+        .theme-switch__checkbox:checked + .theme-switch__container {
+            background-color: var(--container-night-bg);
+        }
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+            left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+        }
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
+            transform: translate(0);
+        }
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
+            bottom: -3.2em;
+        }
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         /* ===== Hero Section ===== */
@@ -860,10 +1084,11 @@
         footer {
             background-color: var(--footer-bg);
             width: 100%;
-            padding: 35px 0 25px;
+            padding: 40px 0 25px;
             margin-top: auto;
             text-align: center;
             transition: all 0.3s ease;
+            border-top: 1px solid var(--border-color);
         }
 
         .footer-container {
@@ -877,7 +1102,7 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .footer-brand-text {
@@ -911,12 +1136,95 @@
             object-fit: contain;
         }
 
+        /* Social Icons in Footer */
+        .footer-social {
+            margin: 20px 0;
+        }
+
+        .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-size: 18px;
+        }
+
+        .footer-social-icons a:hover {
+            background: var(--main-gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
         .footer-copyright {
             font-size: 14px;
             font-weight: 500;
             color: var(--light-text);
-            margin-top: 12px;
-            transition: color 0.3s ease;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--whatsapp-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-float i {
+            font-size: 32px;
+            color: white;
+        }
+        .whatsapp-float .tooltip {
+            position: absolute;
+            bottom: 70px;
+            left: -10px;
+            right: auto;
+            background: var(--bg-white);
+            color: var(--dark-text);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+        }
+        .whatsapp-float:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 80px;
         }
 
         /* ===== Trial Modal Styles ===== */
@@ -1073,15 +1381,6 @@
             box-shadow: 0 15px 30px rgba(122,90,248,0.3);
         }
 
-        .trial-submit i {
-            font-size: 18px;
-            transition: transform 0.3s;
-        }
-
-        .trial-submit:hover i {
-            transform: translateX(5px);
-        }
-
         .trial-note {
             text-align: center;
             color: var(--light-text);
@@ -1232,9 +1531,31 @@
                 flex-direction: column;
                 gap: 10px;
             }
-
-            .footer-brand-text {
-                text-align: center;
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+            }
+            .whatsapp-float i {
+                font-size: 26px;
+            }
+            
+            .splash-content {
+                padding: 25px 35px;
+                margin: 0 20px;
+            }
+            .splash-title {
+                font-size: 32px;
+            }
+            .splash-subtitle {
+                font-size: 14px;
+            }
+            .splash-logo {
+                width: 120px;
+            }
+            .enter-btn {
+                padding: 10px 30px;
+                font-size: 16px;
             }
         }
 
@@ -1323,23 +1644,51 @@
             .footer-copyright {
                 font-size: 12px;
             }
-
-            .trial-modal {
-                padding: 25px 20px;
+            
+            .footer-social-icons a {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
             }
             
-            .trial-header h2 {
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+            }
+            .whatsapp-float i {
+                font-size: 22px;
+            }
+            
+            .splash-content {
+                padding: 20px 25px;
+            }
+            .splash-title {
                 font-size: 28px;
             }
-            
-            .trial-form .form-row {
-                grid-template-columns: 1fr;
-                gap: 10px;
+            .splash-logo {
+                width: 100px;
+            }
+            .enter-btn {
+                padding: 8px 25px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Splash Screen with Video -->
+    <div class="splash-overlay" id="splashScreen">
+        <video autoplay muted loop playsinline class="splash-video" id="splashVideo">
+            <source src="assets/Front.mp4" type="video/mp4">
+        </video>
+        <div class="splash-content">
+            <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="splash-logo">
+            <h1 class="splash-title">Odunex</h1>
+            <p class="splash-subtitle">Unified ERP Solutions</p>
+            <button class="enter-btn" id="enterSiteBtn">Enter Site</button>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <div class="nav-left">
@@ -1360,9 +1709,26 @@
                     <span class="lang-text">عربي</span>
                     <div class="globe-icon"></div>
                 </div>
-                <div class="dark-mode-container" onclick="toggleDarkMode()">
-                    <span class="dark-mode-toggle">☾</span>
-                </div>
+                <label class="theme-switch">
+                    <input type="checkbox" class="theme-switch__checkbox" id="themeToggle">
+                    <div class="theme-switch__container">
+                        <div class="theme-switch__clouds"></div>
+                        <div class="theme-switch__stars-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <div class="theme-switch__circle-container">
+                            <div class="theme-switch__sun-moon-container">
+                                <div class="theme-switch__moon">
+                                    <div class="theme-switch__spot"></div>
+                                    <div class="theme-switch__spot"></div>
+                                    <div class="theme-switch__spot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
             </div>
         </div>
     </header>
@@ -1375,12 +1741,10 @@
                     <span class="brand-gradient">Odunex</span> <span class="black-text">| Unified ERP Solutions</span>
                 </h1>
                 <div class="subheadline">Integration. Security. Scalability.</div>
-                <p class="description" style="text-align: center;">
-                    <span style="display: inline-block;">A comprehensive accounting system that brings all your</span>
-                    <br>
-                    <span style="display: inline-block;">business operations into one easy, secure, and scalable platform.</span>
+                <p class="description">
+                    A comprehensive accounting system that brings all your business operations into one easy, secure, and scalable platform.
                 </p>
-                <div class="cta-buttons" style="justify-content: center;">
+                <div class="cta-buttons">
                     <button class="btn-primary" id="openTrialModalBtn">Start Free Trial</button>
                     <a href="https://wa.me/9647506841035?text=I%20would%20like%20a%20consultation%20about%20Odunex%20system" 
                        class="btn-whatsapp" 
@@ -1388,6 +1752,18 @@
                         <i class="fab fa-whatsapp"></i>
                         Request Consultation
                     </a>
+                </div>
+                
+                <!-- Rotating Keywords Section -->
+                <div class="rotating-words-container">
+                    <div class="rotating-card">
+                        <div class="loader-words">
+                            <span class="brand-static">Odunex</span>
+                            <div class="words">
+                                <span class="word" id="wordDisplay"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1657,13 +2033,32 @@
                     <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
                 </div>
             </div>
+            
+            <!-- Social Media Icons -->
+            <div class="footer-social">
+                <div class="footer-social-icons">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/9647506841035" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
             <div class="footer-copyright">
                 © 2026 Odunex | Unified ERP Solutions. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- Trial Request Modal with Security -->
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/9647506841035?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20Odunex%20services" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">Contact us on WhatsApp</span>
+    </a>
+
+    <!-- Trial Modal -->
     <div class="trial-modal-overlay" id="trialModal">
         <div class="trial-modal">
             <div class="trial-close" onclick="closeTrialModal()">&times;</div>
@@ -1674,10 +2069,7 @@
             </div>
             
             <div class="trial-form">
-                <!-- Honeypot field - hidden from humans, traps bots -->
                 <input type="text" id="website" name="website" style="display:none" autocomplete="off">
-                
-                <!-- reCAPTCHA v3 token (invisible) -->
                 <input type="hidden" id="recaptchaToken" name="recaptchaToken">
                 
                 <div class="form-group">
@@ -1740,100 +2132,71 @@
         </div>
     </div>
 
-    <!-- EmailJS SDK (already included) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
     <script>
-        // ==============================================
-        // Initialize EmailJS with your credentials
-        // ==============================================
-        (function() {
-            emailjs.init('jO00szsaAuuC7Gsly');
-        })();
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
+            authDomain: "odunex-project.firebaseapp.com",
+            projectId: "odunex-project",
+            storageBucket: "odunex-project.firebasestorage.app",
+            messagingSenderId: "20189086682",
+            appId: "1:20189086682:web:76574c7befec70c24df6e3",
+            measurementId: "G-RREEW2EY4K"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-        // ==============================================
-        // Security and Validation Functions
-        // ==============================================
-        
         function sanitizeInput(text) {
-            if (typeof DOMPurify !== 'undefined') {
-                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
-            }
+            if (typeof DOMPurify !== 'undefined') return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
             return text.replace(/[<>]/g, "");
         }
         
         function validateEmail(email) {
             const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!pattern.test(email)) return false;
-            
-            const blockedDomains = [
-                "mailinator.com", "tempmail.com", "10minutemail.com",
-                "yopmail.com", "guerrillamail.com", "throwawaymail.com",
-                "fakeemail.com", "trashmail.com", "maildrop.cc",
-                "temp-mail.org", "tempinbox.com", "mailnesia.com",
-                "spam4.me", "dispostable.com", "getnada.com"
-            ];
-            
+            const blockedDomains = ["mailinator.com", "tempmail.com", "10minutemail.com", "yopmail.com", "guerrillamail.com", "throwawaymail.com", "fakeemail.com", "trashmail.com", "maildrop.cc", "temp-mail.org", "tempinbox.com", "mailnesia.com", "spam4.me", "dispostable.com", "getnada.com"];
             const domain = email.split("@")[1].toLowerCase();
             if (blockedDomains.includes(domain)) return false;
-            
             return true;
         }
         
         function validatePhoneNumber(phone) {
             let cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
-            
             if (cleanPhone.length < 10 || cleanPhone.length > 15) return false;
             if (!/^\d+$/.test(cleanPhone)) return false;
-            
             if (cleanPhone.startsWith('07') && cleanPhone.length === 11) return true;
             if (cleanPhone.startsWith('964') && cleanPhone.length >= 12) return true;
             if (cleanPhone.startsWith('7') && cleanPhone.length === 10) return true;
-            
             return false;
         }
         
         function formatPhoneNumber(phone) {
             let cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
-            
-            if (cleanPhone.startsWith('7') && cleanPhone.length === 10) {
-                return '964' + cleanPhone;
-            }
-            if (cleanPhone.startsWith('07') && cleanPhone.length === 11) {
-                return '964' + cleanPhone.substring(1);
-            }
+            if (cleanPhone.startsWith('7') && cleanPhone.length === 10) return '964' + cleanPhone;
+            if (cleanPhone.startsWith('07') && cleanPhone.length === 11) return '964' + cleanPhone.substring(1);
             return cleanPhone;
         }
         
         function isSpam(text) {
-            const spamWords = [
-                "crypto", "bitcoin", "casino", "loan", "porn", "sex",
-                "viagra", "xxx", "nude", "gambling", "poker"
-            ];
-            
+            const spamWords = ["crypto", "bitcoin", "casino", "loan", "porn", "sex", "viagra", "xxx", "nude", "gambling", "poker"];
             text = text.toLowerCase();
-            for (let word of spamWords) {
-                if (text.includes(word)) {
-                    return true;
-                }
-            }
+            for (let word of spamWords) if (text.includes(word)) return true;
             return false;
         }
         
         function validateRequestOrigin() {
             const referrer = document.referrer || '';
             const currentDomain = window.location.hostname;
-            
             if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
-                console.warn('Request from external domain detected:', referrer);
+                console.warn('Request from external domain:', referrer);
                 return false;
             }
             return true;
         }
 
-        // ==============================================
-        // Modal Functions
-        // ==============================================
-        
         function openTrialModal() {
             document.getElementById('trialModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -1842,7 +2205,6 @@
         function closeTrialModal() {
             document.getElementById('trialModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-            
             document.getElementById('fullName').value = '';
             document.getElementById('email').value = '';
             document.getElementById('phone').value = '';
@@ -1851,116 +2213,48 @@
             document.getElementById('trialMessage').style.display = 'none';
         }
 
-        // ==============================================
-        // Submit Trial Request with Security
-        // ==============================================
-        
         async function submitTrialRequest() {
-            // Validate request origin
-            if (!validateRequestOrigin()) {
-                showTrialMessage('Unauthorized request', 'error');
-                return;
-            }
-            
-            // Check honeypot
+            if (!validateRequestOrigin()) { showTrialMessage('Unauthorized request', 'error'); return; }
             const honeypot = document.getElementById('website')?.value || '';
-            if (honeypot !== "") {
-                console.log("Bot detected (Honeypot)");
-                showTrialMessage('Suspicious activity detected', 'error');
-                return;
-            }
-            
-            // Get form data
+            if (honeypot !== "") { console.log("Bot detected"); showTrialMessage('Suspicious activity detected', 'error'); return; }
             const fullName = sanitizeInput(document.getElementById('fullName').value.trim());
             const email = sanitizeInput(document.getElementById('email').value.trim());
             const phone = sanitizeInput(document.getElementById('phone').value.trim());
             const companyName = sanitizeInput(document.getElementById('companyName').value.trim());
             const companyField = document.getElementById('companyField').value;
-            
-            // Validate fields
-            if (!fullName || !email || !phone || !companyName || !companyField) {
-                showTrialMessage('Please fill in all required fields', 'warning');
-                return;
-            }
-            
-            // Validate email
-            if (!validateEmail(email)) {
-                showTrialMessage('Please enter a valid email address', 'warning');
-                return;
-            }
-            
-            // Check for spam
-            if (isSpam(fullName + companyName)) {
-                showTrialMessage('Spam detected', 'error');
-                return;
-            }
-            
-            // Validate phone
-            if (!validatePhoneNumber(phone)) {
-                showTrialMessage('Please enter a valid Iraqi phone number (e.g., 07701234567 or 9647701234567)', 'warning');
-                return;
-            }
-            
-            // Get reCAPTCHA token
+            if (!fullName || !email || !phone || !companyName || !companyField) { showTrialMessage('Please fill in all required fields', 'warning'); return; }
+            if (!validateEmail(email)) { showTrialMessage('Please enter a valid email address', 'warning'); return; }
+            if (isSpam(fullName + companyName)) { showTrialMessage('Spam detected', 'error'); return; }
+            if (!validatePhoneNumber(phone)) { showTrialMessage('Please enter a valid Iraqi phone number (e.g., 07701234567 or 9647701234567)', 'warning'); return; }
             let recaptchaToken = '';
-            try {
-                recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'});
-            } catch (error) {
-                console.error('reCAPTCHA error:', error);
-                showTrialMessage('Security verification failed. Please refresh the page.', 'error');
-                return;
-            }
-            
-            if (!recaptchaToken || recaptchaToken.length < 10) {
-                showTrialMessage('Security verification failed', 'error');
-                return;
-            }
-            
-            // Rate limiting
+            try { recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'}); } catch (error) { console.error('reCAPTCHA error:', error); showTrialMessage('Security verification failed. Please refresh the page.', 'error'); return; }
+            if (!recaptchaToken || recaptchaToken.length < 10) { showTrialMessage('Security verification failed', 'error'); return; }
             const lastSend = localStorage.getItem('lastTrialSend');
             const now = Date.now();
-            if (lastSend && now - lastSend < 30000) {
-                const secondsLeft = Math.ceil((30000 - (now - lastSend)) / 1000);
-                showTrialMessage(`Please wait ${secondsLeft} seconds before sending another request`, 'warning');
-                return;
-            }
-            
-            // Format phone
+            if (lastSend && now - lastSend < 30000) { const secondsLeft = Math.ceil((30000 - (now - lastSend)) / 1000); showTrialMessage(`Please wait ${secondsLeft} seconds before sending another request`, 'warning'); return; }
             const formattedPhone = formatPhoneNumber(phone);
-            
-            // Show loading
             document.getElementById('submitBtn').style.display = 'none';
             document.getElementById('trialLoading').style.display = 'block';
             document.getElementById('trialMessage').style.display = 'none';
-            
             try {
-                // Send via EmailJS
-                await emailjs.send(
-                    'service_u22biwc',
-                    'template_jj5k7r9',
-                    {
-                        to_email: 'Info@odunex.com',
-                        to_name: 'Odunex Team',
-                        from_name: fullName,
-                        from_email: email,
-                        phone: formattedPhone,
-                        company_name: companyName,
-                        company_field: companyField,
-                        message: `Trial request from ${fullName} at ${companyName}`,
-                        reply_to: email
-                    }
-                );
-                
+                const docRef = await db.collection('trial_requests').add({
+                    fullName: fullName, email: email, phone: formattedPhone, phoneRaw: phone,
+                    companyName: companyName, companyField: companyField, status: 'pending',
+                    adminApproved: false, trialLink: '', createdAt: new Date().toISOString(), read: false
+                });
+                console.log('✅ Saved request:', docRef.id);
+                emailjs.init('jO00szsaAuuC7Gsly');
+                await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
+                    to_email: ['info@odunex.com', 'support@odunex.com'],
+                    fullName: fullName, email: email, phone: phone, companyName: companyName,
+                    companyField: companyField, requestId: docRef.id,
+                    firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
+                });
+                console.log('✅ Email sent');
                 localStorage.setItem('lastTrialSend', now);
-                
                 document.getElementById('trialLoading').style.display = 'none';
                 showTrialMessage('✅ Your request has been sent successfully! We will contact you within 24 hours', 'success');
-                
-                setTimeout(() => {
-                    closeTrialModal();
-                    document.getElementById('submitBtn').style.display = 'flex';
-                }, 4000);
-                
+                setTimeout(() => { closeTrialModal(); document.getElementById('submitBtn').style.display = 'flex'; }, 4000);
             } catch (error) {
                 console.error('❌ Error:', error);
                 document.getElementById('trialLoading').style.display = 'none';
@@ -1974,88 +2268,117 @@
             msgDiv.textContent = message;
             msgDiv.className = 'trial-message ' + type;
             msgDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                msgDiv.style.display = 'none';
-            }, 5000);
+            setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
         }
 
-        // ==============================================
-        // Dark Mode and UI Functions
-        // ==============================================
+        // Rotating Keywords
+        const wordsArray = [
+            "Integration","Centralization","Flexibility","Scalability","Automation","Transparency",
+            "Accuracy","Speed","Reliability","Customization","Reports","Analytics",
+            "Security","Tracking","Organization","Efficiency","Unification","Control","Productivity"
+        ];
+
+        const wordDisplay = document.getElementById('wordDisplay');
+        let index = 0;
+        if (wordDisplay) wordDisplay.textContent = wordsArray[index];
+
+        setInterval(() => {
+            if (wordDisplay) {
+                index = (index + 1) % wordsArray.length;
+                wordDisplay.textContent = wordsArray[index];
+            }
+        }, 2000);
+
+        const wordsWrapper = document.querySelector('.words');
+        if (wordsWrapper) {
+            let maxWidth = 0;
+            const tempSpan = document.createElement('span');
+            tempSpan.style.visibility = 'hidden';
+            tempSpan.style.position = 'absolute';
+            tempSpan.style.whiteSpace = 'nowrap';
+            tempSpan.style.fontSize = '18px';
+            tempSpan.style.fontWeight = '600';
+            tempSpan.style.fontFamily = 'Poppins, sans-serif';
+            document.body.appendChild(tempSpan);
+            wordsArray.forEach(word => {
+                tempSpan.textContent = word;
+                const width = tempSpan.offsetWidth;
+                if (width > maxWidth) maxWidth = width;
+            });
+            document.body.removeChild(tempSpan);
+            wordsWrapper.style.minWidth = (maxWidth + 12) + 'px';
+        }
+
+        // Splash Screen with Video and Sound
+        const splashScreen = document.getElementById('splashScreen');
+        const enterBtn = document.getElementById('enterSiteBtn');
+        const splashVideo = document.getElementById('splashVideo');
+        const audio = new Audio('assets/Sound.mp3');
         
+        const hasSeenSplash = localStorage.getItem('hasSeenSplash');
+        
+        if (hasSeenSplash === 'true') {
+            splashScreen.style.display = 'none';
+            if (splashVideo) splashVideo.pause();
+        } else {
+            splashScreen.style.display = 'flex';
+        }
+        
+        enterBtn.addEventListener('click', function() {
+            audio.play().catch(e => console.log('Audio play failed:', e));
+            splashScreen.classList.add('splash-hidden');
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                if (splashVideo) splashVideo.pause();
+                localStorage.setItem('hasSeenSplash', 'true');
+            }, 500);
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const savedMode = localStorage.getItem('darkMode');
-            const toggleBtn = document.querySelector('.dark-mode-toggle');
+            const themeToggle = document.getElementById('themeToggle');
             
             if (savedMode === 'enabled') {
                 document.body.classList.add('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
+                if (themeToggle) themeToggle.checked = true;
             } else {
                 document.body.classList.remove('dark-mode');
-                if (toggleBtn) toggleBtn.textContent = '☾';
+                if (themeToggle) themeToggle.checked = false;
+            }
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function(e) {
+                    const isDarkMode = e.target.checked;
+                    if (isDarkMode) {
+                        document.body.classList.add('dark-mode');
+                        localStorage.setItem('darkMode', 'enabled');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                        localStorage.setItem('darkMode', 'disabled');
+                    }
+                });
             }
             
             updateActiveLink();
             startCountersOnScroll();
-            
-            // Link trial button
             const trialBtn = document.getElementById('openTrialModalBtn');
-            if (trialBtn) {
-                trialBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openTrialModal();
-                });
-            }
-            
-            // Close modal on outside click
-            window.onclick = function(event) {
-                const modal = document.getElementById('trialModal');
-                if (event.target === modal) {
-                    closeTrialModal();
-                }
-            };
+            if (trialBtn) trialBtn.addEventListener('click', function(e) { e.preventDefault(); openTrialModal(); });
+            window.onclick = function(event) { const modal = document.getElementById('trialModal'); if (event.target === modal) closeTrialModal(); };
         });
-
-        function toggleDarkMode() {
-            const isDarkMode = document.body.classList.toggle('dark-mode');
-            const toggleBtn = document.querySelector('.dark-mode-toggle');
-            
-            if (isDarkMode) {
-                localStorage.setItem('darkMode', 'enabled');
-                if (toggleBtn) toggleBtn.textContent = '☀️';
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                if (toggleBtn) toggleBtn.textContent = '☾';
-            }
-        }
 
         function updateActiveLink() {
             const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
+            navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === currentPage) link.classList.add('active'); });
         }
 
-        // ==============================================
-        // Language Switch - مثل pricing-en.html تماماً
-        // ==============================================
         function switchLanguage() {
-            window.location.href = '/?v=' + Math.random();
+            window.location.href = 'index.html?v=' + Math.random();
         }
 
         function toggleFAQ(element) {
             const allItems = document.querySelectorAll('.faq-item');
-            allItems.forEach(item => {
-                if (item !== element) {
-                    item.classList.remove('active');
-                }
-            });
+            allItems.forEach(item => { if (item !== element) item.classList.remove('active'); });
             element.classList.toggle('active');
         }
 
@@ -2066,11 +2389,8 @@
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const currentValue = Math.floor(progress * (end - start) + start);
                 element.innerText = prefix + currentValue + (end === 99 ? '%' : '');
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    element.innerText = prefix + end + (end === 99 ? '%' : '');
-                }
+                if (progress < 1) window.requestAnimationFrame(step);
+                else element.innerText = prefix + end + (end === 99 ? '%' : '');
             };
             window.requestAnimationFrame(step);
         }
@@ -2079,32 +2399,21 @@
             const counters = document.querySelectorAll('.stat-number');
             const targets = [1500, 320, 15, 99];
             let animationStarted = false;
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !animationStarted) {
                         animationStarted = true;
-                        
                         counters.forEach((counter, index) => {
                             const target = targets[index];
-                            if (target === 99) {
-                                animateCounter(counter, 1, target, 2000, '');
-                            } else if (target === 1500 || target === 320) {
-                                animateCounter(counter, 1, target, 2500, '+');
-                            } else {
-                                animateCounter(counter, 1, target, 2000, '');
-                            }
+                            if (target === 99) animateCounter(counter, 1, target, 2000, '');
+                            else animateCounter(counter, 1, target, 2500, '+');
                         });
-                        
                         observer.disconnect();
                     }
                 });
             }, { threshold: 0.3 });
-            
             const statsSection = document.querySelector('.statistics-section');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
+            if (statsSection) observer.observe(statsSection);
         }
     </script>
 </body>
