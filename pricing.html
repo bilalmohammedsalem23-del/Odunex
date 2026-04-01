@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Odunex | الأسعار</title>
+    <title>Odunex | Our Portfolio</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/Location Logo.png">
@@ -17,6 +17,8 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- DOMPurify -->
@@ -44,23 +46,25 @@
             --icon-color: #666666;
             --footer-bg: #F8F9FB;
             --main-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            --icon-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
+            --tag-gradient: linear-gradient(135deg, #7A5AF8, #2BB0ED);
             --whatsapp-green: #25D366;
             
             /* Dark mode colors */
-            --dark-bg: #0a0a2a;
-            --dark-card: #0f0f2a;
-            --dark-border: #1e2a4a;
-            --dark-text-primary: #ffffff;
-            --dark-text-secondary: #cbd5e6;
-            --dark-text-muted: #94a3b8;
-            --dark-card-bg: #111133;
-            --dark-header-bg: #0a0a2a;
+            --dark-bg: #0a0a1a;
+            --dark-card: #14142b;
+            --dark-border: #2a2a4a;
+            --dark-text-primary: #e0e0ff;
+            --dark-text-secondary: #c0c0e0;
+            --dark-text-muted: #a0a0c0;
+            --dark-card-bg: #1a1a35;
+            --dark-header-bg: #14142b;
+            --dark-glow: rgba(122, 90, 248, 0.3);
         }
 
-        /* Default Dark Mode */
         body {
-            background: var(--dark-bg);
-            color: var(--dark-text-primary);
+            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
+            color: var(--dark-text);
             line-height: 1.6;
             padding-top: 80px;
             overflow-x: hidden;
@@ -70,115 +74,119 @@
             flex-direction: column;
         }
 
-        /* Light Mode */
-        body.light-mode {
-            background: linear-gradient(135deg, #F1F3FD 0%, #E6FAFF 100%);
-            color: var(--dark-text);
+        /* ===== Dark Mode Styles ===== */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text-primary);
         }
-        body.light-mode header {
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
+
+        body.dark-mode header {
+            background: var(--dark-header-bg);
+            border-bottom: 1px solid var(--dark-border);
         }
-        body.light-mode .nav-logo-text {
-            color: #000000 !important;
+
+        body.dark-mode .nav-logo-text {
+            color: var(--dark-text-primary) !important;
         }
-        body.light-mode .nav-menu a {
-            color: #6B6B6B;
+
+        body.dark-mode .nav-menu a {
+            color: var(--dark-text-secondary);
         }
-        body.light-mode .nav-menu a:hover,
-        body.light-mode .nav-menu a.active {
+
+        body.dark-mode .nav-menu a:hover,
+        body.dark-mode .nav-menu a.active {
             color: var(--primary-purple);
         }
-        body.light-mode .lang-container {
-            border-color: #ddd;
+
+        body.dark-mode .lang-container {
+            border-color: var(--dark-border);
         }
-        body.light-mode .pricing-plan-card,
-        body.light-mode .support-card,
-        body.light-mode .service-card,
-        body.light-mode .consulting-item,
-        body.light-mode .cart-sidebar {
+
+        body.dark-mode .lang-text {
+            color: var(--dark-text-secondary);
+        }
+
+        body.dark-mode .globe-icon {
+            filter: invert(0.8);
+        }
+
+        body.dark-mode .gallery-card {
+            background: var(--dark-card-bg);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .card-title {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .card-description {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .icon-box {
+            background: var(--icon-gradient);
+            box-shadow: 0 5px 15px var(--dark-glow);
+        }
+
+        body.dark-mode .tag {
+            background: var(--tag-gradient);
+            color: white;
+            box-shadow: 0 3px 8px var(--dark-glow);
+        }
+
+        body.dark-mode .gallery-card:hover .tag {
+            box-shadow: 0 5px 15px var(--dark-glow);
+        }
+
+        body.dark-mode .gallery-card:hover .icon-box {
+            box-shadow: 0 0 25px var(--dark-glow);
+        }
+
+        body.dark-mode footer {
+            background: var(--dark-card-bg);
+            border-top: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .footer-brand-name {
+            color: var(--dark-text-primary) !important;
+        }
+
+        body.dark-mode .footer-tagline,
+        body.dark-mode .footer-copyright {
+            color: var(--dark-text-secondary) !important;
+        }
+
+        body.dark-mode .section-header p {
+            color: var(--dark-text-secondary) !important;
+        }
+        
+        body.dark-mode .footer-social-icons a {
+            background: rgba(255,255,255,0.1);
+            color: var(--dark-text-secondary);
+        }
+        
+        body.dark-mode .footer-social-icons a:hover {
+            background: var(--main-gradient);
+            color: white;
+        }
+        
+        body.dark-mode .whatsapp-float .tooltip {
+            background: var(--dark-card-bg);
+            color: var(--dark-text-primary);
+            border-color: var(--dark-border);
+        }
+        
+        body.light-mode .whatsapp-float .tooltip {
             background: var(--bg-white);
+            color: var(--dark-text);
             border-color: var(--border-color);
         }
-        body.light-mode .plan-header h3,
-        body.light-mode .support-card h3,
-        body.light-mode .service-card h3,
-        body.light-mode .consulting-info h3 {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .plan-features li,
-        body.light-mode .support-card li,
-        body.light-mode .service-card p,
-        body.light-mode .consulting-info p {
-            color: var(--secondary-text) !important;
-        }
-        body.light-mode footer {
-            background: var(--footer-bg);
-            border-top: 1px solid var(--border-color);
-        }
-        body.light-mode .footer-brand-name {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .footer-tagline,
-        body.light-mode .footer-copyright {
-            color: var(--secondary-text) !important;
-        }
-        body.light-mode .page-header p,
-        body.light-mode .section-subtitle {
-            color: var(--secondary-text) !important;
-        }
-        body.light-mode .section-title {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .page-header h1 {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .payment-title {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .payment-title span {
-            background: none;
-            -webkit-text-fill-color: var(--primary-purple);
-            color: var(--primary-purple);
-        }
-        body.light-mode .card .front {
-            background-color: var(--bg-white);
-        }
-        body.light-mode .card .back {
-            background-color: var(--bg-white);
-        }
-        body.light-mode .card .back::before {
-            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--primary-blue), var(--primary-purple), transparent);
-        }
-        body.light-mode .card .back-content {
-            background-color: var(--bg-white);
-        }
-        body.light-mode .card .back-content .payment-name,
-        body.light-mode .card .back-content .qr-note {
-            color: var(--dark-text) !important;
-        }
-        body.light-mode .card .front .front-content .badge {
-            background-color: rgba(0,0,0,0.1);
-            color: var(--primary-purple);
-        }
-        body.light-mode .card .front .description {
-            background-color: rgba(0,0,0,0.05);
-            box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.05);
-        }
-        body.light-mode .card .front .description .title p {
-            color: var(--dark-text);
-        }
-        body.light-mode .card .front .description .card-footer {
-            color: var(--secondary-text);
-        }
-        body.light-mode .whatsapp-float {
-            background: var(--whatsapp-green);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
+        
         body.light-mode .footer-social-icons a {
             background: rgba(0,0,0,0.05);
             color: var(--secondary-text);
         }
+        
         body.light-mode .footer-social-icons a:hover {
             background: var(--main-gradient);
             color: white;
@@ -191,10 +199,10 @@
             width: 100%;
         }
 
-        /* Header */
+        /* ===== Header ===== */
         header {
-            background: var(--dark-header-bg);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            background: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 12px 0;
             position: fixed;
             top: 0;
@@ -203,29 +211,33 @@
             z-index: 1000;
             width: 100%;
             transition: all 0.3s ease;
-            border-bottom: 1px solid var(--dark-border);
         }
+
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .nav-right {
+
+        .nav-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
+
         .nav-logo-img {
             height: 45px;
             width: auto;
             object-fit: contain;
         }
+
         .nav-logo-text {
             font-size: 22px;
             font-weight: 700;
-            color: var(--dark-text-primary);
+            color: #000000;
             transition: color 0.3s ease;
         }
+
         .nav-menu {
             display: flex;
             gap: 30px;
@@ -236,53 +248,66 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
-        .nav-menu::-webkit-scrollbar { display: none; }
+
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+
         .nav-menu a {
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
-            color: var(--dark-text-secondary);
+            color: #6B6B6B;
             transition: all 0.3s ease;
             white-space: nowrap;
             position: relative;
         }
+
         .nav-menu a:hover,
         .nav-menu a.active {
             color: var(--primary-purple);
         }
-        .nav-left {
+
+        .nav-right {
             display: flex;
             gap: 15px;
             align-items: center;
         }
+
         .lang-container {
             display: flex;
             align-items: center;
             gap: 4px;
-            border: 2px solid var(--dark-border);
+            border: 2px solid #ddd;
             border-radius: 8px;
             padding: 5px 10px;
             background: transparent;
             cursor: pointer;
             transition: all 0.3s ease;
         }
+
         .lang-container:hover {
             border-color: var(--primary-purple);
             transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
         }
+
         .lang-text {
             font-size: 14px;
             font-weight: 600;
-            color: var(--dark-text-secondary);
+            color: #555;
+            transition: color 0.3s ease;
         }
+
         .globe-icon {
             width: 16px;
             height: 16px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23c0c0e0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
             background-size: contain;
+            transition: filter 0.3s ease;
         }
 
-        /* Theme Switch Button */
+        /* ===== THEME SWITCH BUTTON ===== */
         .theme-switch {
             --toggle-size: 12px;
             --container-width: 4.8em;
@@ -321,6 +346,7 @@
             transition: var(--transition);
             position: relative;
         }
+
         .theme-switch__container::before {
             content: "";
             position: absolute;
@@ -329,9 +355,11 @@
             box-shadow: 0em 0.03em 0.1em rgba(0, 0, 0, 0.25) inset;
             border-radius: var(--container-radius);
         }
+
         .theme-switch__checkbox {
             display: none;
         }
+
         .theme-switch__circle-container {
             width: var(--circle-container-diameter);
             height: var(--circle-container-diameter);
@@ -344,6 +372,7 @@
             transition: var(--circle-transition);
             pointer-events: none;
         }
+
         .theme-switch__sun-moon-container {
             pointer-events: auto;
             position: relative;
@@ -356,6 +385,7 @@
             overflow: hidden;
             transition: var(--transition);
         }
+
         .theme-switch__moon {
             transform: translateX(100%);
             width: 100%;
@@ -365,6 +395,7 @@
             transition: var(--transition);
             position: relative;
         }
+
         .theme-switch__spot {
             position: absolute;
             top: 0.6em;
@@ -374,18 +405,21 @@
             border-radius: var(--container-radius);
             background-color: var(--spot-color);
         }
+
         .theme-switch__spot:nth-of-type(2) {
             width: 0.3em;
             height: 0.3em;
             top: 0.8em;
             left: 1.1em;
         }
+
         .theme-switch__spot:nth-last-of-type(3) {
             width: 0.2em;
             height: 0.2em;
             top: 0.25em;
             left: 0.65em;
         }
+
         .theme-switch__clouds {
             width: 1em;
             height: 1em;
@@ -396,6 +430,7 @@
             left: 0.25em;
             transition: 0.4s ease;
         }
+
         .theme-switch__stars-container {
             position: absolute;
             color: var(--stars-color);
@@ -405,725 +440,162 @@
             height: auto;
             transition: var(--transition);
         }
+
         .theme-switch__stars-container svg {
             width: 100%;
             height: auto;
         }
+
         .theme-switch__checkbox:checked + .theme-switch__container {
             background-color: var(--container-night-bg);
         }
+
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
             left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
         }
+
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
             transform: translate(0);
         }
+
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
             bottom: -3.2em;
         }
+
         .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
             top: 50%;
             transform: translateY(-50%);
         }
 
-        /* Page Header */
-        .page-header {
+        /* ===== Section Header ===== */
+        .section-header {
             text-align: center;
+            margin-bottom: 50px;
             padding: 40px 0 20px;
         }
-        .page-header h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--dark-text-primary);
-        }
-        .page-header h1 span {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .page-header p {
-            font-size: 20px;
-            color: var(--dark-text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
 
-        /* Section Titles */
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--dark-text-primary);
-        }
-        .section-title .gradient-text {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .section-subtitle {
-            text-align: center;
-            color: var(--dark-text-secondary);
-            margin-bottom: 40px;
-            font-size: 18px;
-        }
-
-        /* Pricing Plans Cards */
-        .pricing-plans-section,
-        .support-section,
-        .additional-services,
-        .consulting-services {
-            padding: 60px 0;
-            background: transparent;
-        }
-        .pricing-plans-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        .pricing-plan-card {
-            background: var(--dark-card-bg);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid var(--dark-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-        }
-        .pricing-plan-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(122,90,248,0.2);
-            border-color: var(--primary-purple);
-        }
-        .pricing-plan-card.popular {
-            border: 2px solid var(--primary-purple);
-            transform: scale(1.02);
-        }
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--main-gradient);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .plan-header h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-align: center;
-            color: var(--dark-text-primary);
-        }
-        .plan-price {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .plan-price .price {
+        .section-header h2 {
             font-size: 42px;
             font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark-text);
+            transition: color 0.3s ease;
+        }
+
+        .section-header h2 .gradient-text {
             background: var(--main-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .plan-desc {
-            text-align: center;
-            color: var(--dark-text-muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .plan-features {
-            flex: 1;
-        }
-        .plan-features ul {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-        .plan-features li {
-            padding: 8px 0;
-            font-size: 14px;
-            color: var(--dark-text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--dark-border);
-        }
-        .plan-features li:last-child { border-bottom: none; }
-        .plan-features li i.fa-check-circle { color: #10b981; }
-        .btn-plan {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            background: var(--main-gradient);
-            color: white;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-        .btn-plan:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        /* Support Plans */
-        .support-plans-grid {
+        /* ===== Gallery Section ===== */
+        .gallery-section {
+            padding: 20px 0 60px;
+            flex: 1;
+        }
+
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
-        .support-card {
-            background: var(--dark-card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid var(--dark-border);
+
+        /* ===== Card Styling ===== */
+        .gallery-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-        }
-        .support-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-purple);
-        }
-        .support-card.popular {
-            border: 2px solid var(--primary-purple);
-        }
-        .support-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--dark-text-primary);
-        }
-        .support-card .price {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--primary-purple);
-        }
-        .support-card ul {
-            list-style: none;
-            margin-bottom: 25px;
-            text-align: right;
-            flex: 1;
-        }
-        .support-card li {
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--dark-text-secondary);
-        }
-        .support-card li i {
-            width: 20px;
-            color: var(--primary-purple);
-        }
-        .btn-support {
-            display: inline-block;
-            padding: 10px 25px;
-            border-radius: 50px;
-            background: var(--main-gradient);
-            color: white;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-        .btn-support:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
+            border: 1px solid var(--border-color);
         }
 
-        /* Additional Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-        .service-card {
-            background: var(--dark-card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--dark-border);
-        }
-        .service-card:hover {
+        .gallery-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-purple);
+            box-shadow: 0 20px 40px rgba(122,90,248,0.15);
         }
-        .service-card i {
-            font-size: 40px;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: var(--icon-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 15px;
-            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(122,90,248,0.2);
         }
-        .service-card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--dark-text-primary);
-        }
-        .service-card .price {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-purple);
-            margin-bottom: 10px;
-        }
-        .service-card p {
-            font-size: 13px;
-            color: var(--dark-text-secondary);
-        }
-        .btn-service {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 50px;
-            background: var(--main-gradient);
+
+        .icon-box i {
+            font-size: 24px;
             color: white;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            margin-top: 15px;
-            font-size: 14px;
+            transition: all 0.3s ease;
         }
-        .btn-service:hover {
-            transform: translateY(-2px);
+
+        .gallery-card:hover .icon-box {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(122,90,248,0.6);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .card-description {
+            font-size: 13px;
+            color: var(--secondary-text);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-weight: 400;
+            flex: 1;
+            transition: color 0.3s ease;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        .tag {
+            background: var(--tag-gradient);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 3px 8px rgba(122,90,248,0.2);
+            white-space: nowrap;
+        }
+
+        .gallery-card:hover .tag {
+            transform: translateY(-2px) scale(1.03);
             box-shadow: 0 5px 15px rgba(122,90,248,0.4);
         }
 
-        /* Consulting Services */
-        .consulting-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-        .consulting-item {
-            display: flex;
-            gap: 15px;
-            padding: 15px;
-            background: var(--dark-card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--dark-border);
-            transition: all 0.3s ease;
-            align-items: center;
-        }
-        .consulting-item:hover {
-            border-color: var(--primary-purple);
-        }
-        .consulting-item i {
-            font-size: 28px;
-            color: var(--primary-purple);
-        }
-        .consulting-info {
-            flex: 1;
-        }
-        .consulting-info h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--dark-text-primary);
-        }
-        .consulting-info p {
-            font-size: 13px;
-            color: var(--dark-text-secondary);
-            margin-bottom: 5px;
-        }
-        .consulting-info .price {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary-purple);
-        }
-        .btn-consulting {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            background: var(--main-gradient);
-            color: white;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-        .btn-consulting:hover {
-            transform: translateY(-2px);
-        }
-
-        /* ===== 3D Flip Payment Cards ===== */
-        .payment-section {
-            padding: 40px 0 60px;
-            text-align: center;
-        }
-        .payment-title {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: var(--dark-text-primary);
-        }
-        .payment-title span {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            justify-items: center;
-        }
-
-        /* 3D Card Styles */
-        .card {
-            overflow: visible;
-            width: 100%;
-            max-width: 280px;
-            height: 340px;
-            cursor: pointer;
-        }
-
-        .content {
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 500ms;
-            box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.3);
-            border-radius: 20px;
-        }
-
-        .front, .back {
-            background-color: var(--dark-card-bg);
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--dark-border);
-        }
-
-        .back {
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .back::before {
-            position: absolute;
-            content: ' ';
-            display: block;
-            width: 200px;
-            height: 200%;
-            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--primary-blue), var(--primary-purple), transparent);
-            animation: rotation_481 6000ms infinite linear;
-        }
-
-        @keyframes rotation_481 {
-            0% { transform: rotateZ(0deg); }
-            100% { transform: rotateZ(360deg); }
-        }
-
-        .back-content {
-            position: absolute;
-            width: 94%;
-            height: 94%;
-            background-color: var(--dark-card-bg);
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            z-index: 2;
-        }
-
-        .back-content .payment-qr {
-            width: 90%;
-            height: auto;
-            max-height: 70%;
-            object-fit: contain;
-            border-radius: 12px;
-            background: white;
-            padding: 8px;
-        }
-
-        .back-content .payment-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--dark-text-primary);
-            text-align: center;
-        }
-
-        .back-content .qr-note {
-            font-size: 11px;
-            color: var(--dark-text-secondary);
-            text-align: center;
-        }
-
-        .front {
-            transform: rotateY(180deg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(122,90,248,0.15), rgba(43,176,237,0.15));
-        }
-
-        .card:hover .content {
-            transform: rotateY(180deg);
-        }
-
-        .front .front-content {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-        }
-
-        .front-content .badge {
-            background-color: rgba(122,90,248,0.25);
-            padding: 8px 16px;
-            border-radius: 30px;
-            backdrop-filter: blur(5px);
-            width: fit-content;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary-purple);
-            margin-top: 20px;
-        }
-
-        .front .description {
-            box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.2);
-            width: 90%;
-            padding: 15px;
-            background-color: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            margin-bottom: 20px;
-        }
-
-        .front .description .title {
-            font-size: 14px;
-            max-width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .front .description .title p {
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .front .description .card-footer {
-            color: rgba(255,255,255,0.8);
-            margin-top: 8px;
-            font-size: 11px;
-        }
-
-        .front .img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: var(--primary-purple);
-            position: absolute;
-            filter: blur(25px);
-            animation: floating 2600ms infinite linear;
-            opacity: 0.5;
-        }
-
-        .circle:nth-child(1) {
-            width: 120px;
-            height: 120px;
-            top: -30px;
-            right: -30px;
-            background-color: var(--primary-purple);
-            animation-delay: -500ms;
-        }
-
-        .circle:nth-child(2) {
-            background-color: var(--primary-blue);
-            left: -40px;
-            bottom: -40px;
-            width: 140px;
-            height: 140px;
-            animation-delay: -1200ms;
-        }
-
-        .circle:nth-child(3) {
-            background-color: var(--primary-purple);
-            right: 30px;
-            bottom: 20px;
-            width: 80px;
-            height: 80px;
-            animation-delay: -800ms;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(-15px) translateX(5px); }
-            100% { transform: translateY(0px) translateX(0px); }
-        }
-
-        /* Cart Sidebar */
-        .cart-sidebar {
-            position: fixed;
-            right: -400px;
-            top: 0;
-            width: 380px;
-            height: 100vh;
-            background: var(--dark-card-bg);
-            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
-            z-index: 1001;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            border-left: 1px solid var(--dark-border);
-        }
-        .cart-sidebar.open { right: 0; }
-        .cart-header {
-            padding: 20px;
-            background: var(--main-gradient);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cart-header h3 { font-size: 20px; font-weight: 700; }
-        .close-cart {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .cart-items { flex: 1; padding: 20px; }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--dark-border);
-        }
-        .cart-item-name {
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--dark-text-primary);
-        }
-        .cart-item-price {
-            font-size: 12px;
-            color: var(--primary-purple);
-            font-weight: 600;
-        }
-        .cart-item-remove {
-            background: none;
-            border: none;
-            color: #ef4444;
-            cursor: pointer;
-        }
-        .cart-total {
-            padding: 20px;
-            border-top: 2px solid var(--dark-border);
-        }
-        .cart-total-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--dark-text-primary);
-        }
-        .cart-total-range {
-            color: var(--primary-purple);
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .cart-empty {
-            text-align: center;
-            padding: 40px;
-            color: var(--dark-text-muted);
-        }
-        .btn-checkout {
-            width: 100%;
-            padding: 12px;
-            background: var(--main-gradient);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        .btn-checkout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(122,90,248,0.4);
-        }
-        
-        /* Cart Toggle Button (for cart) */
-        .cart-toggle {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--main-gradient);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(122,90,248,0.5);
-            z-index: 999;
-            transition: all 0.3s ease;
-        }
-        .cart-toggle:hover {
-            transform: scale(1.1);
-        }
-        .cart-toggle i {
-            font-size: 24px;
-            color: white;
-        }
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ef4444;
-            color: white;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ===== WhatsApp Float Button ===== */
+        /* ===== WHATSAPP FLOAT BUTTON ===== */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -1153,8 +625,8 @@
             position: absolute;
             bottom: 70px;
             right: -10px;
-            background: var(--dark-card-bg);
-            color: var(--dark-text-primary);
+            background: var(--bg-white);
+            color: var(--dark-text);
             padding: 8px 12px;
             border-radius: 8px;
             font-size: 12px;
@@ -1164,84 +636,31 @@
             visibility: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border: 1px solid var(--dark-border);
+            border: 1px solid var(--border-color);
         }
         .whatsapp-float:hover .tooltip {
             opacity: 1;
             visibility: visible;
             bottom: 80px;
         }
-        body.light-mode .whatsapp-float .tooltip {
-            background: var(--bg-white);
-            color: var(--dark-text);
-            border-color: var(--border-color);
-        }
 
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal {
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-        }
-        .close-modal {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            font-size: 32px;
-            cursor: pointer;
-            color: white;
-        }
-        .close-modal:hover { color: var(--primary-purple); }
-        .modal-img-container {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background: var(--dark-card-bg);
-            border-radius: 24px;
-            overflow: hidden;
-        }
-        .modal-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .modal h3 {
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            margin: 20px 0 10px;
-        }
-        .modal p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.8);
-        }
-
-        /* Footer */
+        /* ===== Footer ===== */
         footer {
-            background-color: var(--dark-card-bg);
+            background-color: var(--footer-bg);
             width: 100%;
             padding: 40px 0 25px;
             text-align: center;
             margin-top: auto;
-            border-top: 1px solid var(--dark-border);
+            transition: all 0.3s ease;
+            border-top: 1px solid var(--border-color);
         }
+
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
         .footer-brand-row {
             display: flex;
             align-items: center;
@@ -1249,116 +668,205 @@
             gap: 15px;
             margin-bottom: 20px;
         }
+
         .footer-brand-name {
             font-size: 24px;
             font-weight: 700;
-            color: var(--dark-text-primary);
+            color: var(--dark-text);
         }
+
         .footer-tagline {
             font-size: 15px;
             font-weight: 600;
-            color: var(--dark-text-secondary);
+            color: var(--secondary-text);
             margin-top: 3px;
         }
-        .footer-logo { width: 55px; height: 55px; }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+        }
+
         .footer-logo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-        
+
         /* Social Icons in Footer */
         .footer-social {
             margin: 20px 0;
         }
+
         .footer-social-icons {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
         }
+
         .footer-social-icons a {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: var(--dark-text-secondary);
+            color: var(--secondary-text);
             font-size: 18px;
         }
+
         .footer-social-icons a:hover {
             background: var(--main-gradient);
             color: white;
             transform: translateY(-3px);
         }
-        
+
         .footer-copyright {
             font-size: 14px;
             font-weight: 500;
-            color: var(--dark-text-muted);
+            color: var(--light-text);
             margin-top: 20px;
             padding-top: 15px;
-            border-top: 1px solid var(--dark-border);
+            border-top: 1px solid var(--border-color);
         }
 
+        /* ===== Responsive Design ===== */
         @media (max-width: 992px) {
-            .pricing-plans-grid, .support-plans-grid, .services-grid, .consulting-grid, .payment-grid {
+            .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .section-header h2 {
+                font-size: 36px;
             }
         }
+
         @media (max-width: 768px) {
-            header .container { flex-wrap: wrap; gap: 15px; }
-            .nav-menu { order: 3; width: 100%; justify-content: flex-start; gap: 20px; }
-            .page-header h1 { font-size: 36px; }
-            .pricing-plans-grid, .support-plans-grid, .services-grid, .consulting-grid, .payment-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 25px;
-                align-items: center;
+            header .container {
+                flex-wrap: wrap;
+                gap: 15px;
             }
-            .card { max-width: 280px; height: 340px; }
-            .cart-sidebar { width: 320px; }
-            .cart-toggle, .whatsapp-float {
+
+            .nav-left, .nav-right {
+                width: auto;
+            }
+
+            .nav-menu {
+                order: 3;
+                width: 100%;
+                justify-content: flex-start;
+                gap: 20px;
+            }
+
+            .section-header {
+                padding: 50px 0 20px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .section-header p {
+                font-size: 16px;
+                padding: 0 15px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-float i {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-header {
+                padding: 60px 0 20px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .card-title {
+                font-size: 16px;
+            }
+
+            .card-description {
+                font-size: 12px;
+            }
+
+            .tag {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .footer-brand-name {
+                font-size: 22px;
+            }
+
+            .footer-logo {
                 width: 50px;
                 height: 50px;
             }
-            .cart-toggle i, .whatsapp-float i {
-                font-size: 22px;
+
+            .footer-copyright {
+                font-size: 12px;
             }
-        }
-        @media (max-width: 480px) {
-            .page-header h1 { font-size: 32px; }
-            .cart-sidebar { width: 100%; right: -100%; }
-            .card { max-width: 260px; height: 320px; }
+            
             .footer-social-icons a {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
             }
+            
+            .whatsapp-float {
+                width: 45px;
+                height: 45px;
+            }
+            .whatsapp-float i {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
-            <div class="nav-right">
+            <div class="nav-left">
                 <img src="assets/images/odonex-logo.png.png" alt="Odunex" class="nav-logo-img">
                 <span class="nav-logo-text">Odunex</span>
             </div>
+
             <div class="nav-menu">
-                <a href="index.html">الرئيسية</a>
-                <a href="features.html">المميزات</a>
-                <a href="pricing.html" class="active">الأسعار</a>
-                <a href="gallery.html">معرض الأعمال</a>
-                <a href="contact.html">اتصل بنا</a>
+                <a href="index-en.html">Home</a>
+                <a href="features-en.html">Features</a>
+                <a href="pricing-en.html">Pricing</a>
+                <a href="gallery-en.html" class="active">Portfolio</a>
+                <a href="contact-en.html">Contact</a>
             </div>
-            <div class="nav-left">
+
+            <div class="nav-right">
                 <div class="lang-container" onclick="switchLanguage()">
-                    <span class="lang-text">EN</span>
+                    <span class="lang-text">عربي</span>
                     <div class="globe-icon"></div>
                 </div>
                 <label class="theme-switch">
@@ -1385,555 +893,101 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
-        <!-- Page Header -->
-        <section class="page-header">
+        <!-- Section Header -->
+        <div class="section-header">
             <div class="container">
-                <h1><span>خطط</span> الأسعار</h1>
-                <p>اختر الباقة المناسبة لبدء رحلة التحول الرقمي</p>
+                <h2>Our <span class="gradient-text">Portfolio</span></h2>
+                <p>Real projects we delivered for our clients across various sectors</p>
             </div>
-        </section>
+        </div>
 
-        <!-- ERP Implementation Plans Section -->
-        <section class="pricing-plans-section">
+        <!-- Gallery Section -->
+        <section class="gallery-section">
             <div class="container">
-                <div class="pricing-plans-grid">
-                    <div class="pricing-plan-card" data-plan="starter" data-name="Starter" data-min="500" data-max="800">
-                        <div class="plan-header">
-                            <h3>Starter</h3>
-                            <div class="plan-price">
-                                <span class="price">$500 – $800</span>
-                            </div>
-                            <p class="plan-desc">لمنشآت البداية</p>
+                <div class="gallery-grid">
+                    <!-- 1. Restaurant Management System -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-utensils"></i>
                         </div>
-                        <div class="plan-features">
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> نظام ERPNext أو Odoo</li>
-                                <li><i class="fas fa-check-circle"></i> تركيب النظام</li>
-                                <li><i class="fas fa-check-circle"></i> إعداد الشركة على النظام</li>
-                                <li><i class="fas fa-user"></i> <strong>2 مستخدم</strong></li>
-                                <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
-                                <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
-                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية</li>
-                                <li><i class="fas fa-check-circle"></i> تدريب 2 ساعة</li>
-                                <li><i class="fas fa-check-circle"></i> دعم 7 أيام بعد التشغيل</li>
-                            </ul>
-                        </div>
-                        <div class="plan-footer">
-                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Starter" data-min="500" data-max="800">اطلب الخطة</button>
+                        <h3 class="card-title">Restaurant Management System</h3>
+                        <p class="card-description">A comprehensive system for managing orders, inventory, and invoices for a restaurant chain with 15 branches.</p>
+                        <div class="tags-container">
+                            <span class="tag">POS</span>
+                            <span class="tag">Inventory</span>
+                            <span class="tag">Reports</span>
                         </div>
                     </div>
 
-                    <div class="pricing-plan-card popular" data-plan="professional" data-name="Professional" data-min="2000" data-max="3500">
-                        <div class="popular-badge">الأكثر طلباً</div>
-                        <div class="plan-header">
-                            <h3>Professional</h3>
-                            <div class="plan-price">
-                                <span class="price">$2,000 – $3,500</span>
-                            </div>
-                            <p class="plan-desc">للشركات النامية</p>
+                    <!-- 2. Factory Accounting System -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-industry"></i>
                         </div>
-                        <div class="plan-features">
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> نظام ERPNext أو Odoo</li>
-                                <li><i class="fas fa-check-circle"></i> تركيب النظام</li>
-                                <li><i class="fas fa-check-circle"></i> إعداد الشركة على النظام</li>
-                                <li><i class="fas fa-user"></i> <strong>12 مستخدم</strong></li>
-                                <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
-                                <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
-                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية والمتقدمة</li>
-                                <li><i class="fas fa-check-circle"></i> إدارة المخزون</li>
-                                <li><i class="fas fa-check-circle"></i> المبيعات والمشتريات</li>
-                                <li><i class="fas fa-check-circle"></i> التقارير المالية</li>
-                                <li><i class="fas fa-check-circle"></i> تخصيص محدود</li>
-                                <li><i class="fas fa-check-circle"></i> ترحيل البيانات</li>
-                                <li><i class="fas fa-check-circle"></i> تدريب 6 ساعات</li>
-                                <li><i class="fas fa-check-circle"></i> دعم 30 يوم بعد التشغيل</li>
-                            </ul>
-                        </div>
-                        <div class="plan-footer">
-                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Professional" data-min="2000" data-max="3500">اطلب الخطة</button>
+                        <h3 class="card-title">Factory Accounting System</h3>
+                        <p class="card-description">A complete ERP solution for a clothing factory including production tracking, costs, and HR.</p>
+                        <div class="tags-container">
+                            <span class="tag">Production</span>
+                            <span class="tag">Costs</span>
+                            <span class="tag">HR</span>
                         </div>
                     </div>
 
-                    <div class="pricing-plan-card" data-plan="enterprise" data-name="Enterprise" data-custom="true">
-                        <div class="plan-header">
-                            <h3>Enterprise</h3>
-                            <div class="plan-price">
-                                <span class="price">سعر مخصص</span>
-                            </div>
-                            <p class="plan-desc">للمؤسسات الكبرى</p>
+                    <!-- 3. Medical Clinic System -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-hospital"></i>
                         </div>
-                        <div class="plan-features">
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> نظام ERPNext أو Odoo</li>
-                                <li><i class="fas fa-check-circle"></i> تركيب النظام</li>
-                                <li><i class="fas fa-check-circle"></i> إعداد الشركة على النظام</li>
-                                <li><i class="fas fa-user"></i> <strong>مستخدمين غير محدود</strong></li>
-                                <li><i class="fas fa-check-circle"></i> إعداد المنتجات والخدمات</li>
-                                <li><i class="fas fa-check-circle"></i> إضافة العملاء والموردين</li>
-                                <li><i class="fas fa-check-circle"></i> المحاسبة الأساسية والمتقدمة</li>
-                                <li><i class="fas fa-check-circle"></i> إدارة المخزون</li>
-                                <li><i class="fas fa-check-circle"></i> المبيعات والمشتريات</li>
-                                <li><i class="fas fa-check-circle"></i> التقارير المالية</li>
-                                <li><i class="fas fa-check-circle"></i> تخصيص متقدم</li>
-                                <li><i class="fas fa-check-circle"></i> تكامل API</li>
-                                <li><i class="fas fa-check-circle"></i> ترحيل البيانات</li>
-                                <li><i class="fas fa-check-circle"></i> تدريب كامل</li>
-                                <li><i class="fas fa-check-circle"></i> دعم 90 يوم بعد التشغيل</li>
-                            </ul>
-                        </div>
-                        <div class="plan-footer">
-                            <button class="btn-plan add-to-cart" data-type="plan" data-name="Enterprise" data-custom="true">اطلب الخطة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Support Plans Section -->
-        <section class="support-section">
-            <div class="container">
-                <h2 class="section-title">خطط <span class="gradient-text">الدعم الفني</span></h2>
-                <p class="section-subtitle">اختر باقة الدعم المناسبة لعملك</p>
-                <div class="support-plans-grid">
-                    <div class="support-card" data-support="basic" data-name="دعم Basic" data-price="100">
-                        <h3>Basic</h3>
-                        <div class="price">$100 <span>/شهرياً</span></div>
-                        <ul>
-                            <li><i class="fas fa-envelope"></i> دعم عبر البريد الإلكتروني</li>
-                            <li><i class="fas fa-bug"></i> إصلاح الأخطاء</li>
-                            <li><i class="fas fa-database"></i> نسخ احتياطي أسبوعي</li>
-                            <li><i class="fas fa-clock"></i> وقت الاستجابة: 48 ساعة</li>
-                        </ul>
-                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Basic" data-price="100">اشترك الآن</button>
-                    </div>
-                    <div class="support-card popular" data-support="professional" data-name="دعم Professional" data-price="250">
-                        <div class="popular-badge">الأكثر طلباً</div>
-                        <h3>Professional</h3>
-                        <div class="price">$250 <span>/شهرياً</span></div>
-                        <ul>
-                            <li><i class="fas fa-envelope"></i> دعم عبر البريد الإلكتروني</li>
-                            <li><i class="fab fa-whatsapp"></i> دعم عبر واتساب</li>
-                            <li><i class="fas fa-bug"></i> إصلاح الأخطاء</li>
-                            <li><i class="fas fa-sync-alt"></i> تحديثات النظام</li>
-                            <li><i class="fas fa-database"></i> نسخ احتياطي أسبوعي</li>
-                            <li><i class="fas fa-code"></i> 3 ساعات تطوير شهرياً</li>
-                            <li><i class="fas fa-clock"></i> وقت الاستجابة: 24 ساعة</li>
-                        </ul>
-                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Professional" data-price="250">اشترك الآن</button>
-                    </div>
-                    <div class="support-card" data-support="enterprise" data-name="دعم Enterprise" data-price="500">
-                        <h3>Enterprise</h3>
-                        <div class="price">$500 <span>/شهرياً</span></div>
-                        <ul>
-                            <li><i class="fas fa-headset"></i> دعم كامل</li>
-                            <li><i class="fas fa-bug"></i> إصلاح الأخطاء</li>
-                            <li><i class="fas fa-sync-alt"></i> تحديثات النظام</li>
-                            <li><i class="fas fa-database"></i> نسخ احتياطي يومي</li>
-                            <li><i class="fas fa-code"></i> 10 ساعات تطوير شهرياً</li>
-                            <li><i class="fas fa-clock"></i> وقت الاستجابة: 12 ساعة</li>
-                        </ul>
-                        <button class="btn-support add-to-cart" data-type="support" data-name="دعم Enterprise" data-price="500">اشترك الآن</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Additional Services Section -->
-        <section class="additional-services">
-            <div class="container">
-                <h2 class="section-title">الخدمات <span class="gradient-text">الإضافية</span></h2>
-                <p class="section-subtitle">خدمات إضافية لتعزيز نظامك</p>
-                <div class="services-grid">
-                    <div class="service-card" data-service="hosting" data-name="استضافة الخادم" data-min="25" data-max="250">
-                        <i class="fas fa-server"></i>
-                        <h3>استضافة الخادم</h3>
-                        <p class="price">$25 – $250 <span>/شهر</span></p>
-                        <p>استضافة آمنة وسريعة للنظام</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="استضافة الخادم" data-min="25" data-max="250">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="reports" data-name="تقارير مخصصة" data-min="100" data-max="500">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>تقارير مخصصة</h3>
-                        <p class="price">$100 – $500</p>
-                        <p>تصميم تقارير حسب احتياجك</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="تقارير مخصصة" data-min="100" data-max="500">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="api" data-name="تكامل API" data-min="300" data-max="1500">
-                        <i class="fas fa-plug"></i>
-                        <h3>تكامل API</h3>
-                        <p class="price">$300 – $1,500</p>
-                        <p>ربط النظام مع تطبيقات خارجية</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="تكامل API" data-min="300" data-max="1500">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="website" data-name="تكامل موقع إلكتروني" data-min="300" data-max="1000">
-                        <i class="fas fa-globe"></i>
-                        <h3>تكامل موقع إلكتروني</h3>
-                        <p class="price">$300 – $1,000</p>
-                        <p>ربط المتجر الإلكتروني مع النظام</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="تكامل موقع إلكتروني" data-min="300" data-max="1000">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="training" data-name="تدريب إضافي" data-price="25">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <h3>تدريب إضافي</h3>
-                        <p class="price">$25 <span>/ساعة</span></p>
-                        <p>تدريب الموظفين على النظام</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="تدريب إضافي" data-price="25">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="custom" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">
-                        <i class="fas fa-puzzle-piece"></i>
-                        <h3>تطوير وحدات مخصصة</h3>
-                        <p class="price">$500 – $5,000</p>
-                        <p>تطوير مميزات خاصة بشركتك</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="تطوير وحدات مخصصة" data-min="500" data-max="5000">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="mobile" data-name="تطبيق موبايل" data-min="1000" data-max="3000">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h3>تطبيق موبايل</h3>
-                        <p class="price">$1,000 – $3,000</p>
-                        <p>تطبيق مخصص للوصول للنظام</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="تطبيق موبايل" data-min="1000" data-max="3000">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="pos" data-name="نظام نقاط البيع" data-min="300" data-max="800">
-                        <i class="fas fa-cash-register"></i>
-                        <h3>نظام نقاط البيع</h3>
-                        <p class="price">$300 – $800</p>
-                        <p>ربط نظام POS مع ERP</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="نظام نقاط البيع" data-min="300" data-max="800">اطلب الخدمة</button>
-                    </div>
-                    <div class="service-card" data-service="hr" data-name="نظام الموارد البشرية" data-min="400" data-max="1200">
-                        <i class="fas fa-users"></i>
-                        <h3>نظام الموارد البشرية</h3>
-                        <p class="price">$400 – $1,200</p>
-                        <p>إدارة الموظفين والرواتب</p>
-                        <button class="btn-service add-to-cart" data-type="service" data-name="نظام الموارد البشرية" data-min="400" data-max="1200">اطلب الخدمة</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Consulting Services Section -->
-        <section class="consulting-services">
-            <div class="container">
-                <h2 class="section-title">الخدمات <span class="gradient-text">الاستشارية</span></h2>
-                <p class="section-subtitle">استشارات احترافية لتعظيم استفادتك من النظام</p>
-                <div class="consulting-grid">
-                    <div class="consulting-item" data-consult="annual_reports" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">
-                        <i class="fas fa-file-alt"></i>
-                        <div class="consulting-info">
-                            <h3>إعداد التقارير السنوية</h3>
-                            <p>إعداد التقارير المالية السنوية</p>
-                            <span class="price">$300 – $800</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد التقارير السنوية" data-min="300" data-max="800">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="fiscal_close" data-name="تقفيل السنة المالية" data-min="200" data-max="500">
-                        <i class="fas fa-calendar-alt"></i>
-                        <div class="consulting-info">
-                            <h3>تقفيل السنة المالية</h3>
-                            <p>Closing Fiscal Year وإعداد Opening Balance</p>
-                            <span class="price">$200 – $500</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تقفيل السنة المالية" data-min="200" data-max="500">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="audit" data-name="التدقيق السنوي" data-min="500" data-max="2000">
-                        <i class="fas fa-search"></i>
-                        <div class="consulting-info">
-                            <h3>التدقيق السنوي</h3>
-                            <p>مراجعة العمليات المالية داخل النظام</p>
-                            <span class="price">$500 – $2,000</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="التدقيق السنوي" data-min="500" data-max="2000">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="risk" data-name="إدارة المخاطر" data-min="800" data-max="2500">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="consulting-info">
-                            <h3>إدارة المخاطر</h3>
-                            <p>تحليل المخاطر التشغيلية والمالية</p>
-                            <span class="price">$800 – $2,500</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إدارة المخاطر" data-min="800" data-max="2500">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="sop" data-name="إعداد سياسات وإجراءات SOP" data-min="500" data-max="1500">
-                        <i class="fas fa-file-signature"></i>
-                        <div class="consulting-info">
-                            <h3>إعداد سياسات وإجراءات SOP</h3>
-                            <p>كتابة السياسات التشغيلية وربطها بالنظام</p>
-                            <span class="price">$500 – $1,500</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد سياسات وإجراءات SOP" data-min="500" data-max="1500">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="dashboard" data-name="إعداد Dashboard تنفيذي" data-min="300" data-max="900">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <div class="consulting-info">
-                            <h3>إعداد Dashboard تنفيذي</h3>
-                            <p>تصميم لوحة تحكم للإدارة KPI Dashboard</p>
-                            <span class="price">$300 – $900</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد Dashboard تنفيذي" data-min="300" data-max="900">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="data_analysis" data-name="تحليل البيانات" data-min="200" data-max="700">
-                        <i class="fas fa-chart-bar"></i>
-                        <div class="consulting-info">
-                            <h3>تحليل البيانات</h3>
-                            <p>استخراج وتحليل بيانات المبيعات والعمليات</p>
-                            <span class="price">$200 – $700</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل البيانات" data-min="200" data-max="700">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="staff_training" data-name="تدريب الموظفين" data-min="25" data-max="80" data-hourly="true">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <div class="consulting-info">
-                            <h3>تدريب الموظفين</h3>
-                            <p>تدريب المحاسبة والمبيعات والمخازن</p>
-                            <span class="price">$25 – $80 / ساعة</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تدريب الموظفين" data-min="25" data-max="80" data-hourly="true">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="tax" data-name="إعداد النظام للامتثال الضريبي" data-min="200" data-max="600">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        <div class="consulting-info">
-                            <h3>إعداد النظام للامتثال الضريبي</h3>
-                            <p>إعداد الضرائب VAT أو Tax Setup</p>
-                            <span class="price">$200 – $600</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد النظام للامتثال الضريبي" data-min="200" data-max="600">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="internal_control" data-name="إعداد نظام الرقابة الداخلية" data-min="500" data-max="1500">
-                        <i class="fas fa-lock"></i>
-                        <div class="consulting-info">
-                            <h3>إعداد نظام الرقابة الداخلية</h3>
-                            <p>تصميم Internal Control داخل النظام</p>
-                            <span class="price">$500 – $1,500</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد نظام الرقابة الداخلية" data-min="500" data-max="1500">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="iso" data-name="إعداد وتطبيق ISO" data-min="2000" data-max="9000">
-                        <i class="fas fa-certificate"></i>
-                        <div class="consulting-info">
-                            <h3>إعداد وتطبيق ISO</h3>
-                            <p>إعداد الشركة للحصول على شهادات ISO</p>
-                            <span class="price">$2,000 – $9,000</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="إعداد وتطبيق ISO" data-min="2000" data-max="9000">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="process" data-name="تحليل العمليات Business Process" data-min="800" data-max="3000">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="consulting-info">
-                            <h3>تحليل العمليات Business Process</h3>
-                            <p>تحليل العمليات وتحسينها داخل ERP</p>
-                            <span class="price">$800 – $3,000</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل العمليات Business Process" data-min="800" data-max="3000">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="supply_chain" data-name="تحليل سلسلة التوريد" data-min="600" data-max="2000">
-                        <i class="fas fa-truck"></i>
-                        <div class="consulting-info">
-                            <h3>تحليل سلسلة التوريد</h3>
-                            <p>تحسين عمليات المشتريات والمخزون</p>
-                            <span class="price">$600 – $2,000</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="تحليل سلسلة التوريد" data-min="600" data-max="2000">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="cfo" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">
-                        <i class="fas fa-chart-pie"></i>
-                        <div class="consulting-info">
-                            <h3>استشارات الإدارة المالية</h3>
-                            <p>CFO Advisory باستخدام تقارير ERP</p>
-                            <span class="price">$300 – $1,000</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارات الإدارة المالية" data-min="300" data-max="1000">اطلب الاستشارة</button>
-                    </div>
-                    <div class="consulting-item" data-consult="custom_consulting" data-name="استشارة مخصصة" data-min="100" data-max="5000" data-custom="true">
-                        <i class="fas fa-comments"></i>
-                        <div class="consulting-info">
-                            <h3>استشارة مخصصة</h3>
-                            <p>استشارة حسب احتياجك الخاص</p>
-                            <span class="price">$100 – $5,000</span>
-                        </div>
-                        <button class="btn-consulting add-to-cart" data-type="consulting" data-name="استشارة مخصصة" data-min="100" data-max="5000">اطلب الاستشارة</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Payment Methods Section - 3D Flip Cards -->
-        <section class="payment-section">
-            <div class="container">
-                <h2 class="payment-title"><span>طرق</span> الدفع</h2>
-                <div class="payment-grid">
-                    <!-- Ki Card -->
-                    <div class="card" onclick="openPaymentModal('qcard')">
-                        <div class="content">
-                            <div class="front">
-                                <div class="img">
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="front-content">
-                                    <small class="badge">دفع آمن</small>
-                                    <div class="description">
-                                        <div class="title">
-                                            <p>كي كارد</p>
-                                        </div>
-                                        <p class="card-footer">ادفع بسهولة وأمان</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back">
-                                <div class="back-content">
-                                    <img src="assets/images/Q card.gif" alt="كي كارد" class="payment-qr">
-                                    <div class="payment-name">كي كارد</div>
-                                    <div class="qr-note">امسح رمز QR للدفع</div>
-                                </div>
-                            </div>
+                        <h3 class="card-title">Medical Clinic System</h3>
+                        <p class="card-description">A platform for managing appointments, medical records, and invoices for a group of specialized clinics.</p>
+                        <div class="tags-container">
+                            <span class="tag">Appointments</span>
+                            <span class="tag">Records</span>
+                            <span class="tag">Billing</span>
                         </div>
                     </div>
 
-                    <!-- Zain Cash -->
-                    <div class="card" onclick="openPaymentModal('zain')">
-                        <div class="content">
-                            <div class="front">
-                                <div class="img">
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="front-content">
-                                    <small class="badge">دفع آمن</small>
-                                    <div class="description">
-                                        <div class="title">
-                                            <p>زين كاش</p>
-                                        </div>
-                                        <p class="card-footer">ادفع بسهولة وأمان</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back">
-                                <div class="back-content">
-                                    <img src="assets/images/Zain.gif" alt="زين كاش" class="payment-qr">
-                                    <div class="payment-name">زين كاش</div>
-                                    <div class="qr-note">امسح رمز QR للدفع</div>
-                                </div>
-                            </div>
+                    <!-- 4. School Management System -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="card-title">School Management System</h3>
+                        <p class="card-description">A comprehensive system for managing student affairs, tuition fees, and financial reports.</p>
+                        <div class="tags-container">
+                            <span class="tag">Students</span>
+                            <span class="tag">Fees</span>
+                            <span class="tag">Reports</span>
                         </div>
                     </div>
 
-                    <!-- FIB -->
-                    <div class="card" onclick="openPaymentModal('fib')">
-                        <div class="content">
-                            <div class="front">
-                                <div class="img">
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="front-content">
-                                    <small class="badge">دفع آمن</small>
-                                    <div class="description">
-                                        <div class="title">
-                                            <p>مصرف العراق الأول FIB</p>
-                                        </div>
-                                        <p class="card-footer">ادفع بسهولة وأمان</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back">
-                                <div class="back-content">
-                                    <img src="assets/images/FIB.gif" alt="FIB" class="payment-qr">
-                                    <div class="payment-name">مصرف العراق الأول FIB</div>
-                                    <div class="qr-note">امسح رمز QR للدفع</div>
-                                </div>
-                            </div>
+                    <!-- 5. Real Estate System -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="card-title">Real Estate System</h3>
+                        <p class="card-description">An integrated solution for managing properties, contracts, rentals, maintenance, and collections.</p>
+                        <div class="tags-container">
+                            <span class="tag">Properties</span>
+                            <span class="tag">Contracts</span>
+                            <span class="tag">Collections</span>
                         </div>
                     </div>
 
-                    <!-- Al Taeef Islamic Bank -->
-                    <div class="card" onclick="openPaymentModal('altaeef')">
-                        <div class="content">
-                            <div class="front">
-                                <div class="img">
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="front-content">
-                                    <small class="badge">دفع آمن</small>
-                                    <div class="description">
-                                        <div class="title">
-                                            <p>مصرف الطيف الاسلامي</p>
-                                        </div>
-                                        <p class="card-footer">ادفع بسهولة وأمان</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back">
-                                <div class="back-content">
-                                    <img src="assets/images/al taeef.gif" alt="مصرف الطيف الاسلامي" class="payment-qr">
-                                    <div class="payment-name">مصرف الطيف الاسلامي</div>
-                                    <div class="qr-note">امسح رمز QR للدفع</div>
-                                </div>
-                            </div>
+                    <!-- 6. E-Commerce System -->
+                    <div class="gallery-card">
+                        <div class="icon-box">
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
-                    </div>
-
-                    <!-- Fast Pay -->
-                    <div class="card" onclick="openPaymentModal('fastpay')">
-                        <div class="content">
-                            <div class="front">
-                                <div class="img">
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="front-content">
-                                    <small class="badge">دفع آمن</small>
-                                    <div class="description">
-                                        <div class="title">
-                                            <p>فاست بي</p>
-                                        </div>
-                                        <p class="card-footer">ادفع بسهولة وأمان</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back">
-                                <div class="back-content">
-                                    <img src="assets/images/Fast pay.gif" alt="فاست بي" class="payment-qr">
-                                    <div class="payment-name">فاست بي</div>
-                                    <div class="qr-note">امسح رمز QR للدفع</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Asia Bee -->
-                    <div class="card" onclick="openPaymentModal('asia')">
-                        <div class="content">
-                            <div class="front">
-                                <div class="img">
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                    <div class="circle"></div>
-                                </div>
-                                <div class="front-content">
-                                    <small class="badge">دفع آمن</small>
-                                    <div class="description">
-                                        <div class="title">
-                                            <p>اسيا بي</p>
-                                        </div>
-                                        <p class="card-footer">ادفع بسهولة وأمان</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="back">
-                                <div class="back-content">
-                                    <img src="assets/images/Asia.gif" alt="اسيا بي" class="payment-qr">
-                                    <div class="payment-name">اسيا بي</div>
-                                    <div class="qr-note">امسح رمز QR للدفع</div>
-                                </div>
-                            </div>
+                        <h3 class="card-title">E-Commerce System</h3>
+                        <p class="card-description">Linking the online store with the accounting system to automatically track sales and inventory.</p>
+                        <div class="tags-container">
+                            <span class="tag">Store</span>
+                            <span class="tag">Sales</span>
+                            <span class="tag">Inventory</span>
                         </div>
                     </div>
                 </div>
@@ -1941,56 +995,19 @@
         </section>
     </main>
 
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
-            <button class="close-cart" onclick="toggleCart()">&times;</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="cart-empty">سلة المشتريات فارغة</div>
-        </div>
-        <div class="cart-total" id="cartTotal" style="display: none;">
-            <div class="cart-total-row">
-                <span>المجموع الكلي:</span>
-                <span class="cart-total-range" id="totalRange">$0 – $0</span>
-            </div>
-            <button class="btn-checkout" onclick="sendToWhatsApp()">
-                <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
-            </button>
-        </div>
-    </div>
-
-    <!-- Cart Toggle Button -->
-    <div class="cart-toggle" onclick="toggleCart()">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count" id="cartCount">0</span>
-    </div>
-
     <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/9647506841035?text=مرحباً%20أرغب%20في%20الاستفسار%20عن%20خدمات%20Odunex" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/9647506841035?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20Odunex%20services" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
-        <span class="tooltip">تواصل معنا عبر واتساب</span>
+        <span class="tooltip">Contact us on WhatsApp</span>
     </a>
 
-    <!-- Payment Modal -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal">
-            <span class="close-modal" onclick="closePaymentModal()">&times;</span>
-            <div class="modal-img-container">
-                <img src="" alt="طريقة الدفع" class="modal-img" id="modalImage">
-            </div>
-            <h3 id="modalTitle">طريقة الدفع</h3>
-            <p id="modalDescription">امسح رمز QR للدفع</p>
-        </div>
-    </div>
-
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand-row">
                 <div class="footer-brand-text">
                     <div class="footer-brand-name">Odunex</div>
-                    <div class="footer-tagline">حلول ERP الموحدة</div>
+                    <div class="footer-tagline">Unified ERP Solutions</div>
                 </div>
                 <div class="footer-logo">
                     <img src="assets/images/odonex-logo.png.png" alt="Odunex Logo">
@@ -2010,191 +1027,71 @@
             </div>
             
             <div class="footer-copyright">
-                © 2026 جميع الحقوق محفوظة لشركة Odunex | حلول ERP الموحدة
+                © 2026 Odunex | Unified ERP Solutions. All rights reserved.
             </div>
         </div>
     </footer>
 
     <script>
-        // Cart System
-        let cart = [];
-
-        function addToCart(item) {
-            cart.push(item);
-            updateCartUI();
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const cartItemsDiv = document.getElementById('cartItems');
-            const cartTotalDiv = document.getElementById('cartTotal');
-            const cartCount = document.getElementById('cartCount');
-            
-            cartCount.textContent = cart.length;
-            
-            if (cart.length === 0) {
-                cartItemsDiv.innerHTML = '<div class="cart-empty">سلة المشتريات فارغة</div>';
-                cartTotalDiv.style.display = 'none';
-                return;
+        // ==============================================
+        // Security Functions
+        // ==============================================
+        
+        function sanitizeInput(text) {
+            if (typeof DOMPurify !== 'undefined') {
+                return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
             }
+            return text.replace(/[<>]/g, "");
+        }
+        
+        function validateRequestOrigin() {
+            const referrer = document.referrer || '';
+            const currentDomain = window.location.hostname;
             
-            cartTotalDiv.style.display = 'block';
-            
-            let html = '';
-            let totalMin = 0;
-            let totalMax = 0;
-            
-            cart.forEach((item, index) => {
-                let priceDisplay = '';
-                let minVal = 0;
-                let maxVal = 0;
-                
-                if (item.min && item.max) {
-                    priceDisplay = `$${item.min} – $${item.max}`;
-                    minVal = item.min;
-                    maxVal = item.max;
-                } else if (item.price) {
-                    priceDisplay = `$${item.price}`;
-                    minVal = item.price;
-                    maxVal = item.price;
-                } else if (item.custom) {
-                    priceDisplay = 'سعر مخصص';
-                }
-                
-                totalMin += minVal;
-                totalMax += maxVal;
-                
-                html += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">${priceDisplay}</div>
-                        </div>
-                        <button class="cart-item-remove" onclick="removeFromCart(${index})">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                `;
-            });
-            
-            cartItemsDiv.innerHTML = html;
-            
-            let totalDisplay = '';
-            if (totalMin === totalMax && totalMin > 0) {
-                totalDisplay = `$${totalMin}`;
-            } else if (totalMin > 0 || totalMax > 0) {
-                totalDisplay = `$${totalMin} – $${totalMax}`;
-            } else {
-                totalDisplay = 'سعر مخصص';
+            if (referrer && !referrer.includes(currentDomain) && !referrer.includes('odunex.com')) {
+                console.warn('Request from external domain detected:', referrer);
+                return false;
             }
+            return true;
+        }
+        
+        function checkRateLimit() {
+            const lastVisit = localStorage.getItem('lastPageVisit');
+            const now = Date.now();
             
-            document.getElementById('totalRange').textContent = totalDisplay;
+            if (lastVisit && now - lastVisit < 3000) {
+                return false;
+            }
+            localStorage.setItem('lastPageVisit', now);
+            return true;
         }
 
-        document.querySelectorAll('.add-to-cart').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const name = this.dataset.name;
-                const item = { name: name };
-                
-                if (this.dataset.min && this.dataset.max) {
-                    item.min = parseInt(this.dataset.min);
-                    item.max = parseInt(this.dataset.max);
-                }
-                if (this.dataset.price) {
-                    item.price = parseInt(this.dataset.price);
-                }
-                if (this.dataset.custom === 'true') {
-                    item.custom = true;
-                }
-                
-                addToCart(item);
-                
-                const notification = document.createElement('div');
-                notification.textContent = `✓ تم إضافة "${name}" إلى السلة`;
-                notification.style.position = 'fixed';
-                notification.style.bottom = '100px';
-                notification.style.right = '30px';
-                notification.style.backgroundColor = '#10b981';
-                notification.style.color = 'white';
-                notification.style.padding = '12px 20px';
-                notification.style.borderRadius = '8px';
-                notification.style.zIndex = '1002';
-                notification.style.fontWeight = '600';
-                document.body.appendChild(notification);
-                setTimeout(() => notification.remove(), 2000);
-            });
-        });
-
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('open');
-        }
-
-        function sendToWhatsApp() {
-            if (cart.length === 0) {
-                alert('السلة فارغة. أضف بعض الخدمات أولاً.');
-                return;
-            }
-            
-            let message = '📋 *طلب خدمات Odunex*\n\n';
-            message += '*الخدمات المطلوبة:*\n';
-            
-            cart.forEach((item, index) => {
-                let priceDisplay = '';
-                if (item.min && item.max) {
-                    priceDisplay = ` ($${item.min} – $${item.max})`;
-                } else if (item.price) {
-                    priceDisplay = ` ($${item.price})`;
-                } else if (item.custom) {
-                    priceDisplay = ` (سعر مخصص)`;
-                }
-                message += `${index + 1}. ${item.name}${priceDisplay}\n`;
-            });
-            
-            let totalMin = cart.reduce((sum, item) => sum + (item.min || item.price || 0), 0);
-            let totalMax = cart.reduce((sum, item) => sum + (item.max || item.price || 0), 0);
-            
-            message += '\n*المجموع:* ';
-            if (totalMin === totalMax && totalMin > 0) {
-                message += `$${totalMin}`;
-            } else if (totalMin > 0 || totalMax > 0) {
-                message += `$${totalMin} – $${totalMax}`;
-            } else {
-                message += 'سعر مخصص';
-            }
-            
-            message += '\n\n*للتواصل:* يرجى التواصل معنا لتأكيد الطلب وتفاصيل الدفع.';
-            
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/9647506841035?text=${encodedMessage}`, '_blank');
-        }
-
+        // ==============================================
         // Theme Toggle Function
+        // ==============================================
         function setTheme(isDark) {
             const themeToggle = document.getElementById('themeToggle');
             if (isDark) {
-                document.body.classList.remove('light-mode');
+                document.body.classList.remove('dark-mode');
                 if (themeToggle) themeToggle.checked = false;
-                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('darkMode', 'disabled');
             } else {
-                document.body.classList.add('light-mode');
+                document.body.classList.add('dark-mode');
                 if (themeToggle) themeToggle.checked = true;
-                localStorage.setItem('theme', 'light');
+                localStorage.setItem('darkMode', 'enabled');
             }
         }
 
         function toggleTheme(e) {
-            const isLightMode = e.target.checked;
-            setTheme(!isLightMode);
+            const isDarkMode = e.target.checked;
+            setTheme(!isDarkMode);
         }
 
         function updateActiveLink() {
-            const currentPage = window.location.pathname.split('/').pop() || 'pricing.html';
-            document.querySelectorAll('.nav-menu a').forEach(link => {
+            const currentPage = window.location.pathname.split('/').pop() || 'gallery-en.html';
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === currentPage) {
                     link.classList.add('active');
@@ -2202,54 +1099,22 @@
             });
         }
 
+        // ==============================================
+        // Language Switch
+        // ==============================================
         function switchLanguage() {
-            window.location.href = 'pricing-en.html';
-        }
-
-        function openPaymentModal(method) {
-            const modal = document.getElementById('paymentModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            
-            const methods = {
-                qcard: { img: 'assets/images/Q card.gif', title: 'كي كارد', desc: 'امسح رمز QR مع تطبيق كي كارد' },
-                zain: { img: 'assets/images/Zain.gif', title: 'زين كاش', desc: 'امسح رمز QR مع تطبيق زين كاش' },
-                fib: { img: 'assets/images/FIB.gif', title: 'مصرف العراق الأول FIB', desc: 'امسح رمز QR مع تطبيق FIB' },
-                altaeef: { img: 'assets/images/al taeef.gif', title: 'مصرف الطيف الاسلامي', desc: 'امسح رمز QR مع تطبيق مصرف الطيف' },
-                fastpay: { img: 'assets/images/Fast pay.gif', title: 'فاست بي', desc: 'امسح رمز QR مع تطبيق فاست بي' },
-                asia: { img: 'assets/images/Asia.gif', title: 'اسيا بي', desc: 'امسح رمز QR مع تطبيق اسيا بي' }
-            };
-            
-            const data = methods[method];
-            if (data) {
-                modalImage.src = data.img;
-                modalTitle.textContent = data.title;
-                modalDescription.textContent = data.desc;
-            }
-            modal.style.display = 'flex';
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('paymentModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
+            window.location.href = 'gallery.html?v=' + Math.random();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
+            const savedMode = localStorage.getItem('darkMode');
             const themeToggle = document.getElementById('themeToggle');
             
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
+            if (savedMode === 'enabled') {
+                document.body.classList.add('dark-mode');
                 if (themeToggle) themeToggle.checked = true;
             } else {
-                document.body.classList.remove('light-mode');
+                document.body.classList.remove('dark-mode');
                 if (themeToggle) themeToggle.checked = false;
             }
             
@@ -2258,6 +1123,8 @@
             }
             
             updateActiveLink();
+            validateRequestOrigin();
+            checkRateLimit();
         });
     </script>
 </body>
