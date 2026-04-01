@@ -95,12 +95,10 @@
         body.dark-mode .nav-menu a.active {
             color: var(--primary-purple);
         }
-        body.dark-mode .lang-container,
-        body.dark-mode .audio-control-container {
+        body.dark-mode .lang-container {
             border-color: var(--dark-border);
         }
-        body.dark-mode .lang-text,
-        body.dark-mode .audio-toggle {
+        body.dark-mode .lang-text {
             color: var(--dark-text-secondary);
         }
         body.dark-mode .globe-icon {
@@ -361,7 +359,7 @@
         }
         .nav-left {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
         }
         .lang-container {
@@ -392,53 +390,6 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>');
             background-size: contain;
             transition: filter 0.3s ease;
-        }
-        
-        /* Audio Control Styles */
-        .audio-control-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            padding: 5px 10px;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .audio-control-container:hover {
-            border-color: var(--primary-purple);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(122, 90, 248, 0.3);
-        }
-        .audio-toggle {
-            background: transparent;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            color: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.3s ease;
-        }
-        .volume-slider {
-            width: 0;
-            overflow: hidden;
-            transition: width 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-        .audio-control-container:hover .volume-slider {
-            width: 80px;
-            opacity: 1;
-            visibility: visible;
-        }
-        .volume-slider input {
-            width: 70px;
-            cursor: pointer;
-            accent-color: var(--primary-purple);
         }
         
         /* Theme Switch Button */
@@ -1309,14 +1260,6 @@
                     <span class="lang-text">EN</span>
                     <div class="globe-icon"></div>
                 </div>
-                <div class="audio-control-container" id="audioControl">
-                    <button class="audio-toggle" id="audioToggleBtn">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <div class="volume-slider">
-                        <input type="range" id="volumeSlider" min="0" max="100" value="50">
-                    </div>
-                </div>
                 <label class="theme-switch">
                     <input type="checkbox" class="theme-switch__checkbox" id="themeToggle">
                     <div class="theme-switch__container">
@@ -1420,7 +1363,7 @@
                     آراء حقيقية من عملاء يثقون بنا في إدارة أعمالهم
                 </p>
                 <div class="testimonials-grid">
-                    <!-- Testimonial 1 -->
+                    <!-- Testimonial 1-6 (same content - shortened for brevity) -->
                     <div class="testimonial-card">
                         <div class="star-rating">
                             <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1434,8 +1377,6 @@
                         <div class="client-name">أحمد السعدي</div>
                         <div class="client-role">المدير المالي - مجموعة الرواد</div>
                     </div>
-
-                    <!-- Testimonial 2 -->
                     <div class="testimonial-card">
                         <div class="star-rating">
                             <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1449,8 +1390,6 @@
                         <div class="client-name">ليلى عبدالله</div>
                         <div class="client-role">رئيس قسم المحاسبة - شركة المنار</div>
                     </div>
-
-                    <!-- Testimonial 3 -->
                     <div class="testimonial-card">
                         <div class="star-rating">
                             <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1464,8 +1403,6 @@
                         <div class="client-name">محمد العمر</div>
                         <div class="client-role">مدير العمليات - شركة التقنية المتكاملة</div>
                     </div>
-
-                    <!-- Testimonial 4 -->
                     <div class="testimonial-card">
                         <div class="star-rating">
                             <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1479,8 +1416,6 @@
                         <div class="client-name">سعد الهاشمي</div>
                         <div class="client-role">المدير التنفيذي - مجموعة الهاشمي القابضة</div>
                     </div>
-
-                    <!-- Testimonial 5 -->
                     <div class="testimonial-card">
                         <div class="star-rating">
                             <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1494,8 +1429,6 @@
                         <div class="client-name">نور جمال</div>
                         <div class="client-role">مديرة التسويق - شركة الأفق للتجارة</div>
                     </div>
-
-                    <!-- Testimonial 6 -->
                     <div class="testimonial-card">
                         <div class="star-rating">
                             <svg class="star star-filled" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1604,68 +1537,19 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Audio Player System - Auto-play on page load
+        // Play background music ONCE on page load
         let bgAudio = null;
-        let isAudioPlaying = false;
-        let currentVolume = 0.5;
+        let hasPlayed = false;
 
-        function initAudio() {
-            bgAudio = new Audio('assets/Sound.mp3');
-            bgAudio.loop = true;
-            bgAudio.volume = currentVolume;
-            
-            const savedVolume = localStorage.getItem('audioVolume');
-            if (savedVolume !== null) {
-                currentVolume = parseFloat(savedVolume);
-                bgAudio.volume = currentVolume;
-                const volumeSlider = document.getElementById('volumeSlider');
-                if (volumeSlider) volumeSlider.value = currentVolume * 100;
-            }
-            
-            // Auto-play on page load
-            bgAudio.play().then(() => {
-                isAudioPlaying = true;
-                updateAudioIcon(true);
-                localStorage.setItem('audioPlaying', 'true');
-            }).catch(e => {
-                console.log('Audio autoplay blocked by browser:', e);
-                isAudioPlaying = false;
-                updateAudioIcon(false);
-                localStorage.setItem('audioPlaying', 'false');
-            });
-        }
-        
-        function updateAudioIcon(isPlaying) {
-            const toggleBtn = document.getElementById('audioToggleBtn');
-            if (toggleBtn) {
-                toggleBtn.innerHTML = isPlaying ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+        function playBackgroundMusic() {
+            if (!hasPlayed) {
+                bgAudio = new Audio('assets/Sound.mp3');
+                bgAudio.volume = 0.5; // 50% volume
+                bgAudio.play().catch(e => console.log('Audio autoplay blocked:', e));
+                hasPlayed = true;
             }
         }
-        
-        function toggleAudio() {
-            if (bgAudio) {
-                if (isAudioPlaying) {
-                    bgAudio.pause();
-                    isAudioPlaying = false;
-                    localStorage.setItem('audioPlaying', 'false');
-                } else {
-                    bgAudio.play().catch(e => console.log('Audio play failed:', e));
-                    isAudioPlaying = true;
-                    localStorage.setItem('audioPlaying', 'true');
-                }
-                updateAudioIcon(isAudioPlaying);
-            }
-        }
-        
-        function setVolume(value) {
-            const volume = value / 100;
-            currentVolume = volume;
-            if (bgAudio) {
-                bgAudio.volume = volume;
-            }
-            localStorage.setItem('audioVolume', volume);
-        }
-        
+
         // Rotating Keywords
         const wordsArray = [
             "تكامل","مركزية","مرونة","قابلية_التوسع","أتمتة","شفافية",
@@ -1704,15 +1588,9 @@
             wordsWrapper.style.minWidth = (maxWidth + 12) + 'px';
         }
         
-        // Initialize audio on page load
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            initAudio();
-            
-            const audioToggleBtn = document.getElementById('audioToggleBtn');
-            const volumeSlider = document.getElementById('volumeSlider');
-            
-            if (audioToggleBtn) audioToggleBtn.addEventListener('click', toggleAudio);
-            if (volumeSlider) volumeSlider.addEventListener('input', (e) => setVolume(e.target.value));
+            playBackgroundMusic();
             
             // Theme and other initializations
             const savedMode = localStorage.getItem('darkMode');
@@ -1745,7 +1623,7 @@
             window.onclick = function(event) { const modal = document.getElementById('trialModal'); if (event.target === modal) closeTrialModal(); };
         });
         
-        // Additional functions
+        // Additional functions (sanitize, validate, etc.)
         function sanitizeInput(text) {
             if (typeof DOMPurify !== 'undefined') return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
             return text.replace(/[<>]/g, "");
