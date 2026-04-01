@@ -990,7 +990,7 @@
             100% { transform: translateY(0px) translateX(0px); }
         }
 
-        /* Cart Sidebar */
+        /* Cart Sidebar - على اليمين */
         .cart-sidebar {
             position: fixed;
             right: -400px;
@@ -1084,11 +1084,11 @@
             box-shadow: 0 10px 20px rgba(122,90,248,0.4);
         }
         
-        /* Cart Toggle Button (for cart) */
+        /* Cart Toggle Button - على اليمين (للسلة) */
         .cart-toggle {
             position: fixed;
             bottom: 30px;
-            left: 30px;
+            right: 30px;
             background: var(--main-gradient);
             width: 60px;
             height: 60px;
@@ -1123,11 +1123,11 @@
             justify-content: center;
         }
 
-        /* ===== WhatsApp Float Button ===== */
+        /* ===== WhatsApp Float Button - على اليسار ===== */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 30px;
             width: 60px;
             height: 60px;
             background: var(--whatsapp-green);
@@ -1152,7 +1152,8 @@
         .whatsapp-float .tooltip {
             position: absolute;
             bottom: 70px;
-            right: -10px;
+            left: -10px;
+            right: auto;
             background: var(--dark-card-bg);
             color: var(--dark-text-primary);
             padding: 8px 12px;
@@ -1338,6 +1339,14 @@
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
+            }
+            .cart-toggle {
+                right: 20px;
+                bottom: 20px;
+            }
+            .whatsapp-float {
+                left: 20px;
+                bottom: 20px;
             }
         }
     </style>
@@ -1961,13 +1970,13 @@
         </div>
     </div>
 
-    <!-- Cart Toggle Button -->
+    <!-- Cart Toggle Button - Right Side -->
     <div class="cart-toggle" onclick="toggleCart()">
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count" id="cartCount">0</span>
     </div>
 
-    <!-- WhatsApp Float Button -->
+    <!-- WhatsApp Float Button - Left Side -->
     <a href="https://wa.me/9647506841035?text=مرحباً%20أرغب%20في%20الاستفسار%20عن%20خدمات%20Odunex" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
         <span class="tooltip">تواصل معنا عبر واتساب</span>
