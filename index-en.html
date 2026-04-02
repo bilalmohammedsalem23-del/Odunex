@@ -26,7 +26,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <style>
-        /* All CSS remains exactly the same as original */
         * {
             margin: 0;
             padding: 0;
@@ -583,6 +582,10 @@
             padding: 0 15px;
             font-weight: 500;
             transition: color 0.3s ease;
+            text-align: center;
+            line-height: 1.6;
+            white-space: normal;
+            word-break: keep-all;
         }
         .cta-buttons {
             display: flex;
@@ -1191,7 +1194,13 @@
             .hero-logo { width: 210px; }
             h1 { font-size: 32px; }
             .subheadline { font-size: 20px; }
-            .description { font-size: 16px; }
+            .description { 
+                font-size: 16px;
+                padding: 0 20px;
+                line-height: 1.7;
+                white-space: normal;
+                word-break: keep-all;
+            }
             .cta-buttons { flex-direction: column; gap: 12px; }
             .btn-primary, .btn-whatsapp { width: 100%; max-width: 280px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
@@ -1215,6 +1224,13 @@
             .stat-label { font-size: 14px; }
             h1 { font-size: 28px; }
             .hero-logo { width: 168px; }
+            .description {
+                font-size: 14px;
+                padding: 0 16px;
+                line-height: 1.7;
+                white-space: normal;
+                word-break: keep-all;
+            }
             .testimonials-title, .faq-title { font-size: 28px; }
             .testimonials-grid { gap: 15px; }
             .testimonial-card { padding: 20px; }
@@ -1249,11 +1265,11 @@
             </div>
 
             <div class="nav-menu">
-                <a href="index.html" class="active">Home</a>
-                <a href="features.html">Features</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="contact.html">Contact</a>
+                <a href="/en/" class="active">Home</a>
+                <a href="/en/features.html">Features</a>
+                <a href="/en/pricing.html">Pricing</a>
+                <a href="/en/gallery.html">Gallery</a>
+                <a href="/en/contact.html">Contact</a>
             </div>
 
             <div class="nav-left">
@@ -1294,8 +1310,8 @@
                 </h1>
                 <div class="subheadline">Integration. Security. Scalability.</div>
                 <p class="description">
-                    An integrated accounting system that brings all your business operations together<br>
-                    in one easy, secure, and scalable platform.
+                    An integrated accounting system that brings all your business operations together in one platform<br>
+                    easy, secure, and scalable
                 </p>
                 <div class="cta-buttons">
                     <button class="btn-primary" id="openTrialModalBtn">Start Your Free Trial</button>
@@ -1303,7 +1319,7 @@
                        class="btn-whatsapp" 
                        target="_blank">
                         <i class="fab fa-whatsapp"></i>
-                        Request a Consultation
+                        Request Consultation
                     </a>
                 </div>
                 
@@ -1526,7 +1542,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
     <script>
-        // Firebase configuration remains unchanged
         const firebaseConfig = {
             apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
             authDomain: "odunex-project.firebaseapp.com",
@@ -1539,20 +1554,18 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Play background music ONCE on page load
         let bgAudio = null;
         let hasPlayed = false;
 
         function playBackgroundMusic() {
             if (!hasPlayed) {
                 bgAudio = new Audio('assets/Sound.mp3');
-                bgAudio.volume = 0.5; // 50% volume
+                bgAudio.volume = 0.5;
                 bgAudio.play().catch(e => console.log('Audio autoplay blocked:', e));
                 hasPlayed = true;
             }
         }
 
-        // Rotating Keywords (English words)
         const wordsArray = [
             "Integration","Centralization","Flexibility","Scalability","Automation","Transparency",
             "Accuracy","Speed","Reliability","Customization","Reports","Analytics",
@@ -1590,11 +1603,9 @@
             wordsWrapper.style.minWidth = (maxWidth + 12) + 'px';
         }
         
-        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             playBackgroundMusic();
             
-            // Theme and other initializations
             const savedMode = localStorage.getItem('darkMode');
             const themeToggle = document.getElementById('themeToggle');
             
@@ -1625,7 +1636,6 @@
             window.onclick = function(event) { const modal = document.getElementById('trialModal'); if (event.target === modal) closeTrialModal(); };
         });
         
-        // All helper functions remain unchanged (sanitizeInput, validateEmail, validatePhoneNumber, etc.)
         function sanitizeInput(text) {
             if (typeof DOMPurify !== 'undefined') return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
             return text.replace(/[<>]/g, "");
@@ -1755,7 +1765,7 @@
         }
         
         function switchLanguage() {
-            window.location.href = 'index.html?v=' + Math.random();
+            window.location.href = '/';
         }
         
         function toggleFAQ(element) {
