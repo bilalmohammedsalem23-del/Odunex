@@ -1265,11 +1265,11 @@
             </div>
 
             <div class="nav-menu">
-                <a href="/en/" class="active">Home</a>
-                <a href="/en/features.html">Features</a>
-                <a href="/en/pricing.html">Pricing</a>
-                <a href="/en/gallery.html">Gallery</a>
-                <a href="/en/contact.html">Contact</a>
+                <a href="index-en.html" class="active">Home</a>
+                <a href="features-en.html">Features</a>
+                <a href="pricing-en.html">Pricing</a>
+                <a href="gallery-en.html">Portfolio</a>
+                <a href="contact-en.html">Contact</a>
             </div>
 
             <div class="nav-left">
@@ -1310,8 +1310,7 @@
                 </h1>
                 <div class="subheadline">Integration. Security. Scalability.</div>
                 <p class="description">
-                    An integrated accounting system that brings all your business operations together in one platform<br>
-                    easy, secure, and scalable
+                    An integrated accounting system that brings all your business operations together in one platform, easy, secure, and scalable
                 </p>
                 <div class="cta-buttons">
                     <button class="btn-primary" id="openTrialModalBtn">Start Your Free Trial</button>
@@ -1759,13 +1758,13 @@
         }
         
         function updateActiveLink() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const currentPage = window.location.pathname.split('/').pop() || 'index-en.html';
             const navLinks = document.querySelectorAll('.nav-menu a');
             navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === currentPage) link.classList.add('active'); });
         }
         
         function switchLanguage() {
-            window.location.href = '/';
+            window.location.href = 'index.html';
         }
         
         function toggleFAQ(element) {
