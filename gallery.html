@@ -176,6 +176,30 @@
             border-color: var(--dark-border);
         }
         
+        /* ===== Hero Section Text Colors ===== */
+        /* Light Mode: "معرض" باللون الأسود المعتمد */
+        body.light-mode .section-header h2 .gallery-word {
+            color: var(--dark-text) !important;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: var(--dark-text);
+        }
+        
+        /* Dark Mode: "معرض" باللون الأبيض (نفس لون عناوين البطاقات) */
+        body.dark-mode .section-header h2 .gallery-word {
+            color: var(--dark-text-primary) !important;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: var(--dark-text-primary);
+        }
+        
+        /* كلمة "أعمالنا" تحتفظ بالتدرج في كلتا الحالتين */
+        .section-header h2 .gradient-text {
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
         body.light-mode .whatsapp-float .tooltip {
             background: var(--bg-white);
             color: var(--dark-text);
@@ -480,12 +504,6 @@
             margin-bottom: 15px;
             color: var(--dark-text);
             transition: color 0.3s ease;
-        }
-
-        .section-header h2 .gradient-text {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .section-header p {
@@ -898,7 +916,7 @@
         <!-- Section Header -->
         <div class="section-header">
             <div class="container">
-                <h2>معرض <span class="gradient-text">أعمالنا</span></h2>
+                <h2><span class="gallery-word">معرض</span> <span class="gradient-text">أعمالنا</span></h2>
                 <p>مشاريع حقيقية نفذناها لعملائنا في مختلف القطاعات</p>
             </div>
         </div>
