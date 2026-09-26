@@ -23,7 +23,6 @@
     <!-- reCAPTCHA & Security -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <style>
         * {
@@ -1733,13 +1732,23 @@
                     adminApproved: false, trialLink: '', createdAt: new Date().toISOString(), read: false
                 });
                 console.log('✅ تم حفظ الطلب:', docRef.id);
-                emailjs.init('8cXcRruITvzWHTDf3');
-                await emailjs.send('service_y5lsvxh', 'template_6ylhgmc', {
-                    to_email: ['info@odunex.com', 'support@odunex.com'],
-                    fullName: fullName, email: email, phone: phone, companyName: companyName,
-                    companyField: companyField, requestId: docRef.id,
-                    firebaseLink: `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
+                const formSubmitResponse = await fetch('https://formsubmit.co/ajax/info@odunex.com', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: `طلب تجربة مجانية جديد - ${companyName}`,
+                        _cc: 'support@odunex.com',
+                        _template: 'table',
+                        'الاسم الكامل': fullName,
+                        'البريد الإلكتروني': email,
+                        'رقم الهاتف': phone,
+                        'اسم الشركة': companyName,
+                        'مجال الشركة': companyField,
+                        'رقم الطلب': docRef.id,
+                        'رابط فايربيس': `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
+                    })
                 });
+                if (!formSubmitResponse.ok) throw new Error('فشل إرسال الإيميل عبر FormSubmit');
                 console.log('✅ تم إرسال الإيميل');
                 localStorage.setItem('lastTrialSend', now);
                 document.getElementById('trialLoading').style.display = 'none';
