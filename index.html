@@ -1702,7 +1702,7 @@
             document.getElementById('trialMessage').style.display = 'none';
         }
         
-        async function submitTrialRequest() {
+                async function submitTrialRequest() {
             if (!validateRequestOrigin()) { showTrialMessage('طلب غير مصرح به', 'error'); return; }
             const honeypot = document.getElementById('website')?.value || '';
             if (honeypot !== "") { console.log("تم حظر بوت"); showTrialMessage('تم اكتشاف نشاط غير طبيعي', 'error'); return; }
@@ -1732,12 +1732,11 @@
                     adminApproved: false, trialLink: '', createdAt: new Date().toISOString(), read: false
                 });
                 console.log('✅ تم حفظ الطلب:', docRef.id);
-                const formSubmitResponse = await fetch('https://formsubmit.co/ajax/info@odunex.com', {
+                const formSubmitResponse = await fetch('https://formsubmit.co/ajax/Salamjasem66@gmail.com', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify({
                         _subject: `طلب تجربة مجانية جديد - ${companyName}`,
-                        _cc: 'support@odunex.com',
                         _template: 'table',
                         'الاسم الكامل': fullName,
                         'البريد الإلكتروني': email,
@@ -1761,7 +1760,7 @@
                 showTrialMessage('حدث خطأ. الرجاء المحاولة مرة أخرى', 'error');
             }
         }
-        
+           
         function showTrialMessage(message, type) {
             const msgDiv = document.getElementById('trialMessage');
             msgDiv.textContent = message;
