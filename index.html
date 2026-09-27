@@ -1706,11 +1706,13 @@
             if (!validateRequestOrigin()) { showTrialMessage('طلب غير مصرح به', 'error'); return; }
             const honeypot = document.getElementById('website')?.value || '';
             if (honeypot !== "") { console.log("تم حظر بوت"); showTrialMessage('تم اكتشاف نشاط غير طبيعي', 'error'); return; }
+            
             const fullName = sanitizeInput(document.getElementById('fullName').value.trim());
             const email = sanitizeInput(document.getElementById('email').value.trim());
             const phone = sanitizeInput(document.getElementById('phone').value.trim());
             const companyName = sanitizeInput(document.getElementById('companyName').value.trim());
             const companyField = document.getElementById('companyField').value;
+            
             if (!fullName || !email || !phone || !companyName || !companyField) { showTrialMessage('الرجاء ملء جميع الحقول المطلوبة', 'warning'); return; }
             if (!validateEmail(email)) { showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning'); return; }
             if (isSpam(fullName + companyName)) { showTrialMessage('تم اكتشاف رسالة غير مرغوب فيها', 'error'); return; }
@@ -1718,7 +1720,11 @@
             
             const lastSend = localStorage.getItem('lastTrialSend');
             const now = Date.now();
-            if (lastSend && now - lastSend < 30000) { const secondsLeft = Math.ceil((30000 - (now - lastSend)) / 1000); showTrialMessage(`الرجاء الانتظار ${secondsLeft} ثانية قبل إرسال طلب آخر`, 'warning'); return; }
+            if (lastSend && now - lastSend < 30000) { 
+                const secondsLeft = Math.ceil((30000 - (now - lastSend)) / 1000); 
+                showTrialMessage(`الرجاء الانتظار ${secondsLeft} ثانية قبل إرسال طلب آخر`, 'warning'); 
+                return; 
+            }
             
             const formattedPhone = formatPhoneNumber(phone);
             document.getElementById('submitBtn').style.display = 'none';
@@ -1726,64 +1732,55 @@
             document.getElementById('trialMessage').style.display = 'none';
             
             try {
-                // حفظ الطلب في فايربيس
+                // 1. الحفظ في Firebase Firestore
                 const docRef = await db.collection('trial_requests').add({
-                    fullName: fullName, email: email, phone: formattedPhone, phoneRaw: phone,
-                    companyName: companyName, companyField: companyField, status: 'pending',
-                    adminApproved: false, trialLink: '', createdAt: new Date().toISOString(), read: false
+                    fullName: fullName, 
+                    email: email, 
+                    phone: formattedPhone, 
+                    phoneRaw: phone,
+                    companyName: companyName, 
+                    companyField: companyField, 
+                    status: 'pending',
+                    adminApproved: false, 
+                    trialLink: '', 
+                    createdAt: new Date().toISOString(), 
+                    read: false
                 });
 
-                // إرسال الإيميل بشكل مضمون
-                let iframe = document.getElementById('hidden_submit_iframe');
-                if (!iframe) {
-                    iframe = document.createElement('iframe');
-                    iframe.id = 'hidden_submit_iframe';
-                    iframe.name = 'hidden_submit_iframe';
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
+                // 2. استدعاء خادم Vercel Serverless لإرسال الإيميل الرسمي
+                const apiResponse = await fetch('/api/send', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        fullName: fullName,
+                        email: email,
+                        phone: formattedPhone,
+                        companyName: companyName,
+                        companyField: companyField,
+                        docId: docRef.id
+                    })
+                });
+
+                if (!apiResponse.ok) {
+                    console.warn('تحذير: حدثت مشكلة أثناء إرسال البريد عبر الخادم');
                 }
-
-                const tempForm = document.createElement('form');
-                tempForm.method = 'POST';
-                tempForm.action = 'https://formsubmit.co/Salamjasem66@gmail.com';
-                tempForm.target = 'hidden_submit_iframe';
-
-                const formData = {
-                    '_subject': `طلب تجربة مجانية جديد - ${companyName}`,
-                    '_template': 'table',
-                    '_captcha': 'false',
-                    'الاسم الكامل': fullName,
-                    'البريد الإلكتروني': email,
-                    'رقم الهاتف': phone,
-                    'اسم الشركة': companyName,
-                    'مجال الشركة': companyField,
-                    'رقم الطلب': docRef.id
-                };
-
-                for (const key in formData) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = formData[key];
-                    tempForm.appendChild(input);
-                }
-
-                document.body.appendChild(tempForm);
-                tempForm.submit();
-                tempForm.remove();
 
                 localStorage.setItem('lastTrialSend', now);
                 document.getElementById('trialLoading').style.display = 'none';
-                showTrialMessage('✅ تم إرسال طلبك بنجاح! سنقوم بالرد عليك خلال 24 ساعة', 'success');
-                setTimeout(() => { closeTrialModal(); document.getElementById('submitBtn').style.display = 'flex'; }, 4000);
+                showTrialMessage('✅ تم استلام طلبك بنجاح! سنتواصل معك قريباً', 'success');
+                
+                setTimeout(() => { 
+                    closeTrialModal(); 
+                    document.getElementById('submitBtn').style.display = 'flex'; 
+                }, 3000);
+
             } catch (error) {
                 console.error('❌ خطأ:', error);
                 document.getElementById('trialLoading').style.display = 'none';
                 document.getElementById('submitBtn').style.display = 'flex';
-                showTrialMessage('حدث خطأ. الرجاء المحاولة مرة أخرى', 'error');
+                showTrialMessage('حدث خطأ أثناء إرسال الطلب، يرجى المحاولة لاحقاً', 'error');
             }
         }
-           
         function showTrialMessage(message, type) {
             const msgDiv = document.getElementById('trialMessage');
             msgDiv.textContent = message;
