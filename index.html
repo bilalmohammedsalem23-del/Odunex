@@ -1702,7 +1702,7 @@
             document.getElementById('trialMessage').style.display = 'none';
         }
         
-                async function submitTrialRequest() {
+               async function submitTrialRequest() {
             if (!validateRequestOrigin()) { showTrialMessage('طلب غير مصرح به', 'error'); return; }
             const honeypot = document.getElementById('website')?.value || '';
             if (honeypot !== "") { console.log("تم حظر بوت"); showTrialMessage('تم اكتشاف نشاط غير طبيعي', 'error'); return; }
@@ -1715,40 +1715,63 @@
             if (!validateEmail(email)) { showTrialMessage('الرجاء إدخال بريد إلكتروني صحيح', 'warning'); return; }
             if (isSpam(fullName + companyName)) { showTrialMessage('تم اكتشاف رسالة غير مرغوب فيها', 'error'); return; }
             if (!validatePhoneNumber(phone)) { showTrialMessage('الرجاء إدخال رقم هاتف عراقي صحيح (مثال: 07701234567 أو 9647701234567)', 'warning'); return; }
-            let recaptchaToken = '';
-            try { recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'}); } catch (error) { console.error('reCAPTCHA error:', error); showTrialMessage('خطأ في التحقق الأمني، الرجاء تحديث الصفحة', 'error'); return; }
-            if (!recaptchaToken || recaptchaToken.length < 10) { showTrialMessage('فشل التحقق الأمني', 'error'); return; }
+            
             const lastSend = localStorage.getItem('lastTrialSend');
             const now = Date.now();
             if (lastSend && now - lastSend < 30000) { const secondsLeft = Math.ceil((30000 - (now - lastSend)) / 1000); showTrialMessage(`الرجاء الانتظار ${secondsLeft} ثانية قبل إرسال طلب آخر`, 'warning'); return; }
+            
             const formattedPhone = formatPhoneNumber(phone);
             document.getElementById('submitBtn').style.display = 'none';
             document.getElementById('trialLoading').style.display = 'block';
             document.getElementById('trialMessage').style.display = 'none';
+            
             try {
+                // حفظ الطلب في فايربيس
                 const docRef = await db.collection('trial_requests').add({
                     fullName: fullName, email: email, phone: formattedPhone, phoneRaw: phone,
                     companyName: companyName, companyField: companyField, status: 'pending',
                     adminApproved: false, trialLink: '', createdAt: new Date().toISOString(), read: false
                 });
-                console.log('✅ تم حفظ الطلب:', docRef.id);
-                const formSubmitResponse = await fetch('https://formsubmit.co/ajax/Salamjasem66@gmail.com', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({
-                        _subject: `طلب تجربة مجانية جديد - ${companyName}`,
-                        _template: 'table',
-                        'الاسم الكامل': fullName,
-                        'البريد الإلكتروني': email,
-                        'رقم الهاتف': phone,
-                        'اسم الشركة': companyName,
-                        'مجال الشركة': companyField,
-                        'رقم الطلب': docRef.id,
-                        'رابط فايربيس': `https://console.firebase.google.com/project/odunex-project/firestore/data/trial_requests/${docRef.id}`
-                    })
-                });
-                if (!formSubmitResponse.ok) throw new Error('فشل إرسال الإيميل عبر FormSubmit');
-                console.log('✅ تم إرسال الإيميل');
+
+                // إرسال الإيميل بشكل مضمون
+                let iframe = document.getElementById('hidden_submit_iframe');
+                if (!iframe) {
+                    iframe = document.createElement('iframe');
+                    iframe.id = 'hidden_submit_iframe';
+                    iframe.name = 'hidden_submit_iframe';
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                }
+
+                const tempForm = document.createElement('form');
+                tempForm.method = 'POST';
+                tempForm.action = 'https://formsubmit.co/Salamjasem66@gmail.com';
+                tempForm.target = 'hidden_submit_iframe';
+
+                const formData = {
+                    '_subject': `طلب تجربة مجانية جديد - ${companyName}`,
+                    '_template': 'table',
+                    '_captcha': 'false',
+                    'الاسم الكامل': fullName,
+                    'البريد الإلكتروني': email,
+                    'رقم الهاتف': phone,
+                    'اسم الشركة': companyName,
+                    'مجال الشركة': companyField,
+                    'رقم الطلب': docRef.id
+                };
+
+                for (const key in formData) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = formData[key];
+                    tempForm.appendChild(input);
+                }
+
+                document.body.appendChild(tempForm);
+                tempForm.submit();
+                tempForm.remove();
+
                 localStorage.setItem('lastTrialSend', now);
                 document.getElementById('trialLoading').style.display = 'none';
                 showTrialMessage('✅ تم إرسال طلبك بنجاح! سنقوم بالرد عليك خلال 24 ساعة', 'success');
