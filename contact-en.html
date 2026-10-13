@@ -27,9 +27,6 @@
     <!-- DOMPurify - XSS Protection -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
     <style>
         /* ===== STANDARD ODUNEX STYLES ===== */
         * {
@@ -1003,15 +1000,12 @@
                 gap: 25px;
                 transform: scale(1);
             }
-            
             .page-header h1 {
                 font-size: 38px;
             }
-
             .form-header {
                 flex-direction: column;
             }
-
             .envelope-container {
                 margin-left: 0;
                 margin-bottom: 15px;
@@ -1023,62 +1017,49 @@
                 flex-wrap: wrap;
                 gap: 15px;
             }
-
             .nav-left, .nav-right {
                 width: auto;
             }
-
             .nav-menu {
                 order: 3;
                 width: 100%;
                 justify-content: flex-start;
                 gap: 20px;
             }
-
             .page-header {
                 padding: 50px 0 20px;
             }
-
             .page-header h1 {
                 font-size: 34px;
             }
-
             .page-header p {
                 font-size: 16px;
             }
-
             .contact-form {
                 padding: 25px;
             }
-
             .envelope-container {
                 width: 150px;
                 height: 150px;
             }
-
             .form-header h2 {
                 font-size: 24px;
             }
-
             .info-card {
                 padding: 20px;
             }
-
             .card-header h3 {
                 font-size: 18px;
             }
-
             .social-icon-large {
                 width: 50px;
                 height: 50px;
                 font-size: 22px;
             }
-
             .footer-brand-row {
                 flex-direction: column;
                 gap: 10px;
             }
-            
             .whatsapp-float {
                 width: 50px;
                 height: 50px;
@@ -1094,58 +1075,46 @@
             .page-header {
                 padding: 60px 0 20px;
             }
-
             .page-header h1 {
                 font-size: 30px;
             }
-
             .page-header p {
                 font-size: 14px;
             }
-
             .contact-form {
                 padding: 20px;
             }
-
             .envelope-container {
                 width: 120px;
                 height: 120px;
             }
-
             .form-header h2 {
                 font-size: 22px;
             }
-
             .info-item a,
             .info-item span {
                 font-size: 13px;
             }
-
             .social-icon-large {
                 width: 45px;
                 height: 45px;
                 font-size: 20px;
             }
-
             .footer-brand-name {
                 font-size: 22px;
             }
-
             .footer-logo {
                 width: 50px;
                 height: 50px;
             }
-
             .footer-copyright {
                 font-size: 12px;
             }
-            
             .footer-social-icons a {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
             }
-            
             .whatsapp-float {
                 width: 45px;
                 height: 45px;
@@ -1345,7 +1314,6 @@
                 </div>
             </div>
             
-            <!-- Social Media Icons -->
             <div class="footer-social">
                 <div class="footer-social-icons">
                     <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -1363,29 +1331,48 @@
         </div>
     </footer>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script>
         // ==============================================
-        // Initialize EmailJS
+        // Firebase Initialization
         // ==============================================
-        (function() {
-            emailjs.init('jO00szsaAuuC7Gsly');
-        })();
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
+            authDomain: "odunex-project.firebaseapp.com",
+            projectId: "odunex-project",
+            storageBucket: "odunex-project.firebasestorage.app",
+            messagingSenderId: "20189086682",
+            appId: "1:20189086682:web:76574c7befec70c24df6e3",
+            measurementId: "G-RREEW2EY4K"
+        };
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
 
         // ==============================================
         // Security and Validation Functions
         // ==============================================
-        
+        function validateRequestOrigin() {
+            const validHosts = ['odunex.com', 'www.odunex.com', 'localhost'];
+            const currentHost = window.location.hostname;
+            return validHosts.includes(currentHost) || currentHost.endsWith('.vercel.app');
+        }
+
         function sanitizeWithDOMPurify(text) {
             if (typeof DOMPurify !== 'undefined') {
                 return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
             }
             return text.replace(/[<>]/g, "");
         }
-        
+
         function validateEmail(email) {
             const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!pattern.test(email)) return false;
-            
+
             const blockedDomains = [
                 "mailinator.com", "tempmail.com", "10minutemail.com",
                 "yopmail.com", "guerrillamail.com", "throwawaymail.com",
@@ -1393,19 +1380,19 @@
                 "temp-mail.org", "tempinbox.com", "mailnesia.com",
                 "spam4.me", "dispostable.com", "getnada.com"
             ];
-            
+
             const domain = email.split("@")[1].toLowerCase();
             if (blockedDomains.includes(domain)) return false;
-            
+
             return true;
         }
-        
+
         function isSpam(text) {
             const spamWords = [
                 "crypto", "bitcoin", "casino", "loan", "porn", "sex",
                 "viagra", "xxx", "nude", "gambling", "poker"
             ];
-            
+
             text = text.toLowerCase();
             for (let word of spamWords) {
                 if (text.includes(word)) {
@@ -1415,26 +1402,21 @@
             return false;
         }
 
-        // ==============================================
-        // Show Alert Message
-        // ==============================================
         function showAlert(message, type) {
             const alertDiv = document.getElementById('messageAlert');
-            
             let icon = '';
             if (type === 'success') icon = '✅';
             else if (type === 'error') icon = '❌';
             else if (type === 'warning') icon = '⚠️';
-            
+
             alertDiv.innerHTML = `
                 <div class="alert-message ${type}">
                     <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
                     <span>${icon} ${message}</span>
                 </div>
             `;
-            
             alertDiv.style.display = 'block';
-            
+
             setTimeout(() => {
                 alertDiv.style.display = 'none';
             }, 5000);
@@ -1445,37 +1427,42 @@
         // ==============================================
         function setupContactForm() {
             const form = document.getElementById('contactForm');
-            
+
             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
-                
-                const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
-                const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
-                const subject = sanitizeWithDOMPurify(document.getElementById('subject').value.trim());
-                const message = sanitizeWithDOMPurify(document.getElementById('message').value.trim());
-                
+
+                if (!validateRequestOrigin()) {
+                    showAlert('Unauthorized request', 'error');
+                    return;
+                }
+
                 const honeypot = document.getElementById('website').value;
                 if (honeypot !== "") {
                     console.log("Bot detected (Honeypot)");
                     showAlert('Suspicious activity detected', 'error');
                     return;
                 }
-                
+
+                const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
+                const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
+                const subject = sanitizeWithDOMPurify(document.getElementById('subject').value.trim());
+                const message = sanitizeWithDOMPurify(document.getElementById('message').value.trim());
+
                 if (!name || !email || !subject || !message) {
                     showAlert('Please fill in all required fields', 'warning');
                     return;
                 }
-                
+
                 if (!validateEmail(email)) {
                     showAlert('Invalid or temporary email address', 'warning');
                     return;
                 }
-                
+
                 if (isSpam(name + subject + message)) {
                     showAlert('Spam detected', 'error');
                     return;
                 }
-                
+
                 let recaptchaToken = '';
                 try {
                     recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'});
@@ -1485,12 +1472,12 @@
                     showAlert('Security verification failed. Please refresh the page.', 'error');
                     return;
                 }
-                
+
                 if (!recaptchaToken || recaptchaToken.length < 10) {
                     showAlert('Security verification failed', 'error');
                     return;
                 }
-                
+
                 const lastSend = localStorage.getItem('lastSend');
                 const now = Date.now();
                 if (lastSend && now - lastSend < 30000) {
@@ -1498,38 +1485,50 @@
                     showAlert(`Please wait ${secondsLeft} seconds before sending another message`, 'warning');
                     return;
                 }
-                
+
                 const submitBtn = document.getElementById('submitBtn');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<span>Sending</span> <span class="loading-spinner"></span>';
                 submitBtn.disabled = true;
-                
+
                 try {
-                    await emailjs.send(
-                        'service_u22biwc',
-                        'template_jj5k7r9',
-                        {
-                            to_email: 'Info@odunex.com',
-                            to_name: 'Odunex Team',
-                            from_name: name,
-                            from_email: email,
+                    // 1. Save to Firestore (contact_messages collection)
+                    const docRef = await db.collection('contact_messages').add({
+                        fullName: name,
+                        email: email,
+                        subject: subject,
+                        message: message,
+                        createdAt: new Date().toISOString(),
+                        status: 'unread',
+                        language: 'en'
+                    });
+
+                    // 2. Send Email via Vercel serverless API
+                    const response = await fetch('/api/send', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            type: 'contact',
+                            fullName: name,
+                            email: email,
                             subject: subject,
                             message: message,
-                            reply_to: email
-                        }
-                    );
-                    
+                            docId: docRef.id
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to send email via API');
+                    }
+
                     localStorage.setItem('lastSend', now);
-                    
                     showAlert('Your message has been sent successfully! We will reply to you soon.', 'success');
-                    
+
                     form.reset();
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    
                 } catch (error) {
                     console.error('❌ Send failed:', error);
                     showAlert('Sorry, an error occurred. Please try again.', 'error');
+                } finally {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 }
