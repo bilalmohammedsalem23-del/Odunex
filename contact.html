@@ -26,9 +26,6 @@
     <!-- DOMPurify للحماية -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
     
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
     <style>
         * {
             margin: 0;
@@ -954,7 +951,6 @@
             object-fit: contain;
         }
 
-        /* Social Icons in Footer */
         .footer-social {
             margin: 20px 0;
         }
@@ -995,22 +991,18 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* ===== Responsive Design ===== */
         @media (max-width: 992px) {
             .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
                 transform: scale(1);
             }
-            
             .page-header h1 {
                 font-size: 38px;
             }
-
             .form-header {
                 flex-direction: column-reverse;
             }
-
             .envelope-container {
                 margin-right: 0;
                 margin-bottom: 15px;
@@ -1022,62 +1014,49 @@
                 flex-wrap: wrap;
                 gap: 15px;
             }
-
             .nav-right, .nav-left {
                 width: auto;
             }
-
             .nav-menu {
                 order: 3;
                 width: 100%;
                 justify-content: flex-start;
                 gap: 20px;
             }
-
             .page-header {
                 padding: 50px 0 20px;
             }
-
             .page-header h1 {
                 font-size: 34px;
             }
-
             .page-header p {
                 font-size: 16px;
             }
-
             .contact-form {
                 padding: 25px;
             }
-
             .envelope-container {
                 width: 150px;
                 height: 150px;
             }
-
             .form-header h2 {
                 font-size: 24px;
             }
-
             .info-card {
                 padding: 20px;
             }
-
             .card-header h3 {
                 font-size: 18px;
             }
-
             .social-icon-large {
                 width: 50px;
                 height: 50px;
                 font-size: 22px;
             }
-
             .footer-brand-row {
                 flex-direction: column;
                 gap: 10px;
             }
-            
             .whatsapp-float {
                 width: 50px;
                 height: 50px;
@@ -1093,58 +1072,46 @@
             .page-header {
                 padding: 60px 0 20px;
             }
-
             .page-header h1 {
                 font-size: 30px;
             }
-
             .page-header p {
                 font-size: 14px;
             }
-
             .contact-form {
                 padding: 20px;
             }
-
             .envelope-container {
                 width: 120px;
                 height: 120px;
             }
-
             .form-header h2 {
                 font-size: 22px;
             }
-
             .info-item a,
             .info-item span {
                 font-size: 13px;
             }
-
             .social-icon-large {
                 width: 45px;
                 height: 45px;
                 font-size: 20px;
             }
-
             .footer-brand-name {
                 font-size: 22px;
             }
-
             .footer-logo {
                 width: 50px;
                 height: 50px;
             }
-
             .footer-copyright {
                 font-size: 12px;
             }
-            
             .footer-social-icons a {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
             }
-            
             .whatsapp-float {
                 width: 45px;
                 height: 45px;
@@ -1344,7 +1311,6 @@
                 </div>
             </div>
             
-            <!-- Social Media Icons -->
             <div class="footer-social">
                 <div class="footer-social-icons">
                     <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -1362,29 +1328,48 @@
         </div>
     </footer>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script>
         // ==============================================
-        // تهيئة EmailJS
+        // تهيئة Firebase
         // ==============================================
-        (function() {
-            emailjs.init('jO00szsaAuuC7Gsly');
-        })();
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbaHb-x48AUNFnwifNgqcqjmSujcXpmZ0",
+            authDomain: "odunex-project.firebaseapp.com",
+            projectId: "odunex-project",
+            storageBucket: "odunex-project.firebasestorage.app",
+            messagingSenderId: "20189086682",
+            appId: "1:20189086682:web:76574c7befec70c24df6e3",
+            measurementId: "G-RREEW2EY4K"
+        };
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
 
         // ==============================================
         // دوال الحماية والتنظيف
         // ==============================================
-        
+        function validateRequestOrigin() {
+            const validHosts = ['odunex.com', 'www.odunex.com', 'localhost'];
+            const currentHost = window.location.hostname;
+            return validHosts.includes(currentHost) || currentHost.endsWith('.vercel.app');
+        }
+
         function sanitizeWithDOMPurify(text) {
             if (typeof DOMPurify !== 'undefined') {
                 return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
             }
             return text.replace(/[<>]/g, "");
         }
-        
+
         function validateEmail(email) {
             const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!pattern.test(email)) return false;
-            
+
             const blockedDomains = [
                 "mailinator.com", "tempmail.com", "10minutemail.com",
                 "yopmail.com", "guerrillamail.com", "throwawaymail.com",
@@ -1392,20 +1377,20 @@
                 "temp-mail.org", "tempinbox.com", "mailnesia.com",
                 "spam4.me", "dispostable.com", "getnada.com"
             ];
-            
+
             const domain = email.split("@")[1].toLowerCase();
             if (blockedDomains.includes(domain)) return false;
-            
+
             return true;
         }
-        
+
         function isSpam(text) {
             const spamWords = [
                 "crypto", "bitcoin", "casino", "loan", "porn", "sex",
                 "viagra", "xxx", "nude", "gambling", "poker",
                 "روليت", "قمار", "اختراق", "هاكر", "عملات رقمية"
             ];
-            
+
             text = text.toLowerCase();
             for (let word of spamWords) {
                 if (text.includes(word)) {
@@ -1415,67 +1400,67 @@
             return false;
         }
 
-        // ==============================================
-        // دالة عرض الرسالة
-        // ==============================================
         function showAlert(message, type) {
             const alertDiv = document.getElementById('messageAlert');
-            
             let icon = '';
             if (type === 'success') icon = '✅';
             else if (type === 'error') icon = '❌';
             else if (type === 'warning') icon = '⚠️';
-            
+
             alertDiv.innerHTML = `
                 <div class="alert-message ${type}">
                     <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
                     <span>${icon} ${message}</span>
                 </div>
             `;
-            
             alertDiv.style.display = 'block';
-            
+
             setTimeout(() => {
                 alertDiv.style.display = 'none';
             }, 5000);
         }
 
         // ==============================================
-        // إعداد نموذج الاتصال
+        // إعداد نموذج الاتصال والربط
         // ==============================================
         function setupContactForm() {
             const form = document.getElementById('contactForm');
-            
+
             form.addEventListener('submit', async function(event) {
                 event.preventDefault();
-                
-                const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
-                const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
-                const subject = sanitizeWithDOMPurify(document.getElementById('subject').value.trim());
-                const message = sanitizeWithDOMPurify(document.getElementById('message').value.trim());
-                
+
+                if (!validateRequestOrigin()) {
+                    showAlert('طلب غير مصرح به', 'error');
+                    return;
+                }
+
                 const honeypot = document.getElementById('website').value;
                 if (honeypot !== "") {
                     console.log("تم حظر بوت (Honeypot)");
                     showAlert('تم اكتشاف نشاط غير طبيعي', 'error');
                     return;
                 }
-                
+
+                const name = sanitizeWithDOMPurify(document.getElementById('name').value.trim());
+                const email = sanitizeWithDOMPurify(document.getElementById('email').value.trim());
+                const subject = sanitizeWithDOMPurify(document.getElementById('subject').value.trim());
+                const message = sanitizeWithDOMPurify(document.getElementById('message').value.trim());
+
                 if (!name || !email || !subject || !message) {
                     showAlert('الرجاء ملء جميع الحقول المطلوبة', 'warning');
                     return;
                 }
-                
+
                 if (!validateEmail(email)) {
                     showAlert('البريد الإلكتروني غير صالح أو غير مسموح به', 'warning');
                     return;
                 }
-                
+
                 if (isSpam(name + subject + message)) {
                     showAlert('تم اكتشاف رسالة غير مرغوب فيها', 'error');
                     return;
                 }
-                
+
                 let recaptchaToken = '';
                 try {
                     recaptchaToken = await grecaptcha.execute('6Lebq4ssAAAAAJh824NZP6cxZZAqXRV7KO6_hAsH', {action: 'submit'});
@@ -1485,12 +1470,12 @@
                     showAlert('خطأ في التحقق الأمني، الرجاء تحديث الصفحة', 'error');
                     return;
                 }
-                
+
                 if (!recaptchaToken || recaptchaToken.length < 10) {
                     showAlert('فشل التحقق الأمني', 'error');
                     return;
                 }
-                
+
                 const lastSend = localStorage.getItem('lastSend');
                 const now = Date.now();
                 if (lastSend && now - lastSend < 30000) {
@@ -1498,38 +1483,49 @@
                     showAlert(`يمكنك إرسال رسالة واحدة كل 30 ثانية. انتظر ${secondsLeft} ثانية`, 'warning');
                     return;
                 }
-                
+
                 const submitBtn = document.getElementById('submitBtn');
                 const originalText = submitBtn.innerHTML;
                 submitBtn.innerHTML = '<span>جاري الإرسال</span> <span class="loading-spinner"></span>';
                 submitBtn.disabled = true;
-                
+
                 try {
-                    await emailjs.send(
-                        'service_u22biwc',
-                        'template_jj5k7r9',
-                        {
-                            to_email: 'Info@odunex.com',
-                            to_name: 'فريق Odunex',
-                            from_name: name,
-                            from_email: email,
+                    // 1. الحفظ في Firestore
+                    const docRef = await db.collection('contact_messages').add({
+                        fullName: name,
+                        email: email,
+                        subject: subject,
+                        message: message,
+                        createdAt: new Date().toISOString(),
+                        status: 'unread'
+                    });
+
+                    // 2. الإرسال عبر API Vercel
+                    const response = await fetch('/api/send', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            type: 'contact',
+                            fullName: name,
+                            email: email,
                             subject: subject,
                             message: message,
-                            reply_to: email
-                        }
-                    );
-                    
+                            docId: docRef.id
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('فشل إرسال البريد عبر الخادم');
+                    }
+
                     localStorage.setItem('lastSend', now);
-                    
                     showAlert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً', 'success');
-                    
+
                     form.reset();
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    
                 } catch (error) {
                     console.error('❌ فشل الإرسال:', error);
                     showAlert('عذراً، حدث خطأ في الإرسال. الرجاء المحاولة مرة أخرى', 'error');
+                } finally {
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 }
